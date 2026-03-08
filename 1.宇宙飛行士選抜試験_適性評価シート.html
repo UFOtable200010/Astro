@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CANDIDATE PROFILE — 宇宙飛行士選抜試験</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    min-height: 100vh; background: #050A0F;
+    font-family: 'Courier New', monospace; color: #C8D8E8;
+    padding: 40px 20px; position: relative; overflow-x: hidden;
+  }
+  .scanlines {
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,255,179,0.015) 2px, rgba(0,255,179,0.015) 4px);
+    pointer-events: none; z-index: 10;
+  }
+  .scanline-move {
+    position: fixed; top: 0; left: 0; right: 0; height: 2px;
+    background: rgba(0,255,179,0.12);
+    animation: scanline 6s linear infinite;
+    pointer-events: none; z-index: 11;
+  }
+  .stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+  .star { position: absolute; border-radius: 50%; background: white; }
+
+  @keyframes scanline { 0% { transform: translateY(-100vh); } 100% { transform: translateY(100vh); } }
+  @keyframes glitch {
+    0% { clip-path: inset(40% 0 61% 0); transform: translate(-2px,0); }
+    20% { clip-path: inset(92% 0 1% 0); transform: translate(2px,0); }
+    40% { clip-path: inset(43% 0 1% 0); transform: translate(-2px,0); }
+    60% { clip-path: inset(25% 0 58% 0); transform: translate(2px,0); }
+    80% { clip-path: inset(54% 0 7% 0); transform: translate(-2px,0); }
+    100% { clip-path: inset(58% 0 43% 0); transform: translate(0); }
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(-8px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes pulseGreen { 0%,100%{box-shadow:0 0 6px #00FFB380} 50%{box-shadow:0 0 18px #00FFB3cc} }
+  @keyframes pulseRed   { 0%,100%{box-shadow:0 0 6px #FF4D6D80} 50%{box-shadow:0 0 18px #FF4D6Dcc} }
+
+  .container { max-width: 680px; margin: 0 auto; position: relative; z-index: 1; }
+
+  .header { text-align: center; margin-bottom: 48px; }
+  .header-sub { font-size: 10px; letter-spacing: 6px; color: #00FFB3; margin-bottom: 8px; opacity: 0.7; }
+  .title-wrap { position: relative; display: inline-block; }
+  .title { font-size: clamp(26px,6vw,52px); font-weight: 900; letter-spacing: 4px; color: #E8F4FF; text-shadow: 0 0 30px rgba(0,255,179,0.3); }
+  .title-glitch { position: absolute; top: 0; left: 0; font-size: clamp(26px,6vw,52px); font-weight: 900; letter-spacing: 4px; color: #00FFB3; opacity: 0.4; animation: glitch 3s infinite; pointer-events: none; }
+  .subtitle { font-size: 11px; letter-spacing: 8px; color: #8899AA; margin-top: 10px; }
+  .divider { display: flex; align-items: center; gap: 12px; margin-top: 24px; }
+  .divider-line { flex: 1; height: 1px; }
+  .divider-line.l { background: linear-gradient(to right, transparent, #00FFB340); }
+  .divider-line.r { background: linear-gradient(to left, transparent, #00FFB340); }
+  .divider-icon { font-size: 10px; color: #00FFB3; opacity: 0.6; }
+  .status-row { display: flex; justify-content: center; gap: 24px; margin-top: 16px; font-size: 9px; letter-spacing: 3px; color: #556677; }
+  .c-green { color: #00FFB3; } .c-yellow { color: #FFB800; }
+  .c-blink { color: #00FFB3; animation: blink 1.2s infinite; }
+
+  .section { margin-bottom: 20px; }
+  .toggle-btn {
+    width: 100%; background: transparent; border-radius: 2px;
+    padding: 14px 20px; cursor: pointer;
+    display: flex; align-items: center; gap: 14px;
+    transition: all 0.2s; position: relative; overflow: hidden;
+    font-family: 'Courier New', monospace;
+  }
+  .toggle-btn.str { border: 1px solid rgba(0,255,179,0.2); animation: pulseGreen 2.5s infinite; }
+  .toggle-btn.wkn { border: 1px solid rgba(255,77,109,0.2); animation: pulseRed 2.5s infinite; }
+  .toggle-btn.str:hover { background: rgba(0,255,179,0.05); border-color: rgba(0,255,179,0.4); }
+  .toggle-btn.wkn:hover { background: rgba(255,77,109,0.05); border-color: rgba(255,77,109,0.4); }
+  .corner { position: absolute; width: 10px; height: 10px; }
+  .corner.tl { top:0; left:0; } .corner.br { bottom:0; right:0; }
+  .str .corner.tl { border-top: 2px solid #00FFB3; border-left: 2px solid #00FFB3; }
+  .str .corner.br { border-bottom: 2px solid #00FFB3; border-right: 2px solid #00FFB3; }
+  .wkn .corner.tl { border-top: 2px solid #FF4D6D; border-left: 2px solid #FF4D6D; }
+  .wkn .corner.br { border-bottom: 2px solid #FF4D6D; border-right: 2px solid #FF4D6D; }
+  .code-badge { font-size: 9px; letter-spacing: 3px; padding: 3px 8px; border-radius: 1px; flex-shrink: 0; font-family: 'Courier New', monospace; }
+  .str .code-badge { color: #00FFB3; background: rgba(0,255,179,0.1); border: 1px solid rgba(0,255,179,0.3); }
+  .wkn .code-badge { color: #FF4D6D; background: rgba(255,77,109,0.1); border: 1px solid rgba(255,77,109,0.3); }
+  .btn-label { font-size: 11px; letter-spacing: 4px; color: #C8D8E8; flex: 1; text-align: left; }
+  .arrow { font-size: 12px; transition: transform 0.3s; }
+  .str .arrow { color: #00FFB3; } .wkn .arrow { color: #FF4D6D; }
+  .arrow.open { transform: rotate(180deg); }
+
+  .panel { display: none; animation: fadeIn 0.25s ease; border-radius: 0 0 2px 2px; padding: 4px 0; }
+  .panel.open { display: block; }
+  .panel.str-panel { border: 1px solid rgba(0,255,179,0.2); border-top: none; background: rgba(0,255,179,0.03); }
+  .panel.wkn-panel { border: 1px solid rgba(255,77,109,0.2); border-top: none; background: rgba(255,77,109,0.03); }
+
+  .entry-row { display: flex; align-items: flex-start; gap: 16px; padding: 12px 20px; }
+  .str-panel .entry-row { border-bottom: 1px solid rgba(0,255,179,0.1); }
+  .wkn-panel .entry-row { border-bottom: 1px solid rgba(255,77,109,0.1); }
+  .entry-row:last-of-type { border-bottom: none; }
+  .entry-index { font-size: 9px; letter-spacing: 2px; opacity: 0.5; flex-shrink: 0; width: 24px; padding-top: 6px; }
+  .str-panel .entry-index { color: #00FFB3; }
+  .wkn-panel .entry-index { color: #FF4D6D; }
+  .entry-input {
+    flex: 1; background: transparent; border: none; border-bottom: 1px dashed;
+    padding: 4px 0; font-size: 13px; letter-spacing: 1px;
+    color: #E0EEF8; font-family: 'Courier New', monospace;
+    outline: none; resize: none; min-height: 28px; line-height: 1.7;
+  }
+  .str-panel .entry-input { border-bottom-color: rgba(0,255,179,0.25); }
+  .wkn-panel .entry-input { border-bottom-color: rgba(255,77,109,0.25); }
+  .str-panel .entry-input:focus { border-bottom-color: rgba(0,255,179,0.7); background: rgba(0,255,179,0.03); }
+  .wkn-panel .entry-input:focus { border-bottom-color: rgba(255,77,109,0.7); background: rgba(255,77,109,0.03); }
+  .entry-input::placeholder { color: #2A3A4A; }
+  .entry-dot { width: 5px; height: 5px; border-radius: 50%; opacity: 0.3; flex-shrink: 0; margin-top: 10px; }
+  .str-panel .entry-dot { background: #00FFB3; }
+  .wkn-panel .entry-dot { background: #FF4D6D; }
+  .panel-footer { padding: 8px 20px 4px; font-size: 8px; color: #334455; letter-spacing: 3px; text-align: right; }
+
+  .footer { margin-top: 48px; text-align: center; font-size: 8px; color: #223344; letter-spacing: 4px; line-height: 2; }
+</style>
+</head>
+<body>
+<div class="scanlines"></div>
+<div class="scanline-move"></div>
+<div class="stars" id="stars"></div>
+
+<div class="container">
+  <div class="header">
+    <div class="header-sub">JAXA ASTRONAUT SELECTION PROGRAM — CLASSIFIED</div>
+    <div class="title-wrap">
+      <div class="title">CANDIDATE PROFILE</div>
+      <div class="title-glitch" aria-hidden="true">CANDIDATE PROFILE</div>
+    </div>
+    <div class="subtitle">宇宙飛行士選抜試験　適性評価シート</div>
+    <div class="divider">
+      <div class="divider-line l"></div>
+      <span class="divider-icon">◈</span>
+      <div class="divider-line r"></div>
+    </div>
+    <div class="status-row">
+      <span>ID: <span class="c-green">---</span></span>
+      <span>CLEARANCE: <span class="c-yellow">LEVEL-3</span></span>
+      <span>STATUS: <span class="c-blink">● ACTIVE</span></span>
+    </div>
+  </div>
+
+  <!-- STRENGTHS -->
+  <div class="section">
+    <button class="toggle-btn str" onclick="toggleSection('str')">
+      <div class="corner tl"></div>
+      <div class="corner br"></div>
+      <span class="code-badge">STR</span>
+      <span class="btn-label">STRENGTHS // 強み</span>
+      <span class="arrow" id="arrow-str">▼</span>
+    </button>
+    <div class="panel str-panel" id="panel-str">
+      <div class="entry-row">
+        <span class="entry-index">01</span>
+        <textarea class="entry-input" placeholder="強みを入力してください..." rows="1" oninput="autoResize(this)"></textarea>
+        <div class="entry-dot"></div>
+      </div>
+      <div class="entry-row">
+        <span class="entry-index">02</span>
+        <textarea class="entry-input" placeholder="強みを入力してください..." rows="1" oninput="autoResize(this)"></textarea>
+        <div class="entry-dot"></div>
+      </div>
+      <div class="entry-row">
+        <span class="entry-index">03</span>
+        <textarea class="entry-input" placeholder="強みを入力してください..." rows="1" oninput="autoResize(this)"></textarea>
+        <div class="entry-dot"></div>
+      </div>
+      <div class="panel-footer">SECTION COMPLETE ◈ AWAITING INPUT</div>
+    </div>
+  </div>
+
+  <!-- WEAKNESSES -->
+  <div class="section">
+    <button class="toggle-btn wkn" onclick="toggleSection('wkn')">
+      <div class="corner tl"></div>
+      <div class="corner br"></div>
+      <span class="code-badge">WKN</span>
+      <span class="btn-label">WEAKNESSES // 弱み</span>
+      <span class="arrow" id="arrow-wkn">▼</span>
+    </button>
+    <div class="panel wkn-panel" id="panel-wkn">
+      <div class="entry-row">
+        <span class="entry-index">01</span>
+        <textarea class="entry-input" placeholder="弱みを入力してください..." rows="1" oninput="autoResize(this)"></textarea>
+        <div class="entry-dot"></div>
+      </div>
+      <div class="entry-row">
+        <span class="entry-index">02</span>
+        <textarea class="entry-input" placeholder="弱みを入力してください..." rows="1" oninput="autoResize(this)"></textarea>
+        <div class="entry-dot"></div>
+      </div>
+      <div class="entry-row">
+        <span class="entry-index">03</span>
+        <textarea class="entry-input" placeholder="弱みを入力してください..." rows="1" oninput="autoResize(this)"></textarea>
+        <div class="entry-dot"></div>
+      </div>
+      <div class="panel-footer">SECTION COMPLETE ◈ AWAITING INPUT</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div>CONFIDENTIAL — FOR EVALUATION USE ONLY</div>
+    <div style="margin-top:4px">◈ ◈ ◈ <span style="color:#334455">ASTRONAUT SELECTION BOARD</span> ◈ ◈ ◈</div>
+  </div>
+</div>
+
+<script>
+  // Stars
+  const starsEl = document.getElementById('stars');
+  for (let i = 0; i < 60; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const size = Math.random() * 2 + 1;
+    s.style.cssText = `top:${Math.random()*100}%;left:${Math.random()*100}%;width:${size}px;height:${size}px;opacity:${Math.random()*0.5+0.1};`;
+    starsEl.appendChild(s);
+  }
+
+  function toggleSection(id) {
+    const panel = document.getElementById('panel-' + id);
+    const arrow = document.getElementById('arrow-' + id);
+    panel.classList.toggle('open');
+    arrow.classList.toggle('open');
+  }
+
+  function autoResize(el) {
+    el.style.height = 'auto';
+    el.style.height = el.scrollHeight + 'px';
+  }
+</script>
+</body>
+</html>
