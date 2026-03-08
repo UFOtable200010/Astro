@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>資産合計</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600;700&family=Noto+Sans+JP:wght@300;400;500&family=EB+Garamond:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #f4f1eb;
+    --paper:     #faf8f4;
+    --paper2:    #f0ece3;
+    --navy:      #1a2640;
+    --navy-mid:  #2c3e5a;
+    --navy-lt:   #3d5275;
+    --gold:      #8a6e3a;
+    --gold-line: #c9a96e;
+    --rule:      #d8d0c0;
+    --text:      #1a2640;
+    --text-mid:  #4a5568;
+    --text-lt:   #8a9ab0;
+    --mochi: #b05a2a;
+    --tsuki: #2a5f8a;
+    --taku:  #2a7a4a;
+    --rou:   #6a2a7a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans JP', sans-serif;
+    min-height: 100vh;
+    padding: 48px 20px 60px;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 23px, rgba(180,165,140,0.08) 24px),
+      repeating-linear-gradient(90deg, transparent, transparent 23px, rgba(180,165,140,0.04) 24px);
+  }
+
+  .container { max-width: 820px; margin: 0 auto; }
+
+  /* ── HEADER ── */
+  .bank-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 22px;
+    border-bottom: 2px solid var(--navy);
+    position: relative;
+  }
+  .bank-header::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: var(--gold-line);
+    margin-top: 4px;
+  }
+  .bank-crest {
+    font-family: 'EB Garamond', serif;
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .bank-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 24px;
+    font-weight: 300;
+    color: var(--navy);
+    letter-spacing: 0.3em;
+  }
+
+  /* ── GROUPS ── */
+  .groups-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 28px;
+    box-shadow: 0 2px 14px rgba(26,38,64,0.09);
+  }
+  @media (max-width: 600px) {
+    .groups-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .group-card {
+    background: var(--paper);
+    padding: 36px 24px 32px;
+    position: relative;
+  }
+  .group-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .group-card.mochi::before { background: var(--mochi); }
+  .group-card.tsuki::before { background: var(--tsuki); }
+  .group-card.taku::before  { background: var(--taku); }
+  .group-card.rou::before   { background: var(--rou); }
+
+  /* グループ名：名前大きく、「グループ」小さく右寄せ */
+  .group-name {
+    margin-bottom: 14px;
+    line-height: 1.2;
+  }
+  .group-name .name-main {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    display: block;
+  }
+  .group-name .name-sub {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    color: var(--text-lt);
+    display: block;
+    margin-top: 3px;
+    padding-left: 2em;
+  }
+
+  .mochi .group-name .name-main { color: var(--mochi); }
+  .tsuki .group-name .name-main { color: var(--tsuki); }
+  .taku  .group-name .name-main { color: var(--taku); }
+  .rou   .group-name .name-main { color: var(--rou); }
+
+  .group-divider { height: 1px; background: var(--rule); margin-bottom: 16px; margin-top: 4px; }
+
+  .group-asset {
+    font-family: 'EB Garamond', serif;
+    font-size: 52px;
+    font-weight: 500;
+    color: var(--navy);
+    line-height: 1;
+    transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+  }
+  .group-asset .yen {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 16px;
+    color: var(--text-lt);
+    margin-left: 4px;
+    font-weight: 300;
+  }
+
+  /* ── INPUT ── */
+  .ledger-section {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 12px rgba(26,38,64,0.06);
+  }
+  .ledger-header {
+    background: var(--navy);
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .ledger-header-line { flex: 1; height: 1px; background: rgba(201,169,110,0.35); }
+  .ledger-header-text {
+    font-family: 'EB Garamond', serif;
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    color: var(--gold-line);
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .ledger-body { padding: 14px 16px 12px; }
+
+  .inputs-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  @media (max-width: 600px) { .inputs-grid { grid-template-columns: repeat(2, 1fr); } }
+
+  .input-group { display: flex; flex-direction: column; gap: 4px; }
+  .input-group label {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .label-dot { display: inline-block; width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+  .mochi .label-dot { background: var(--mochi); }
+  .tsuki .label-dot { background: var(--tsuki); }
+  .taku  .label-dot { background: var(--taku); }
+  .rou   .label-dot { background: var(--rou); }
+  .mochi label { color: var(--mochi); }
+  .tsuki label { color: var(--tsuki); }
+  .taku  label { color: var(--taku); }
+  .rou   label { color: var(--rou); }
+
+  .input-group input {
+    background: var(--paper2);
+    border: 1px solid var(--rule);
+    border-bottom: 2px solid var(--rule);
+    border-radius: 3px;
+    padding: 6px 8px;
+    color: var(--navy);
+    font-family: 'EB Garamond', serif;
+    font-size: 15px;
+    width: 100%;
+    outline: none;
+    transition: border-color 0.18s, background 0.18s;
+    text-align: right;
+    -moz-appearance: textfield;
+  }
+  .input-group input::-webkit-outer-spin-button,
+  .input-group input::-webkit-inner-spin-button { -webkit-appearance: none; }
+  .input-group.mochi input:focus { border-bottom-color: var(--mochi); background: #fff; }
+  .input-group.tsuki input:focus { border-bottom-color: var(--tsuki); background: #fff; }
+  .input-group.taku  input:focus { border-bottom-color: var(--taku);  background: #fff; }
+  .input-group.rou   input:focus { border-bottom-color: var(--rou);   background: #fff; }
+  .input-hint { font-size: 8px; color: var(--text-lt); letter-spacing: 0.05em; text-align: right; }
+
+  /* BUTTONS */
+  .buttons-row { display: flex; gap: 8px; }
+  .btn {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    padding: 8px 0;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.18s ease;
+  }
+  .btn:active { transform: scale(0.98); }
+  .btn-apply {
+    flex: 1;
+    background: var(--navy);
+    color: var(--gold-line);
+    border-bottom: 2px solid var(--gold);
+  }
+  .btn-apply:hover { background: var(--navy-mid); color: #e8c97a; }
+  .btn-reset {
+    flex: 0 0 auto;
+    padding: 8px 18px;
+    background: transparent;
+    color: var(--text-mid);
+    border: 1px solid var(--rule);
+  }
+  .btn-reset:hover { background: var(--paper2); color: var(--navy); border-color: var(--navy-lt); }
+
+  /* HISTORY */
+  .history-wrap {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(26,38,64,0.04);
+  }
+  .history-head {
+    background: var(--paper2);
+    border-bottom: 1px solid var(--rule);
+    padding: 7px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .history-head-txt {
+    font-family: 'EB Garamond', serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--text-mid);
+    text-transform: uppercase;
+  }
+  .history-clear {
+    font-size: 9px;
+    color: var(--text-lt);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'Noto Sans JP', sans-serif;
+    letter-spacing: 0.05em;
+    transition: color 0.15s;
+  }
+  .history-clear:hover { color: var(--text-mid); }
+  .history-list {
+    max-height: 150px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--rule) transparent;
+  }
+  .history-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 14px;
+    border-bottom: 1px solid var(--rule);
+    animation: rowIn 0.2s ease;
+  }
+  .history-item:last-child { border-bottom: none; }
+  @keyframes rowIn {
+    from { opacity: 0; transform: translateX(-6px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  .h-time { font-family: 'EB Garamond', serif; font-size: 11px; color: var(--text-lt); flex-shrink: 0; width: 40px; }
+  .h-chips { display: flex; gap: 5px; flex-wrap: wrap; flex: 1; }
+  .h-chip {
+    font-size: 9px;
+    font-family: 'EB Garamond', serif;
+    padding: 1px 6px;
+    border-radius: 2px;
+    border: 1px solid;
+  }
+  .h-chip.mochi { color: var(--mochi); border-color: rgba(176,90,42,0.3);  background: rgba(176,90,42,0.06); }
+  .h-chip.tsuki { color: var(--tsuki); border-color: rgba(42,95,138,0.3);  background: rgba(42,95,138,0.06); }
+  .h-chip.taku  { color: var(--taku);  border-color: rgba(42,122,74,0.3);  background: rgba(42,122,74,0.06); }
+  .h-chip.rou   { color: var(--rou);   border-color: rgba(106,42,122,0.3); background: rgba(106,42,122,0.06); }
+  .h-total { font-family: 'EB Garamond', serif; font-size: 12px; color: var(--navy); flex-shrink: 0; }
+  .empty-history {
+    text-align: center;
+    padding: 14px;
+    color: var(--text-lt);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    font-family: 'EB Garamond', serif;
+  }
+  .val-positive { color: #1a4fa0 !important; }
+  .val-negative { color: #c0272d !important; }
+  .flash-num { animation: numFlash 0.4s ease; }
+  @keyframes numFlash {
+    0%   { opacity: 1; }
+    25%  { opacity: 0.25; }
+    100% { opacity: 1; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="bank-header">
+    <div class="bank-crest">Group Asset Management</div>
+    <div class="bank-title">資 産 合 計</div>
+  </div>
+
+  <!-- グループカード -->
+  <div class="groups-grid">
+    <div class="group-card mochi">
+      <div class="group-name">
+        <span class="name-main">もち</span>
+        <span class="name-sub">グループ</span>
+      </div>
+      <div class="group-divider"></div>
+      <div class="group-asset" id="mochiAsset">0<span class="yen">円</span></div>
+    </div>
+    <div class="group-card tsuki">
+      <div class="group-name">
+        <span class="name-main">つき</span>
+        <span class="name-sub">グループ</span>
+      </div>
+      <div class="group-divider"></div>
+      <div class="group-asset" id="tsukiAsset">0<span class="yen">円</span></div>
+    </div>
+    <div class="group-card taku">
+      <div class="group-name">
+        <span class="name-main">たく</span>
+        <span class="name-sub">グループ</span>
+      </div>
+      <div class="group-divider"></div>
+      <div class="group-asset" id="takuAsset">0<span class="yen">円</span></div>
+    </div>
+    <div class="group-card rou">
+      <div class="group-name">
+        <span class="name-main">ろう</span>
+        <span class="name-sub">グループ</span>
+      </div>
+      <div class="group-divider"></div>
+      <div class="group-asset" id="rouAsset">0<span class="yen">円</span></div>
+    </div>
+  </div>
+
+  <!-- 入力 -->
+  <div class="ledger-section">
+    <div class="ledger-header">
+      <div class="ledger-header-line"></div>
+      <span class="ledger-header-text">Reward / Loss Entry · 報酬・損失額入力</span>
+      <div class="ledger-header-line"></div>
+    </div>
+    <div class="ledger-body">
+      <div class="inputs-grid">
+        <div class="input-group mochi">
+          <label><span class="label-dot"></span>もちグループ</label>
+          <input type="number" id="mochiInput" placeholder="0" step="1">
+          <span class="input-hint">+ / − 入力</span>
+        </div>
+        <div class="input-group tsuki">
+          <label><span class="label-dot"></span>つきグループ</label>
+          <input type="number" id="tsukiInput" placeholder="0" step="1">
+          <span class="input-hint">+ / − 入力</span>
+        </div>
+        <div class="input-group taku">
+          <label><span class="label-dot"></span>たくグループ</label>
+          <input type="number" id="takuInput" placeholder="0" step="1">
+          <span class="input-hint">+ / − 入力</span>
+        </div>
+        <div class="input-group rou">
+          <label><span class="label-dot"></span>ろうグループ</label>
+          <input type="number" id="rouInput" placeholder="0" step="1">
+          <span class="input-hint">+ / − 入力</span>
+        </div>
+      </div>
+      <div class="buttons-row">
+        <button class="btn btn-apply" onclick="applyChanges()">反　映</button>
+        <button class="btn btn-reset" onclick="resetInputs()">クリア</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 履歴 -->
+  <div class="history-wrap">
+    <div class="history-head">
+      <span class="history-head-txt">Transaction History · 変更履歴</span>
+      <button class="history-clear" onclick="clearHistory()">全削除</button>
+    </div>
+    <div class="history-list" id="historyList">
+      <div class="empty-history">— 取引記録なし —</div>
+    </div>
+  </div>
+
+</div>
+<script>
+  const state = { mochi: 0, tsuki: 0, taku: 0, rou: 0 };
+  const history = [];
+  const fmt = n => n.toLocaleString('ja-JP');
+
+  function flash(id) {
+    const el = document.getElementById(id);
+    el.classList.remove('flash-num');
+    void el.offsetWidth;
+    el.classList.add('flash-num');
+  }
+
+  function updateDisplay() {
+    const items = [
+      { id: 'mochiAsset', val: state.mochi },
+      { id: 'tsukiAsset', val: state.tsuki },
+      { id: 'takuAsset',  val: state.taku  },
+      { id: 'rouAsset',   val: state.rou   },
+    ];
+    items.forEach(({ id, val }) => {
+      const el = document.getElementById(id);
+      el.innerHTML = fmt(val) + '<span class="yen">億円</span>';
+      el.classList.remove('val-positive', 'val-negative');
+      if (val > 0) el.classList.add('val-positive');
+      else if (val < 0) el.classList.add('val-negative');
+    });
+    ['mochiAsset','tsukiAsset','takuAsset','rouAsset'].forEach(flash);
+  }
+
+  function applyChanges() {
+    const vals = {
+      mochi: parseFloat(document.getElementById('mochiInput').value) || 0,
+      tsuki: parseFloat(document.getElementById('tsukiInput').value) || 0,
+      taku:  parseFloat(document.getElementById('takuInput').value)  || 0,
+      rou:   parseFloat(document.getElementById('rouInput').value)   || 0,
+    };
+    if (!Object.values(vals).some(v => v !== 0)) return;
+
+    state.mochi += vals.mochi;
+    state.tsuki += vals.tsuki;
+    state.taku  += vals.taku;
+    state.rou   += vals.rou;
+
+    const now = new Date();
+    const t = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+    history.unshift({ time: t, vals: {...vals}, total: state.mochi + state.tsuki + state.taku + state.rou });
+    if (history.length > 30) history.pop();
+
+    updateDisplay();
+    renderHistory();
+    resetInputs();
+  }
+
+  function resetInputs() {
+    ['mochiInput','tsukiInput','takuInput','rouInput'].forEach(id => {
+      document.getElementById(id).value = '';
+    });
+  }
+
+  function renderHistory() {
+    const list = document.getElementById('historyList');
+    if (!history.length) {
+      list.innerHTML = '<div class="empty-history">— 取引記録なし —</div>';
+      return;
+    }
+    const map = [
+      { k:'mochi', lbl:'もち', cls:'mochi' },
+      { k:'tsuki', lbl:'つき', cls:'tsuki' },
+      { k:'taku',  lbl:'たく', cls:'taku'  },
+      { k:'rou',   lbl:'ろう', cls:'rou'   },
+    ];
+    list.innerHTML = history.map(h => {
+      const chips = map.filter(m => h.vals[m.k] !== 0)
+        .map(m => `<span class="h-chip ${m.cls}">${m.lbl} ${h.vals[m.k]>0?'+':''}${fmt(h.vals[m.k])}</span>`)
+        .join('');
+      return `<div class="history-item">
+        <span class="h-time">${h.time}</span>
+        <div class="h-chips">${chips}</div>
+        <span class="h-total">${fmt(h.total)} 億円</span>
+      </div>`;
+    }).join('');
+  }
+
+  function clearHistory() { history.length = 0; renderHistory(); }
+
+  document.querySelectorAll('input[type=number]').forEach(el => {
+    el.addEventListener('keydown', e => { if (e.key === 'Enter') applyChanges(); });
+  });
+
+  updateDisplay();
+</script>
+</body>
+</html>
