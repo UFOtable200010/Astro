@@ -2174,15 +2174,22 @@
         </button>
       </div>
     </div>
-    <div class="gm-form-bar">
-      <div class="gm-form-label">📋 グループビルディング フォーム URL</div>
-      <div class="gm-form-url">https://ufotable200010.github.io/Astro/form/form.html</div>
-      <button class="gm-form-copy" onclick="navigator.clipboard.writeText('https://ufotable200010.github.io/Astro/form/form.html').then(()=>m5Toast('✓ フォームURLをコピーしました'))">コピー</button>
-    </div>
-    <div style="padding:10px 14px;background:rgba(255,60,60,.05);border-top:1px solid rgba(255,60,60,.12);border-bottom:1px solid rgba(255,60,60,.12);display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-      <div style="font-family:var(--mono);font-size:9px;letter-spacing:.2em;color:rgba(255,120,100,.6);flex-shrink:0;">🔐 役職カードPW</div>
-      <input id="gm-card-pw" type="text" placeholder="例: 1234" value="1234" style="flex:1;min-width:80px;padding:6px 10px;background:rgba(255,60,60,.08);border:1px solid rgba(255,60,60,.25);border-radius:3px;font-family:var(--mono);font-size:11px;color:#ffcccc;outline:none;" oninput="refreshAllCardURLs()">
-      <div style="font-family:var(--mono);font-size:8px;color:rgba(255,120,100,.4);">→ URLに含めて配布</div>
+    <div style="padding:10px 14px;background:rgba(50,200,120,.03);border-top:1px solid rgba(50,200,120,.08);border-bottom:1px solid rgba(50,200,120,.08);">
+      <div style="font-family:var(--mono);font-size:8px;letter-spacing:.18em;color:rgba(50,200,120,.45);margin-bottom:8px;">🔐 部屋パスワード設定（役職カードURLに含まれます）</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <div style="flex:1;min-width:70px;">
+          <div style="font-family:var(--mono);font-size:8px;color:rgba(255,190,50,.45);margin-bottom:3px;">⚡ 機関室 PW</div>
+          <input id="gm-pw2" type="text" placeholder="PW2" style="width:100%;padding:5px 8px;background:rgba(255,190,50,.06);border:1px solid rgba(255,190,50,.2);border-radius:3px;font-family:var(--mono);font-size:11px;color:#ffe082;outline:none;" oninput="refreshAllCardURLs()">
+        </div>
+        <div style="flex:1;min-width:70px;">
+          <div style="font-family:var(--mono);font-size:8px;color:rgba(50,200,120,.45);margin-bottom:3px;">🏥 生命維持 PW</div>
+          <input id="gm-pw3" type="text" placeholder="PW3" style="width:100%;padding:5px 8px;background:rgba(50,200,120,.06);border:1px solid rgba(50,200,120,.2);border-radius:3px;font-family:var(--mono);font-size:11px;color:#88ffcc;outline:none;" oninput="refreshAllCardURLs()">
+        </div>
+        <div style="flex:1;min-width:70px;">
+          <div style="font-family:var(--mono);font-size:8px;color:rgba(255,85,85,.45);margin-bottom:3px;">📦 貨物室 PW</div>
+          <input id="gm-pw4" type="text" placeholder="PW4" style="width:100%;padding:5px 8px;background:rgba(255,85,85,.06);border:1px solid rgba(255,85,85,.2);border-radius:3px;font-family:var(--mono);font-size:11px;color:#ffaaaa;outline:none;" oninput="refreshAllCardURLs()">
+        </div>
+      </div>
     </div>
     <div class="rp-taskbar">
       <button class="tb-btn active" id="tb-mochi" style="--tab-c:#4da6ff" onclick="switchM5Group('mochi')">
@@ -2632,10 +2639,7 @@ document.getElementById('btn-close-bank').addEventListener('click', () => {
   function renderM5Group(g){
     const el=document.getElementById('gc-roles');
     el.innerHTML=ROLES.map(role=>{
-      const tg=TRUE_GROUP[g][role];
-      const base='https://ufotable200010.github.io/Astro/murder/card.html';
-      const pw=(document.getElementById('gm-card-pw')||{value:'1234'}).value||'1234';
-      const initURL=`${base}?group=${g}&role=${role}&tg=${tg}&pw=${encodeURIComponent(pw)}`;
+      const initURL=buildCardURL(g,role,'');
       return `<div class="gc-role-card">
         <div class="gc-role-hd" onclick="openM5Card('${g}','${role}')" style="cursor:pointer;">
           <div class="gc-role-hd-emoji">${ROLE_EMOJI[role]}</div>
@@ -2654,10 +2658,16 @@ document.getElementById('btn-close-bank').addEventListener('click', () => {
   }
 
   function buildCardURL(g,role,name){
-    const tg=TRUE_GROUP[g][role];
-    const pw=(document.getElementById('gm-card-pw')||{value:'1234'}).value||'1234';
-    const base='https://ufotable200010.github.io/Astro/murder/card.html';
-    return `${base}?group=${g}&role=${role}&tg=${tg}&pw=${encodeURIComponent(pw)}${name?'&name='+encodeURIComponent(name):''}`;
+    const pw2=(document.getElementById('gm-pw2')||{value:''}).value||'';
+    const pw3=(document.getElementById('gm-pw3')||{value:''}).value||'';
+    const pw4=(document.getElementById('gm-pw4')||{value:''}).value||'';
+    const base=`https://ufotable200010.github.io/Astro/murder/sample_${role}.html`;
+    let url=`${base}?group=${g}`;
+    if(name)url+='&name='+encodeURIComponent(name);
+    if(pw2)url+='&pw2='+encodeURIComponent(pw2);
+    if(pw3)url+='&pw3='+encodeURIComponent(pw3);
+    if(pw4)url+='&pw4='+encodeURIComponent(pw4);
+    return url;
   }
 
   window.refreshAllCardURLs=function(){
