@@ -1286,6 +1286,35 @@
 .cm-close-btn{display:block;margin:4px 16px 16px;padding:10px;text-align:center;background:transparent;border:1px solid rgba(255,255,255,.1);border-radius:6px;font-family:var(--mono);font-size:10px;letter-spacing:.15em;cursor:pointer;color:rgba(255,255,255,.3)}
 .cm-close-btn:hover{background:rgba(255,255,255,.06)}
 .m5-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(10px);background:rgba(50,220,130,.14);border:1px solid rgba(50,220,130,.4);border-radius:6px;padding:9px 18px;font-family:var(--mono);font-size:11px;color:rgba(100,255,180,.9);letter-spacing:.1em;opacity:0;transition:all .3s;z-index:2000;pointer-events:none;white-space:nowrap}
+
+/* ===== MISSION 05 追加スタイル ===== */
+.m5-rocket-panel{max-width:min(860px,95vw)!important;width:calc(100% - 40px)!important;}
+.m5-panel-layout{display:flex;width:100%;gap:0;align-items:stretch}
+.m5-svg-side{width:220px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,rgba(10,22,44,.97),rgba(6,14,30,.99));border-right:1px solid rgba(77,166,255,.15);padding:20px 10px;}
+.m5-rooms-side{flex:1;background:linear-gradient(180deg,rgba(10,22,44,.95),rgba(6,14,30,.98));display:flex;flex-direction:column;}
+.m5-svg-rocket{width:180px;height:auto;filter:drop-shadow(0 0 18px rgba(77,166,255,.5));animation:rocketHover 4s ease-in-out infinite;}
+@keyframes rocketHover{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.m5-dq-wrap{position:relative;z-index:10;width:calc(100% - 40px);max-width:640px;margin:32px 20px 0;}
+.m5-dq-box{background:rgba(5,5,42,.92);border:3px solid rgba(123,47,255,.8);border-radius:4px;padding:18px 22px;box-shadow:0 0 24px rgba(123,47,255,.3),inset 0 0 20px rgba(0,0,0,.5);position:relative;}
+.m5-dq-box::before{content:'';position:absolute;inset:4px;border:1px solid rgba(123,47,255,.25);border-radius:2px;pointer-events:none;}
+.m5-dq-text{font-family:'DotGothic16','Share Tech Mono',monospace;font-size:15px;line-height:2;color:#e8e8ff;white-space:pre-wrap;min-height:80px;}
+.m5-dq-cursor{display:inline-block;width:10px;height:16px;background:#ffe066;animation:dqblink .8s step-end infinite;vertical-align:middle;margin-left:2px;}
+@keyframes dqblink{0%,100%{opacity:1}50%{opacity:0}}
+/* 4グループ送信モーダル */
+.m5-group-send-list{display:flex;flex-direction:column;gap:10px;margin-top:12px;}
+.m5-group-send-row{border:1px solid rgba(255,255,255,.1);border-radius:8px;overflow:hidden;}
+.m5-gsr-hd{display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(255,255,255,.04);}
+.m5-gsr-dot{width:8px;height:8px;border-radius:50%;}
+.m5-gsr-name{font-family:var(--mono);font-size:11px;letter-spacing:.2em;font-weight:700;}
+.m5-gsr-body{display:flex;gap:8px;padding:10px 14px;}
+.m5-gi-btn{flex:1;padding:9px 6px;border-radius:6px;border:none;cursor:pointer;font-family:var(--mono);font-size:10px;letter-spacing:.1em;transition:all .2s;text-align:center;}
+.m5-gi-btn.unsent{background:rgba(50,200,130,.1);color:rgba(100,255,190,.8);border:1px solid rgba(50,200,130,.3);}
+.m5-gi-btn.unsent:hover{background:rgba(50,200,130,.2);}
+.m5-gi-btn.sent{background:rgba(50,200,130,.05);color:rgba(50,200,130,.45);border:1px solid rgba(50,200,130,.15);cursor:default;}
+.m5-gi-btn.sending{opacity:.5;cursor:not-allowed;}
+.m5-gi-all{width:100%;margin-top:0;padding:8px;background:rgba(77,166,255,.08);color:rgba(150,200,255,.8);border:1px solid rgba(77,166,255,.25);border-radius:6px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;cursor:pointer;transition:all .2s;margin:0 14px 10px;width:calc(100% - 28px);}
+.m5-gi-all:hover:not(:disabled){background:rgba(77,166,255,.18);}
+.m5-gi-all:disabled{opacity:.3;cursor:not-allowed;}
 </style>
 </head>
 <body>
@@ -1976,15 +2005,10 @@
     <div class="m5-dash"></div>
     <div class="m5-codename">LAST 15 MINUTES — SURVIVAL PROTOCOL</div>
   </div>
-  <div class="m5-alert">
-    <div class="m5-alert-icon">⚠️</div>
-    <div class="m5-alert-text">CRITICAL ALERT — 帰還用カプセルに致命的な破損を検出。<br>修復不能まで残り <strong>15:00</strong>。仲間の中に破壊工作員が潜んでいる。</div>
-  </div>
-  <div class="m5-flavor">
-    <p>ミッションが終わりかけた。もうすぐ地球へ帰還できる。<br>突然として警報が鳴り響く。</p>
-    <div class="m5-divider"></div>
-    <p>「……気づいたか。仲間たちの中に、<strong>ライバル企業から送り込まれた破壊工作員</strong>が1人混じっている。<br>犯人を捕まえなければカプセルを直せない。</p>
-    <p>幸運を祈る。</p>
+  <div class="m5-dq-wrap">
+    <div class="m5-dq-box">
+      <div class="m5-dq-text" id="m5-dq-text"><span class="m5-dq-cursor" id="m5-dq-cursor"></span></div>
+    </div>
   </div>
   <div class="m5-launch-wrap">
     <div class="m5-launch-label">GAME MASTER ONLY</div>
@@ -2001,13 +2025,81 @@
       </div>
       <button class="rp-close-btn" onclick="toggleM5Panel()">✕ CLOSE</button>
     </div>
-    <div class="rocket-inner" style="border-radius:0">
-      <div class="r-nose-wrap">
-        <div class="r-nose"></div>
-        <div class="r-nose-label">LAST-15MIN</div>
+    <div class="m5-panel-layout" style="border:1px solid rgba(77,166,255,.18);border-top:none;border-bottom:none;">
+      <!-- SVGロケット（装飾） -->
+      <div class="m5-svg-side">
+        <svg class="m5-svg-rocket" viewBox="0 0 200 480" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="bGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#0a1525"/>
+              <stop offset="40%" stop-color="#1a3a6b"/>
+              <stop offset="100%" stop-color="#0a1525"/>
+            </linearGradient>
+            <linearGradient id="nGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#2563a8"/>
+              <stop offset="100%" stop-color="#0d1830"/>
+            </linearGradient>
+            <radialGradient id="gGrad" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#4da6ff" stop-opacity="0.2"/>
+              <stop offset="100%" stop-color="#4da6ff" stop-opacity="0"/>
+            </radialGradient>
+            <filter id="glw"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            <filter id="glw2"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          </defs>
+          <!-- 背景グロー -->
+          <ellipse cx="100" cy="220" rx="90" ry="200" fill="url(#gGrad)"/>
+          <!-- ノーズコーン -->
+          <path d="M100,10 L148,110 L52,110 Z" fill="url(#nGrad)" stroke="#4da6ff" stroke-width="1.5" filter="url(#glw)"/>
+          <path d="M100,18 L142,110 L58,110 Z" fill="rgba(37,99,168,.4)"/>
+          <line x1="100" y1="18" x2="100" y2="100" stroke="#4da6ff" stroke-width="0.6" opacity="0.4"/>
+          <!-- 胴体 -->
+          <rect x="52" y="110" width="96" height="240" rx="4" fill="url(#bGrad)" stroke="#4da6ff" stroke-width="1.2"/>
+          <!-- サイドライン -->
+          <rect x="52" y="130" width="3" height="220" fill="#4da6ff" opacity="0.35"/>
+          <rect x="145" y="130" width="3" height="220" fill="#4da6ff" opacity="0.35"/>
+          <!-- メインウィンドウ -->
+          <circle cx="100" cy="158" r="22" fill="#030a18" stroke="#4da6ff" stroke-width="2" filter="url(#glw)"/>
+          <circle cx="100" cy="158" r="16" fill="#061428"/>
+          <circle cx="93" cy="151" r="5" fill="#4da6ff" opacity="0.2"/>
+          <circle cx="93" cy="151" r="2.5" fill="#a8d4ff" opacity="0.5"/>
+          <!-- ホリゾンタルバンド -->
+          <rect x="52" y="210" width="96" height="10" fill="#4da6ff" opacity="0.12"/>
+          <line x1="52" y1="210" x2="148" y2="210" stroke="#4da6ff" stroke-width="0.8" opacity="0.5"/>
+          <line x1="52" y1="220" x2="148" y2="220" stroke="#4da6ff" stroke-width="0.8" opacity="0.5"/>
+          <!-- サブウィンドウ2つ -->
+          <rect x="68" y="232" width="26" height="18" rx="3" fill="#030a18" stroke="#4da6ff" stroke-width="1" opacity="0.7"/>
+          <rect x="106" y="232" width="26" height="18" rx="3" fill="#030a18" stroke="#4da6ff" stroke-width="1" opacity="0.7"/>
+          <!-- ロゴライン -->
+          <rect x="68" y="265" width="64" height="2" fill="#4da6ff" opacity="0.3"/>
+          <rect x="72" y="272" width="56" height="1" fill="#4da6ff" opacity="0.2"/>
+          <!-- フィン左 -->
+          <path d="M52,290 L18,360 L52,340 Z" fill="#0a1525" stroke="#4da6ff" stroke-width="1.2" filter="url(#glw)"/>
+          <line x1="52" y1="295" x2="24" y2="352" stroke="#4da6ff" stroke-width="0.5" opacity="0.4"/>
+          <!-- フィン右 -->
+          <path d="M148,290 L182,360 L148,340 Z" fill="#0a1525" stroke="#4da6ff" stroke-width="1.2" filter="url(#glw)"/>
+          <line x1="148" y1="295" x2="176" y2="352" stroke="#4da6ff" stroke-width="0.5" opacity="0.4"/>
+          <!-- エンジン部 -->
+          <rect x="56" y="350" width="88" height="28" rx="6" fill="#06111e" stroke="#4da6ff" stroke-width="1" opacity="0.9"/>
+          <!-- ノズル3本 -->
+          <path d="M70,378 L65,415 L82,415 L77,378 Z" fill="#040e1c" stroke="#4da6ff" stroke-width="0.8"/>
+          <path d="M91,378 L86,424 L114,424 L109,378 Z" fill="#040e1c" stroke="#4da6ff" stroke-width="0.8"/>
+          <path d="M123,378 L118,415 L135,415 L130,378 Z" fill="#040e1c" stroke="#4da6ff" stroke-width="0.8"/>
+          <!-- 炎 左 -->
+          <ellipse cx="73.5" cy="420" rx="8" ry="14" fill="rgba(255,140,20,.75)" filter="url(#glw2)"/>
+          <ellipse cx="73.5" cy="418" rx="4" ry="8" fill="rgba(255,220,100,.9)"/>
+          <!-- 炎 中央 -->
+          <ellipse cx="100" cy="430" rx="11" ry="18" fill="rgba(255,100,10,.8)" filter="url(#glw2)"/>
+          <ellipse cx="100" cy="427" rx="5.5" ry="10" fill="rgba(255,200,80,.95)"/>
+          <!-- 炎 右 -->
+          <ellipse cx="126.5" cy="420" rx="8" ry="14" fill="rgba(255,140,20,.75)" filter="url(#glw2)"/>
+          <ellipse cx="126.5" cy="418" rx="4" ry="8" fill="rgba(255,220,100,.9)"/>
+          <!-- テキスト -->
+          <text x="100" y="198" text-anchor="middle" fill="#4da6ff" font-family="monospace" font-size="8" opacity="0.6" letter-spacing="1">LAST-15MIN</text>
+        </svg>
       </div>
-      <div class="r-body">
-        <button class="room-row" id="room-btn-0" onclick="openM5Room(0)">
+      <!-- 部屋リスト -->
+      <div class="m5-rooms-side">
+        <button class="room-row" id="room-btn-0" onclick="openM5Room(0)" style="border-top:none;">
           <div class="rr-num">①</div><div class="rr-icon">🛸</div>
           <div class="rr-info"><div class="rr-name">操縦室</div><div class="rr-note">🔒 船長 入室不可</div></div>
           <div class="rr-status" id="rs-0">未探索</div>
@@ -2027,10 +2119,6 @@
           <div class="rr-info"><div class="rr-name">貨物室</div><div class="rr-note">🔒 科学者 入室不可</div></div>
           <div class="rr-status" id="rs-3">未探索</div>
         </button>
-      </div>
-      <div class="r-fins"><div class="fin-l"></div><div class="fin-r"></div></div>
-      <div class="r-engine">
-        <div class="nozzle"></div><div class="nozzle"></div><div class="nozzle"></div>
       </div>
     </div>
     <div class="rp-taskbar">
@@ -2076,20 +2164,14 @@
       <div class="mbox sec" id="m-sec"></div>
     </div>
     <div class="msend">
-      <div class="msend-title">📤 発見アイテムを探索者に送信</div>
-      <div class="items-grid">
+      <div class="msend-title">📦 発見アイテム</div>
+      <div class="items-grid" id="m-items-grid">
         <div class="item-slot" id="is-0"><div class="is-ab">A</div><div class="is-icon" id="ii0"></div><div class="is-name" id="in0"></div></div>
         <div class="item-slot" id="is-1"><div class="is-ab">B</div><div class="is-icon" id="ii1"></div><div class="is-name" id="in1"></div></div>
       </div>
-      <div class="target-label">送信先（探索する1人を選択）</div>
-      <div class="target-btns" id="m-tbts"></div>
-      <div class="tnote" id="m-tnote"></div>
-      <div class="send-btns">
-        <button class="s-btn" id="sb0" disabled onclick="sendM5Item(0)">A を送信</button>
-        <button class="s-btn" id="sb1" disabled onclick="sendM5Item(1)">B を送信</button>
-      </div>
-      <button class="s-all" id="sba" disabled onclick="sendM5All()">A・B 両方まとめて送信</button>
-      <button class="m-close" onclick="closeM5Modal()">閉じる</button>
+      <div class="msend-title" style="margin-top:14px;">📤 グループへ送信</div>
+      <div class="m5-group-send-list" id="m5-group-send-list"></div>
+      <button class="m-close" onclick="closeM5Modal()" style="margin-top:14px;">閉じる</button>
     </div>
   </div>
 </div>
@@ -2101,7 +2183,6 @@
       <div class="cm-emoji" id="cm-emoji"></div>
       <div class="cm-role" id="cm-role"></div>
       <div class="cm-grp" id="cm-grp"></div>
-      <div class="cm-true" id="cm-true"></div>
     </div>
     <a class="cm-link" id="cm-link" target="_blank">📱 役職カードを開く</a>
     <div class="cm-close-btn" onclick="closeM5Card()">閉じる</div>
@@ -2391,6 +2472,29 @@ document.getElementById('btn-close-bank').addEventListener('click', () => {
   const wrap=document.getElementById('m5-streaks');
   for(let i=0;i<18;i++){const el=document.createElement('div');el.className='streak';el.style.cssText=`top:${Math.random()*100}%;width:${60+Math.random()*180}px;--dur:${2+Math.random()*5}s;--delay:${Math.random()*8}s;opacity:${0.3+Math.random()*0.4};`;wrap.appendChild(el);}
 })();
+
+// DQタイピング
+(function(){
+  const M5_STORY = 'やっとミッションが終わり、もうすぐ地球へ帰還する。\n\nしかし、突如として警報が鳴り響く。\n「帰還用カプセルに致命的な破損を検出。修復不能まで残り15分。」\n\n幸い、修復は可能だ。だが、その直後に「地上」の委員長から、ノイズ混じりの極秘通信が入る。\n\n「……聞こえるか。君たちの中に、ライバル企業から送り込まれた破壊工作員が1人混じっている。その工作員は、『帰還の瞬間』に帰還用カプセルを完全に破壊するようだ……\n\nそれと……全員に告ぐ。君たちがそれぞれ『私的な理由』で集まったことは分かっている。破壊工作員を捕まえ、無事にカプセルを直せ。そうすれば、隠し持っている機密ごと高額なボーナスで買い取ってやろう。\nただし、破壊工作員を間違えれば……全員のキャリアはここで終わりだ。幸運を祈る。」';
+  const el=document.getElementById('m5-dq-text');
+  const cursor=document.getElementById('m5-dq-cursor');
+  let i=0;
+  function type(){
+    if(i<M5_STORY.length){
+      el.textContent=M5_STORY.slice(0,i+1);
+      el.appendChild(cursor);
+      i++;
+      setTimeout(type, i===1?600:28);
+    } else {
+      cursor.style.display='none';
+    }
+  }
+  // ミッション05セクションが見えたらタイピング開始
+  const obs=new IntersectionObserver(entries=>{
+    if(entries[0].isIntersecting){type();obs.disconnect();}
+  },{threshold:0.2});
+  obs.observe(document.getElementById('mission5'));
+})();
 </script>
 
 <script type="module">
@@ -2410,40 +2514,37 @@ document.getElementById('btn-close-bank').addEventListener('click', () => {
 
   const GROUP_JP  ={mochi:'もち',tsuki:'つき',taku:'たく',rou:'ろう'};
   const GROUP_ACC ={mochi:'#4da6ff',tsuki:'#32c878',taku:'#ffbe32',rou:'#ff5555'};
+  const GROUPS    =['mochi','tsuki','taku','rou'];
   const ROLE_JP   ={captain:'船長',doctor:'医師',engineer:'エンジニア',scientist:'科学者'};
   const ROLE_EMOJI={captain:'🛸',doctor:'🏥',engineer:'⚡',scientist:'🧪'};
   const ROLE_ACC  ={captain:'#4da6ff',doctor:'#32c878',engineer:'#ffbe32',scientist:'#ff5555'};
   const ROLES     =['captain','scientist','engineer','doctor'];
-  const ALL_ROLES =['captain','doctor','engineer','scientist'];
-  const TRUE_GROUP={
-    mochi:{captain:'mochi',scientist:'tsuki',engineer:'taku', doctor:'rou'  },
-    tsuki:{captain:'tsuki',scientist:'mochi',engineer:'rou',  doctor:'taku' },
-    taku: {captain:'taku', scientist:'rou',  engineer:'mochi',doctor:'tsuki'},
-    rou:  {captain:'rou',  scientist:'taku', engineer:'tsuki',doctor:'mochi'},
-  };
-  const CARD_FILES={captain:'murder/sample_captain.html',doctor:'murder/sample_doctor.html',engineer:'murder/sample_engineer.html',scientist:'murder/sample_scientist.html'};
+  const CARD_FILES={captain:'murder/sample_doctor.html',doctor:'murder/sample_doctor.html',engineer:'murder/sample_doctor.html',scientist:'murder/sample_doctor.html'};
 
   const ROOMS=[
     {id:0,icon:'🛸',name:'操縦室',num:'① 操縦室',restrict:'captain',restrictLabel:'🔒 船長 入室不可',
-     items:[{id:'cockpit_terminal',icon:'📡',name:'暗号通信端末',desc:'競合企業への暗号通信端末。'},{id:'nav_log',icon:'🗓️',name:'改ざんされた航行ログ',desc:'マスターキー使用履歴が残っている。'}],
+     items:[{id:'cockpit_terminal',icon:'📡',name:'暗号通信端末'},{id:'nav_log',icon:'🗓️',name:'改ざんされた航行ログ'}],
      storyPub:'操縦室に不審な操作ログが残っていた。競合企業への暗号通信の痕跡が発見された。',
      storySec:'【口頭のみ】航行ログにマスターキーを使ったロック解除記録がある。船長だけが持つキーの使用履歴だ。'},
     {id:1,icon:'⚡',name:'機関室',num:'② 機関室',restrict:'engineer',restrictLabel:'🔒 エンジニア 入室不可',
-     items:[{id:'engine_explosive',icon:'💣',name:'起爆装置パーツ',desc:'単体では起爆不可。'},{id:'eng_manual',icon:'🔧',name:'書き込みのある修復マニュアル',desc:'エンジニアの筆跡で細工手順が書き込まれている。'}],
+     items:[{id:'engine_explosive',icon:'💣',name:'起爆装置パーツ'},{id:'eng_manual',icon:'🔧',name:'書き込みのある修復マニュアル'}],
      storyPub:'エネルギーコアに過負荷の細工が施されていた。精密な電気工学の知識が必要な作業だ。',
      storySec:'【口頭のみ】エンジニアの認証コードで記録された不正アクセスログが残っている。'},
     {id:2,icon:'🏥',name:'生命維持室',num:'③ 生命維持室',restrict:'doctor',restrictLabel:'🔒 医師 入室不可',
-     items:[{id:'life_poison',icon:'⚠️',name:'未認可の薬物',desc:'医師の致死判定能力の発動条件。'},{id:'med_record',icon:'📋',name:'改ざんされた医療処置記録',desc:'医師の署名で改ざんされている。'}],
+     items:[{id:'life_poison',icon:'⚠️',name:'未認可の薬物'},{id:'med_record',icon:'📋',name:'改ざんされた医療処置記録'}],
      storyPub:'酸素循環フィルターに異物が混入されていた。医療・薬学の専門知識が必要な仕業だ。',
      storySec:'【口頭のみ】医師の署名付きで、未認可の薬物の持ち込み記録がある。'},
     {id:3,icon:'📦',name:'貨物室',num:'④ 貨物室',restrict:'scientist',restrictLabel:'🔒 科学者 入室不可',
-     items:[{id:'cargo_battery',icon:'🔋',name:'高圧電池パック',desc:'カプセル破壊能力の発動条件。'},{id:'enc_media',icon:'💾',name:'暗号化記憶媒体',desc:'スパイグループの機密データ。'}],
+     items:[{id:'cargo_battery',icon:'🔋',name:'高圧電池パック'},{id:'enc_media',icon:'💾',name:'暗号化記憶媒体'}],
      storyPub:'貨物室の隔壁に爆破装置が取り付けられていた。帰還の瞬間に起動する設計になっている。',
      storySec:'【口頭のみ】爆破装置の起動コードが科学者の研究端末のシリアルナンバーと一致する。'},
   ];
 
-  const sentMap={0:{0:false,1:false},1:{0:false,1:false},2:{0:false,1:false},3:{0:false,1:false}};
-  let curRoom=null,selTarget=null,curGroup='mochi';
+  // sentMap[roomId][group][itemIdx]
+  const sentMap={};
+  for(let r=0;r<4;r++){sentMap[r]={};GROUPS.forEach(g=>{sentMap[r][g]={0:false,1:false};});}
+
+  let curRoom=null,curGroup='mochi';
 
   window.toggleM5Panel=function(){
     const p=document.getElementById('m5-rocket-panel');
@@ -2470,12 +2571,10 @@ document.getElementById('btn-close-bank').addEventListener('click', () => {
   function renderM5Group(g){
     const el=document.getElementById('gc-roles');
     el.innerHTML=ROLES.map(role=>{
-      const tg=TRUE_GROUP[g][role];
       return `<button class="gc-role-btn" onclick="openM5Card('${g}','${role}')">
         <div class="gc-role-emoji">${ROLE_EMOJI[role]}</div>
         <div class="gc-role-info">
           <div class="gc-role-name">${ROLE_JP[role]}</div>
-          <div class="gc-role-true" style="color:${GROUP_ACC[tg]}88">真の所属：${GROUP_JP[tg]}グループ</div>
         </div>
         <div class="gc-role-arrow">›</div>
       </button>`;
@@ -2483,12 +2582,10 @@ document.getElementById('btn-close-bank').addEventListener('click', () => {
   }
 
   window.openM5Card=function(g,role){
-    const tg=TRUE_GROUP[g][role];
     document.getElementById('cm-emoji').textContent=ROLE_EMOJI[role];
     document.getElementById('cm-role').textContent=ROLE_JP[role];
     document.getElementById('cm-grp').textContent=GROUP_JP[g]+'グループ';
     document.getElementById('cm-grp').style.color=GROUP_ACC[g];
-    document.getElementById('cm-true').textContent='真の所属：'+GROUP_JP[tg]+'グループ';
     const lk=document.getElementById('cm-link');
     lk.href=CARD_FILES[role];
     lk.style.cssText=`display:block;margin:14px 16px 4px;padding:13px;text-align:center;border-radius:8px;font-family:var(--mono);font-size:10px;letter-spacing:.15em;cursor:pointer;text-decoration:none;color:${ROLE_ACC[role]};background:${ROLE_ACC[role]}22;border:1px solid ${ROLE_ACC[role]}44`;
@@ -2498,85 +2595,110 @@ document.getElementById('btn-close-bank').addEventListener('click', () => {
   window.m5CardBgClose=(e)=>{if(e.target===document.getElementById('m5-card-overlay'))window.closeM5Card()};
 
   window.openM5Room=function(id){
-    const r=ROOMS[id];curRoom=r;selTarget=null;
+    const r=ROOMS[id];curRoom=r;
     document.getElementById('m-icon').textContent=r.icon;
     document.getElementById('m-num').textContent=r.num;
     document.getElementById('m-name').textContent=r.name;
     document.getElementById('m-restrict').textContent=r.restrictLabel;
     document.getElementById('m-pub').textContent=r.storyPub;
     document.getElementById('m-sec').textContent=r.storySec;
+    // アイテム表示
     r.items.forEach((it,i)=>{
       document.getElementById('ii'+i).textContent=it.icon;
       document.getElementById('in'+i).textContent=it.name;
-      const sl=document.getElementById('is-'+i);
-      const ob=sl.querySelector('.is-sent');if(ob)ob.remove();
-      if(sentMap[id][i]){const b=document.createElement('div');b.className='is-sent';b.textContent='✓';sl.appendChild(b);}
-      const sb=document.getElementById('sb'+i);
-      sb.disabled=true;sb.textContent=(i===0?'A':'B')+(sentMap[id][i]?' 済み':' を送信');
-      sb.className=sentMap[id][i]?'s-btn sent':'s-btn';
     });
-    const as=sentMap[id][0]&&sentMap[id][1];
-    document.getElementById('sba').disabled=true;
-    document.getElementById('sba').textContent=as?'✓ 両方送信済み':'A・B 両方まとめて送信';
-    const btns=document.getElementById('m-tbts');
-    btns.innerHTML=ALL_ROLES.map(role=>{
-      const dis=role===r.restrict?'disabled':'';
-      return `<button class="t-btn" id="tbtn-${role}" ${dis} onclick="pickM5Target(this,'${role}')">${ROLE_EMOJI[role]} ${ROLE_JP[role]}</button>`;
+    // グループ送信リスト生成
+    const list=document.getElementById('m5-group-send-list');
+    list.innerHTML=GROUPS.map(g=>{
+      const s0=sentMap[id][g][0];const s1=sentMap[id][g][1];
+      const both=s0&&s1;
+      return `<div class="m5-group-send-row" id="gsr-${id}-${g}">
+        <div class="m5-gsr-hd">
+          <div class="m5-gsr-dot" style="background:${GROUP_ACC[g]};box-shadow:0 0 5px ${GROUP_ACC[g]};"></div>
+          <div class="m5-gsr-name" style="color:${GROUP_ACC[g]};">${GROUP_JP[g]}グループ</div>
+          ${both?'<span style="font-family:var(--mono);font-size:9px;color:#32c878;margin-left:auto;">✓ 完了</span>':''}
+        </div>
+        <div class="m5-gsr-body">
+          <button class="m5-gi-btn ${s0?'sent':'unsent'}" id="gbtn-${id}-${g}-0" onclick="sendM5GroupItem(${id},'${g}',0)">
+            ${s0?'✓ A 済み':'A を送信'}
+          </button>
+          <button class="m5-gi-btn ${s1?'sent':'unsent'}" id="gbtn-${id}-${g}-1" onclick="sendM5GroupItem(${id},'${g}',1)">
+            ${s1?'✓ B 済み':'B を送信'}
+          </button>
+        </div>
+        <button class="m5-gi-all" id="gball-${id}-${g}" ${both?'disabled':''} onclick="sendM5GroupAll(${id},'${g}')">
+          ${both?'✓ A・B 両方送信済み':'A・B まとめて送信'}
+        </button>
+      </div>`;
     }).join('');
-    document.getElementById('m-tnote').textContent='※ '+r.restrictLabel;
     document.getElementById('m5-overlay').classList.add('open');
   };
-  window.pickM5Target=function(btn,role){
-    document.querySelectorAll('.t-btn').forEach(b=>b.classList.remove('sel'));
-    btn.classList.add('sel');selTarget=role;
-    [0,1].forEach(i=>{if(!sentMap[curRoom.id][i])document.getElementById('sb'+i).disabled=false;});
-    if(!(sentMap[curRoom.id][0]&&sentMap[curRoom.id][1]))document.getElementById('sba').disabled=false;
-  };
-  window.closeM5Modal=()=>{document.getElementById('m5-overlay').classList.remove('open');curRoom=null;selTarget=null;};
+
+  window.closeM5Modal=()=>{document.getElementById('m5-overlay').classList.remove('open');curRoom=null;};
   window.m5BgClose=(e)=>{if(e.target===document.getElementById('m5-overlay'))window.closeM5Modal();};
 
-  async function doM5Send(idx){
+  async function doSend(roomId,group,idx){
     const it=curRoom.items[idx];
-    const ref=doc(db,'game','session','inventory',curGroup+'_'+selTarget);
+    const ref=doc(db,'game','session','m5items',`${roomId}_${group}`);
     const sn=await getDoc(ref);
     const items=[...(sn.data()?.items||[])];
     if(!items.includes(it.id))items.push(it.id);
-    await setDoc(ref,{items,role:selTarget,group:curGroup});
-    sentMap[curRoom.id][idx]=true;
+    await setDoc(ref,{items,group,roomId});
+    sentMap[roomId][group][idx]=true;
   }
-  window.sendM5Item=async function(idx){
-    if(!curRoom||!selTarget)return;
-    const btn=document.getElementById('sb'+idx);
-    btn.disabled=true;btn.textContent='送信中…';
+
+  window.sendM5GroupItem=async function(roomId,group,idx){
+    const btn=document.getElementById(`gbtn-${roomId}-${group}-${idx}`);
+    if(!btn||btn.classList.contains('sent'))return;
+    btn.classList.add('sending');btn.textContent='送信中…';
     try{
-      await doM5Send(idx);
-      btn.textContent=(idx===0?'A':'B')+' 済み';btn.className='s-btn sent';
-      const sl=document.getElementById('is-'+idx);
-      if(!sl.querySelector('.is-sent')){const b=document.createElement('div');b.className='is-sent';b.textContent='✓';sl.appendChild(b);}
-      updateM5RS(curRoom.id);
-      if(sentMap[curRoom.id][0]&&sentMap[curRoom.id][1]){document.getElementById('sba').disabled=true;document.getElementById('sba').textContent='✓ 両方送信済み';}
-      m5Toast('✓ '+ROLE_EMOJI[selTarget]+ROLE_JP[selTarget]+' に '+curRoom.items[idx].name+' を送信');
-    }catch(e){btn.disabled=false;btn.textContent=(idx===0?'A':'B')+' を送信';m5Toast('⚠️ '+e.message);}
+      await doSend(roomId,group,idx);
+      btn.className='m5-gi-btn sent';btn.textContent=(idx===0?'✓ A 済み':'✓ B 済み');
+      updateM5RS(roomId);refreshGroupRow(roomId,group);
+      m5Toast(`✓ ${GROUP_JP[group]}グループに ${ROOMS[roomId].items[idx].name} を送信`);
+    }catch(e){btn.classList.remove('sending');btn.textContent=(idx===0?'A を送信':'B を送信');m5Toast('⚠️ '+e.message);}
   };
-  window.sendM5All=async function(){
-    if(!curRoom||!selTarget)return;
-    const btn=document.getElementById('sba');btn.disabled=true;btn.textContent='送信中…';
+
+  window.sendM5GroupAll=async function(roomId,group){
+    const allBtn=document.getElementById(`gball-${roomId}-${group}`);
+    if(!allBtn||allBtn.disabled)return;
+    allBtn.disabled=true;allBtn.textContent='送信中…';
     try{
       for(let i=0;i<2;i++){
-        if(!sentMap[curRoom.id][i])await doM5Send(i);
-        const sb=document.getElementById('sb'+i);sb.textContent=(i===0?'A':'B')+' 済み';sb.className='s-btn sent';sb.disabled=true;
-        const sl=document.getElementById('is-'+i);
-        if(!sl.querySelector('.is-sent')){const b=document.createElement('div');b.className='is-sent';b.textContent='✓';sl.appendChild(b);}
+        if(!sentMap[roomId][group][i])await doSend(roomId,group,i);
+        const b=document.getElementById(`gbtn-${roomId}-${group}-${i}`);
+        if(b){b.className='m5-gi-btn sent';b.textContent=(i===0?'✓ A 済み':'✓ B 済み');}
       }
-      btn.textContent='✓ 両方送信済み';updateM5RS(curRoom.id);
-      m5Toast('✓ A・B 両方を '+ROLE_EMOJI[selTarget]+ROLE_JP[selTarget]+' に送信');
-    }catch(e){btn.disabled=false;btn.textContent='A・B 両方まとめて送信';m5Toast('⚠️ '+e.message);}
+      allBtn.textContent='✓ A・B 両方送信済み';
+      updateM5RS(roomId);refreshGroupRow(roomId,group);
+      m5Toast(`✓ ${GROUP_JP[group]}グループに A・B 両方送信`);
+    }catch(e){allBtn.disabled=false;allBtn.textContent='A・B まとめて送信';m5Toast('⚠️ '+e.message);}
   };
-  function updateM5RS(id){
-    const s=sentMap[id];const el=document.getElementById('rs-'+id);const btn=document.getElementById('room-btn-'+id);
-    if(s[0]&&s[1]){el.textContent='✓ 完了';el.className='rr-status done';btn.classList.add('explored');}
-    else if(s[0]||s[1]){el.textContent='▶ 1/2';el.className='rr-status part';}
+
+  function refreshGroupRow(roomId,group){
+    const s0=sentMap[roomId][group][0];const s1=sentMap[roomId][group][1];
+    const both=s0&&s1;
+    const hd=document.querySelector(`#gsr-${roomId}-${group} .m5-gsr-hd`);
+    if(hd&&both&&!hd.querySelector('.done-mark')){
+      const sp=document.createElement('span');
+      sp.className='done-mark';
+      sp.style.cssText='font-family:var(--mono);font-size:9px;color:#32c878;margin-left:auto;';
+      sp.textContent='✓ 完了';
+      hd.appendChild(sp);
+    }
+    const ab=document.getElementById(`gball-${roomId}-${group}`);
+    if(ab&&both){ab.disabled=true;ab.textContent='✓ A・B 両方送信済み';}
   }
+
+  function updateM5RS(id){
+    const allDone=GROUPS.every(g=>sentMap[id][g][0]&&sentMap[id][g][1]);
+    const anyDone=GROUPS.some(g=>sentMap[id][g][0]||sentMap[id][g][1]);
+    const el=document.getElementById('rs-'+id);
+    const btn=document.getElementById('room-btn-'+id);
+    if(allDone){el.textContent='✓ 完了';el.className='rr-status done';btn.classList.add('explored');}
+    else if(anyDone){el.textContent='▶ 進行中';el.className='rr-status part';}
+  }
+
   function m5Toast(msg){
     const t=document.getElementById('m5-toast');t.textContent=msg;
     t.style.opacity='1';t.style.transform='translateX(-50%) translateY(0)';
