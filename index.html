@@ -1562,6 +1562,11 @@
     <button id="btn-open-form" class="action-btn" style="width:100%;cursor:pointer;font-family:inherit;">
       🚀 &nbsp; INPUT FORM — START
     </button>
+    <div style="margin-top:10px;padding:10px 14px;background:rgba(0,200,212,.04);border:1px solid rgba(0,200,212,.2);border-radius:4px;display:flex;align-items:center;flex-wrap:wrap;gap:8px;">
+      <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.2em;color:rgba(0,200,212,.5);flex-shrink:0;">CANDIDATE PROFILE URL</div>
+      <div style="font-family:'Space Mono',monospace;font-size:9px;color:rgba(200,230,255,.4);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">https://ufotable200010.github.io/Astro/form/form.html</div>
+      <button onclick="navigator.clipboard.writeText('https://ufotable200010.github.io/Astro/form/form.html').then(()=>{this.textContent='✓ コピー済み';setTimeout(()=>this.textContent='URLコピー',2000)})" style="padding:6px 12px;background:rgba(0,200,212,.1);border:1px solid rgba(0,200,212,.3);border-radius:3px;font-family:'Space Mono',monospace;font-size:9px;color:rgba(0,200,212,.7);cursor:pointer;white-space:nowrap;flex-shrink:0;">URLコピー</button>
+    </div>
     <div style="margin-top:28px;padding:20px 28px;background:rgba(123,47,255,0.07);border:1px solid rgba(123,47,255,0.3);border-radius:2px;">
       <p style="font-family:'Space Mono',monospace;font-size:14px;letter-spacing:0.25em;color:#a87fff;margin-bottom:14px;">💡 なかなか強み・弱みが書けない方へ</p>
       <p style="font-size:19px;color:rgba(232,240,255,0.75);line-height:2.1;">
@@ -2174,6 +2179,11 @@
       <div class="gm-form-url">https://ufotable200010.github.io/Astro/form/form.html</div>
       <button class="gm-form-copy" onclick="navigator.clipboard.writeText('https://ufotable200010.github.io/Astro/form/form.html').then(()=>m5Toast('✓ フォームURLをコピーしました'))">コピー</button>
     </div>
+    <div style="padding:10px 14px;background:rgba(255,60,60,.05);border-top:1px solid rgba(255,60,60,.12);border-bottom:1px solid rgba(255,60,60,.12);display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+      <div style="font-family:var(--mono);font-size:9px;letter-spacing:.2em;color:rgba(255,120,100,.6);flex-shrink:0;">🔐 役職カードPW</div>
+      <input id="gm-card-pw" type="text" placeholder="例: 1234" value="1234" style="flex:1;min-width:80px;padding:6px 10px;background:rgba(255,60,60,.08);border:1px solid rgba(255,60,60,.25);border-radius:3px;font-family:var(--mono);font-size:11px;color:#ffcccc;outline:none;" oninput="refreshAllCardURLs()">
+      <div style="font-family:var(--mono);font-size:8px;color:rgba(255,120,100,.4);">→ URLに含めて配布</div>
+    </div>
     <div class="rp-taskbar">
       <button class="tb-btn active" id="tb-mochi" style="--tab-c:#4da6ff" onclick="switchM5Group('mochi')">
         <div class="tb-dot" style="background:#4da6ff;box-shadow:0 0 5px #4da6ff"></div>
@@ -2622,7 +2632,10 @@ document.getElementById('btn-close-bank').addEventListener('click', () => {
   function renderM5Group(g){
     const el=document.getElementById('gc-roles');
     el.innerHTML=ROLES.map(role=>{
+      const tg=TRUE_GROUP[g][role];
       const base='https://ufotable200010.github.io/Astro/murder/card.html';
+      const pw=(document.getElementById('gm-card-pw')||{value:'1234'}).value||'1234';
+      const initURL=`${base}?group=${g}&role=${role}&tg=${tg}&pw=${encodeURIComponent(pw)}`;
       return `<div class="gc-role-card">
         <div class="gc-role-hd" onclick="openM5Card('${g}','${role}')" style="cursor:pointer;">
           <div class="gc-role-hd-emoji">${ROLE_EMOJI[role]}</div>
@@ -2632,7 +2645,7 @@ document.getElementById('btn-close-bank').addEventListener('click', () => {
         <div class="gc-url-body">
           <input class="gc-name-inp" id="gi-name-${g}-${role}" placeholder="名前を入力（任意）" oninput="updateCardURL('${g}','${role}')">
           <div class="gc-url-row">
-            <div class="gc-url-text" id="gi-url-${g}-${role}">${base}?group=${g}&role=${role}</div>
+            <div class="gc-url-text" id="gi-url-${g}-${role}">${initURL}</div>
             <button class="gc-copy-btn" onclick="copyCardURL('${g}','${role}')">URLコピー</button>
           </div>
         </div>
@@ -2640,11 +2653,28 @@ document.getElementById('btn-close-bank').addEventListener('click', () => {
     }).join('');
   }
 
+  function buildCardURL(g,role,name){
+    const tg=TRUE_GROUP[g][role];
+    const pw=(document.getElementById('gm-card-pw')||{value:'1234'}).value||'1234';
+    const base='https://ufotable200010.github.io/Astro/murder/card.html';
+    return `${base}?group=${g}&role=${role}&tg=${tg}&pw=${encodeURIComponent(pw)}${name?'&name='+encodeURIComponent(name):''}`;
+  }
+
+  window.refreshAllCardURLs=function(){
+    ['mochi','tsuki','taku','rou'].forEach(g=>{
+      ROLES.forEach(role=>{
+        const nameEl=document.getElementById(`gi-name-${g}-${role}`);
+        const name=nameEl?nameEl.value:'';
+        const urlEl=document.getElementById(`gi-url-${g}-${role}`);
+        if(urlEl)urlEl.textContent=buildCardURL(g,role,name);
+      });
+    });
+  };
+
   window.openM5Card=function(g,role){
     const nameEl=document.getElementById(`gi-name-${g}-${role}`);
     const name=nameEl?nameEl.value:'';
-    const base='https://ufotable200010.github.io/Astro/murder/card.html';
-    const url=`${base}?group=${g}&role=${role}${name?'&name='+encodeURIComponent(name):''}`;
+    const url=buildCardURL(g,role,name);
     document.getElementById('cm-emoji').textContent=ROLE_EMOJI[role];
     document.getElementById('cm-role').textContent=ROLE_JP[role];
     document.getElementById('cm-grp').textContent=GROUP_JP[g]+'グループ';
@@ -2657,17 +2687,13 @@ document.getElementById('btn-close-bank').addEventListener('click', () => {
   window.updateCardURL=function(g,role){
     const nameEl=document.getElementById(`gi-name-${g}-${role}`);
     const name=nameEl?nameEl.value:'';
-    const base='https://ufotable200010.github.io/Astro/murder/card.html';
-    const url=`${base}?group=${g}&role=${role}${name?'&name='+encodeURIComponent(name):''}`;
     const urlEl=document.getElementById(`gi-url-${g}-${role}`);
-    if(urlEl)urlEl.textContent=url;
+    if(urlEl)urlEl.textContent=buildCardURL(g,role,name);
   };
   window.copyCardURL=function(g,role){
     const nameEl=document.getElementById(`gi-name-${g}-${role}`);
     const name=nameEl?nameEl.value:'';
-    const base='https://ufotable200010.github.io/Astro/murder/card.html';
-    const url=`${base}?group=${g}&role=${role}${name?'&name='+encodeURIComponent(name):''}`;
-    navigator.clipboard.writeText(url).then(()=>m5Toast('✓ '+ROLE_JP[role]+'のURLをコピーしました'));
+    navigator.clipboard.writeText(buildCardURL(g,role,name)).then(()=>m5Toast('✓ '+ROLE_JP[role]+'のURLをコピーしました'));
   };
   window.closeM5Card=()=>document.getElementById('m5-card-overlay').classList.remove('open');
   window.m5CardBgClose=(e)=>{if(e.target===document.getElementById('m5-card-overlay'))window.closeM5Card()};

@@ -3,152 +3,437 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>MISSION 05 — 役職カード</title>
+<title>役職カード — LAST-15MIN</title>
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Noto+Serif+JP:wght@400;700;900&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
-:root { --rc: 77,166,255; }
-*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
-body { background:#02030a; color:#c8dcf8; font-family:'Share Tech Mono',monospace; min-height:100vh; overflow-x:hidden; }
-.scanlines { position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,200,212,.01) 2px,rgba(0,200,212,.01) 4px);pointer-events:none;z-index:100; }
-#cbg { position:fixed;inset:0;z-index:0;pointer-events:none; }
-.page { position:relative;z-index:1;max-width:480px;margin:0 auto;padding:0 0 80px; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--rc:77,166,255}
+body{background:#02030a;color:#c8dcf8;font-family:'Noto Serif JP',serif;min-height:100vh;overflow-x:hidden}
+.scanlines{position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,200,212,.01) 2px,rgba(0,200,212,.01) 4px);pointer-events:none;z-index:100}
+#cbg{position:fixed;inset:0;z-index:0;pointer-events:none}
+.page{position:relative;z-index:1;max-width:460px;margin:0 auto;padding:0 0 80px}
 
-/* ヘッダー */
-.card-header { padding:28px 20px 20px;text-align:center;border-bottom:1px solid rgba(var(--rc),.2);background:rgba(0,0,20,.5); }
-.ch-mission { font-family:'Orbitron',monospace;font-size:9px;letter-spacing:.4em;color:rgba(var(--rc),.45);margin-bottom:10px;text-transform:uppercase; }
-.ch-group { display:inline-block;padding:4px 16px;border:1px solid rgba(var(--rc),.4);border-radius:20px;font-size:11px;letter-spacing:.2em;color:rgba(var(--rc),.85);margin-bottom:16px; }
-.ch-emoji { font-size:56px;line-height:1.2;filter:drop-shadow(0 0 20px rgba(var(--rc),.5));display:block; }
-.ch-role { font-family:'Noto Serif JP',serif;font-size:28px;font-weight:900;color:rgb(var(--rc));text-shadow:0 0 24px rgba(var(--rc),.5);margin-top:8px; }
-.ch-name { font-size:14px;color:rgba(200,220,255,.6);margin-top:6px;letter-spacing:.15em; }
+/* ─── 役職公開カード ─── */
+.pub-card{margin:20px 16px 0;background:linear-gradient(160deg,#070b1a 0%,#040710 60%,#030508 100%);border:1px solid rgba(var(--rc),.3);border-radius:10px;overflow:hidden;box-shadow:0 0 60px rgba(var(--rc),.15),0 4px 32px rgba(0,0,0,.8);position:relative;animation:fadeUp .7s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.pub-card::after{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,transparent,rgb(var(--rc)),rgba(var(--rc),.5),transparent);pointer-events:none}
+.pc-header{padding:24px 22px 18px;border-bottom:1px solid rgba(var(--rc),.12);text-align:center;position:relative;z-index:1}
+.pc-eyebrow{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(var(--rc),.6);margin-bottom:8px}
+.pc-grp{display:inline-block;padding:3px 14px;border:1px solid rgba(var(--rc),.3);border-radius:12px;font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.2em;color:rgba(var(--rc),.85);margin-bottom:14px}
+.pc-emoji{font-size:52px;line-height:1.2;filter:drop-shadow(0 0 18px rgba(var(--rc),.5));display:block}
+.pc-role{font-size:26px;font-weight:900;color:rgb(var(--rc));text-shadow:0 0 24px rgba(var(--rc),.45);margin-top:8px;letter-spacing:.04em}
+.pc-name{font-size:13px;color:rgba(200,220,255,.55);margin-top:5px;letter-spacing:.15em}
+.pc-sec{padding:16px 22px;border-bottom:1px solid rgba(var(--rc),.07);position:relative;z-index:1}
+.pc-sec:last-of-type{border-bottom:none}
+.pc-label{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(var(--rc),.55);margin-bottom:9px}
+.pc-info-text{font-size:15px;font-weight:700;color:rgba(220,235,255,.85);line-height:1.75;letter-spacing:.03em}
+.pc-sec.ability{background:rgba(255,200,50,.03);border-left:3px solid rgba(255,200,50,.35) !important;padding-left:20px}
+.pc-sec.ability .pc-label{color:rgba(255,200,50,.6)}
+.ab-name{font-size:14px;font-weight:700;color:#ffe082;margin-bottom:8px}
+.ab-item{display:inline-flex;align-items:center;gap:5px;background:rgba(255,200,50,.1);border:1px solid rgba(255,200,50,.3);border-radius:4px;padding:4px 10px;font-size:11px;color:#ffd54f;font-weight:700;margin-bottom:9px}
+.ab-desc{font-size:12px;color:#fff3cc;line-height:1.75}
+.ab-note{display:flex;gap:6px;align-items:flex-start;font-size:11px;color:rgba(255,200,80,.7);line-height:1.5;margin-top:5px}
+.pc-sec.win{background:rgba(50,220,130,.03);border-left:3px solid rgba(50,220,130,.35) !important;padding-left:20px}
+.pc-sec.win .pc-label{color:rgba(50,220,130,.6)}
+.win-item{display:flex;gap:8px;align-items:center;font-size:13px;font-weight:700;color:#b3ffe0;padding:3px 0}
+.win-item::before{content:'▸';color:#32dc82;font-size:11px}
+.pc-sec.bonus{background:rgba(255,160,50,.03);border-left:3px solid rgba(255,160,50,.3) !important;padding-left:20px}
+.pc-sec.bonus .pc-label{color:rgba(255,160,50,.6)}
+.bonus-item{display:flex;gap:7px;align-items:center;font-size:12px;color:#ffd8a0;padding:3px 0}
+.bonus-item::before{content:'★';color:#ffaa44;font-size:10px}
+.pc-footer{padding:9px 20px;border-top:1px solid rgba(var(--rc),.1);display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1}
+.pc-footer-code{font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(var(--rc),.26);letter-spacing:.1em}
+.pc-footer-status{display:flex;align-items:center;gap:5px;font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(var(--rc),.5);letter-spacing:.1em}
+.pc-footer-status::before{content:'';display:inline-block;width:5px;height:5px;border-radius:50%;background:rgb(var(--rc));box-shadow:0 0 5px rgb(var(--rc));animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
 
-/* アイテム警告 */
-.item-warning { display:none;margin:12px 16px;padding:14px 16px;background:rgba(255,60,60,.1);border:1px solid rgba(255,60,60,.45);border-radius:8px;font-size:12px;color:rgba(255,180,180,.9);line-height:1.8;text-align:center; }
-.item-warning.show { display:block; }
+/* ─── 秘密情報セクション ─── */
+.secret-section{margin:12px 16px 0;border:1px solid rgba(255,60,60,.3);border-radius:10px;overflow:hidden}
+.ss-hd{padding:13px 18px;background:rgba(255,40,40,.06);border-bottom:1px solid rgba(255,60,60,.15);display:flex;align-items:center;justify-content:space-between;gap:10px}
+.ss-hd-left{display:flex;align-items:center;gap:10px}
+.ss-hd-icon{font-size:20px}
+.ss-hd-title{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.18em;color:rgba(255,120,100,.8)}
+.ss-lock-btn{padding:6px 14px;background:rgba(255,60,60,.12);border:1px solid rgba(255,60,60,.35);border-radius:4px;font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.15em;color:rgba(255,140,120,.8);cursor:pointer;transition:all .2s}
+.ss-lock-btn:hover{background:rgba(255,60,60,.22)}
+.ss-pw-area{padding:14px 18px 10px}
+.ss-pw-row{display:flex;gap:8px}
+.ss-pw-input{flex:1;padding:10px 13px;background:rgba(255,60,60,.06);border:1px solid rgba(255,60,60,.25);border-radius:4px;font-family:'Share Tech Mono',monospace;font-size:13px;color:#ffcccc;letter-spacing:.1em;outline:none}
+.ss-pw-input::placeholder{color:rgba(255,100,100,.3)}
+.ss-pw-input:focus{border-color:rgba(255,60,60,.5)}
+.ss-pw-submit{padding:10px 16px;background:rgba(255,60,60,.15);border:1px solid rgba(255,60,60,.4);border-radius:4px;font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.12em;color:rgba(255,140,120,.9);cursor:pointer;white-space:nowrap}
+.ss-pw-err{margin-top:7px;font-family:'Share Tech Mono',monospace;font-size:10px;color:rgba(255,80,80,.7);display:none}
+.ss-content{display:none}
+.ss-content.open{display:block}
+.ss-identity{margin:14px 18px;padding:14px 16px;background:rgba(255,40,40,.08);border:1px solid rgba(255,60,60,.25);border-radius:8px;text-align:center}
+.ssi-label{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.25em;color:rgba(255,100,100,.6);margin-bottom:8px}
+.ssi-role{font-size:18px;font-weight:900;letter-spacing:.06em}
+.ssi-sub{font-size:12px;color:rgba(255,180,160,.65);margin-top:5px;line-height:1.7}
+.ss-sec{padding:12px 18px;border-top:1px solid rgba(255,60,60,.08)}
+.ss-sec-label{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.25em;color:rgba(255,130,100,.55);margin-bottom:7px}
+.ss-text{font-size:13px;color:rgba(255,200,180,.8);line-height:1.85}
+.ss-sec-bonus-item{display:flex;gap:7px;align-items:center;font-size:12px;color:#ffd8a0;padding:3px 0}
+.ss-sec-bonus-item::before{content:'★';color:#ffaa44;font-size:10px}
 
-/* 部屋タブ */
-.room-tabs { display:flex;overflow-x:auto;padding:14px 16px 0;gap:8px;scrollbar-width:none; }
-.room-tabs::-webkit-scrollbar { display:none; }
-.rt-btn { flex-shrink:0;padding:10px 14px;border:1px solid rgba(255,255,255,.13);border-radius:8px 8px 0 0;border-bottom:none;background:rgba(255,255,255,.03);color:rgba(255,255,255,.38);font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.1em;cursor:pointer;transition:all .2s;white-space:nowrap; }
-.rt-btn.active { background:rgba(var(--rc),.13);border-color:rgba(var(--rc),.5);color:rgb(var(--rc)); }
-.rt-btn.locked { opacity:.38;cursor:not-allowed;border-style:dashed; }
-.rt-lock { font-size:9px;display:block;margin-top:3px;color:rgba(255,90,70,.7); }
+/* ─── 部屋タブ ─── */
+.room-section{margin:14px 0 0}
+.room-tabs{display:flex;overflow-x:auto;padding:0 16px;gap:7px;scrollbar-width:none}
+.room-tabs::-webkit-scrollbar{display:none}
+.rt-btn{flex-shrink:0;padding:10px 13px;border:1px solid rgba(255,255,255,.12);border-radius:7px 7px 0 0;border-bottom:none;background:rgba(255,255,255,.03);color:rgba(255,255,255,.36);font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.08em;cursor:pointer;transition:all .2s;white-space:nowrap}
+.rt-btn.active{background:rgba(var(--rc),.12);border-color:rgba(var(--rc),.45);color:rgb(var(--rc))}
+.rt-restricted{font-size:8px;display:block;margin-top:2px;color:rgba(255,90,70,.65)}
+.room-content{margin:0 16px;border:1px solid rgba(var(--rc),.2);border-radius:0 7px 7px 7px;background:rgba(0,0,20,.65);overflow:hidden}
+.sub-tabs{display:flex;border-bottom:1px solid rgba(var(--rc),.13)}
+.st-btn{flex:1;padding:11px 4px;text-align:center;background:transparent;border:none;border-right:1px solid rgba(var(--rc),.08);color:rgba(255,255,255,.3);font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.06em;cursor:pointer;transition:all .2s}
+.st-btn:last-child{border-right:none}
+.st-btn.active{background:rgba(var(--rc),.09);color:rgb(var(--rc));border-bottom:2px solid rgb(var(--rc))}
+.sub-content{padding:15px;min-height:110px}
+.sc-story{font-size:13px;line-height:2.1;color:rgba(200,220,255,.75)}
+.sc-empty{text-align:center;padding:24px;font-size:11px;color:rgba(255,255,255,.18);letter-spacing:.18em}
+.sc-locked{text-align:center;padding:24px;font-size:12px;color:rgba(255,80,80,.55);line-height:2}
+.itm-card{display:flex;align-items:center;gap:12px;padding:11px 13px;margin-bottom:9px;background:rgba(255,200,50,.04);border:1px solid rgba(255,200,50,.2);border-radius:7px}
+.itm-icon{font-size:24px;flex-shrink:0}
+.itm-name{font-size:12px;font-weight:700;color:#ffe082;letter-spacing:.04em}
+.sec-card{padding:12px 15px;margin-bottom:9px;background:rgba(255,60,60,.05);border:1px solid rgba(255,60,60,.2);border-left:3px solid rgba(255,60,60,.45);border-radius:0 7px 7px 0;font-size:11px;color:rgba(255,180,160,.82);line-height:1.9}
+.sec-lbl{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:.2em;color:rgba(255,80,80,.55);margin-bottom:5px}
+.sc-pw-gate{text-align:center;padding:20px;font-size:11px;color:rgba(255,100,100,.5);line-height:2}
+.sc-pw-gate-btn{display:inline-block;margin-top:8px;padding:8px 18px;background:rgba(255,60,60,.1);border:1px solid rgba(255,60,60,.3);border-radius:4px;font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(255,140,120,.7);cursor:pointer;letter-spacing:.12em}
 
-/* 部屋コンテンツ */
-.room-content { margin:0 16px;border:1px solid rgba(var(--rc),.2);border-radius:0 8px 8px 8px;background:rgba(0,0,20,.65);overflow:hidden; }
-.rc-locked { padding:36px 20px;text-align:center;color:rgba(255,90,70,.7);font-size:13px;line-height:2; }
-.lock-icon { font-size:36px;margin-bottom:10px;display:block; }
+/* ─── インベントリ ─── */
+.inv-card{margin:14px 16px 0;background:linear-gradient(155deg,#0f1318,#090c10);border:1px solid rgba(255,190,50,.25);border-radius:10px;overflow:hidden;box-shadow:0 0 40px rgba(180,130,10,.12),0 4px 24px rgba(0,0,0,.7);position:relative}
+.inv-card::after{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,transparent,#ffbe32,#cc8800,transparent);pointer-events:none}
+.inv-hd{padding:14px 20px 12px;border-bottom:1px solid rgba(255,190,50,.12);display:flex;align-items:center;justify-content:space-between;gap:8px}
+.inv-eyebrow{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,190,50,.5);margin-bottom:3px}
+.inv-title{font-size:14px;font-weight:700;color:#fff8e0}
+.sync-badge{display:flex;align-items:center;gap:5px;font-family:'Share Tech Mono',monospace;font-size:8px;color:rgba(50,220,130,.6);letter-spacing:.08em;white-space:nowrap}
+.sync-dot{width:5px;height:5px;border-radius:50%;background:#32dc82;box-shadow:0 0 5px #32dc82;flex-shrink:0;animation:blink 2s infinite}
+.sync-dot.off{background:#666;box-shadow:none;animation:none}
+.inv-warning{display:none;margin:0 14px 10px;padding:11px 14px;background:rgba(255,60,60,.1);border:1px solid rgba(255,60,60,.4);border-radius:6px;font-size:11px;color:rgba(255,180,180,.9);line-height:1.8;text-align:center}
+.inv-warning.show{display:block}
+.inv-slots{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:14px}
+.slot{border-radius:8px;min-height:130px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;text-align:center;cursor:pointer;transition:transform .2s,box-shadow .2s;position:relative;padding:10px 8px}
+.slot:active{transform:scale(.96)}
+.slot.has-item{background:rgba(255,190,50,.07);border:1px solid rgba(255,190,50,.3);box-shadow:0 0 16px rgba(255,190,50,.06)}
+.slot.has-item:hover{box-shadow:0 0 24px rgba(255,190,50,.14)}
+.slot-badge{position:absolute;top:6px;right:6px;font-family:'Share Tech Mono',monospace;font-size:8px;padding:2px 5px;border-radius:2px;background:rgba(50,220,130,.12);color:#32dc82;border:1px solid rgba(50,220,130,.25)}
+.slot-icon{font-size:30px;line-height:1}
+.slot-name{font-size:12px;font-weight:700;color:#ffe8a0}
+.slot-hint{font-family:'Share Tech Mono',monospace;font-size:8px;color:rgba(255,230,130,.4)}
+.slot.empty{background:rgba(255,255,255,.015);border:1px dashed rgba(255,255,255,.1);cursor:default}
+.slot.empty .slot-icon{opacity:.18}
+.slot.empty .slot-name{color:rgba(255,255,255,.2);font-size:10px}
+.slot.empty .slot-hint{color:rgba(255,255,255,.12)}
+.inv-ft{padding:9px 20px;border-top:1px solid rgba(255,190,50,.1);display:flex;justify-content:space-between;font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(255,190,50,.28);letter-spacing:.1em}
+.inv-count-val{color:rgba(255,190,50,.65)}
 
-/* サブタブ */
-.sub-tabs { display:flex;border-bottom:1px solid rgba(var(--rc),.15); }
-.st-btn { flex:1;padding:11px 4px;text-align:center;background:transparent;border:none;border-right:1px solid rgba(var(--rc),.1);color:rgba(255,255,255,.3);font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.08em;cursor:pointer;transition:all .2s; }
-.st-btn:last-child { border-right:none; }
-.st-btn.active { background:rgba(var(--rc),.09);color:rgb(var(--rc));border-bottom:2px solid rgb(var(--rc)); }
-.sub-content { padding:16px;min-height:130px; }
-.sc-story { font-size:13px;line-height:2.1;color:rgba(200,220,255,.75);font-family:'Noto Serif JP',serif; }
-.sc-empty { text-align:center;padding:28px;font-size:11px;color:rgba(255,255,255,.18);letter-spacing:.2em; }
-.item-card { display:flex;align-items:flex-start;gap:14px;padding:12px 14px;margin-bottom:10px;background:rgba(255,200,50,.04);border:1px solid rgba(255,200,50,.2);border-radius:8px; }
-.item-icon { font-size:26px;flex-shrink:0; }
-.item-name { font-size:13px;font-weight:700;color:#ffe082;letter-spacing:.05em; }
-.secret-card { padding:13px 16px;margin-bottom:10px;background:rgba(255,60,60,.05);border:1px solid rgba(255,60,60,.2);border-left:3px solid rgba(255,60,60,.5);border-radius:0 8px 8px 0;font-size:12px;color:rgba(255,180,160,.82);line-height:1.9;font-family:'Noto Serif JP',serif; }
-.secret-label { font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.2em;color:rgba(255,80,80,.6);margin-bottom:6px; }
+/* ─── トレードポップアップ ─── */
+.ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.78);backdrop-filter:blur(6px);z-index:200;align-items:flex-end;justify-content:center}
+.ov.open{display:flex;animation:oIn .22s ease}
+@keyframes oIn{from{opacity:0}to{opacity:1}}
+.popup{width:100%;max-width:460px;background:linear-gradient(155deg,#0f1825,#080d14);border:1px solid rgba(255,190,50,.3);border-radius:14px 14px 0 0;overflow:hidden;animation:pIn .28s cubic-bezier(.34,1.2,.64,1)}
+@keyframes pIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.popup-handle{width:36px;height:3px;background:rgba(255,255,255,.15);border-radius:2px;margin:14px auto 0}
+.popup-img{background:linear-gradient(160deg,#1a1500,#0d0a00);padding:22px 22px 16px;display:flex;flex-direction:column;align-items:center;gap:9px;border-bottom:1px solid rgba(255,190,50,.12)}
+.pop-big-icon{font-size:58px;line-height:1}
+.pop-name{font-size:19px;font-weight:900;color:#ffe082}
+.pop-desc{font-size:12px;color:rgba(255,230,150,.6);line-height:1.6;text-align:center}
+.popup-body{padding:16px 18px 24px}
+.tr-label{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,80,80,.6);margin-bottom:9px}
+.role-btns{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:12px}
+.role-btn{padding:10px 6px;border-radius:5px;cursor:pointer;font-size:12px;font-weight:700;background:rgba(255,80,80,.08);color:rgba(255,160,160,.8);border:1px solid rgba(255,80,80,.2);transition:background .2s}
+.role-btn.sel,.role-btn:hover{background:rgba(255,80,80,.2);border-color:rgba(255,80,80,.5);color:#ffaaaa}
+.confirm-btn{width:100%;padding:11px;background:rgba(255,80,80,.15);color:#ff9090;border:1px solid rgba(255,80,80,.35);border-radius:6px;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.18em;cursor:pointer;margin-bottom:7px}
+.confirm-btn:hover:not(:disabled){background:rgba(255,80,80,.28)}
+.confirm-btn:disabled{opacity:.35;cursor:not-allowed}
+.close-btn{width:100%;padding:9px;background:transparent;color:rgba(255,255,255,.25);border:1px solid rgba(255,255,255,.1);border-radius:6px;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.15em;cursor:pointer}
+.close-btn:hover{background:rgba(255,255,255,.06)}
 
-/* インベントリバー */
-.inv-bar { display:flex;align-items:center;gap:10px;padding:12px 16px;background:rgba(0,0,20,.85);border-top:1px solid rgba(255,255,255,.06);margin:0 16px;border-radius:0 0 8px 8px; }
-.inv-label { font-size:9px;letter-spacing:.2em;color:rgba(255,255,255,.28); }
-.inv-slots { display:flex;gap:7px; }
-.inv-slot { width:32px;height:32px;border-radius:6px;border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.04);display:flex;align-items:center;justify-content:center;font-size:15px;transition:all .2s; }
-.inv-slot.filled { border-color:rgba(var(--rc),.45);background:rgba(var(--rc),.09); }
-.inv-slot.over { border-color:rgba(255,60,60,.55);background:rgba(255,60,60,.12);animation:slotPulse 1.2s ease-in-out infinite; }
-@keyframes slotPulse { 0%,100%{box-shadow:0 0 0 rgba(255,60,60,0)} 50%{box-shadow:0 0 10px rgba(255,60,60,.5)} }
-.inv-count { font-family:'Orbitron',monospace;font-size:10px;margin-left:auto;color:rgba(255,255,255,.3); }
-.inv-count.over { color:rgba(255,100,100,.8); }
+/* ─── トースト ─── */
+.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(12px);background:rgba(50,220,130,.14);border:1px solid rgba(50,220,130,.4);border-radius:6px;padding:10px 20px;font-family:'Share Tech Mono',monospace;font-size:11px;color:rgba(100,255,180,.9);letter-spacing:.1em;opacity:0;transition:opacity .3s,transform .3s;z-index:300;pointer-events:none;white-space:nowrap}
 </style>
 </head>
 <body>
 <div class="scanlines"></div>
 <canvas id="cbg"></canvas>
 <div class="page">
-  <div class="card-header">
-    <div class="ch-mission">LAST — 15 MINUTES &nbsp;·&nbsp; CLASSIFIED</div>
-    <div class="ch-group" id="ch-group">-- グループ</div>
-    <span class="ch-emoji" id="ch-emoji">🛸</span>
-    <div class="ch-role" id="ch-role">読み込み中…</div>
-    <div class="ch-name" id="ch-name"></div>
-  </div>
-  <div class="item-warning" id="item-warning">
-    ⚠️ アイテム所持数が上限（3個）を超えています！<br>
-    現在 仮格納中（4個）→ 誰かと1個トレードして 3個 にしてください。
-  </div>
-  <div class="room-tabs" id="room-tabs"></div>
-  <div class="room-content" id="room-content"></div>
-  <div class="inv-bar">
-    <div class="inv-label">INVENTORY</div>
-    <div class="inv-slots" id="inv-slots">
-      <div class="inv-slot" id="sl0"></div>
-      <div class="inv-slot" id="sl1"></div>
-      <div class="inv-slot" id="sl2"></div>
-      <div class="inv-slot" id="sl3" style="display:none;"></div>
+
+  <!-- ====== 役職カード（公開情報） ====== -->
+  <div class="pub-card">
+    <div class="pc-header">
+      <div class="pc-eyebrow" id="pc-eyebrow">— CLASSIFIED MISSION —</div>
+      <div class="pc-grp" id="pc-grp">— グループ</div>
+      <span id="pc-emoji" class="pc-emoji">🛸</span>
+      <div class="pc-role" id="pc-role">読み込み中…</div>
+      <div class="pc-name" id="pc-name"></div>
     </div>
-    <div class="inv-count" id="inv-count">0 / 3</div>
+    <div class="pc-sec">
+      <div class="pc-label">【公開情報】</div>
+      <div class="pc-info-text" id="pc-info"></div>
+    </div>
+    <div class="pc-sec ability">
+      <div class="pc-label" id="pc-ab-label">【能力】</div>
+      <div class="ab-name" id="pc-ab-name"></div>
+      <div class="ab-item" id="pc-ab-item"></div>
+      <div class="ab-desc" id="pc-ab-desc"></div>
+      <div id="pc-ab-notes"></div>
+    </div>
+    <div class="pc-sec win">
+      <div class="pc-label">【勝利条件】</div>
+      <div class="win-item" id="pc-win"></div>
+    </div>
+    <div class="pc-sec bonus">
+      <div class="pc-label">【ボーナスミッション（予告）】</div>
+      <div id="pc-bonus"></div>
+    </div>
+    <div class="pc-footer">
+      <div class="pc-footer-code" id="pc-footer-code">—</div>
+      <div class="pc-footer-status">MONITORING</div>
+    </div>
+  </div>
+
+  <!-- ====== 秘密情報（パスワード保護） ====== -->
+  <div class="secret-section">
+    <div class="ss-hd">
+      <div class="ss-hd-left">
+        <div class="ss-hd-icon">🔐</div>
+        <div class="ss-hd-title">SECRET IDENTITY — CLASSIFIED</div>
+      </div>
+      <button class="ss-lock-btn" id="ss-lock-btn" onclick="toggleSecretPw()">解除</button>
+    </div>
+    <div id="ss-pw-area" class="ss-pw-area">
+      <div class="ss-pw-row">
+        <input class="ss-pw-input" id="ss-pw-input" type="password" placeholder="パスワードを入力…" onkeydown="if(event.key==='Enter')checkPw()">
+        <button class="ss-pw-submit" onclick="checkPw()">UNLOCK</button>
+      </div>
+      <div class="ss-pw-err" id="ss-pw-err">⚠️ パスワードが違います</div>
+    </div>
+    <div class="ss-content" id="ss-content">
+      <div class="ss-identity">
+        <div class="ssi-label" id="ssi-label">YOUR IDENTITY</div>
+        <div class="ssi-role" id="ssi-role">—</div>
+        <div class="ssi-sub" id="ssi-sub"></div>
+      </div>
+      <div class="ss-sec">
+        <div class="ss-sec-label">🎯 YOUR MISSION</div>
+        <div class="ss-text" id="ss-mission"></div>
+      </div>
+      <div class="ss-sec" style="padding-bottom:16px;">
+        <div class="ss-sec-label">💰 SECRET BONUS CONDITIONS</div>
+        <div id="ss-bonus"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== 部屋タブ ====== -->
+  <div class="room-section">
+    <div class="room-tabs" id="room-tabs"></div>
+    <div class="room-content" id="room-content"></div>
+  </div>
+
+  <!-- ====== インベントリ ====== -->
+  <div class="inv-card">
+    <div class="inv-hd">
+      <div>
+        <div class="inv-eyebrow">🎒 所持アイテム / INVENTORY</div>
+        <div class="inv-title" id="inv-title">アイテム</div>
+      </div>
+      <div class="sync-badge"><div class="sync-dot" id="sync-dot"></div><span id="sync-label">接続中…</span></div>
+    </div>
+    <div class="inv-warning" id="inv-warning">
+      ⚠️ 所持数が上限（3個）を超えています！<br>
+      仮格納中（4個）→ 誰かと1個トレードして <strong>3個</strong> にしてください。
+    </div>
+    <div class="inv-slots" id="inv-slots"></div>
+    <div class="inv-ft">
+      <span>LAST-15MIN</span>
+      <span>所持: <span class="inv-count-val" id="inv-count">—</span> / 3個</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- ====== トレードポップアップ ====== -->
+<div class="ov" id="ov" onclick="bgClose(event)">
+  <div class="popup">
+    <div class="popup-handle"></div>
+    <div class="popup-img">
+      <div class="pop-big-icon" id="pop-icon"></div>
+      <div class="pop-name" id="pop-name"></div>
+      <div class="pop-desc" id="pop-desc"></div>
+    </div>
+    <div class="popup-body">
+      <div class="tr-label">渡す相手を選択</div>
+      <div class="role-btns" id="role-btns"></div>
+      <button class="confirm-btn" id="confirm-btn" disabled onclick="confirmGive()">この相手に渡す ✓</button>
+      <button class="close-btn" onclick="closePopup()">キャンセル</button>
+    </div>
   </div>
 </div>
 
+<div class="toast" id="toast"></div>
+
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
-import { getFirestore, doc, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+import { getFirestore, doc, onSnapshot, setDoc, getDoc }
+  from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
 const firebaseConfig = {
-  apiKey:"AIzaSyBHVQILRmOO6ZZDL_Szy_5cn7i9v6Ux5lo",authDomain:"astro-murder.firebaseapp.com",
-  projectId:"astro-murder",storageBucket:"astro-murder.firebasestorage.app",
-  messagingSenderId:"543542600233",appId:"1:543542600233:web:ba9a6050ac775d4352f238"
+  apiKey:"AIzaSyBHVQILRmOO6ZZDL_Szy_5cn7i9v6Ux5lo",
+  authDomain:"astro-murder.firebaseapp.com",
+  projectId:"astro-murder",
+  storageBucket:"astro-murder.firebasestorage.app",
+  messagingSenderId:"543542600233",
+  appId:"1:543542600233:web:ba9a6050ac775d4352f238"
 };
 const app = initializeApp(firebaseConfig);
 const db  = getFirestore(app);
 
-const p = new URLSearchParams(location.search);
-const group = p.get('group') || 'mochi';
-const role  = p.get('role')  || 'captain';
-const name  = p.get('name')  || '';
+/* ── URL パラメータ ── */
+const qp    = new URLSearchParams(location.search);
+const group = qp.get('group') || 'mochi';
+const role  = qp.get('role')  || 'captain';
+const name  = qp.get('name')  || '';
+const tg    = qp.get('tg')    || group;
+const pwCor = qp.get('pw')    || '0000';
 
-const GROUP_JP = {mochi:'もち',tsuki:'つき',taku:'たく',rou:'ろう'};
-const GROUP_RGB= {mochi:'77,166,255',tsuki:'50,200,120',taku:'255,190,50',rou:'255,85,85'};
-const ROLE_JP  = {captain:'船長',doctor:'医師',engineer:'エンジニア',scientist:'科学者'};
-const ROLE_EMO = {captain:'🛸',doctor:'🏥',engineer:'⚡',scientist:'🧪'};
-const ROLE_RGB = {captain:'77,166,255',doctor:'50,200,120',engineer:'255,190,50',scientist:'255,85,85'};
+/* ── 定数 ── */
+const GROUP_JP  = {mochi:'もち',tsuki:'つき',taku:'たく',rou:'ろう'};
+const ROLE_JP   = {captain:'船長',doctor:'医師',engineer:'エンジニア',scientist:'科学者'};
+const ROLE_EMO  = {captain:'🛸',doctor:'🏥',engineer:'⚡',scientist:'🧪'};
+const ROLE_RGB  = {captain:'77,166,255',doctor:'50,200,120',engineer:'255,190,50',scientist:'255,85,85'};
+const ROLE_EN   = {captain:'CAPTAIN',doctor:'DOCTOR',engineer:'ENGINEER',scientist:'SCIENTIST'};
+
+const ALL_ITEMS = {
+  captain_key:      {icon:'🗝️',name:'マスターオーバーライドキー',  desc:'全エリアのロックを解除できる万能キー。'},
+  doctor_sedative:  {icon:'💉',name:'医療用鎮静剤',              desc:'能力「鎮静剤投与」の発動に使用。'},
+  engineer_tool:    {icon:'🔧',name:'緊急修復ツールセット',       desc:'エンジニアの初期所持品。アリバイ証拠品。'},
+  scientist_device: {icon:'📱',name:'暗号化端末',                desc:'科学者の能力「カプセル破壊」の発動条件。'},
+  cockpit_terminal: {icon:'📡',name:'暗号通信端末',              desc:'操縦室で発見。破壊の発動条件にもなる。'},
+  engine_explosive: {icon:'💣',name:'起爆装置パーツ',            desc:'機関室で発見。単体では起爆不可。'},
+  life_poison:      {icon:'⚠️',name:'未認可の劇薬',              desc:'生命維持室で発見。致死投与の発動条件。'},
+  cargo_battery:    {icon:'🔋',name:'高圧電池パック',             desc:'貨物室で発見。破壊の発動条件にもなる。'},
+  nav_log:          {icon:'🗓️',name:'改ざんされた航行ログ',       desc:'操縦室で発見。工作員の証拠になりうる。'},
+  eng_manual:       {icon:'🔩',name:'書き込みのある修復マニュアル',desc:'機関室で発見。工作員の筆跡入り。'},
+  med_record:       {icon:'📋',name:'改ざんされた医療記録',        desc:'生命維持室で発見。医師の署名で改ざん済み。'},
+  enc_media:        {icon:'💾',name:'暗号化記憶媒体',             desc:'貨物室で発見。スパイの機密データ。'},
+};
+
+const ROLE_INIT = {
+  captain:['captain_key'],
+  doctor:['doctor_sedative'],
+  engineer:['engineer_tool'],
+  scientist:['scientist_device'],
+};
+
+const ROLE_DATA = {
+  captain:{
+    eyebrow:'COMMANDER / 司令塔',
+    publicInfo:'カリスマ性のある指揮官。どんな緊急事態でも冷静に対処する。機密事項は墓場まで持っていく主義だ。',
+    abilityLabel:'【能力】制圧命令',
+    abilityName:'特定の1名の行動を封じる',
+    abilityItem:'🗝️ マスターオーバーライドキー',
+    abilityDesc:'キーを所持している場合、最終アクションフェーズで他の1名の行動を封じることができる。対象は全役職から選択可。',
+    abilityNotes:['⚠️ キーを所持していない場合は発動不可。','⚠️ 対象が先に行動した場合は無効になる場合がある。'],
+    winBase:'帰還用カプセルが修復され、全員で地球へ帰還すること。',
+    bonusBase:['破壊工作員を正確に特定（グループ＋30億円）','犠牲者ゼロで帰還（＋20億円）'],
+    bonusTraitor:['工作員ミッション完遂（グループ＋50億円）','正体が最後まで発覚しなかった（＋20億円）'],
+    missionTrue:'仲間を守り、帰還用カプセルを修復して全員で地球へ帰れ。工作員を見つけ出すこと。',
+    missionTraitor:'組織の命令を遂行せよ。内側から信頼を勝ち取りながら、任務を妨害して工作を完遂すること。',
+  },
+  doctor:{
+    eyebrow:'DOCTOR / 医師',
+    publicInfo:'潔癖で几帳面。カルテの改ざんは絶対に許さない主義だが、自分の秘密だけは別の話だ。',
+    abilityLabel:'【能力②】致死投与',
+    abilityName:'エンジニアの最終行動を封じる',
+    abilityItem:'⚠️ 未認可の劇薬',
+    abilityDesc:'劇薬を探索で入手済みの場合、最終アクションで「エンジニアへの致死投与」を宣言。エンジニアは最終アクションを失う。',
+    abilityNotes:['⚠️ 劇薬を探索で入手していない場合は発動不可。','⚠️ エンジニアが先に行動した場合は無効になる場合がある。'],
+    winBase:'帰還用カプセルが修復され、全員で地球へ帰還すること。',
+    bonusBase:['工作員を正確に特定（グループ＋30億円）','医師として全員の安全を守る（＋15億円）'],
+    bonusTraitor:['エンジニアへの致死投与成功（グループ＋60億円）','誰にも見破られなかった（＋10億円）'],
+    missionTrue:'仲間の健康を守り、工作員を見つけ出せ。',
+    missionTraitor:'エンジニアを地球へ帰してはならない。致死投与を完遂せよ。',
+  },
+  engineer:{
+    eyebrow:'ENGINEER / エンジニア',
+    publicInfo:'機械工学のエキスパート。冷静で論理的。修復作業に誰よりも長けているが、知られたくない秘密がある。',
+    abilityLabel:'【能力】緊急修復',
+    abilityName:'帰還カプセルを修復する',
+    abilityItem:'🔧 緊急修復ツールセット',
+    abilityDesc:'ツールを所持している場合、最終アクションで帰還カプセルの「緊急修復」を宣言できる。工作員に妨害されなければ修復成功。',
+    abilityNotes:['⚠️ ツールを所持していない場合は発動不可。','⚠️ 医師の致死投与を受けた場合は行動不能になる。'],
+    winBase:'帰還用カプセルが修復され、全員で地球へ帰還すること。',
+    bonusBase:['修復を主導して完遂（グループ＋40億円）','工作員の正体を暴露（＋15億円）'],
+    bonusTraitor:['修復を意図的に失敗させる（グループ＋50億円）','誰にも見破られなかった（＋20億円）'],
+    missionTrue:'カプセルを修復し、全員を地球へ帰還させろ。工作員の妨害を阻止すること。',
+    missionTraitor:'修復を妨害せよ。表では信頼を勝ち取りながら、裏でカプセルを破壊に導け。',
+  },
+  scientist:{
+    eyebrow:'SCIENTIST / 科学者',
+    publicInfo:'データと証拠に基づいて行動する合理主義者。今回の任務には表向き以外の個人的な動機がある。',
+    abilityLabel:'【能力】カプセル破壊',
+    abilityName:'帰還カプセルを破壊する',
+    abilityItem:'🔋 高圧電池パック ＋ 📡 暗号通信端末',
+    abilityDesc:'両アイテムを所持している場合、最終アクションで「カプセル破壊」を宣言可能。成功すれば帰還が不可能になる。',
+    abilityNotes:['⚠️ 両アイテムを所持していない場合は発動不可。','⚠️ 船長の制圧命令を受けた場合は行動不能になる。'],
+    winBase:'帰還用カプセルが修復され、全員で地球へ帰還すること。',
+    bonusBase:['暗号化記憶媒体を解読して工作員を特定（グループ＋50億円）'],
+    bonusTraitor:['カプセル破壊の実行成功（グループ＋80億円）','誰にも見破られなかった（＋15億円）'],
+    missionTrue:'証拠を集め、工作員の正体を暴け。暗号化記憶媒体を解読すること。',
+    missionTraitor:'両アイテムを揃え、最終アクションでカプセルを破壊せよ。',
+  },
+};
 
 const ROOMS = [
   {id:0,icon:'🛸',name:'操縦室',restrict:'captain',
    items:[{id:'cockpit_terminal',icon:'📡',name:'暗号通信端末',desc:'競合企業への暗号通信端末。特定の人物との通信記録が残っている。'},
           {id:'nav_log',icon:'🗓️',name:'改ざんされた航行ログ',desc:'マスターキーを使ったロック解除記録がある。船長だけが持つキーの使用履歴だ。'}],
-   storyPub:'操縦室に不審な操作ログが残っていた。競合企業への暗号通信の痕跡が発見された。'},
+   storyPub:'操縦室に不審な操作ログが残っていた。競合企業への暗号通信の痕跡が発見された。',
+   storySec:'航行ログにマスターキーを使ったロック解除記録がある。船長だけが持つキーの使用履歴だ。'},
   {id:1,icon:'⚡',name:'機関室',restrict:'engineer',
    items:[{id:'engine_explosive',icon:'💣',name:'起爆装置パーツ',desc:'単体では起爆不可。他のパーツと組み合わせると爆破装置が完成する。'},
-          {id:'eng_manual',icon:'🔧',name:'書き込みのある修復マニュアル',desc:'エンジニアの筆跡で細工手順が書き込まれている。'}],
-   storyPub:'エネルギーコアに過負荷の細工が施されていた。精密な電気工学の知識が必要な作業だ。'},
+          {id:'eng_manual',icon:'🔩',name:'書き込みのある修復マニュアル',desc:'エンジニアの筆跡で細工手順が書き込まれている。'}],
+   storyPub:'エネルギーコアに過負荷の細工が施されていた。精密な電気工学の知識が必要な作業だ。',
+   storySec:'エンジニアの認証コードで記録された不正アクセスログが残っている。'},
   {id:2,icon:'🏥',name:'生命維持室',restrict:'doctor',
    items:[{id:'life_poison',icon:'⚠️',name:'未認可の薬物',desc:'医療倫理委員会の認可を受けていない薬物。医師でなければ識別できない。'},
           {id:'med_record',icon:'📋',name:'改ざんされた医療処置記録',desc:'医師の署名で改ざんされている。記録の日付と内容が矛盾している。'}],
-   storyPub:'酸素循環フィルターに異物が混入されていた。医療・薬学の専門知識が必要な仕業だ。'},
+   storyPub:'酸素循環フィルターに異物が混入されていた。医療・薬学の専門知識が必要な仕業だ。',
+   storySec:'医師の署名付きで、未認可の薬物の持ち込み記録がある。'},
   {id:3,icon:'📦',name:'貨物室',restrict:'scientist',
-   items:[{id:'cargo_battery',icon:'🔋',name:'高圧電池パック',desc:'カプセル破壊能力の発動条件。特殊な電気回路と組み合わせることで起爆可能になる。'},
+   items:[{id:'cargo_battery',icon:'🔋',name:'高圧電池パック',desc:'カプセル破壊の発動条件。特殊な電気回路と組み合わせることで起爆可能になる。'},
           {id:'enc_media',icon:'💾',name:'暗号化記憶媒体',desc:'スパイグループの機密データ。解読すれば工作員の正体が判明するかもしれない。'}],
-   storyPub:'貨物室の隔壁に爆破装置が取り付けられていた。帰還の瞬間に起動する設計になっている。'},
+   storyPub:'貨物室の隔壁に爆破装置が取り付けられていた。帰還の瞬間に起動する設計になっている。',
+   storySec:'爆破装置の起動コードが科学者の研究端末のシリアルナンバーと一致する。'},
 ];
 
-// CSS color
+const isTraitor = tg !== group;
+const rd = ROLE_DATA[role] || ROLE_DATA.captain;
+
+/* ── CSS カラー ── */
 document.documentElement.style.setProperty('--rc', ROLE_RGB[role] || '77,166,255');
 
-// Header
-document.getElementById('ch-group').textContent = (GROUP_JP[group]||group) + 'グループ';
-document.getElementById('ch-emoji').textContent  = ROLE_EMO[role] || '🛸';
-document.getElementById('ch-role').textContent   = ROLE_JP[role]  || role;
-document.getElementById('ch-name').textContent   = name ? `— ${name} —` : '';
-document.title = `${ROLE_JP[role]||role} — ${GROUP_JP[group]||group}`;
+/* ── ヘッダー描画 ── */
+document.getElementById('pc-eyebrow').textContent  = rd.eyebrow;
+document.getElementById('pc-grp').textContent      = (GROUP_JP[group]||group) + 'グループ';
+document.getElementById('pc-emoji').textContent    = ROLE_EMO[role] || '🛸';
+document.getElementById('pc-role').textContent     = ROLE_JP[role]  || role;
+document.getElementById('pc-name').textContent     = name ? `— ${name} —` : '';
+document.getElementById('pc-info').textContent     = rd.publicInfo;
+document.getElementById('pc-ab-label').textContent = rd.abilityLabel;
+document.getElementById('pc-ab-name').textContent  = rd.abilityName;
+document.getElementById('pc-ab-item').textContent  = rd.abilityItem;
+document.getElementById('pc-ab-desc').textContent  = rd.abilityDesc;
+document.getElementById('pc-ab-notes').innerHTML   = (rd.abilityNotes||[]).map(n=>`<div class="ab-note"><span>⚠️</span><span>${n.replace(/^⚠️\s*/,'')}</span></div>`).join('');
+document.getElementById('pc-win').textContent      = rd.winBase;
+document.getElementById('pc-bonus').innerHTML      = rd.bonusBase.map(b=>`<div class="bonus-item">${b}</div>`).join('');
+document.getElementById('pc-footer-code').textContent = `${ROLE_EN[role]||role.toUpperCase()}-01 / LAST-15MIN`;
+document.getElementById('inv-title').textContent   = ROLE_JP[role] + 'のアイテム';
+document.title = `${ROLE_JP[role]||role} — ${GROUP_JP[group]||group}グループ`;
 
-// Stars
+/* ── 星 ── */
 (function(){
   const cv=document.getElementById('cbg');
-  cv.width=window.innerWidth;cv.height=window.innerHeight;
+  cv.width=window.innerWidth; cv.height=window.innerHeight;
   const ctx=cv.getContext('2d');
   const st=Array.from({length:100},()=>({x:Math.random(),y:Math.random(),r:Math.random()*1.2+.2,a:Math.random(),da:(Math.random()-.5)*.002}));
   function draw(){ctx.clearRect(0,0,cv.width,cv.height);st.forEach(s=>{s.a=Math.max(.05,Math.min(1,s.a+s.da));if(s.a<=.05||s.a>=1)s.da*=-1;ctx.beginPath();ctx.arc(s.x*cv.width,s.y*cv.height,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(200,220,255,${s.a*.5})`;ctx.fill();});requestAnimationFrame(draw);}
@@ -156,64 +441,98 @@ document.title = `${ROLE_JP[role]||role} — ${GROUP_JP[group]||group}`;
   window.addEventListener('resize',()=>{cv.width=window.innerWidth;cv.height=window.innerHeight;});
 })();
 
-// State
-let curRoom = ROOMS.findIndex(r => r.restrict !== role);
-if(curRoom < 0) curRoom = 0;
+/* ── パスワード ── */
+window.toggleSecretPw = function(){
+  const area = document.getElementById('ss-pw-area');
+  area.style.display = area.style.display === 'none' ? '' : 'none';
+  document.getElementById('ss-pw-err').style.display='none';
+};
+window.checkPw = function(){
+  const val = document.getElementById('ss-pw-input').value.trim();
+  if(val === pwCor){
+    document.getElementById('ss-pw-area').style.display = 'none';
+    document.getElementById('ss-pw-err').style.display  = 'none';
+    document.getElementById('ss-content').classList.add('open');
+    document.getElementById('ss-lock-btn').textContent = '🔓';
+    // 秘密内容を描画
+    if(isTraitor){
+      document.getElementById('ssi-label').textContent = '⚠️ TRAITOR — 裏切り者';
+      document.getElementById('ssi-role').innerHTML = `<span style="color:#ff9090">裏切り者（${GROUP_JP[tg]||tg}グループ所属）</span>`;
+      document.getElementById('ssi-sub').textContent = `あなたは ${GROUP_JP[group]||group}グループに潜入した工作員です。`;
+    } else {
+      document.getElementById('ssi-label').textContent = '✅ GENUINE — 正規メンバー';
+      document.getElementById('ssi-role').innerHTML = `<span style="color:#88ffcc">正規メンバー（${GROUP_JP[group]||group}グループ）</span>`;
+      document.getElementById('ssi-sub').textContent = `あなたは正規メンバーです。仲間の工作員を見つけ出してください。`;
+    }
+    document.getElementById('ss-mission').textContent  = isTraitor ? rd.missionTraitor : rd.missionTrue;
+    document.getElementById('ss-bonus').innerHTML = (isTraitor ? rd.bonusTraitor : rd.bonusBase)
+      .map(b=>`<div class="ss-sec-bonus-item">${b}</div>`).join('');
+    renderContent(); // 部屋コンテンツを再描画（極秘ファイルのロック解除のため）
+  } else {
+    document.getElementById('ss-pw-err').style.display='block';
+  }
+};
+
+/* ── 部屋タブ ── */
+let curRoom = 0;
 let curSub  = 'story';
 const recvd = {0:[],1:[],2:[],3:[]};
 
-// Firebase
 ROOMS.forEach(r=>{
   onSnapshot(doc(db,'game','session','m5items',`${r.id}_${group}`), snap=>{
     recvd[r.id] = snap.data()?.items || [];
-    renderContent();
-    updateInv();
+    if(curRoom === r.id) renderContent();
+    buildTabs();
   });
 });
 
-// Tabs
 function buildTabs(){
   document.getElementById('room-tabs').innerHTML = ROOMS.map(r=>{
-    const locked = r.restrict === role;
-    return `<button class="rt-btn${locked?' locked':''}${curRoom===r.id?' active':''}"
-      onclick="${locked?'':'selectRoom('+r.id+')'}" ${locked?'disabled':''}>
-      ${r.icon} ${r.name}${locked?`<span class="rt-lock">⛔ 入室不可</span>`:''}
+    const restricted = r.restrict === role;
+    const cnt = recvd[r.id].length;
+    return `<button class="rt-btn${curRoom===r.id?' active':''}" onclick="selectRoom(${r.id})">
+      ${r.icon} ${r.name}${cnt?` <span style="font-size:8px;opacity:.7;">(${cnt})</span>`:''}
+      ${restricted?`<span class="rt-restricted">🔒入室不可</span>`:''}
     </button>`;
   }).join('');
 }
 
-window.selectRoom = function(id){
-  if(ROOMS[id].restrict===role)return;
-  curRoom=id; curSub='story'; buildTabs(); renderContent();
-};
+window.selectRoom = function(id){ curRoom=id; curSub='story'; buildTabs(); renderContent(); };
+window.setSubTab  = function(t){ curSub=t; renderContent(); };
 
-window.setSubTab = function(t){ curSub=t; renderContent(); };
+function isSecretUnlocked(){ return document.getElementById('ss-content').classList.contains('open'); }
 
 function renderContent(){
-  const r = ROOMS[curRoom];
-  const el = document.getElementById('room-content');
-  if(r.restrict===role){
-    el.innerHTML=`<div class="rc-locked"><span class="lock-icon">⛔</span>${ROLE_JP[role]} はこの部屋に立ち入れません。<br><span style="font-size:10px;opacity:.5;font-family:'Share Tech Mono',monospace;">ACCESS RESTRICTED</span></div>`;
-    return;
-  }
+  const r   = ROOMS[curRoom];
+  const el  = document.getElementById('room-content');
+  const restricted = r.restrict === role;
   const items = recvd[r.id];
   const cnt   = items.length;
 
   let body = '';
-  if(curSub==='story'){
+  if(curSub === 'story'){
     body = `<div class="sc-story">${r.storyPub}</div>`;
-  } else if(curSub==='items'){
-    if(!cnt){ body='<div class="sc-empty">— まだアイテムは届いていません —</div>'; }
+  } else if(curSub === 'items'){
+    if(!cnt){ body = '<div class="sc-empty">— まだアイテムは届いていません —</div>'; }
     else body = items.map(id=>{
-      const it=r.items.find(i=>i.id===id);
-      return it?`<div class="item-card"><div class="item-icon">${it.icon}</div><div><div class="item-name">${it.name}</div></div></div>`:'';
+      const it = r.items.find(i=>i.id===id);
+      return it ? `<div class="itm-card"><div class="itm-icon">${it.icon}</div><div><div class="itm-name">${it.name}</div></div></div>` : '';
     }).join('');
   } else {
-    if(!cnt){ body='<div class="sc-empty">— 極秘ファイルはまだ届いていません —</div>'; }
-    else body = items.map(id=>{
-      const it=r.items.find(i=>i.id===id);
-      return it?`<div class="secret-card"><div class="secret-label">🔴 CLASSIFIED</div>🔍 ${it.name}<br><span style="font-size:11px;">${it.desc}</span></div>`:'';
-    }).join('');
+    // 極秘ファイル：入室制限がある部屋はブロック（ストーリー/落とし物は入室制限関係なし）
+    if(restricted){
+      body = `<div class="sc-locked">🔒 ${ROLE_JP[role]} にはこの部屋の<br>極秘ファイル閲覧権がありません。</div>`;
+    } else if(!isSecretUnlocked()){
+      body = `<div class="sc-pw-gate">🔐 極秘ファイルの閲覧にはパスワードが必要です。<br>
+        <button class="sc-pw-gate-btn" onclick="scrollToSecret()">Secret Identityセクションで解除 ↑</button></div>`;
+    } else if(!cnt){
+      body = '<div class="sc-empty">— 極秘ファイルはまだ届いていません —</div>';
+    } else {
+      body = items.map(id=>{
+        const it = r.items.find(i=>i.id===id);
+        return it ? `<div class="sec-card"><div class="sec-lbl">🔴 CLASSIFIED</div>🔍 ${it.name}<br><span style="font-size:11px;">${it.desc}</span></div>` : '';
+      }).join('');
+    }
   }
 
   el.innerHTML = `
@@ -225,33 +544,109 @@ function renderContent(){
     <div class="sub-content">${body}</div>`;
 }
 
-function updateInv(){
-  const all = Object.entries(recvd).flatMap(([rid,ids])=>
-    ids.map(id=>{ const it=ROOMS[parseInt(rid)].items.find(i=>i.id===id); return it?it.icon:'?'; })
-  );
-  const total = all.length;
-  const warn  = document.getElementById('item-warning');
-  total > 3 ? warn.classList.add('show') : warn.classList.remove('show');
-  const cnt = document.getElementById('inv-count');
-  cnt.textContent = `${total} / 3`;
-  cnt.className   = 'inv-count' + (total>3?' over':'');
-  for(let s=0;s<4;s++){
-    const sl = document.getElementById('sl'+s);
-    if(!sl) continue;
-    if(s < all.length){
-      sl.textContent = all[s];
-      sl.className   = 'inv-slot filled' + (s>=3?' over':'');
-      if(s>=3) sl.style.display='flex';
-    } else {
-      sl.textContent=''; sl.className='inv-slot';
-      if(s>=3) sl.style.display='none';
-    }
-  }
-}
+window.scrollToSecret = function(){
+  document.querySelector('.secret-section').scrollIntoView({behavior:'smooth'});
+  setTimeout(()=>{ const a=document.getElementById('ss-pw-area'); if(a)a.style.display=''; }, 400);
+};
 
 buildTabs();
 renderContent();
-updateInv();
+
+/* ── インベントリ (Firestore) ── */
+const invPath = `${group}_${role}`;
+const docRef  = doc(db,'game','session','inventory', invPath);
+let curItem = null, selRole = null;
+
+async function initInv(){
+  try{
+    const snap = await getDoc(docRef);
+    if(!snap.exists()){
+      await setDoc(docRef, {items: ROLE_INIT[role]||[], role, group});
+    }
+    onSnapshot(docRef, s=>{
+      renderSlots(s.exists() ? (s.data().items||[]) : []);
+      setSynced(true);
+    }, ()=>setSynced(false));
+  }catch(e){ setSynced(false); }
+}
+
+function setSynced(ok){
+  document.getElementById('sync-dot').className = 'sync-dot'+(ok?'':' off');
+  document.getElementById('sync-label').textContent = ok ? 'SYNC' : 'オフライン';
+}
+
+function renderSlots(items){
+  document.getElementById('inv-count').textContent = items.length;
+  items.length > 3
+    ? document.getElementById('inv-warning').classList.add('show')
+    : document.getElementById('inv-warning').classList.remove('show');
+
+  let html = items.map(id=>{
+    const it = ALL_ITEMS[id] || {icon:'❓',name:id,desc:''};
+    return `<div class="slot has-item" onclick="openPopup('${id}')">
+      <div class="slot-badge">所持中</div>
+      <div class="slot-icon">${it.icon}</div>
+      <div class="slot-name">${it.name}</div>
+      <div class="slot-hint">タップして渡す</div>
+    </div>`;
+  }).join('');
+  const empties = Math.max(0, 2 - items.length);
+  for(let i=0;i<empties;i++)
+    html += `<div class="slot empty"><div class="slot-icon">📦</div><div class="slot-name">空きスロット</div><div class="slot-hint">交渉で入手</div></div>`;
+  document.getElementById('inv-slots').innerHTML = html;
+}
+
+/* ── トレードポップアップ ── */
+const ALL_ROLES = ['captain','doctor','engineer','scientist'];
+const ROLE_LABEL = {captain:'🛸 船長',doctor:'🏥 医師',engineer:'⚡ エンジニア',scientist:'🧪 科学者'};
+
+window.openPopup = function(itemId){
+  const it = ALL_ITEMS[itemId]; if(!it) return;
+  curItem=itemId; selRole=null;
+  document.getElementById('pop-icon').textContent = it.icon;
+  document.getElementById('pop-name').textContent = it.name;
+  document.getElementById('pop-desc').textContent = it.desc;
+  document.getElementById('role-btns').innerHTML = ALL_ROLES.filter(r=>r!==role)
+    .map(r=>`<button class="role-btn" onclick="pickRole(this,'${r}')">${ROLE_LABEL[r]}</button>`).join('');
+  document.getElementById('confirm-btn').disabled = true;
+  document.getElementById('ov').classList.add('open');
+};
+window.closePopup = ()=>{ document.getElementById('ov').classList.remove('open'); curItem=null; selRole=null; };
+window.bgClose    = (e)=>{ if(e.target===document.getElementById('ov')) window.closePopup(); };
+window.pickRole   = (btn,r)=>{
+  document.querySelectorAll('.role-btn').forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel'); selRole=r;
+  document.getElementById('confirm-btn').disabled=false;
+};
+
+window.confirmGive = async function(){
+  if(!curItem||!selRole) return;
+  document.getElementById('confirm-btn').disabled=true;
+  try{
+    const mySnap  = await getDoc(docRef);
+    const newMy   = (mySnap.data()?.items||[]).filter(id=>id!==curItem);
+    const tgtRef  = doc(db,'game','session','inventory',`${group}_${selRole}`);
+    const tgtSnap = await getDoc(tgtRef);
+    const newTgt  = [...(tgtSnap.data()?.items||[])];
+    if(!newTgt.includes(curItem)) newTgt.push(curItem);
+    await setDoc(docRef, {items:newMy,  role,      group});
+    await setDoc(tgtRef, {items:newTgt, role:selRole, group});
+    window.closePopup();
+    showToast('✅ ' + ROLE_LABEL[selRole] + ' に渡しました');
+  }catch(e){
+    showToast('⚠️ ' + e.message);
+    document.getElementById('confirm-btn').disabled=false;
+  }
+};
+
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.style.opacity='1'; t.style.transform='translateX(-50%) translateY(0)';
+  setTimeout(()=>{ t.style.opacity='0'; t.style.transform='translateX(-50%) translateY(12px)'; },2600);
+}
+
+initInv();
 </script>
 </body>
 </html>
