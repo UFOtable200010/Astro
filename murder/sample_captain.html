@@ -20,8 +20,6 @@ body{background:#060a18;min-height:100vh;font-family:'Noto Serif JP',serif;paddi
 .room-tab.active{color:var(--acc);border-bottom-color:var(--acc);background:rgba(77,166,255,.06)}
 .room-tab.lock-tab{color:rgba(100,120,140,.3)}
 .room-tab.restrict-tab{color:rgba(255,80,80,.3)}
-.m5-tab{padding:10px 6px;font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:.04em;color:rgba(255,200,50,.45);background:transparent;border:none;cursor:pointer;transition:all .2s;border-bottom:2px solid transparent;white-space:nowrap;flex-shrink:0}
-.m5-tab:hover{color:rgba(255,200,50,.8);background:rgba(255,200,50,.04)}
 .room-panel{width:100%;max-width:420px;display:none}
 .room-panel.show{display:block;animation:fadeUp .3s ease}
 .restrict-screen{padding:32px 24px;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;background:rgba(255,50,50,.03);border-bottom:1px solid rgba(255,50,50,.1)}
@@ -148,22 +146,6 @@ body{background:#060a18;min-height:100vh;font-family:'Noto Serif JP',serif;paddi
 .limit-msg{font-size:14px;color:#ffaaaa;line-height:1.9;margin-bottom:20px}
 .limit-ok{padding:10px 28px;background:rgba(255,50,50,.2);border:1px solid rgba(255,50,50,.5);border-radius:6px;color:#ff8888;font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:.12em;cursor:pointer;transition:background .2s}
 .limit-ok:hover{background:rgba(255,50,50,.35)}
-/* M5進行表ポップアップ */
-.m5-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.82);backdrop-filter:blur(8px);z-index:150;align-items:flex-end;justify-content:center;padding:0}
-.m5-overlay.open{display:flex;animation:oIn .22s ease}
-.m5-popup{width:100%;max-width:420px;background:linear-gradient(160deg,#090d18,#050810);border:1px solid rgba(255,200,50,.25);border-radius:14px 14px 0 0;overflow:hidden;max-height:85vh;overflow-y:auto;animation:pIn .28s cubic-bezier(.34,1.2,.64,1)}
-.m5p-header{padding:16px 20px 12px;border-bottom:1px solid rgba(255,200,50,.15);display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;background:linear-gradient(160deg,#090d18,#050810);z-index:5}
-.m5p-title{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.22em;color:rgba(255,200,50,.7)}
-.m5p-close{padding:5px 10px;background:transparent;border:1px solid rgba(255,255,255,.15);border-radius:4px;color:rgba(255,255,255,.4);font-family:'Share Tech Mono',monospace;font-size:9px;cursor:pointer}
-.m5p-steps{padding:12px 16px 24px;display:flex;flex-direction:column;gap:0}
-.m5-step{display:flex;gap:12px;padding:10px 4px;border-bottom:1px solid rgba(255,255,255,.05)}
-.m5-step:last-child{border-bottom:none}
-.m5-step-num{font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(255,200,50,.45);min-width:44px;padding-top:2px;letter-spacing:.08em}
-.m5-step-content{}
-.m5-step-name{font-size:12px;font-weight:700;color:rgba(232,240,255,.75);margin-bottom:2px}
-.m5-step-desc{font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(180,200,220,.35);line-height:1.5}
-.m5-step.unknown .m5-step-name{color:rgba(255,255,255,.2)}
-.m5-step.unknown .m5-step-desc{color:rgba(255,255,255,.12)}
 /* toast */
 .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(12px);background:rgba(50,220,130,.14);border:1px solid rgba(50,220,130,.4);border-radius:6px;padding:10px 20px;font-family:'Share Tech Mono',monospace;font-size:11px;color:rgba(100,255,180,.9);letter-spacing:.1em;opacity:0;transition:opacity .3s,transform .3s;z-index:300;pointer-events:none;white-space:nowrap}
 </style>
@@ -183,7 +165,6 @@ body{background:#060a18;min-height:100vh;font-family:'Noto Serif JP',serif;paddi
   <button class="room-tab lock-tab" id="rtab-1" onclick="switchRoom(1)">機関室🔒</button>
   <button class="room-tab lock-tab" id="rtab-2" onclick="switchRoom(2)">生命維持🔒</button>
   <button class="room-tab lock-tab" id="rtab-3" onclick="switchRoom(3)">貨物室🔒</button>
-  <button class="m5-tab" onclick="openM5()">📋M5</button>
 </div>
 
 <!-- 操縦室（立入禁止） -->
@@ -371,8 +352,8 @@ body{background:#060a18;min-height:100vh;font-family:'Noto Serif JP',serif;paddi
   </div>
   <div class="sec bonus">
     <div class="sec-title">【ボーナスミッション】</div>
-    <div class="bonus-item">裏切り者3人全員を正確に指名（＋100億円）</div>
-    <div class="bonus-item">自分自身が生き残り帰還（＋20億円）</div>
+    <div class="bonus-item">破壊工作員（科学者）を正しく拘束すること</div>
+    <div class="bonus-item">自分自身が生き残り帰還すること</div>
   </div>
   <div class="card-footer">
     <div class="footer-code">CAPTAIN-01 / LAST-15MIN</div>
@@ -433,28 +414,6 @@ body{background:#060a18;min-height:100vh;font-family:'Noto Serif JP',serif;paddi
   </div>
 </div>
 
-<!-- M5進行表ポップアップ -->
-<div class="m5-overlay" id="m5-overlay" onclick="m5BgClose(event)">
-  <div class="m5-popup">
-    <div class="m5p-header">
-      <div class="m5p-title">📋 MISSION 05 — ゲーム進行フロー</div>
-      <button class="m5p-close" onclick="closeM5()">✕ 閉じる</button>
-    </div>
-    <div class="m5p-steps">
-      <div class="m5-step"><div class="m5-step-num">STEP 01</div><div class="m5-step-content"><div class="m5-step-name">🎭 役職カード確認</div><div class="m5-step-desc">各自が役職カードを開き、公開情報・秘密情報を確認する</div></div></div>
-      <div class="m5-step"><div class="m5-step-num">STEP 02</div><div class="m5-step-content"><div class="m5-step-name">🗣️ 自己紹介フェーズ</div><div class="m5-step-desc">グループ内で自己紹介（公開情報のみ開示可）</div></div></div>
-      <div class="m5-step"><div class="m5-step-num">STEP 03</div><div class="m5-step-content"><div class="m5-step-name">🔍 探索フェーズ① — 操縦室</div><div class="m5-step-desc">GMが操縦室の情報を開示。発見物をプレイヤーに送信</div></div></div>
-      <div class="m5-step"><div class="m5-step-num">STEP 04</div><div class="m5-step-content"><div class="m5-step-name">🔍 探索フェーズ② — 機関室</div><div class="m5-step-desc">GMが機関室PW（pw2）を口頭で告知・情報開示</div></div></div>
-      <div class="m5-step"><div class="m5-step-num">STEP 05</div><div class="m5-step-content"><div class="m5-step-name">🔍 探索フェーズ③ — 生命維持室</div><div class="m5-step-desc">GMが生命維持室PW（pw3）を口頭で告知・情報開示</div></div></div>
-      <div class="m5-step"><div class="m5-step-num">STEP 06</div><div class="m5-step-content"><div class="m5-step-name">🔍 探索フェーズ④ — 貨物室</div><div class="m5-step-desc">GMが貨物室PW（pw4）を口頭で告知・情報開示</div></div></div>
-      <div class="m5-step"><div class="m5-step-num">STEP 07</div><div class="m5-step-content"><div class="m5-step-name">💬 情報交換・アイテム交渉</div><div class="m5-step-desc">グループ内外でアイテムの受け渡し・情報共有を行う</div></div></div>
-      <div class="m5-step"><div class="m5-step-num">STEP 08</div><div class="m5-step-content"><div class="m5-step-name">🎯 能力使用フェーズ</div><div class="m5-step-desc">帰還の瞬間の能力を除くすべての能力を使用可能</div></div></div>
-      <div class="m5-step unknown"><div class="m5-step-num">STEP 09</div><div class="m5-step-content"><div class="m5-step-name">🚀 帰還の瞬間 — 最終決断</div><div class="m5-step-desc">詳細不明 — このステップになったときGMが説明します</div></div></div>
-      <div class="m5-step unknown"><div class="m5-step-num">STEP 10</div><div class="m5-step-content"><div class="m5-step-name">🗳️ 裏切り者 告発・投票</div><div class="m5-step-desc">詳細不明 — このステップになったときGMが説明します</div></div></div>
-      <div class="m5-step unknown"><div class="m5-step-num">STEP 11</div><div class="m5-step-content"><div class="m5-step-name">📣 結末・正体公開</div><div class="m5-step-desc">詳細不明 — このステップになったときGMが説明します</div></div></div>
-    </div>
-  </div>
-</div>
 
 <div class="toast" id="toast"></div>
 
@@ -477,9 +436,6 @@ const db  = getFirestore(app);
 const params = new URLSearchParams(location.search);
 const group  = params.get('group') || 'mochi';
 const name   = params.get('name')  || '';
-const pw2    = params.get('pw2')   || '';
-const pw3    = params.get('pw3')   || '';
-const pw4    = params.get('pw4')   || '';
 
 const TRUE_GROUP = {
   mochi:{captain:'mochi',scientist:'tsuki',engineer:'taku',doctor:'rou'},
@@ -497,7 +453,7 @@ const trueGName = GROUP_NAMES[TRUE_GROUP[group]?.[ROLE]] || group;
 document.getElementById('nb-name-val').textContent = name || '（名前未設定）';
 document.getElementById('identity-text').textContent = '正規船長（' + trueGName + '）です';
 
-const ROOM_PW = {1:pw2, 2:pw3, 3:pw4};
+const ROOM_PW_FIELD = {1:'pw2', 2:'pw3', 3:'pw4'};
 const unlocked = {0:false, 1:false, 2:false, 3:false}; // 0 is restricted
 
 const ALL_ITEMS = {
@@ -513,25 +469,36 @@ const ALL_ITEMS = {
   med_record:       {icon:'📋',name:'改ざんされた医療処置記録',desc:'生命維持室（探索③）で発見。'},
   cargo_battery:    {icon:'🔋',name:'高圧電池パック',        desc:'貨物室（探索④）で発見。'},
   enc_media:        {icon:'💾',name:'暗号化記憶媒体',        desc:'貨物室（探索④）で発見。'},
+  // 旧IDの後方互換エイリアス
+  captain_key:      {icon:'🔦',name:'懐中電灯',            desc:'暗所調査に使用。船長の能力①の発動に必要。'},
+  engineer_tool:    {icon:'🔩',name:'精密ドライバー',        desc:'エンジニアの初期所持品。'},
+  engine_tool:      {icon:'🔩',name:'精密ドライバー',        desc:'エンジニアの初期所持品。'},
+  scientist_device: {icon:'🪪',name:'船長のIDカード',        desc:'科学者の初期所持品。'},
 };
 const INIT_ITEMS = [INIT_ITEM_ID];
 const docRef = doc(db,'game','session','inventory',group+'_'+ROLE);
 let curItem=null, selRole=null;
 
-window.tryUnlock = function(roomId) {
+window.tryUnlock = async function(roomId) {
   const inp = document.getElementById('pw-inp-'+roomId);
   const err = document.getElementById('lock-err-'+roomId);
   const entered = inp.value.trim();
-  const correct = ROOM_PW[roomId];
-  if (roomId > 1 && !unlocked[roomId-1]) { err.textContent='前の部屋を先に解錠してください'; return; }
-  if (!correct) { err.textContent='パスワードが設定されていません（GMに確認）'; return; }
-  if (entered === correct) {
-    unlocked[roomId]=true;
-    document.getElementById('ls-'+roomId).style.display='none';
-    document.getElementById('rc-'+roomId).style.display='block';
-    document.getElementById('rtab-'+roomId).classList.remove('lock-tab');
-    switchRoom(roomId); err.textContent='';
-  } else { err.textContent='❌ パスワードが違います'; inp.value=''; }
+  if (!entered) { err.textContent='パスワードを入力してください'; return; }
+  err.textContent='確認中…';
+  try {
+    const cfgRef = doc(db,'game','session','config','main');
+    const cfgSnap = await getDoc(cfgRef);
+    const field = ROOM_PW_FIELD[roomId];
+    const correct = cfgSnap.exists() ? (cfgSnap.data()[field]||'') : '';
+    if (!correct) { err.textContent='パスワードが設定されていません（GMに確認）'; return; }
+    if (entered === correct) {
+      unlocked[roomId]=true;
+      document.getElementById('ls-'+roomId).style.display='none';
+      document.getElementById('rc-'+roomId).style.display='block';
+      document.getElementById('rtab-'+roomId).classList.remove('lock-tab');
+      switchRoom(roomId); err.textContent='';
+    } else { err.textContent='❌ パスワードが違います'; inp.value=''; }
+  } catch(e) { err.textContent='⚠️ エラー: '+e.message; }
 };
 window.switchRoom = function(roomId) {
   document.querySelectorAll('.room-panel').forEach(p=>p.classList.remove('show'));
@@ -600,9 +567,6 @@ window.confirmGive=async function(){
   }catch(e){showToast('⚠️ '+e.message);document.getElementById('confirm-btn').disabled=false;}
 };
 
-window.openM5=()=>document.getElementById('m5-overlay').classList.add('open');
-window.closeM5=()=>document.getElementById('m5-overlay').classList.remove('open');
-window.m5BgClose=e=>{if(e.target===document.getElementById('m5-overlay'))window.closeM5();};
 
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.style.opacity='1';t.style.transform='translateX(-50%) translateY(0)';setTimeout(()=>{t.style.opacity='0';t.style.transform='translateX(-50%) translateY(12px)';},2600);}
 init();
