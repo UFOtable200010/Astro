@@ -855,6 +855,49 @@
   #btn-close-crew:hover { border-color: rgba(232,240,255,0.5); color: rgba(232,240,255,0.7); }
 
   /* ===== BANK OVERLAY ===== */
+  #form-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: rgba(2,3,10,0.95);
+    flex-direction: column;
+  }
+  #form-overlay.open { display: flex; }
+  #form-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 24px;
+    background: rgba(4,9,24,0.98);
+    border-bottom: 1px solid rgba(0,200,212,0.2);
+    flex-shrink: 0;
+  }
+  #form-topbar span {
+    font-family: 'Orbitron', monospace;
+    font-size: 13px;
+    letter-spacing: 0.4em;
+    color: var(--alice-teal);
+  }
+  #btn-close-form {
+    background: none;
+    border: 1px solid rgba(232,240,255,0.2);
+    color: rgba(232,240,255,0.5);
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    padding: 8px 20px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  #btn-close-form:hover { border-color: rgba(232,240,255,0.5); color: rgba(232,240,255,0.8); }
+  #form-frame {
+    flex: 1;
+    border: none;
+    background: #02030a;
+  }
+
   #bank-overlay {
     display: none;
     position: fixed;
@@ -1119,6 +1162,14 @@
 </nav>
 
 <!-- ===== BANK OVERLAY ===== -->
+<div id="form-overlay">
+  <div id="form-topbar">
+    <span>🚀 &nbsp; MISSION 01 — CANDIDATE PROFILE</span>
+    <button id="btn-close-form">✕ CLOSE</button>
+  </div>
+  <iframe id="form-frame" src="about:blank" title="CANDIDATE PROFILE"></iframe>
+</div>
+
 <div id="bank-overlay">
   <div id="bank-topbar">
     <span>🏦 &nbsp; BANK — ASSET MANAGEMENT</span>
@@ -1285,9 +1336,9 @@
         強み × 3 　 弱み × 3 　を今から入力してください。
       </p>
     </div>
-    <a href="https://ufotable200010.github.io/Astro/" target="_blank" class="action-btn">
-      🚀 &nbsp; INPUT FORM — OPEN MISSION LINK
-    </a>
+    <button id="btn-open-form" class="action-btn" style="width:100%;cursor:pointer;font-family:inherit;">
+      🚀 &nbsp; INPUT FORM — START
+    </button>
     <div style="margin-top:28px;padding:20px 28px;background:rgba(123,47,255,0.07);border:1px solid rgba(123,47,255,0.3);border-radius:2px;">
       <p style="font-family:'Space Mono',monospace;font-size:14px;letter-spacing:0.25em;color:#a87fff;margin-bottom:14px;">💡 なかなか強み・弱みが書けない方へ</p>
       <p style="font-size:19px;color:rgba(232,240,255,0.75);line-height:2.1;">
@@ -1980,6 +2031,19 @@ document.getElementById('btn-close-crew').addEventListener('click', () => {
 });
 
 // ===== BANK OVERLAY =====
+const formOverlay = document.getElementById('form-overlay');
+let formLoaded = false;
+document.getElementById('btn-open-form').addEventListener('click', () => {
+  if (!formLoaded) {
+    document.getElementById('form-frame').src = 'form/form.html';
+    formLoaded = true;
+  }
+  formOverlay.classList.add('open');
+});
+document.getElementById('btn-close-form').addEventListener('click', () => {
+  formOverlay.classList.remove('open');
+});
+
 const bankOverlay = document.getElementById('bank-overlay');
 const bankFrame = document.getElementById('bank-frame');
 let bankLoaded = false;
