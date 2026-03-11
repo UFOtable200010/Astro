@@ -1,21 +1,1999 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <title>MISSION HUB — 宇宙飛行士選抜試験</title>
-    <style>
-        body { background: #1a2640; color: #f4f1eb; text-align: center; font-family: sans-serif; padding-top: 100px; }
-        .nav { display: flex; gap: 30px; justify-content: center; margin-top: 50px; }
-        .btn { padding: 25px; border: 1px solid #8a6e3a; color: #f4f1eb; text-decoration: none; transition: 0.3s; width: 250px; background: rgba(138, 110, 58, 0.1); }
-        .btn:hover { background: #8a6e3a; color: #1a2640; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>たくろう、宇宙（どこ）までも</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&family=Shippori+Mincho:wght@400;700;800&family=Orbitron:wght@400;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --space-black: #02030a;
+    --deep-navy: #040918;
+    --cosmos: #080d2a;
+    --iss-blue: #1a3a6b;
+    --stellar-blue: #2563a8;
+    --alice-teal: #00c8d4;
+    --alice-pink: #e879b0;
+    --alice-gold: #f5c842;
+    --star-white: #e8f0ff;
+    --nebula-purple: #7b2fff;
+    --mission-green: #00ff9d;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--space-black);
+    color: var(--star-white);
+    font-family: 'Noto Serif JP', serif;
+    font-size: 20px;
+    overflow-x: hidden;
+    cursor: crosshair;
+  }
+
+  /* ===== STARFIELD ===== */
+  #starfield {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* ===== NAVIGATION ===== */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 16px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to bottom, rgba(2,3,10,0.95), transparent);
+    border-bottom: 1px solid rgba(0,200,212,0.1);
+  }
+
+  .nav-logo {
+    font-family: 'Orbitron', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    color: var(--alice-teal);
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: rgba(232,240,255,0.5);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--alice-teal); }
+
+  .nav-bank {
+    padding: 6px 16px;
+    background: rgba(0,200,212,0.12);
+    border: 1px solid var(--alice-teal);
+    border-radius: 2px;
+    color: var(--alice-teal) !important;
+    transition: all 0.3s !important;
+  }
+  .nav-bank:hover {
+    background: rgba(0,200,212,0.25) !important;
+    box-shadow: 0 0 12px rgba(0,200,212,0.4);
+  }
+
+  /* ===== HERO ===== */
+  #hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 120px 40px 80px;
+    z-index: 1;
+    width: 100%;
+    max-width: 100% !important;
+    margin: 0 !important;
+  }
+
+  .hero-subtitle {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.5em;
+    color: var(--alice-teal);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    animation: fadeSlideUp 1s ease 0.3s both;
+  }
+
+  .hero-title {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(48px, 8vw, 96px);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 24px;
+    animation: fadeSlideUp 1s ease 0.5s both;
+    background: linear-gradient(135deg, #ffffff 0%, var(--alice-teal) 40%, var(--alice-pink) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-ruby-label {
+    font-family: 'Orbitron', monospace;
+    font-size: 13px;
+    color: var(--alice-teal);
+    letter-spacing: 0.6em;
+    display: block;
+    margin-bottom: 16px;
+    animation: fadeSlideUp 1s ease 0.4s both;
+  }
+
+  ruby rt {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.32em;
+    letter-spacing: 0.3em;
+    color: var(--alice-teal);
+    -webkit-text-fill-color: var(--alice-teal);
+  }
+
+  .hero-desc {
+    font-size: 18px;
+    line-height: 2;
+    color: rgba(232,240,255,0.7);
+    max-width: 600px;
+    margin: 0 auto 48px;
+    animation: fadeSlideUp 1s ease 0.7s both;
+  }
+
+  .iss-orbit {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border: 1px solid rgba(0,200,212,0.08);
+    border-radius: 50%;
+    animation: orbit 30s linear infinite;
+    pointer-events: none;
+  }
+
+  .iss-orbit::after {
+    content: '🛸';
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 20px;
+    filter: drop-shadow(0 0 8px var(--alice-teal));
+  }
+
+  @keyframes orbit {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    animation: fadeSlideUp 1s ease 1.2s both;
+  }
+
+  .scroll-hint span {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    color: rgba(232,240,255,0.3);
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 48px;
+    background: linear-gradient(to bottom, var(--alice-teal), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.2); }
+  }
+
+  /* ===== SECTIONS ===== */
+  section {
+    position: relative;
+    z-index: 1;
+    padding: 100px 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 60px;
+  }
+
+  .section-number {
+    font-family: 'Orbitron', monospace;
+    font-size: 13px;
+    color: var(--alice-teal);
+    letter-spacing: 0.3em;
+    white-space: nowrap;
+  }
+
+  .section-line {
+    height: 1px;
+    flex: 1;
+    background: linear-gradient(to right, var(--alice-teal), transparent);
+  }
+
+  .mission-badge {
+    display: block;
+    width: 100%;
+    padding: 28px 40px;
+    margin-bottom: 40px;
+    background: linear-gradient(135deg, rgba(0,200,212,0.12), rgba(0,200,212,0.04));
+    border-top: 2px solid var(--alice-teal);
+    border-bottom: 2px solid var(--alice-teal);
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(18px, 2.5vw, 28px);
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    color: var(--alice-teal);
+    text-align: center;
+    text-shadow: 0 0 20px rgba(0,200,212,0.7);
+    box-shadow: 0 0 40px rgba(0,200,212,0.1), inset 0 0 60px rgba(0,200,212,0.04);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .mission-badge::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0,200,212,0.2), transparent);
+    animation: scanline 2.5s ease infinite;
+  }
+
+  .mission-badge::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0;
+    top: 50%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0,200,212,0.3), transparent);
+  }
+
+  @keyframes scanline {
+    0% { left: -100%; }
+    100% { left: 100%; }
+  }
+
+  .mission-title {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 700;
+    margin-bottom: 24px;
+    background: linear-gradient(135deg, var(--star-white), var(--alice-teal));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .mission-body {
+    font-size: 18px;
+    line-height: 2.2;
+    color: rgba(232,240,255,0.75);
+  }
+
+  /* ===== PROFILE CARD ===== */
+  .profile-card {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 48px;
+    padding: 48px;
+    background: rgba(4,9,24,0.8);
+    border: 1px solid rgba(0,200,212,0.2);
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .profile-card::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(0,200,212,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .profile-avatar {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--cosmos), var(--iss-blue));
+    border: 2px solid rgba(0,200,212,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 64px;
+    position: relative;
+  }
+
+  .profile-avatar::after {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,200,212,0.15);
+    animation: pulseBorder 3s ease-in-out infinite;
+  }
+
+  @keyframes pulseBorder {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.05); opacity: 1; }
+  }
+
+  .profile-name {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 36px;
+    font-weight: 800;
+    margin-bottom: 8px;
+  }
+
+  .profile-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--alice-pink);
+    letter-spacing: 0.2em;
+    margin-bottom: 24px;
+  }
+
+  .profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .profile-item {
+    padding: 14px 18px;
+    background: rgba(0,200,212,0.04);
+    border: 1px solid rgba(0,200,212,0.1);
+    border-radius: 2px;
+  }
+
+  .profile-item-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    color: var(--alice-teal);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .profile-item-value {
+    font-size: 19px;
+    color: rgba(232,240,255,0.85);
+  }
+
+  .profile-message {
+    font-size: 19px;
+    line-height: 2.1;
+    color: rgba(232,240,255,0.7);
+    border-left: 3px solid var(--alice-pink);
+    padding-left: 20px;
+    margin-top: 20px;
+  }
+
+  /* ===== MISSION PANELS ===== */
+  .cockpit-panel {
+    background: rgba(4,9,24,0.9);
+    border: 1px solid rgba(26,58,107,0.6);
+    border-radius: 4px;
+    padding: 48px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 48px;
+  }
+
+  .cockpit-panel::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--alice-teal), var(--alice-pink), transparent);
+  }
+
+  .cockpit-panel::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+      linear-gradient(rgba(0,200,212,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,200,212,0.02) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+
+  .transmission-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.5em;
+    color: var(--alice-teal);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .transmission-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--alice-teal);
+    border-radius: 50%;
+    animation: blink 1.5s ease infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.2; }
+  }
+
+  .panel-text {
+    font-size: 22px;
+    line-height: 2.2;
+    color: rgba(232,240,255,0.85);
+  }
+
+  /* ===== RULES LIST ===== */
+  .rules-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .rules-list li {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 20px 24px;
+    background: rgba(0,200,212,0.04);
+    border: 1px solid rgba(0,200,212,0.1);
+    border-radius: 2px;
+    font-size: 20px;
+    line-height: 1.9;
+    color: rgba(232,240,255,0.8);
+    transition: border-color 0.3s, background 0.3s;
+  }
+
+  .rules-list li:hover {
+    border-color: rgba(0,200,212,0.3);
+    background: rgba(0,200,212,0.08);
+  }
+
+  .rule-icon {
+    font-size: 28px;
+    flex-shrink: 0;
+    line-height: 1.6;
+  }
+
+  /* ===== SCENARIO ===== */
+  .scenario-box {
+    background: linear-gradient(135deg, rgba(123,47,255,0.08), rgba(0,200,212,0.05));
+    border: 1px solid rgba(123,47,255,0.3);
+    border-radius: 4px;
+    padding: 40px;
+    margin: 32px 0;
+  }
+
+  .scenario-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 13px;
+    color: var(--nebula-purple);
+    letter-spacing: 0.3em;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .crisis-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .crisis-item {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    padding: 16px 24px;
+    background: rgba(2,3,10,0.5);
+    border-left: 3px solid var(--alice-pink);
+    font-size: 20px;
+    color: rgba(232,240,255,0.85);
+  }
+
+  .crisis-num {
+    font-family: 'Orbitron', monospace;
+    font-size: 15px;
+    color: var(--alice-pink);
+    min-width: 32px;
+  }
+
+  /* ===== SCORING TABLE ===== */
+  .score-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 32px;
+  }
+
+  .score-card {
+    padding: 24px;
+    background: rgba(4,9,24,0.8);
+    border: 1px solid rgba(0,200,212,0.15);
+    border-radius: 2px;
+  }
+
+  .score-icon { font-size: 28px; margin-bottom: 12px; }
+
+  .score-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 15px;
+    letter-spacing: 0.15em;
+    color: rgba(232,240,255,0.6);
+    margin-bottom: 10px;
+  }
+
+  .score-points {
+    font-family: 'Orbitron', monospace;
+    font-size: 40px;
+    font-weight: 900;
+    color: var(--alice-teal);
+  }
+
+  .score-difficulty {
+    font-size: 16px;
+    color: rgba(232,240,255,0.45);
+    margin-top: 6px;
+  }
+
+  .score-icon { font-size: 34px; margin-bottom: 12px; }
+
+  /* ===== ROCKET MISSION ===== */
+  .cost-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 32px;
+  }
+
+  .cost-table th, .cost-table td {
+    padding: 20px 26px;
+    text-align: left;
+    border-bottom: 1px solid rgba(0,200,212,0.1);
+    font-size: 20px;
+  }
+
+  .cost-table th {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    color: var(--alice-teal);
+    text-transform: uppercase;
+    background: rgba(0,200,212,0.05);
+  }
+
+  .cost-table td { color: rgba(232,240,255,0.75); }
+
+  .formula-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 32px;
+    background: rgba(4,9,24,0.9);
+    border: 1px solid rgba(245,200,66,0.3);
+    border-radius: 4px;
+    margin-top: 32px;
+    flex-wrap: wrap;
+    text-align: center;
+  }
+
+  .formula-item {
+    text-align: center;
+  }
+
+  .formula-value {
+    font-family: 'Orbitron', monospace;
+    font-size: 18px;
+    color: var(--alice-gold);
+    margin-bottom: 8px;
+  }
+
+  .formula-label {
+    font-size: 15px;
+    color: rgba(232,240,255,0.45);
+  }
+
+  .formula-op {
+    font-family: 'Orbitron', monospace;
+    font-size: 30px;
+    color: rgba(232,240,255,0.35);
+  }
+
+  .formula-op {
+    font-family: 'Orbitron', monospace;
+    font-size: 24px;
+    color: rgba(232,240,255,0.3);
+  }
+
+  /* ===== GROUPS TABLE ===== */
+  .groups-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    margin-top: 32px;
+    background: rgba(0,200,212,0.1);
+    border: 1px solid rgba(0,200,212,0.2);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .group-col {
+    background: var(--space-black);
+    padding: 0;
+  }
+
+  .group-header {
+    padding: 20px;
+    text-align: center;
+    font-family: 'Shippori Mincho', serif;
+    font-size: 26px;
+    font-weight: 700;
+  }
+
+  .group-mochi .group-header { background: rgba(255,140,0,0.15); color: #ff8c00; border-bottom: 2px solid #ff8c00; }
+  .group-tsuki .group-header { background: rgba(41,121,255,0.15); color: #2979ff; border-bottom: 2px solid #2979ff; }
+  .group-taku .group-header { background: rgba(0,200,83,0.15); color: #00c853; border-bottom: 2px solid #00c853; }
+  .group-rou .group-header { background: rgba(170,0,255,0.15); color: #aa00ff; border-bottom: 2px solid #aa00ff; }
+
+  .group-members {
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .member-slot {
+    padding: 14px 16px;
+    background: rgba(232,240,255,0.03);
+    border: 1px dashed rgba(232,240,255,0.1);
+    border-radius: 2px;
+    color: rgba(232,240,255,0.35);
+    font-family: 'Space Mono', monospace;
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .member-input {
+    width: 100%;
+    padding: 12px 14px;
+    background: rgba(232,240,255,0.04);
+    border: 1px dashed rgba(232,240,255,0.2);
+    border-radius: 2px;
+    color: var(--star-white);
+    font-family: 'Noto Serif JP', serif;
+    font-size: 16px;
+    text-align: center;
+    outline: none;
+    transition: border-color 0.25s, background 0.25s;
+    cursor: text;
+  }
+  .member-input::placeholder { color: rgba(232,240,255,0.25); font-size: 13px; }
+  .member-input:focus { background: rgba(232,240,255,0.08); }
+  .mochi-input:focus  { border-color: #ff8c00; }
+  .tsuki-input:focus  { border-color: #2979ff; }
+  .taku-input:focus   { border-color: #00c853; }
+  .rou-input:focus    { border-color: #aa00ff; }
+  .mochi-input:not(:placeholder-shown) { border-color: rgba(255,140,0,0.5); color: #ffb850; }
+  .tsuki-input:not(:placeholder-shown) { border-color: rgba(41,121,255,0.5); color: #7ca8ff; }
+  .taku-input:not(:placeholder-shown)  { border-color: rgba(0,200,83,0.5);  color: #60e89a; }
+  .rou-input:not(:placeholder-shown)   { border-color: rgba(170,0,255,0.5); color: #cc80ff; }
+
+  /* ===== TIMER ===== */
+  .timer-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px 8px;
+    line-height: 1;
+    transition: opacity 0.2s, transform 0.2s;
+    color: rgba(232,240,255,0.6);
+    display: flex;
+    align-items: center;
+  }
+  .timer-btn:hover { opacity: 1; color: rgba(232,240,255,1); transform: scale(1.12); }
+
+  .nav-bank {
+    display: inline-flex;
+    align-items: center;
+    background: none;
+    border: none;
+    padding: 4px 8px;
+    color: rgba(232,240,255,0.6);
+    text-decoration: none;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .nav-bank:hover {
+    opacity: 1;
+    color: rgba(232,240,255,1) !important;
+    transform: scale(1.12);
+  }
+
+  /* ===== TIMER OVERLAY ===== */
+  #timer-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: rgba(2,3,10,0.85);
+    backdrop-filter: blur(6px);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 32px;
+  }
+  #timer-overlay.open { display: flex; }
+
+  #timer-display {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(72px, 14vw, 160px);
+    font-weight: 900;
+    color: var(--alice-teal);
+    letter-spacing: 0.05em;
+    text-shadow: 0 0 40px rgba(0,200,212,0.5);
+    transition: color 0.3s;
+  }
+  #timer-display.warning { color: var(--alice-pink); text-shadow: 0 0 40px rgba(232,121,176,0.6); }
+
+  .timer-controls {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .timer-preset {
+    font-family: 'Space Mono', monospace;
+    font-size: 14px;
+    letter-spacing: 0.2em;
+    padding: 10px 20px;
+    background: rgba(0,200,212,0.08);
+    border: 1px solid rgba(0,200,212,0.4);
+    border-radius: 2px;
+    color: var(--alice-teal);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .timer-preset:hover { background: rgba(0,200,212,0.2); }
+
+  .timer-action {
+    font-family: 'Orbitron', monospace;
+    font-size: 15px;
+    letter-spacing: 0.2em;
+    padding: 14px 32px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+  }
+  #btn-start { background: var(--alice-teal); color: #000; }
+  #btn-start:hover { background: #00e5f0; box-shadow: 0 0 20px rgba(0,200,212,0.5); }
+  #btn-pause { background: rgba(245,200,66,0.15); border: 1px solid var(--alice-gold); color: var(--alice-gold); }
+  #btn-pause:hover { background: rgba(245,200,66,0.3); }
+  #btn-reset { background: rgba(232,121,176,0.1); border: 1px solid var(--alice-pink); color: var(--alice-pink); }
+  #btn-reset:hover { background: rgba(232,121,176,0.25); }
+  #btn-close-timer { background: none; border: 1px solid rgba(232,240,255,0.2); color: rgba(232,240,255,0.4); font-family:'Space Mono',monospace; font-size:12px; letter-spacing:0.3em; padding:10px 24px; border-radius:2px; cursor:pointer; transition:all 0.2s; }
+  #btn-close-timer:hover { border-color: rgba(232,240,255,0.5); color: rgba(232,240,255,0.7); }
+
+  /* ===== CREW OVERLAY ===== */
+  #crew-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: rgba(2,3,10,0.92);
+    backdrop-filter: blur(8px);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 24px;
+    padding: 40px 20px;
+    overflow-y: auto;
+  }
+  #crew-overlay.open { display: flex; }
+  #btn-close-crew {
+    background: none;
+    border: 1px solid rgba(232,240,255,0.2);
+    color: rgba(232,240,255,0.4);
+    font-family:'Space Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.3em;
+    padding:10px 24px;
+    border-radius:2px;
+    cursor:pointer;
+    transition:all 0.2s;
+    margin-top: 16px;
+  }
+  #btn-close-crew:hover { border-color: rgba(232,240,255,0.5); color: rgba(232,240,255,0.7); }
+
+  /* ===== BANK OVERLAY ===== */
+  #bank-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: rgba(2,3,10,0.95);
+    flex-direction: column;
+  }
+  #bank-overlay.open { display: flex; }
+  #bank-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 24px;
+    background: rgba(4,9,24,0.98);
+    border-bottom: 1px solid rgba(0,200,212,0.2);
+    flex-shrink: 0;
+  }
+  #bank-topbar span {
+    font-family: 'Orbitron', monospace;
+    font-size: 13px;
+    letter-spacing: 0.4em;
+    color: var(--alice-teal);
+  }
+  #btn-close-bank {
+    background: none;
+    border: 1px solid rgba(232,240,255,0.2);
+    color: rgba(232,240,255,0.5);
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    padding: 8px 20px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  #btn-close-bank:hover { border-color: rgba(232,240,255,0.5); color: rgba(232,240,255,0.8); }
+  #bank-frame {
+    flex: 1;
+    border: none;
+    background: #02030a;
+    filter: invert(1) hue-rotate(180deg);
+  }
+  .crew-overlay-name {
+    padding: 12px 14px;
+    background: rgba(232,240,255,0.04);
+    border: 1px solid rgba(232,240,255,0.12);
+    border-radius: 2px;
+    color: var(--star-white);
+    font-family: 'Noto Serif JP', serif;
+    font-size: 17px;
+    text-align: center;
+    min-height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .crew-overlay-name.empty { color: rgba(232,240,255,0.2); font-style: italic; font-size: 14px; }
+
+  /* ===== TELEPHONE GAME ===== */
+  .level-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 32px;
+  }
+
+  .level-table th, .level-table td {
+    padding: 18px 24px;
+    border-bottom: 1px solid rgba(0,200,212,0.08);
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .level-table th {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    color: var(--alice-teal);
+    background: rgba(0,200,212,0.05);
+  }
+
+  .level-badge {
+    font-family: 'Orbitron', monospace;
+    font-size: 17px;
+    color: rgba(232,240,255,0.55);
+  }
+
+  .reward-value {
+    color: var(--mission-green);
+    font-weight: 700;
+    font-family: 'Orbitron', monospace;
+    font-size: 20px;
+  }
+
+  .loss-value {
+    color: var(--alice-pink);
+    font-family: 'Orbitron', monospace;
+    font-size: 20px;
+  }
+
+  /* ===== TELEPHONE DIAGRAM ===== */
+  .diagram-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 48px 24px;
+    background: rgba(4,9,24,0.6);
+    border: 1px solid rgba(0,200,212,0.1);
+    border-radius: 4px;
+    margin: 32px 0;
+    min-height: 280px;
+    position: relative;
+  }
+
+  .diagram-svg {
+    width: 100%;
+    max-width: 560px;
+    height: auto;
+  }
+
+  /* ===== URL BUTTON ===== */
+  .action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 32px;
+    background: rgba(0,200,212,0.08);
+    border: 1px solid var(--alice-teal);
+    border-radius: 2px;
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: var(--alice-teal);
+    text-decoration: none;
+    transition: all 0.3s;
+    margin-top: 24px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .action-btn::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0,200,212,0.2), transparent);
+    transition: left 0.4s;
+  }
+
+  .action-btn:hover::before { left: 100%; }
+  .action-btn:hover {
+    background: rgba(0,200,212,0.15);
+    box-shadow: 0 0 20px rgba(0,200,212,0.3);
+  }
+
+  /* ===== DIVIDER ===== */
+  .cosmic-divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0,200,212,0.3), rgba(232,121,176,0.3), transparent);
+    margin: 60px auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    nav { padding: 14px 20px; }
+    .nav-links { display: none; }
+    section { padding: 80px 20px; }
+    .profile-card { grid-template-columns: 1fr; }
+    .profile-avatar { width: 120px; height: 120px; font-size: 40px; }
+    .groups-grid { grid-template-columns: repeat(2, 1fr); }
+    .score-grid { grid-template-columns: 1fr; }
+    .formula-box { gap: 8px; }
+  }
+
+  /* ===== ENDING ===== */
+  #ending {
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    padding: 100px 40px;
+  }
+
+  .ending-title {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(24px, 4vw, 48px);
+    font-weight: 800;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, var(--alice-teal), var(--alice-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .footer-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    color: rgba(232,240,255,0.2);
+    margin-top: 48px;
+  }
+</style>
 </head>
 <body>
-    <h1>SPACE SELECTION MISSION HUB</h1>
-    <div class="nav">
-        <a href="form/form.html" class="btn">01: CANDIDATE PROFILE</a>
-        <a href="bank/bank.html" class="btn">02: ASSET MANAGEMENT</a>
-        <a href="Assessment/Assesment.html" class="btn">03: MISSION ASSESSMENT<br>(評価・適性検査)</a>
+
+<canvas id="starfield"></canvas>
+
+<nav>
+  <div class="nav-logo">TAKURO SPACE PROGRAM</div>
+  <ul class="nav-links">
+    <li><a href="#mission1">M-01</a></li>
+    <li><a href="#mission2">M-02</a></li>
+    <li><a href="#mission3">M-03</a></li>
+    <li><a href="#mission4">M-04</a></li>
+    <li>
+      <button class="timer-btn" id="open-timer" title="タイマー">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5"/><path d="M9 3h6"/><path d="M12 3v2"/>
+        </svg>
+      </button>
+    </li>
+    <li>
+      <button class="timer-btn" id="open-crew" title="クルー配置">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+        </svg>
+      </button>
+    </li>
+    <li>
+      <button class="timer-btn" id="open-bank" title="BANK">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="11" width="20" height="10" rx="2"/><path d="M6 11V7a6 6 0 0 1 12 0v4"/><line x1="12" y1="15" x2="12" y2="17"/>
+        </svg>
+      </button>
+    </li>
+  </ul>
+</nav>
+
+<!-- ===== BANK OVERLAY ===== -->
+<div id="bank-overlay">
+  <div id="bank-topbar">
+    <span>🏦 &nbsp; BANK — ASSET MANAGEMENT</span>
+    <button id="btn-close-bank">✕ CLOSE</button>
+  </div>
+  <iframe id="bank-frame" src="about:blank" title="BANK"></iframe>
+</div>
+
+<!-- ===== TIMER OVERLAY ===== -->
+<div id="timer-overlay">
+  <div id="timer-current-label" style="font-family:'Space Mono',monospace;font-size:14px;letter-spacing:0.4em;color:rgba(232,240,255,0.4);margin-bottom:8px;">SET TIME</div>
+  <div id="timer-display">00:00</div>
+  <div class="timer-controls" style="gap:10px;">
+    <button class="timer-preset" data-sec="60">＋1分</button>
+    <button class="timer-preset" data-sec="180">＋3分</button>
+    <button class="timer-preset" data-sec="300">＋5分</button>
+    <button class="timer-preset" data-sec="600">＋10分</button>
+    <button class="timer-preset" data-sec="900">＋15分</button>
+  </div>
+  <div class="timer-controls">
+    <button class="timer-action" id="btn-start">▶ START</button>
+    <button class="timer-action" id="btn-pause">⏸ PAUSE</button>
+    <button class="timer-action" id="btn-reset">↺ RESET</button>
+  </div>
+  <button id="btn-close-timer">✕ CLOSE</button>
+</div>
+
+<!-- ===== CREW OVERLAY ===== -->
+<div id="crew-overlay">
+  <div style="font-family:'Orbitron',monospace;font-size:16px;letter-spacing:0.4em;color:var(--alice-teal);margin-bottom:32px;">CREW ASSIGNMENTS</div>
+  <div id="crew-overlay-grid" class="groups-grid" style="max-width:900px;width:100%;"></div>
+  <button id="btn-close-crew">✕ CLOSE</button>
+</div>
+
+<!-- ===== HERO ===== -->
+<section id="hero" style="max-width:100%; padding: 0;">
+  <div class="iss-orbit"></div>
+  <p class="hero-subtitle">ASTRONAUT SELECTION PROGRAM 2025</p>
+  <div class="hero-ruby-label">DOKOKO MADE MO</div>
+  <h1 class="hero-title">
+    たくろう、<ruby>宇宙<rt>どこ</rt></ruby>までも
+  </h1>
+  <div style="margin-top: 80px;">
+    <p class="hero-desc" style="font-size: clamp(18px, 2.2vw, 26px); line-height: 2.4;">
+      今この瞬間から、あなたがたは<br>
+      各国で勝ち抜いてきた宇宙飛行士選抜試験の<br>
+      <em style="color:var(--alice-teal);font-style:normal;">最終候補者</em>です。
+    </p>
+  </div>
+  <div class="scroll-hint">
+    <span>SCROLL TO BEGIN</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<div class="cosmic-divider"></div>
+
+<!-- ===== SELF INTRO ===== -->
+<section id="intro">
+  <div class="section-header reveal">
+    <span class="section-number">FILE — 001</span>
+    <div class="section-line"></div>
+  </div>
+  <div class="profile-card reveal">
+    <div style="display:flex; flex-direction:column; align-items:center; gap:16px;">
+      <div class="profile-avatar">
+        <!-- Neil Armstrong-style astronaut SVG -->
+        <svg width="130" height="130" viewBox="0 0 130 130" xmlns="http://www.w3.org/2000/svg">
+          <!-- helmet outer -->
+          <circle cx="65" cy="65" r="56" fill="#1a2a4a" stroke="rgba(0,200,212,0.6)" stroke-width="3"/>
+          <!-- helmet visor frame -->
+          <circle cx="65" cy="65" r="46" fill="#0d1b35" stroke="rgba(0,200,212,0.3)" stroke-width="1.5"/>
+          <!-- visor golden tint -->
+          <ellipse cx="65" cy="62" rx="32" ry="26" fill="rgba(245,180,40,0.18)" stroke="rgba(245,180,40,0.5)" stroke-width="2"/>
+          <!-- visor reflection shimmer -->
+          <ellipse cx="52" cy="52" rx="10" ry="6" fill="rgba(255,255,255,0.08)" transform="rotate(-20,52,52)"/>
+          <!-- face skin inside visor -->
+          <ellipse cx="65" cy="64" rx="22" ry="19" fill="#d4956a"/>
+          <!-- eyes -->
+          <ellipse cx="57" cy="60" rx="3.5" ry="3" fill="#2a1a0a"/>
+          <ellipse cx="73" cy="60" rx="3.5" ry="3" fill="#2a1a0a"/>
+          <!-- eye shine -->
+          <circle cx="58.5" cy="58.8" r="1" fill="white" opacity="0.6"/>
+          <circle cx="74.5" cy="58.8" r="1" fill="white" opacity="0.6"/>
+          <!-- eyebrows -->
+          <path d="M53 55.5 Q57 53.5 61 55" stroke="#5a3010" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+          <path d="M69 55 Q73 53.5 77 55.5" stroke="#5a3010" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+          <!-- nose -->
+          <path d="M64 62 Q62 68 60 70 Q65 72 70 70 Q68 68 66 62" fill="#c07850" opacity="0.5"/>
+          <!-- mouth - slight smile -->
+          <path d="M58 74 Q65 79 72 74" stroke="#8b4513" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+          <!-- suit collar bottom -->
+          <path d="M20 105 Q65 130 110 105" fill="#1a3a6b" stroke="rgba(0,200,212,0.4)" stroke-width="1.5"/>
+          <!-- NASA badge hint -->
+          <rect x="36" y="98" width="18" height="10" rx="2" fill="rgba(0,200,212,0.2)" stroke="rgba(0,200,212,0.5)" stroke-width="1"/>
+          <text x="45" y="106" text-anchor="middle" fill="var(--alice-teal)" font-size="5" font-family="monospace">NASA</text>
+          <!-- helmet top ridge -->
+          <path d="M18 55 Q65 5 112 55" stroke="rgba(0,200,212,0.25)" stroke-width="2" fill="none"/>
+          <!-- antenna -->
+          <line x1="65" y1="9" x2="65" y2="2" stroke="rgba(0,200,212,0.5)" stroke-width="2"/>
+          <circle cx="65" cy="1.5" r="2" fill="var(--alice-teal)" opacity="0.8"/>
+        </svg>
+      </div>
+      <div style="display:inline-flex;align-items:center;gap:10px;padding:8px 20px;border:1px solid var(--alice-teal);border-radius:2px;font-family:'Orbitron',monospace;font-size:12px;letter-spacing:0.25em;color:var(--alice-teal);background:rgba(0,200,212,0.07);">CREW COMMANDER</div>
     </div>
+    <div>
+      <p class="profile-name">望月 拓朗</p>
+      <p class="profile-tag">#CONTENT-HUMAN / SHIZUOKA ORIGIN</p>
+      <div class="profile-grid">
+        <div class="profile-item">
+          <div class="profile-item-label">出身</div>
+          <div class="profile-item-value">静岡県</div>
+        </div>
+        <div class="profile-item">
+          <div class="profile-item-label">最近困ったこと</div>
+          <div class="profile-item-value">眼精疲労</div>
+        </div>
+        <div class="profile-item" style="grid-column:1/-1;">
+          <div class="profile-item-label">趣味</div>
+          <div class="profile-item-value">読書　散歩　映像鑑賞　フットサル</div>
+        </div>
+      </div>
+      <p class="profile-message">
+        今日はお忙しい中、わざわざ来てくれてありがとうございます！私を一言でいうと「コンテンツ人間」で、なにか情報や楽しそうなものがあれば飛びつきます。<br><br>
+        市販のボードゲームをかき集めてゲームをするのも考えましたが、せっかくなので企画を作ってきました。結構ボリューミーな内容になってしまいました。まるまる一日中プレイすることはないと思いますが…私の自己満足の旅にお付き合いいただければと思います。
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="cosmic-divider"></div>
+
+<!-- ===== TRANSITION — INTRO TO MISSION 1 ===== -->
+<section style="padding: 60px 40px; max-width: 860px; margin: 0 auto; text-align: center; position: relative; z-index: 1;">
+  <p class="reveal" style="font-size: clamp(18px, 2vw, 23px); color: rgba(232,240,255,0.75); line-height: 2.4; font-family: 'Noto Serif JP', serif;">
+    視界に入るのは、まだ見ぬ顔ぶればかりで、<br>期待よりも不安の方が大きいかもしれません。<br><br>
+    しかし、宇宙という極限状態において最大の武器となるのは、<br>高度な技術以上に<strong style="color: var(--alice-teal);">『隣にいるクルーとの信頼関係』</strong>です。<br><br>
+    まずは、共に銀河を目指す仲間を知るための最初のミッション――<br>自己紹介を兼ねたアイスブレイクから始めましょう。
+  </p>
+</section>
+
+<div class="cosmic-divider"></div>
+<section id="mission1">
+  <div class="section-header reveal">
+    <span class="section-number">MISSION — 01</span>
+    <div class="section-line"></div>
+  </div>
+  <div class="mission-badge reveal">━━━━━  MISSION 01 — START  ━━━━━</div>
+  <h2 class="mission-title reveal">適正補完・グループビルディング</h2>
+
+  <div class="cockpit-panel reveal">
+    <div class="transmission-label">
+      <div class="transmission-dot"></div>
+      TRANSMISSION RECEIVED — CREW FORMATION PROTOCOL
+    </div>
+    <p class="panel-text">
+      宇宙開発を行うには、単に「能力が高い人」を集めるのではなく、<br>
+      <strong style="color:var(--alice-gold);font-size:1.1em;">「パズルを完成させるためのピース」</strong>を組み合わせるような<br>
+      極めて緻密かつ高い補完関係のグループを目指して編成します。
+    </p>
+    <br>
+    <div style="margin:24px 0;padding:22px 32px;background:rgba(0,200,212,0.07);border:2px solid rgba(0,200,212,0.4);border-radius:4px;text-align:center;">
+      <p style="font-family:'Shippori Mincho',serif;font-size:clamp(24px,3.5vw,40px);font-weight:800;color:var(--alice-teal);letter-spacing:0.1em;text-shadow:0 0 16px rgba(0,200,212,0.4);">
+        強み × 3 　 弱み × 3 　を今から入力してください。
+      </p>
+    </div>
+    <a href="https://ufotable200010.github.io/Astro/" target="_blank" class="action-btn">
+      🚀 &nbsp; INPUT FORM — OPEN MISSION LINK
+    </a>
+    <div style="margin-top:28px;padding:20px 28px;background:rgba(123,47,255,0.07);border:1px solid rgba(123,47,255,0.3);border-radius:2px;">
+      <p style="font-family:'Space Mono',monospace;font-size:14px;letter-spacing:0.25em;color:#a87fff;margin-bottom:14px;">💡 なかなか強み・弱みが書けない方へ</p>
+      <p style="font-size:19px;color:rgba(232,240,255,0.75);line-height:2.1;">
+        <strong style="color:#c4a0ff;">強み：</strong>できる人の割合が1/10人ほどのもの、他人から褒められた経験…など<br>
+        <strong style="color:#c4a0ff;">弱み：</strong>自分は絶対にやりたくない／できないこと
+      </p>
+    </div>
+  </div>
+
+  <div class="cockpit-panel reveal">
+    <div class="transmission-label">
+      <div class="transmission-dot"></div>
+      PROTOCOL — FREE NEGOTIATION RULES
+    </div>
+    <ul class="rules-list">
+      <li><span class="rule-icon">🛸</span><div><strong style="color:var(--alice-teal);">スカウト</strong><br>「君の能力は面白い。私と組まないか？」と先行予約を入れる。</div></li>
+      <li><span class="rule-icon">🎯</span><div><strong style="color:var(--alice-teal);">ヘッドハンティング</strong><br>既に固まりつつあるペアを、時間内であれば説得して引き抜く。</div></li>
+      <li><span class="rule-icon">🔄</span><div><strong style="color:var(--alice-teal);">離反と転向</strong><br>一度決めたグループでも、制限時間以内であれば心変わりして構わない。</div></li>
+      <li><span class="rule-icon">🤝</span><div><strong style="color:var(--alice-teal);">トレード</strong><br>互いの合意があれば、メンバーの交換を持ちかける。（互いの敬意を失わない範囲で）</div></li>
+    </ul>
+    <div style="margin-top:28px; padding:22px 28px; background:rgba(245,200,66,0.06); border:1px solid rgba(245,200,66,0.25); border-radius:2px;">
+      <p style="font-family:'Space Mono',monospace;font-size:14px;letter-spacing:0.3em;color:var(--alice-gold);margin-bottom:12px;">⚠ SELECTION CRITERIA — CRITICAL</p>
+      <p style="font-size:21px;color:rgba(232,240,255,0.8);line-height:2;">自分と「異なる能力」を持つ相手を優先して選ぶことをおすすめします。<br>多種多様な組織を構成することこそが、過酷な宇宙環境での勝利を左右する…かも。</p>
+    </div>
+    <p style="margin-top:28px;font-size:21px;color:rgba(232,240,255,0.7);">
+      交渉終了時までに、自分を含む<strong style="color:var(--alice-teal);font-size:1.15em;">合計5名</strong>で1つのグループを形成してください。
+    </p>
+  </div>
+
+  <!-- GROUPS TABLE -->
+  <div class="reveal">
+    <p style="font-family:'Space Mono',monospace;font-size:13px;letter-spacing:0.3em;color:rgba(232,240,255,0.4);margin-bottom:16px;">CREW ASSIGNMENTS</p>
+    <div class="groups-grid">
+      <div class="group-col group-mochi">
+        <div class="group-header">もちグループ</div>
+        <div class="group-members">
+          <input class="member-input mochi-input" type="text" placeholder="名前を入力">
+          <input class="member-input mochi-input" type="text" placeholder="名前を入力">
+          <input class="member-input mochi-input" type="text" placeholder="名前を入力">
+          <input class="member-input mochi-input" type="text" placeholder="名前を入力">
+          <input class="member-input mochi-input" type="text" placeholder="名前を入力">
+        </div>
+      </div>
+      <div class="group-col group-tsuki">
+        <div class="group-header">つきグループ</div>
+        <div class="group-members">
+          <input class="member-input tsuki-input" type="text" placeholder="名前を入力">
+          <input class="member-input tsuki-input" type="text" placeholder="名前を入力">
+          <input class="member-input tsuki-input" type="text" placeholder="名前を入力">
+          <input class="member-input tsuki-input" type="text" placeholder="名前を入力">
+          <input class="member-input tsuki-input" type="text" placeholder="名前を入力">
+        </div>
+      </div>
+      <div class="group-col group-taku">
+        <div class="group-header">たくグループ</div>
+        <div class="group-members">
+          <input class="member-input taku-input" type="text" placeholder="名前を入力">
+          <input class="member-input taku-input" type="text" placeholder="名前を入力">
+          <input class="member-input taku-input" type="text" placeholder="名前を入力">
+          <input class="member-input taku-input" type="text" placeholder="名前を入力">
+          <input class="member-input taku-input" type="text" placeholder="名前を入力">
+        </div>
+      </div>
+      <div class="group-col group-rou">
+        <div class="group-header">ろうグループ</div>
+        <div class="group-members">
+          <input class="member-input rou-input" type="text" placeholder="名前を入力">
+          <input class="member-input rou-input" type="text" placeholder="名前を入力">
+          <input class="member-input rou-input" type="text" placeholder="名前を入力">
+          <input class="member-input rou-input" type="text" placeholder="名前を入力">
+          <input class="member-input rou-input" type="text" placeholder="名前を入力">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="cosmic-divider"></div>
+
+<!-- ===== MISSION 2 ===== -->
+<section id="mission2">
+  <div class="section-header reveal">
+    <span class="section-number">MISSION — 02</span>
+    <div class="section-line"></div>
+  </div>
+  <div class="mission-badge reveal">━━━━━  MISSION 02 — START  ━━━━━</div>
+  <h2 class="mission-title reveal">望月議会上院宇宙科学委員会<br>予算決定</h2>
+
+  <div class="cockpit-panel reveal">
+    <div class="transmission-label">
+      <div class="transmission-dot"></div>
+      BUDGET ALLOCATION — ARTEMIS PROGRAM
+    </div>
+    <p class="panel-text">
+      「予算下さい」だけで予算が降ってくるなんて荒唐無稽な話です。<br>
+      ではこれまで宇宙に飛び出た人々たちはどう予算を振り分けてもらったのか？<br>
+      実現可能性、夢のある話…いずれも<em style="color:var(--alice-teal);font-style:normal;">説得力を帯びた内容をプレゼンする</em>ことによって獲得してきました。
+    </p>
+  </div>
+
+  <!-- SCENARIO -->
+  <div class="scenario-box reveal">
+    <div class="scenario-title">
+      <span>⚡</span> EMERGENCY SCENARIO — SURVIVAL PROTOCOL
+    </div>
+    <p style="font-size:21px;color:rgba(232,240,255,0.75);line-height:2;margin-bottom:20px;">
+      宇宙人船との衝突により宇宙船が大破。以下の5つの危機が同時発生している。
+    </p>
+    <ul class="crisis-list">
+      <li class="crisis-item"><span class="crisis-num">01</span>得体のしれない宇宙人がまだ近くにいる</li>
+      <li class="crisis-item"><span class="crisis-num">02</span>推進システムが故障し航行不能</li>
+      <li class="crisis-item"><span class="crisis-num">03</span>食料の残りはあと1日分のみ</li>
+      <li class="crisis-item"><span class="crisis-num">04</span>通信機器が完全に破壊され外部連絡不可</li>
+      <li class="crisis-item"><span class="crisis-num">05</span>クルー1名が歩行不能の重傷を負っている</li>
+    </ul>
+  </div>
+
+  <div class="cockpit-panel reveal">
+    <div class="transmission-label">
+      <div class="transmission-dot"></div>
+      SCORING CRITERIA
+    </div>
+    <p style="font-size:21px;color:rgba(232,240,255,0.7);margin-bottom:8px;">
+      グループ内で設定した <strong style="color:var(--alice-teal);font-size:1.1em;">強み × 1</strong>・<strong style="color:var(--alice-pink);font-size:1.1em;">弱み × 1</strong>（各一人につき１個ずつまで。採用しなくてもOK）を活かして危機を乗り越える方法をプレゼンせよ。
+    </p>
+    <div class="score-grid" style="margin-top:24px;">
+      <div class="score-card">
+        <div class="score-icon">💪</div>
+        <div class="score-label">強み活用率</div>
+        <div class="score-points">10<span style="font-size:20px;color:rgba(232,240,255,0.4);">点</span></div>
+        <div class="score-difficulty">評価：甘め</div>
+      </div>
+      <div class="score-card">
+        <div class="score-icon">😓</div>
+        <div class="score-label">弱みカバー率</div>
+        <div class="score-points">15<span style="font-size:20px;color:rgba(232,240,255,0.4);">点</span></div>
+        <div class="score-difficulty">評価：やや甘め</div>
+      </div>
+      <div class="score-card">
+        <div class="score-icon">🧠</div>
+        <div class="score-label">論理的解決力</div>
+        <div class="score-points">25<span style="font-size:20px;color:rgba(232,240,255,0.4);">点</span></div>
+        <div class="score-difficulty">評価：やや厳しめ</div>
+      </div>
+      <div class="score-card" style="border-color:rgba(232,121,176,0.3);">
+        <div class="score-icon">✨</div>
+        <div class="score-label">発想の斬新さ</div>
+        <div class="score-points" style="color:var(--alice-pink);">50<span style="font-size:20px;color:rgba(232,240,255,0.4);">点</span></div>
+        <div class="score-difficulty">評価：厳しめ</div>
+      </div>
+    </div>
+    <div style="margin-top:24px;padding:20px 24px;background:rgba(0,255,157,0.04);border:1px solid rgba(0,255,157,0.2);border-radius:2px;">
+      <p style="font-size:20px;color:rgba(232,240,255,0.7);line-height:2;">
+        <strong style="color:var(--mission-green);font-size:1.15em;">強みを全部埋めて論理的に説明</strong>し、そこそこの予算を取るもよし。<br>
+        弱みを<strong style="color:var(--alice-pink);font-size:1.1em;">斬新な発想でカバー</strong>することに全ツッパして高い予算を狙うもよし。
+      </p>
+    </div>
+    <p style="margin-top:28px;font-size:19px;color:rgba(232,240,255,0.55);line-height:1.9;">
+      議事録担当者はEメールにて ①名前 ②採用した強み ③弱み ④説明文章 を作成して送ってください。
+    </p>
+    <a href="https://ufotable200010.github.io/Astro/Assessment/Assesment.html" target="_blank" class="action-btn" style="margin-top:20px;">
+      📋 &nbsp; INPUT FORM — OPEN MISSION LINK
+    </a>
+  </div>
+</section>
+
+<div class="cosmic-divider"></div>
+
+<!-- ===== RANKING ANNOUNCEMENT ===== -->
+<section id="ranking" style="text-align:center;">
+  <div class="cockpit-panel reveal" style="background:linear-gradient(135deg,rgba(0,200,212,0.07),rgba(232,121,176,0.05));border-color:rgba(0,200,212,0.35);">
+    <div class="transmission-label" style="justify-content:center;">
+      <div class="transmission-dot"></div>
+      FINAL SCORE — ANNOUNCEMENT
+    </div>
+    <p style="font-family:'Shippori Mincho',serif;font-size:clamp(28px,4vw,52px);font-weight:800;background:linear-gradient(135deg,var(--alice-teal),var(--alice-pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:20px;line-height:1.3;">
+      最終資産の合計で<br>順位が決まります
+    </p>
+    <p style="font-size:20px;color:rgba(232,240,255,0.7);line-height:2.2;max-width:560px;margin:0 auto;">
+      全ミッションで獲得・損失した資産を合算し、<br>
+      最終的に最も資産を保有するグループが<br>
+      <strong style="color:var(--alice-gold);font-size:1.15em;">宇宙飛行士選抜の栄冠</strong>を手にします。
+    </p>
+    <div style="font-size:56px;margin-top:32px;">🏆</div>
+  </div>
+</section>
+
+<div class="cosmic-divider"></div>
+
+<!-- ===== MISSION 3 ===== -->
+<section id="mission3">
+  <div class="section-header reveal">
+    <span class="section-number">MISSION — 03</span>
+    <div class="section-line"></div>
+  </div>
+  <div class="mission-badge reveal">━━━━━  MISSION 03 — START  ━━━━━</div>
+  <h2 class="mission-title reveal">ロケット製造</h2>
+
+  <div class="cockpit-panel reveal">
+    <div class="transmission-label">
+      <div class="transmission-dot"></div>
+      ROCKET MANUFACTURING — COST & PROFIT SYSTEM
+    </div>
+    <p class="panel-text">
+      宇宙に行くためには当然ロケットが必要ですよね。<br>
+      皆さん折り紙でロケットを作ってください。<br><br>
+      飛ばした距離に対して報酬金が支払われます。
+    </p>
+    <div style="margin:28px 0;padding:24px 32px;background:linear-gradient(135deg,rgba(245,200,66,0.12),rgba(245,200,66,0.04));border:2px solid var(--alice-gold);border-radius:4px;text-align:center;">
+      <p style="font-family:'Orbitron',monospace;font-size:clamp(28px,5vw,52px);font-weight:900;color:var(--alice-gold);letter-spacing:0.05em;text-shadow:0 0 24px rgba(245,200,66,0.5);">10cm ＝ 1億円</p>
+    </div>
+    <p class="panel-text" style="color:var(--alice-pink);">
+      ただし——莫大な材料費・製造費を支払わなければなりません。
+    </p>
+
+    <table class="cost-table" style="margin-top:32px;">
+      <thead>
+        <tr>
+          <th>コスト種別</th>
+          <th>単価</th>
+          <th>詳細</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>① 材料費（折り紙）</td>
+          <td style="color:var(--alice-pink);font-family:'Orbitron',monospace;font-size:20px;">3億円 / 枚</td>
+          <td style="color:rgba(232,240,255,0.55);">何枚購入しても可</td>
+        </tr>
+        <tr>
+          <td>② 製造費（工数）</td>
+          <td style="color:var(--alice-pink);font-family:'Orbitron',monospace;font-size:20px;">1億円 / 回</td>
+          <td style="color:rgba(232,240,255,0.55);">折る・破る・切る・ちぎる…いずれも1億円</td>
+        </tr>
+        <tr>
+          <td>③ 打ち上げ費用</td>
+          <td style="color:var(--alice-pink);font-family:'Orbitron',monospace;font-size:20px;">5億円 / 回</td>
+          <td style="color:rgba(232,240,255,0.55);">定位置から投げる（1投 = 1回）</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="formula-box reveal">
+      <div class="formula-item">
+        <div class="formula-value">飛行距離合計</div>
+        <div class="formula-label">10cm = 1億円</div>
+      </div>
+      <div class="formula-op">−</div>
+      <div class="formula-item">
+        <div class="formula-value">材料費 × 枚数</div>
+        <div class="formula-label">1枚 = 3億円</div>
+      </div>
+      <div class="formula-op">−</div>
+      <div class="formula-item">
+        <div class="formula-value">工数 × 回数</div>
+        <div class="formula-label">1回 = 1億円</div>
+      </div>
+      <div class="formula-op">−</div>
+      <div class="formula-item">
+        <div class="formula-value">発射費用 × 回数</div>
+        <div class="formula-label">1回 = 5億円</div>
+      </div>
+      <div class="formula-op">=</div>
+      <div class="formula-item">
+        <div class="formula-value" style="color:var(--mission-green);">利益（損失…？）</div>
+        <div class="formula-label">最終資産に加算</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MANUFACTURING RULES + BEAD DIAGRAM -->
+  <div class="cockpit-panel reveal" style="margin-top:32px;">
+    <div class="transmission-label">
+      <div class="transmission-dot"></div>
+      MANUFACTURING RULES
+    </div>
+    <div style="margin-bottom:24px;padding:18px 28px;background:rgba(0,200,212,0.06);border-left:4px solid var(--alice-teal);">
+      <p style="font-family:'Shippori Mincho',serif;font-size:clamp(20px,2.5vw,28px);font-weight:800;color:var(--alice-teal);margin-bottom:10px;letter-spacing:0.05em;">製造時のルール</p>
+      <p class="panel-text">一人１工程実施したら、次のクルーに渡してください。</p>
+    </div>
+
+    <!-- Bead diagram: horizontal ○→○→○→○→○ with return arrow underneath -->
+    <div style="margin-top:32px;display:flex;justify-content:center;">
+      <svg viewBox="0 0 600 180" width="100%" style="max-width:600px;" xmlns="http://www.w3.org/2000/svg">
+        <!-- Nodes at y=60, spaced 120px apart: x = 60,180,300,420,540 -->
+
+        <!-- Forward arrows between nodes -->
+        <line x1="93"  y1="60" x2="147" y2="60" stroke="rgba(0,200,212,0.5)" stroke-width="2"/>
+        <polygon points="147,55 158,60 147,65" fill="rgba(0,200,212,0.8)"/>
+        <line x1="213" y1="60" x2="267" y2="60" stroke="rgba(0,200,212,0.5)" stroke-width="2"/>
+        <polygon points="267,55 278,60 267,65" fill="rgba(0,200,212,0.8)"/>
+        <line x1="333" y1="60" x2="387" y2="60" stroke="rgba(0,200,212,0.5)" stroke-width="2"/>
+        <polygon points="387,55 398,60 387,65" fill="rgba(0,200,212,0.8)"/>
+        <line x1="453" y1="60" x2="507" y2="60" stroke="rgba(0,200,212,0.5)" stroke-width="2"/>
+        <polygon points="507,55 518,60 507,65" fill="rgba(0,200,212,0.8)"/>
+
+        <!-- Return path: down from node5, left along bottom, up to node1 with arrow -->
+        <line x1="540" y1="93"  x2="540" y2="140" stroke="rgba(0,200,212,0.4)" stroke-width="2" stroke-dasharray="6,4"/>
+        <line x1="540" y1="140" x2="60"  y2="140" stroke="rgba(0,200,212,0.4)" stroke-width="2" stroke-dasharray="6,4"/>
+        <line x1="60"  y1="140" x2="60"  y2="95"  stroke="rgba(0,200,212,0.4)" stroke-width="2" stroke-dasharray="6,4"/>
+        <!-- arrowhead pointing up at node1 -->
+        <polygon points="55,93 60,78 65,93" fill="rgba(0,200,212,0.7)"/>
+
+        <!-- 5 crew nodes -->
+        <circle cx="60"  cy="60" r="30" fill="rgba(0,200,212,0.18)" stroke="#00c8d4" stroke-width="2.5"/>
+        <text x="60"  y="69" text-anchor="middle" fill="#00c8d4" font-family="serif" font-size="26" font-weight="bold">○</text>
+        <circle cx="180" cy="60" r="30" fill="rgba(0,200,212,0.15)" stroke="#00c8d4" stroke-width="2.5"/>
+        <text x="180" y="69" text-anchor="middle" fill="#00c8d4" font-family="serif" font-size="26" font-weight="bold">○</text>
+        <circle cx="300" cy="60" r="30" fill="rgba(0,200,212,0.15)" stroke="#00c8d4" stroke-width="2.5"/>
+        <text x="300" y="69" text-anchor="middle" fill="#00c8d4" font-family="serif" font-size="26" font-weight="bold">○</text>
+        <circle cx="420" cy="60" r="30" fill="rgba(0,200,212,0.15)" stroke="#00c8d4" stroke-width="2.5"/>
+        <text x="420" y="69" text-anchor="middle" fill="#00c8d4" font-family="serif" font-size="26" font-weight="bold">○</text>
+        <circle cx="540" cy="60" r="30" fill="rgba(0,200,212,0.15)" stroke="#00c8d4" stroke-width="2.5"/>
+        <text x="540" y="69" text-anchor="middle" fill="#00c8d4" font-family="serif" font-size="26" font-weight="bold">○</text>
+
+        <!-- Action labels below each node -->
+        <text x="60"  y="115" text-anchor="middle" fill="rgba(232,240,255,0.8)" font-family="sans-serif" font-size="14">１折り</text>
+        <text x="180" y="115" text-anchor="middle" fill="rgba(232,240,255,0.8)" font-family="sans-serif" font-size="14">１折り</text>
+        <text x="300" y="115" text-anchor="middle" fill="#e879b0" font-family="sans-serif" font-size="14">１破り</text>
+        <text x="420" y="115" text-anchor="middle" fill="rgba(232,240,255,0.8)" font-family="sans-serif" font-size="14">１折り</text>
+        <text x="540" y="115" text-anchor="middle" fill="#f5c842" font-family="sans-serif" font-size="14">１切り</text>
+      </svg>
+    </div>
+    <p style="text-align:center;margin-top:12px;font-size:14px;color:rgba(232,240,255,0.3);font-family:'Space Mono',monospace;letter-spacing:0.2em;">CREW × 5 — RELAY MANUFACTURING</p>
+  </div>
+</section>
+
+<div class="cosmic-divider"></div>
+
+<!-- ===== MISSION 4 ===== -->
+<section id="mission4">
+  <div class="section-header reveal">
+    <span class="section-number">MISSION — 04</span>
+    <div class="section-line"></div>
+  </div>
+  <div class="mission-badge reveal">━━━━━  MISSION 04 — START  ━━━━━</div>
+  <h2 class="mission-title reveal">国際共同ミッション</h2>
+
+  <div class="cockpit-panel reveal">
+    <div class="transmission-label">
+      <div class="transmission-dot"></div>
+      INTERNATIONAL COOPERATION — TELEPHONE DRAWING GAME
+    </div>
+    <p class="panel-text">
+      宇宙開発において国家を超えた技術の共有はマストです。<br><br>
+      二つのグループが協力し合い、１つのミッションを達成してください。<br>
+      各グループが持っている技術を大いに発揮して<strong style="color:var(--alice-teal);">相互利益をもたらす</strong>ように頑張ってください。<br><br>
+      <strong style="color:var(--alice-teal);">数珠伝言ゲーム</strong>を行います。<br>
+      ○：もちグループ　　×：つきグループ<br><br>
+      それぞれのグループに1つずつのお題を選ぶ。
+    </p>
+  </div>
+
+  <!-- DIAGRAM -->
+  <div class="diagram-container reveal">
+    <svg class="diagram-svg" viewBox="0 0 560 560" xmlns="http://www.w3.org/2000/svg">
+      <!--
+        8 nodes strictly alternating ○×○×○×○×
+        on a circle r=200, center=(280,280)
+        angles from top (270°) clockwise every 45°:
+        0=270° => (280,80)  ○  もち
+        1=315° => (422,138) ×  つき
+        2=0°   => (480,280) ○  もち
+        3=45°  => (422,422) ×  つき
+        4=90°  => (280,480) ○  もち
+        5=135° => (138,422) ×  つき
+        6=180° => (80,280)  ○  もち
+        7=225° => (138,138) ×  つき
+      -->
+
+      <!-- orbit ring -->
+      <circle cx="280" cy="280" r="200" fill="none" stroke="rgba(0,200,212,0.1)" stroke-width="1.5" stroke-dasharray="8,6"/>
+
+      <!-- connecting lines -->
+      <line x1="280" y1="80"  x2="422" y2="138" stroke="rgba(200,200,255,0.2)" stroke-width="2" stroke-dasharray="6,5"/>
+      <line x1="422" y1="138" x2="480" y2="280" stroke="rgba(200,200,255,0.2)" stroke-width="2" stroke-dasharray="6,5"/>
+      <line x1="480" y1="280" x2="422" y2="422" stroke="rgba(200,200,255,0.2)" stroke-width="2" stroke-dasharray="6,5"/>
+      <line x1="422" y1="422" x2="280" y2="480" stroke="rgba(200,200,255,0.2)" stroke-width="2" stroke-dasharray="6,5"/>
+      <line x1="280" y1="480" x2="138" y2="422" stroke="rgba(200,200,255,0.2)" stroke-width="2" stroke-dasharray="6,5"/>
+      <line x1="138" y1="422" x2="80"  y2="280" stroke="rgba(200,200,255,0.2)" stroke-width="2" stroke-dasharray="6,5"/>
+      <line x1="80"  y1="280" x2="138" y2="138" stroke="rgba(200,200,255,0.2)" stroke-width="2" stroke-dasharray="6,5"/>
+      <line x1="138" y1="138" x2="280" y2="80"  stroke="rgba(200,200,255,0.2)" stroke-width="2" stroke-dasharray="6,5"/>
+
+      <!-- Node 0: top ○ -->
+      <circle cx="280" cy="80"  r="36" fill="rgba(0,200,212,0.15)" stroke="#00c8d4" stroke-width="2.5"/>
+      <text x="280" y="91"  text-anchor="middle" fill="#00c8d4" font-family="serif" font-size="30" font-weight="bold">○</text>
+      <!-- Node 1: upper-right × -->
+      <circle cx="422" cy="138" r="36" fill="rgba(232,121,176,0.13)" stroke="#e879b0" stroke-width="2.5"/>
+      <text x="422" y="149" text-anchor="middle" fill="#e879b0" font-family="serif" font-size="30" font-weight="bold">×</text>
+      <!-- Node 2: right ○ -->
+      <circle cx="480" cy="280" r="36" fill="rgba(0,200,212,0.15)" stroke="#00c8d4" stroke-width="2.5"/>
+      <text x="480" y="291" text-anchor="middle" fill="#00c8d4" font-family="serif" font-size="30" font-weight="bold">○</text>
+      <!-- Node 3: lower-right × -->
+      <circle cx="422" cy="422" r="36" fill="rgba(232,121,176,0.13)" stroke="#e879b0" stroke-width="2.5"/>
+      <text x="422" y="433" text-anchor="middle" fill="#e879b0" font-family="serif" font-size="30" font-weight="bold">×</text>
+      <!-- Node 4: bottom ○ -->
+      <circle cx="280" cy="480" r="36" fill="rgba(0,200,212,0.15)" stroke="#00c8d4" stroke-width="2.5"/>
+      <text x="280" y="491" text-anchor="middle" fill="#00c8d4" font-family="serif" font-size="30" font-weight="bold">○</text>
+      <!-- Node 5: lower-left × -->
+      <circle cx="138" cy="422" r="36" fill="rgba(232,121,176,0.13)" stroke="#e879b0" stroke-width="2.5"/>
+      <text x="138" y="433" text-anchor="middle" fill="#e879b0" font-family="serif" font-size="30" font-weight="bold">×</text>
+      <!-- Node 6: left ○ -->
+      <circle cx="80"  cy="280" r="36" fill="rgba(0,200,212,0.15)" stroke="#00c8d4" stroke-width="2.5"/>
+      <text x="80"  y="291" text-anchor="middle" fill="#00c8d4" font-family="serif" font-size="30" font-weight="bold">○</text>
+      <!-- Node 7: upper-left × -->
+      <circle cx="138" cy="138" r="36" fill="rgba(232,121,176,0.13)" stroke="#e879b0" stroke-width="2.5"/>
+      <text x="138" y="149" text-anchor="middle" fill="#e879b0" font-family="serif" font-size="30" font-weight="bold">×</text>
+
+      <!-- legend -->
+      <circle cx="170" cy="540" r="10" fill="rgba(0,200,212,0.15)" stroke="#00c8d4" stroke-width="1.5"/>
+      <text x="186" y="546" fill="rgba(232,240,255,0.6)" font-family="monospace" font-size="15">もちグループ (○)</text>
+      <circle cx="350" cy="540" r="10" fill="rgba(232,121,176,0.13)" stroke="#e879b0" stroke-width="1.5"/>
+      <text x="366" y="546" fill="rgba(232,240,255,0.6)" font-family="monospace" font-size="15">つきグループ (×)</text>
+    </svg>
+  </div>
+
+  <div class="cockpit-panel reveal">
+    <div class="transmission-label">
+      <div class="transmission-dot"></div>
+      FLOW
+    </div>
+    <p style="font-size:clamp(24px,3.5vw,42px);color:var(--alice-teal);font-weight:800;letter-spacing:0.05em;line-height:1.9;margin-bottom:24px;text-align:center;">
+      絵を描く &nbsp;→&nbsp; 文字にする &nbsp;→&nbsp; 絵を描く &nbsp;→&nbsp; 文字にする &nbsp;→&nbsp; …
+    </p>
+    <p style="font-size:21px;color:rgba(232,240,255,0.75);line-height:1.9;margin-bottom:8px;">
+      お題提供した位置から一周し、最初のお題通りに正しく伝わっているかどうかを確認します。
+    </p>
+
+    <table class="level-table" style="margin-top:24px;">
+      <thead>
+        <tr>
+          <th>LEVEL</th>
+          <th>成功報酬</th>
+          <th>損失補填</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="level-badge">Lv.1</td><td class="reward-value">2億円</td><td class="loss-value">−1億円</td></tr>
+        <tr><td class="level-badge">Lv.2</td><td class="reward-value">5億円</td><td class="loss-value">−3億円</td></tr>
+        <tr><td class="level-badge">Lv.3</td><td class="reward-value">10億円</td><td class="loss-value">−8億円</td></tr>
+        <tr><td class="level-badge">Lv.4</td><td class="reward-value">20億円</td><td class="loss-value">−16億円</td></tr>
+        <tr><td class="level-badge">Lv.5</td><td class="reward-value">30億円</td><td class="loss-value">−25億円</td></tr>
+        <tr><td class="level-badge">Lv.6</td><td class="reward-value">50億円</td><td class="loss-value">−40億円</td></tr>
+      </tbody>
+    </table>
+    <div style="margin-top:28px;padding:22px 28px;background:rgba(232,121,176,0.06);border:1px solid rgba(232,121,176,0.25);border-radius:2px;">
+      <p style="font-size:20px;color:rgba(232,240,255,0.8);line-height:2.2;">
+        成功すれば<strong style="color:var(--mission-green);">２グループに成功報酬</strong>が支払われます。<br>
+        もちろん、失敗したら…２グループの責任なので<strong style="color:var(--alice-pink);">２グループ諸共損失補填</strong>をしなければなりません…<br><br>
+        <em style="color:var(--alice-gold);font-style:normal;">運命共同体でありながらも利己および他己利益追求のバランスを考えて選択してください。</em>
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<script>
+// ===== STARFIELD =====
+const canvas = document.getElementById('starfield');
+const ctx = canvas.getContext('2d');
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+const stars = Array.from({length: 220}, () => ({
+  x: Math.random(),
+  y: Math.random(),
+  r: Math.random() * 1.4 + 0.2,
+  speed: Math.random() * 0.00008 + 0.00002,
+  opacity: Math.random() * 0.7 + 0.2,
+  twinkle: Math.random() * Math.PI * 2,
+  twinkleSpeed: Math.random() * 0.02 + 0.005
+}));
+
+const shootingStars = [];
+
+function addShootingStar() {
+  if (Math.random() < 0.003) {
+    shootingStars.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height * 0.5,
+      length: Math.random() * 120 + 60,
+      speed: Math.random() * 8 + 4,
+      opacity: 1,
+      angle: Math.PI / 6
+    });
+  }
+}
+
+function drawStars(time) {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // bg gradient
+  const grad = ctx.createRadialGradient(canvas.width/2, canvas.height/2, 0, canvas.width/2, canvas.height/2, canvas.width*0.8);
+  grad.addColorStop(0, 'rgba(8,13,42,0.95)');
+  grad.addColorStop(1, 'rgba(2,3,10,1)');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // nebula
+  const nebula = ctx.createRadialGradient(canvas.width*0.7, canvas.height*0.3, 0, canvas.width*0.7, canvas.height*0.3, 300);
+  nebula.addColorStop(0, 'rgba(123,47,255,0.04)');
+  nebula.addColorStop(1, 'transparent');
+  ctx.fillStyle = nebula;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  const nebula2 = ctx.createRadialGradient(canvas.width*0.2, canvas.height*0.7, 0, canvas.width*0.2, canvas.height*0.7, 250);
+  nebula2.addColorStop(0, 'rgba(0,200,212,0.03)');
+  nebula2.addColorStop(1, 'transparent');
+  ctx.fillStyle = nebula2;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // stars
+  stars.forEach(s => {
+    s.twinkle += s.twinkleSpeed;
+    const opacity = s.opacity * (0.6 + 0.4 * Math.sin(s.twinkle));
+    ctx.beginPath();
+    ctx.arc(s.x * canvas.width, s.y * canvas.height, s.r, 0, Math.PI*2);
+    ctx.fillStyle = `rgba(232,240,255,${opacity})`;
+    ctx.fill();
+    s.y += s.speed;
+    if (s.y > 1) s.y = 0;
+  });
+
+  // shooting stars
+  addShootingStar();
+  shootingStars.forEach((ss, i) => {
+    ctx.beginPath();
+    ctx.moveTo(ss.x, ss.y);
+    ctx.lineTo(ss.x - Math.cos(ss.angle) * ss.length, ss.y - Math.sin(ss.angle) * ss.length);
+    const lineGrad = ctx.createLinearGradient(ss.x, ss.y, ss.x - Math.cos(ss.angle)*ss.length, ss.y - Math.sin(ss.angle)*ss.length);
+    lineGrad.addColorStop(0, `rgba(255,255,255,${ss.opacity})`);
+    lineGrad.addColorStop(1, 'transparent');
+    ctx.strokeStyle = lineGrad;
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+    ss.x += ss.speed * Math.cos(ss.angle);
+    ss.y += ss.speed * Math.sin(ss.angle);
+    ss.opacity -= 0.018;
+    if (ss.opacity <= 0) shootingStars.splice(i, 1);
+  });
+
+  requestAnimationFrame(drawStars);
+}
+drawStars();
+
+// ===== SCROLL REVEAL =====
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+reveals.forEach(el => observer.observe(el));
+
+// ===== TIMER =====
+let timerTotal = 0;
+let timerRemaining = 0;
+let timerInterval = null;
+let timerRunning = false;
+
+const display = document.getElementById('timer-display');
+const overlay = document.getElementById('timer-overlay');
+
+function formatTime(sec) {
+  const m = Math.floor(sec / 60).toString().padStart(2, '0');
+  const s = (sec % 60).toString().padStart(2, '0');
+  return `${m}:${s}`;
+}
+
+function updateDisplay() {
+  display.textContent = formatTime(timerRemaining);
+  if (timerRemaining > 0 && timerRemaining <= 30) {
+    display.classList.add('warning');
+  } else {
+    display.classList.remove('warning');
+  }
+}
+
+document.getElementById('open-timer').addEventListener('click', () => {
+  overlay.classList.add('open');
+});
+
+document.getElementById('btn-close-timer').addEventListener('click', () => {
+  overlay.classList.remove('open');
+});
+
+document.querySelectorAll('.timer-preset').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const addSec = parseInt(btn.dataset.sec);
+    timerRemaining += addSec;
+    timerTotal = timerRemaining;
+    updateDisplay();
+    btn.style.background = 'rgba(0,200,212,0.35)';
+    btn.style.color = '#fff';
+    setTimeout(() => { btn.style.background = ''; btn.style.color = ''; }, 500);
+  });
+});
+
+document.getElementById('btn-start').addEventListener('click', () => {
+  if (timerRunning || timerRemaining <= 0) return;
+  timerRunning = true;
+  timerInterval = setInterval(() => {
+    timerRemaining--;
+    updateDisplay();
+    if (timerRemaining <= 0) {
+      clearInterval(timerInterval);
+      timerRunning = false;
+      display.textContent = 'TIME!';
+      display.classList.add('warning');
+      let flashes = 0;
+      const flashInt = setInterval(() => {
+        overlay.style.background = flashes % 2 === 0 ? 'rgba(232,121,176,0.18)' : 'rgba(2,3,10,0.88)';
+        flashes++;
+        if (flashes > 10) { clearInterval(flashInt); overlay.style.background = ''; }
+      }, 200);
+    }
+  }, 1000);
+});
+
+document.getElementById('btn-pause').addEventListener('click', () => {
+  if (!timerRunning) return;
+  clearInterval(timerInterval);
+  timerRunning = false;
+});
+
+document.getElementById('btn-reset').addEventListener('click', () => {
+  clearInterval(timerInterval);
+  timerRunning = false;
+  timerRemaining = 0;
+  timerTotal = 0;
+  updateDisplay();
+});
+
+updateDisplay();
+
+// ===== CREW OVERLAY =====
+const crewOverlay = document.getElementById('crew-overlay');
+const crewGrid = document.getElementById('crew-overlay-grid');
+
+const groups = [
+  { key: 'mochi', label: 'もちグループ', colorClass: 'group-mochi' },
+  { key: 'tsuki', label: 'つきグループ', colorClass: 'group-tsuki' },
+  { key: 'taku',  label: 'たくグループ', colorClass: 'group-taku'  },
+  { key: 'rou',   label: 'ろうグループ', colorClass: 'group-rou'   },
+];
+
+function buildCrewOverlay() {
+  crewGrid.innerHTML = '';
+  groups.forEach(g => {
+    const pageInputs = document.querySelectorAll(`.${g.key}-input`);
+    const col = document.createElement('div');
+    col.className = `group-col ${g.colorClass}`;
+    const header = document.createElement('div');
+    header.className = 'group-header';
+    header.textContent = g.label;
+    col.appendChild(header);
+    const members = document.createElement('div');
+    members.className = 'group-members';
+    pageInputs.forEach((pageInp, i) => {
+      const inp = document.createElement('input');
+      inp.type = 'text';
+      inp.placeholder = '名前を入力';
+      inp.value = pageInp.value;
+      inp.className = `member-input ${g.key}-input`;
+      // sync overlay → page
+      inp.addEventListener('input', () => { pageInp.value = inp.value; });
+      // sync page → overlay while open
+      pageInp._overlaySync = inp;
+      members.appendChild(inp);
+    });
+    col.appendChild(members);
+    crewGrid.appendChild(col);
+  });
+}
+
+document.getElementById('open-crew').addEventListener('click', () => {
+  buildCrewOverlay();
+  crewOverlay.classList.add('open');
+});
+document.getElementById('btn-close-crew').addEventListener('click', () => {
+  crewOverlay.classList.remove('open');
+});
+
+// ===== BANK OVERLAY =====
+const bankOverlay = document.getElementById('bank-overlay');
+const bankFrame = document.getElementById('bank-frame');
+let bankLoaded = false;
+
+document.getElementById('open-bank').addEventListener('click', () => {
+  if (!bankLoaded) {
+    bankFrame.src = 'https://ufotable200010.github.io/Astro/bank/bank.html';
+    bankLoaded = true;
+  }
+  bankOverlay.classList.add('open');
+});
+document.getElementById('btn-close-bank').addEventListener('click', () => {
+  bankOverlay.classList.remove('open');
+});
+</script>
 </body>
 </html>
