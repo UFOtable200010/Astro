@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>MISSION 05 — 役職カード</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Noto+Serif+JP:wght@400;700;900&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root { --rc: 77,166,255; }
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+body { background:#02030a; color:#c8dcf8; font-family:'Share Tech Mono',monospace; min-height:100vh; overflow-x:hidden; }
+.scanlines { position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,200,212,.01) 2px,rgba(0,200,212,.01) 4px);pointer-events:none;z-index:100; }
+#cbg { position:fixed;inset:0;z-index:0;pointer-events:none; }
+.page { position:relative;z-index:1;max-width:480px;margin:0 auto;padding:0 0 80px; }
+
+/* ヘッダー */
+.card-header { padding:28px 20px 20px;text-align:center;border-bottom:1px solid rgba(var(--rc),.2);background:rgba(0,0,20,.5); }
+.ch-mission { font-family:'Orbitron',monospace;font-size:9px;letter-spacing:.4em;color:rgba(var(--rc),.45);margin-bottom:10px;text-transform:uppercase; }
+.ch-group { display:inline-block;padding:4px 16px;border:1px solid rgba(var(--rc),.4);border-radius:20px;font-size:11px;letter-spacing:.2em;color:rgba(var(--rc),.85);margin-bottom:16px; }
+.ch-emoji { font-size:56px;line-height:1.2;filter:drop-shadow(0 0 20px rgba(var(--rc),.5));display:block; }
+.ch-role { font-family:'Noto Serif JP',serif;font-size:28px;font-weight:900;color:rgb(var(--rc));text-shadow:0 0 24px rgba(var(--rc),.5);margin-top:8px; }
+.ch-name { font-size:14px;color:rgba(200,220,255,.6);margin-top:6px;letter-spacing:.15em; }
+
+/* アイテム警告 */
+.item-warning { display:none;margin:12px 16px;padding:14px 16px;background:rgba(255,60,60,.1);border:1px solid rgba(255,60,60,.45);border-radius:8px;font-size:12px;color:rgba(255,180,180,.9);line-height:1.8;text-align:center; }
+.item-warning.show { display:block; }
+
+/* 部屋タブ */
+.room-tabs { display:flex;overflow-x:auto;padding:14px 16px 0;gap:8px;scrollbar-width:none; }
+.room-tabs::-webkit-scrollbar { display:none; }
+.rt-btn { flex-shrink:0;padding:10px 14px;border:1px solid rgba(255,255,255,.13);border-radius:8px 8px 0 0;border-bottom:none;background:rgba(255,255,255,.03);color:rgba(255,255,255,.38);font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.1em;cursor:pointer;transition:all .2s;white-space:nowrap; }
+.rt-btn.active { background:rgba(var(--rc),.13);border-color:rgba(var(--rc),.5);color:rgb(var(--rc)); }
+.rt-btn.locked { opacity:.38;cursor:not-allowed;border-style:dashed; }
+.rt-lock { font-size:9px;display:block;margin-top:3px;color:rgba(255,90,70,.7); }
+
+/* 部屋コンテンツ */
+.room-content { margin:0 16px;border:1px solid rgba(var(--rc),.2);border-radius:0 8px 8px 8px;background:rgba(0,0,20,.65);overflow:hidden; }
+.rc-locked { padding:36px 20px;text-align:center;color:rgba(255,90,70,.7);font-size:13px;line-height:2; }
+.lock-icon { font-size:36px;margin-bottom:10px;display:block; }
+
+/* サブタブ */
+.sub-tabs { display:flex;border-bottom:1px solid rgba(var(--rc),.15); }
+.st-btn { flex:1;padding:11px 4px;text-align:center;background:transparent;border:none;border-right:1px solid rgba(var(--rc),.1);color:rgba(255,255,255,.3);font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.08em;cursor:pointer;transition:all .2s; }
+.st-btn:last-child { border-right:none; }
+.st-btn.active { background:rgba(var(--rc),.09);color:rgb(var(--rc));border-bottom:2px solid rgb(var(--rc)); }
+.sub-content { padding:16px;min-height:130px; }
+.sc-story { font-size:13px;line-height:2.1;color:rgba(200,220,255,.75);font-family:'Noto Serif JP',serif; }
+.sc-empty { text-align:center;padding:28px;font-size:11px;color:rgba(255,255,255,.18);letter-spacing:.2em; }
+.item-card { display:flex;align-items:flex-start;gap:14px;padding:12px 14px;margin-bottom:10px;background:rgba(255,200,50,.04);border:1px solid rgba(255,200,50,.2);border-radius:8px; }
+.item-icon { font-size:26px;flex-shrink:0; }
+.item-name { font-size:13px;font-weight:700;color:#ffe082;letter-spacing:.05em; }
+.secret-card { padding:13px 16px;margin-bottom:10px;background:rgba(255,60,60,.05);border:1px solid rgba(255,60,60,.2);border-left:3px solid rgba(255,60,60,.5);border-radius:0 8px 8px 0;font-size:12px;color:rgba(255,180,160,.82);line-height:1.9;font-family:'Noto Serif JP',serif; }
+.secret-label { font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.2em;color:rgba(255,80,80,.6);margin-bottom:6px; }
+
+/* インベントリバー */
+.inv-bar { display:flex;align-items:center;gap:10px;padding:12px 16px;background:rgba(0,0,20,.85);border-top:1px solid rgba(255,255,255,.06);margin:0 16px;border-radius:0 0 8px 8px; }
+.inv-label { font-size:9px;letter-spacing:.2em;color:rgba(255,255,255,.28); }
+.inv-slots { display:flex;gap:7px; }
+.inv-slot { width:32px;height:32px;border-radius:6px;border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.04);display:flex;align-items:center;justify-content:center;font-size:15px;transition:all .2s; }
+.inv-slot.filled { border-color:rgba(var(--rc),.45);background:rgba(var(--rc),.09); }
+.inv-slot.over { border-color:rgba(255,60,60,.55);background:rgba(255,60,60,.12);animation:slotPulse 1.2s ease-in-out infinite; }
+@keyframes slotPulse { 0%,100%{box-shadow:0 0 0 rgba(255,60,60,0)} 50%{box-shadow:0 0 10px rgba(255,60,60,.5)} }
+.inv-count { font-family:'Orbitron',monospace;font-size:10px;margin-left:auto;color:rgba(255,255,255,.3); }
+.inv-count.over { color:rgba(255,100,100,.8); }
+</style>
+</head>
+<body>
+<div class="scanlines"></div>
+<canvas id="cbg"></canvas>
+<div class="page">
+  <div class="card-header">
+    <div class="ch-mission">LAST — 15 MINUTES &nbsp;·&nbsp; CLASSIFIED</div>
+    <div class="ch-group" id="ch-group">-- グループ</div>
+    <span class="ch-emoji" id="ch-emoji">🛸</span>
+    <div class="ch-role" id="ch-role">読み込み中…</div>
+    <div class="ch-name" id="ch-name"></div>
+  </div>
+  <div class="item-warning" id="item-warning">
+    ⚠️ アイテム所持数が上限（3個）を超えています！<br>
+    現在 仮格納中（4個）→ 誰かと1個トレードして 3個 にしてください。
+  </div>
+  <div class="room-tabs" id="room-tabs"></div>
+  <div class="room-content" id="room-content"></div>
+  <div class="inv-bar">
+    <div class="inv-label">INVENTORY</div>
+    <div class="inv-slots" id="inv-slots">
+      <div class="inv-slot" id="sl0"></div>
+      <div class="inv-slot" id="sl1"></div>
+      <div class="inv-slot" id="sl2"></div>
+      <div class="inv-slot" id="sl3" style="display:none;"></div>
+    </div>
+    <div class="inv-count" id="inv-count">0 / 3</div>
+  </div>
+</div>
+
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+import { getFirestore, doc, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+
+const firebaseConfig = {
+  apiKey:"AIzaSyBHVQILRmOO6ZZDL_Szy_5cn7i9v6Ux5lo",authDomain:"astro-murder.firebaseapp.com",
+  projectId:"astro-murder",storageBucket:"astro-murder.firebasestorage.app",
+  messagingSenderId:"543542600233",appId:"1:543542600233:web:ba9a6050ac775d4352f238"
+};
+const app = initializeApp(firebaseConfig);
+const db  = getFirestore(app);
+
+const p = new URLSearchParams(location.search);
+const group = p.get('group') || 'mochi';
+const role  = p.get('role')  || 'captain';
+const name  = p.get('name')  || '';
+
+const GROUP_JP = {mochi:'もち',tsuki:'つき',taku:'たく',rou:'ろう'};
+const GROUP_RGB= {mochi:'77,166,255',tsuki:'50,200,120',taku:'255,190,50',rou:'255,85,85'};
+const ROLE_JP  = {captain:'船長',doctor:'医師',engineer:'エンジニア',scientist:'科学者'};
+const ROLE_EMO = {captain:'🛸',doctor:'🏥',engineer:'⚡',scientist:'🧪'};
+const ROLE_RGB = {captain:'77,166,255',doctor:'50,200,120',engineer:'255,190,50',scientist:'255,85,85'};
+
+const ROOMS = [
+  {id:0,icon:'🛸',name:'操縦室',restrict:'captain',
+   items:[{id:'cockpit_terminal',icon:'📡',name:'暗号通信端末',desc:'競合企業への暗号通信端末。特定の人物との通信記録が残っている。'},
+          {id:'nav_log',icon:'🗓️',name:'改ざんされた航行ログ',desc:'マスターキーを使ったロック解除記録がある。船長だけが持つキーの使用履歴だ。'}],
+   storyPub:'操縦室に不審な操作ログが残っていた。競合企業への暗号通信の痕跡が発見された。'},
+  {id:1,icon:'⚡',name:'機関室',restrict:'engineer',
+   items:[{id:'engine_explosive',icon:'💣',name:'起爆装置パーツ',desc:'単体では起爆不可。他のパーツと組み合わせると爆破装置が完成する。'},
+          {id:'eng_manual',icon:'🔧',name:'書き込みのある修復マニュアル',desc:'エンジニアの筆跡で細工手順が書き込まれている。'}],
+   storyPub:'エネルギーコアに過負荷の細工が施されていた。精密な電気工学の知識が必要な作業だ。'},
+  {id:2,icon:'🏥',name:'生命維持室',restrict:'doctor',
+   items:[{id:'life_poison',icon:'⚠️',name:'未認可の薬物',desc:'医療倫理委員会の認可を受けていない薬物。医師でなければ識別できない。'},
+          {id:'med_record',icon:'📋',name:'改ざんされた医療処置記録',desc:'医師の署名で改ざんされている。記録の日付と内容が矛盾している。'}],
+   storyPub:'酸素循環フィルターに異物が混入されていた。医療・薬学の専門知識が必要な仕業だ。'},
+  {id:3,icon:'📦',name:'貨物室',restrict:'scientist',
+   items:[{id:'cargo_battery',icon:'🔋',name:'高圧電池パック',desc:'カプセル破壊能力の発動条件。特殊な電気回路と組み合わせることで起爆可能になる。'},
+          {id:'enc_media',icon:'💾',name:'暗号化記憶媒体',desc:'スパイグループの機密データ。解読すれば工作員の正体が判明するかもしれない。'}],
+   storyPub:'貨物室の隔壁に爆破装置が取り付けられていた。帰還の瞬間に起動する設計になっている。'},
+];
+
+// CSS color
+document.documentElement.style.setProperty('--rc', ROLE_RGB[role] || '77,166,255');
+
+// Header
+document.getElementById('ch-group').textContent = (GROUP_JP[group]||group) + 'グループ';
+document.getElementById('ch-emoji').textContent  = ROLE_EMO[role] || '🛸';
+document.getElementById('ch-role').textContent   = ROLE_JP[role]  || role;
+document.getElementById('ch-name').textContent   = name ? `— ${name} —` : '';
+document.title = `${ROLE_JP[role]||role} — ${GROUP_JP[group]||group}`;
+
+// Stars
+(function(){
+  const cv=document.getElementById('cbg');
+  cv.width=window.innerWidth;cv.height=window.innerHeight;
+  const ctx=cv.getContext('2d');
+  const st=Array.from({length:100},()=>({x:Math.random(),y:Math.random(),r:Math.random()*1.2+.2,a:Math.random(),da:(Math.random()-.5)*.002}));
+  function draw(){ctx.clearRect(0,0,cv.width,cv.height);st.forEach(s=>{s.a=Math.max(.05,Math.min(1,s.a+s.da));if(s.a<=.05||s.a>=1)s.da*=-1;ctx.beginPath();ctx.arc(s.x*cv.width,s.y*cv.height,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(200,220,255,${s.a*.5})`;ctx.fill();});requestAnimationFrame(draw);}
+  draw();
+  window.addEventListener('resize',()=>{cv.width=window.innerWidth;cv.height=window.innerHeight;});
+})();
+
+// State
+let curRoom = ROOMS.findIndex(r => r.restrict !== role);
+if(curRoom < 0) curRoom = 0;
+let curSub  = 'story';
+const recvd = {0:[],1:[],2:[],3:[]};
+
+// Firebase
+ROOMS.forEach(r=>{
+  onSnapshot(doc(db,'game','session','m5items',`${r.id}_${group}`), snap=>{
+    recvd[r.id] = snap.data()?.items || [];
+    renderContent();
+    updateInv();
+  });
+});
+
+// Tabs
+function buildTabs(){
+  document.getElementById('room-tabs').innerHTML = ROOMS.map(r=>{
+    const locked = r.restrict === role;
+    return `<button class="rt-btn${locked?' locked':''}${curRoom===r.id?' active':''}"
+      onclick="${locked?'':'selectRoom('+r.id+')'}" ${locked?'disabled':''}>
+      ${r.icon} ${r.name}${locked?`<span class="rt-lock">⛔ 入室不可</span>`:''}
+    </button>`;
+  }).join('');
+}
+
+window.selectRoom = function(id){
+  if(ROOMS[id].restrict===role)return;
+  curRoom=id; curSub='story'; buildTabs(); renderContent();
+};
+
+window.setSubTab = function(t){ curSub=t; renderContent(); };
+
+function renderContent(){
+  const r = ROOMS[curRoom];
+  const el = document.getElementById('room-content');
+  if(r.restrict===role){
+    el.innerHTML=`<div class="rc-locked"><span class="lock-icon">⛔</span>${ROLE_JP[role]} はこの部屋に立ち入れません。<br><span style="font-size:10px;opacity:.5;font-family:'Share Tech Mono',monospace;">ACCESS RESTRICTED</span></div>`;
+    return;
+  }
+  const items = recvd[r.id];
+  const cnt   = items.length;
+
+  let body = '';
+  if(curSub==='story'){
+    body = `<div class="sc-story">${r.storyPub}</div>`;
+  } else if(curSub==='items'){
+    if(!cnt){ body='<div class="sc-empty">— まだアイテムは届いていません —</div>'; }
+    else body = items.map(id=>{
+      const it=r.items.find(i=>i.id===id);
+      return it?`<div class="item-card"><div class="item-icon">${it.icon}</div><div><div class="item-name">${it.name}</div></div></div>`:'';
+    }).join('');
+  } else {
+    if(!cnt){ body='<div class="sc-empty">— 極秘ファイルはまだ届いていません —</div>'; }
+    else body = items.map(id=>{
+      const it=r.items.find(i=>i.id===id);
+      return it?`<div class="secret-card"><div class="secret-label">🔴 CLASSIFIED</div>🔍 ${it.name}<br><span style="font-size:11px;">${it.desc}</span></div>`:'';
+    }).join('');
+  }
+
+  el.innerHTML = `
+    <div class="sub-tabs">
+      <button class="st-btn${curSub==='story'?' active':''}" onclick="setSubTab('story')">📖 ストーリー</button>
+      <button class="st-btn${curSub==='items'?' active':''}" onclick="setSubTab('items')">📦 落とし物${cnt?` (${cnt})`:''}</button>
+      <button class="st-btn${curSub==='secret'?' active':''}" onclick="setSubTab('secret')">🔴 極秘ファイル</button>
+    </div>
+    <div class="sub-content">${body}</div>`;
+}
+
+function updateInv(){
+  const all = Object.entries(recvd).flatMap(([rid,ids])=>
+    ids.map(id=>{ const it=ROOMS[parseInt(rid)].items.find(i=>i.id===id); return it?it.icon:'?'; })
+  );
+  const total = all.length;
+  const warn  = document.getElementById('item-warning');
+  total > 3 ? warn.classList.add('show') : warn.classList.remove('show');
+  const cnt = document.getElementById('inv-count');
+  cnt.textContent = `${total} / 3`;
+  cnt.className   = 'inv-count' + (total>3?' over':'');
+  for(let s=0;s<4;s++){
+    const sl = document.getElementById('sl'+s);
+    if(!sl) continue;
+    if(s < all.length){
+      sl.textContent = all[s];
+      sl.className   = 'inv-slot filled' + (s>=3?' over':'');
+      if(s>=3) sl.style.display='flex';
+    } else {
+      sl.textContent=''; sl.className='inv-slot';
+      if(s>=3) sl.style.display='none';
+    }
+  }
+}
+
+buildTabs();
+renderContent();
+updateInv();
+</script>
+</body>
+</html>

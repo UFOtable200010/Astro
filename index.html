@@ -1286,6 +1286,38 @@
 .cm-close-btn{display:block;margin:4px 16px 16px;padding:10px;text-align:center;background:transparent;border:1px solid rgba(255,255,255,.1);border-radius:6px;font-family:var(--mono);font-size:10px;letter-spacing:.15em;cursor:pointer;color:rgba(255,255,255,.3)}
 .cm-close-btn:hover{background:rgba(255,255,255,.06)}
 .m5-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(10px);background:rgba(50,220,130,.14);border:1px solid rgba(50,220,130,.4);border-radius:6px;padding:9px 18px;font-family:var(--mono);font-size:11px;color:rgba(100,255,180,.9);letter-spacing:.1em;opacity:0;transition:all .3s;z-index:2000;pointer-events:none;white-space:nowrap}
+/* 部屋カード */
+.room-card { width:100%;padding:18px 16px;border:none;border-bottom:1px solid rgba(77,166,255,.1);background:transparent;cursor:pointer;text-align:left;transition:all .2s;display:flex;align-items:center;gap:16px; }
+.room-card:hover { background:rgba(77,166,255,.08); }
+.room-card:last-of-type { border-bottom:none; }
+.room-card.explored { background:rgba(50,220,130,.05); }
+.rc-icon { font-size:36px;flex-shrink:0;filter:drop-shadow(0 0 8px rgba(77,166,255,.4)); }
+.rc-body { flex:1; }
+.rc-name { font-size:16px;font-weight:700;color:rgba(200,220,255,.92);letter-spacing:.05em;margin-bottom:4px; }
+.rc-restrict { font-family:var(--mono);font-size:9px;color:rgba(255,110,80,.65);letter-spacing:.15em;margin-bottom:5px; }
+.rc-desc { font-size:11px;color:rgba(200,220,255,.42);line-height:1.6; }
+.rc-status { font-family:var(--mono);font-size:9px;flex-shrink:0;text-align:right; }
+.rc-status.done { color:#32c878; }
+.rc-status.part { color:#ffbe32; }
+.rc-status.none { color:rgba(77,166,255,.4); }
+/* 役職URLパネル */
+.gc-role-card { background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.08);border-radius:8px;overflow:hidden;margin-bottom:8px; }
+.gc-role-hd { display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.06); }
+.gc-role-hd-emoji { font-size:20px; }
+.gc-role-hd-name { font-size:13px;font-weight:700;color:rgba(200,220,255,.85);flex:1; }
+.gc-url-body { padding:10px 14px; }
+.gc-name-inp { width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:5px;color:#e8f0ff;font-family:var(--mono);font-size:11px;padding:6px 10px;outline:none;margin-bottom:8px; }
+.gc-name-inp:focus { border-color:rgba(77,166,255,.5); }
+.gc-url-row { display:flex;gap:6px;align-items:center; }
+.gc-url-text { flex:1;font-family:var(--mono);font-size:9px;color:rgba(200,220,255,.35);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:5px 8px;background:rgba(0,0,0,.3);border-radius:4px;border:1px solid rgba(255,255,255,.06); }
+.gc-copy-btn { flex-shrink:0;padding:5px 12px;background:rgba(77,166,255,.15);border:1px solid rgba(77,166,255,.35);border-radius:4px;color:rgba(77,166,255,.85);font-family:var(--mono);font-size:9px;letter-spacing:.1em;cursor:pointer;transition:all .2s;white-space:nowrap; }
+.gc-copy-btn:hover { background:rgba(77,166,255,.28); }
+/* フォームURLバー */
+.gm-form-bar { width:100%;padding:10px 14px;background:rgba(255,255,255,.03);border-top:1px solid rgba(255,255,255,.06);display:flex;align-items:center;gap:10px; }
+.gm-form-label { font-family:var(--mono);font-size:9px;color:rgba(200,220,255,.4);letter-spacing:.15em;white-space:nowrap; }
+.gm-form-url { flex:1;font-family:var(--mono);font-size:9px;color:rgba(200,220,255,.3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
+.gm-form-copy { flex-shrink:0;padding:4px 10px;background:rgba(0,200,212,.1);border:1px solid rgba(0,200,212,.3);border-radius:4px;color:rgba(0,200,212,.8);font-family:var(--mono);font-size:9px;cursor:pointer;transition:all .2s; }
+.gm-form-copy:hover { background:rgba(0,200,212,.22); }
 
 /* ===== MISSION 05 追加スタイル ===== */
 .m5-rocket-panel{max-width:min(860px,95vw)!important;width:calc(100% - 40px)!important;}
@@ -2099,27 +2131,48 @@
       </div>
       <!-- 部屋リスト -->
       <div class="m5-rooms-side">
-        <button class="room-row" id="room-btn-0" onclick="openM5Room(0)" style="border-top:none;">
-          <div class="rr-num">①</div><div class="rr-icon">🛸</div>
-          <div class="rr-info"><div class="rr-name">操縦室</div><div class="rr-note">🔒 船長 入室不可</div></div>
-          <div class="rr-status" id="rs-0">未探索</div>
+        <button class="room-card" id="room-btn-0" onclick="openM5Room(0)">
+          <div class="rc-icon">🛸</div>
+          <div class="rc-body">
+            <div class="rc-name">操縦室</div>
+            <div class="rc-restrict">🔒 船長 — 入室不可</div>
+            <div class="rc-desc">不審な操作ログ・暗号通信の痕跡が残っている</div>
+          </div>
+          <div class="rc-status none" id="rs-0">未探索</div>
         </button>
-        <button class="room-row" id="room-btn-1" onclick="openM5Room(1)">
-          <div class="rr-num">②</div><div class="rr-icon">⚡</div>
-          <div class="rr-info"><div class="rr-name">機関室</div><div class="rr-note">🔒 エンジニア 入室不可</div></div>
-          <div class="rr-status" id="rs-1">未探索</div>
+        <button class="room-card" id="room-btn-1" onclick="openM5Room(1)">
+          <div class="rc-icon">⚡</div>
+          <div class="rc-body">
+            <div class="rc-name">機関室</div>
+            <div class="rc-restrict">🔒 エンジニア — 入室不可</div>
+            <div class="rc-desc">エネルギーコアに精密な過負荷の細工が施されている</div>
+          </div>
+          <div class="rc-status none" id="rs-1">未探索</div>
         </button>
-        <button class="room-row" id="room-btn-2" onclick="openM5Room(2)">
-          <div class="rr-num">③</div><div class="rr-icon">🏥</div>
-          <div class="rr-info"><div class="rr-name">生命維持室</div><div class="rr-note">🔒 医師 入室不可</div></div>
-          <div class="rr-status" id="rs-2">未探索</div>
+        <button class="room-card" id="room-btn-2" onclick="openM5Room(2)">
+          <div class="rc-icon">🏥</div>
+          <div class="rc-body">
+            <div class="rc-name">生命維持室</div>
+            <div class="rc-restrict">🔒 医師 — 入室不可</div>
+            <div class="rc-desc">酸素循環フィルターに異物が混入されている</div>
+          </div>
+          <div class="rc-status none" id="rs-2">未探索</div>
         </button>
-        <button class="room-row" id="room-btn-3" onclick="openM5Room(3)">
-          <div class="rr-num">④</div><div class="rr-icon">📦</div>
-          <div class="rr-info"><div class="rr-name">貨物室</div><div class="rr-note">🔒 科学者 入室不可</div></div>
-          <div class="rr-status" id="rs-3">未探索</div>
+        <button class="room-card" id="room-btn-3" onclick="openM5Room(3)">
+          <div class="rc-icon">📦</div>
+          <div class="rc-body">
+            <div class="rc-name">貨物室</div>
+            <div class="rc-restrict">🔒 科学者 — 入室不可</div>
+            <div class="rc-desc">帰還時に起動する爆破装置が取り付けられている</div>
+          </div>
+          <div class="rc-status none" id="rs-3">未探索</div>
         </button>
       </div>
+    </div>
+    <div class="gm-form-bar">
+      <div class="gm-form-label">📋 グループビルディング フォーム URL</div>
+      <div class="gm-form-url">https://ufotable200010.github.io/Astro/form/form.html</div>
+      <button class="gm-form-copy" onclick="navigator.clipboard.writeText('https://ufotable200010.github.io/Astro/form/form.html').then(()=>m5Toast('✓ フォームURLをコピーしました'))">コピー</button>
     </div>
     <div class="rp-taskbar">
       <button class="tb-btn active" id="tb-mochi" style="--tab-c:#4da6ff" onclick="switchM5Group('mochi')">
@@ -2519,8 +2572,6 @@ document.getElementById('btn-close-bank').addEventListener('click', () => {
   const ROLE_EMOJI={captain:'🛸',doctor:'🏥',engineer:'⚡',scientist:'🧪'};
   const ROLE_ACC  ={captain:'#4da6ff',doctor:'#32c878',engineer:'#ffbe32',scientist:'#ff5555'};
   const ROLES     =['captain','scientist','engineer','doctor'];
-  const CARD_FILES={captain:'murder/sample_doctor.html',doctor:'murder/sample_doctor.html',engineer:'murder/sample_doctor.html',scientist:'murder/sample_doctor.html'};
-
   const ROOMS=[
     {id:0,icon:'🛸',name:'操縦室',num:'① 操縦室',restrict:'captain',restrictLabel:'🔒 船長 入室不可',
      items:[{id:'cockpit_terminal',icon:'📡',name:'暗号通信端末'},{id:'nav_log',icon:'🗓️',name:'改ざんされた航行ログ'}],
@@ -2571,25 +2622,52 @@ document.getElementById('btn-close-bank').addEventListener('click', () => {
   function renderM5Group(g){
     const el=document.getElementById('gc-roles');
     el.innerHTML=ROLES.map(role=>{
-      return `<button class="gc-role-btn" onclick="openM5Card('${g}','${role}')">
-        <div class="gc-role-emoji">${ROLE_EMOJI[role]}</div>
-        <div class="gc-role-info">
-          <div class="gc-role-name">${ROLE_JP[role]}</div>
+      const base='https://ufotable200010.github.io/Astro/murder/card.html';
+      return `<div class="gc-role-card">
+        <div class="gc-role-hd" onclick="openM5Card('${g}','${role}')" style="cursor:pointer;">
+          <div class="gc-role-hd-emoji">${ROLE_EMOJI[role]}</div>
+          <div class="gc-role-hd-name">${ROLE_JP[role]}</div>
+          <div style="font-family:var(--mono);font-size:9px;color:rgba(200,220,255,.3);">カードを開く ›</div>
         </div>
-        <div class="gc-role-arrow">›</div>
-      </button>`;
+        <div class="gc-url-body">
+          <input class="gc-name-inp" id="gi-name-${g}-${role}" placeholder="名前を入力（任意）" oninput="updateCardURL('${g}','${role}')">
+          <div class="gc-url-row">
+            <div class="gc-url-text" id="gi-url-${g}-${role}">${base}?group=${g}&role=${role}</div>
+            <button class="gc-copy-btn" onclick="copyCardURL('${g}','${role}')">URLコピー</button>
+          </div>
+        </div>
+      </div>`;
     }).join('');
   }
 
   window.openM5Card=function(g,role){
+    const nameEl=document.getElementById(`gi-name-${g}-${role}`);
+    const name=nameEl?nameEl.value:'';
+    const base='https://ufotable200010.github.io/Astro/murder/card.html';
+    const url=`${base}?group=${g}&role=${role}${name?'&name='+encodeURIComponent(name):''}`;
     document.getElementById('cm-emoji').textContent=ROLE_EMOJI[role];
     document.getElementById('cm-role').textContent=ROLE_JP[role];
     document.getElementById('cm-grp').textContent=GROUP_JP[g]+'グループ';
     document.getElementById('cm-grp').style.color=GROUP_ACC[g];
     const lk=document.getElementById('cm-link');
-    lk.href=CARD_FILES[role];
+    lk.href=url;
     lk.style.cssText=`display:block;margin:14px 16px 4px;padding:13px;text-align:center;border-radius:8px;font-family:var(--mono);font-size:10px;letter-spacing:.15em;cursor:pointer;text-decoration:none;color:${ROLE_ACC[role]};background:${ROLE_ACC[role]}22;border:1px solid ${ROLE_ACC[role]}44`;
     document.getElementById('m5-card-overlay').classList.add('open');
+  };
+  window.updateCardURL=function(g,role){
+    const nameEl=document.getElementById(`gi-name-${g}-${role}`);
+    const name=nameEl?nameEl.value:'';
+    const base='https://ufotable200010.github.io/Astro/murder/card.html';
+    const url=`${base}?group=${g}&role=${role}${name?'&name='+encodeURIComponent(name):''}`;
+    const urlEl=document.getElementById(`gi-url-${g}-${role}`);
+    if(urlEl)urlEl.textContent=url;
+  };
+  window.copyCardURL=function(g,role){
+    const nameEl=document.getElementById(`gi-name-${g}-${role}`);
+    const name=nameEl?nameEl.value:'';
+    const base='https://ufotable200010.github.io/Astro/murder/card.html';
+    const url=`${base}?group=${g}&role=${role}${name?'&name='+encodeURIComponent(name):''}`;
+    navigator.clipboard.writeText(url).then(()=>m5Toast('✓ '+ROLE_JP[role]+'のURLをコピーしました'));
   };
   window.closeM5Card=()=>document.getElementById('m5-card-overlay').classList.remove('open');
   window.m5CardBgClose=(e)=>{if(e.target===document.getElementById('m5-card-overlay'))window.closeM5Card()};
@@ -2695,8 +2773,8 @@ document.getElementById('btn-close-bank').addEventListener('click', () => {
     const anyDone=GROUPS.some(g=>sentMap[id][g][0]||sentMap[id][g][1]);
     const el=document.getElementById('rs-'+id);
     const btn=document.getElementById('room-btn-'+id);
-    if(allDone){el.textContent='✓ 完了';el.className='rr-status done';btn.classList.add('explored');}
-    else if(anyDone){el.textContent='▶ 進行中';el.className='rr-status part';}
+    if(allDone){el.textContent='✓ 完了';el.className='rc-status done';btn.classList.add('explored');}
+    else if(anyDone){el.textContent='▶ 進行中';el.className='rc-status part';}
   }
 
   function m5Toast(msg){
