@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>医師｜公開カード</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--acc:#32c878;--acc2:#1a8f50;--card-bg:#071a0f}
+body{background:#060a18;min-height:100vh;font-family:'Noto Serif JP',serif;padding:24px 16px 48px;display:flex;flex-direction:column;align-items:center;gap:24px}
+.pub-card{width:100%;max-width:420px;background:linear-gradient(160deg,#071a0f 0%,#041209 60%,#030d07 100%);border:1px solid rgba(50,200,120,.3);border-radius:10px;overflow:hidden;box-shadow:0 0 60px rgba(20,160,80,.22),0 4px 32px rgba(0,0,0,.8);position:relative;animation:fadeUp .7s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.pub-card::before{content:'';position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(1px 1px at 14% 20%,rgba(150,255,180,.3) 0%,transparent 100%),radial-gradient(1px 1px at 72% 35%,rgba(150,255,180,.2) 0%,transparent 100%),radial-gradient(1.5px 1.5px at 58% 10%,rgba(180,255,200,.3) 0%,transparent 100%)}
+.pub-card::after{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,transparent,var(--acc),var(--acc2),transparent)}
+.card-header{padding:28px 24px 20px;border-bottom:1px solid rgba(50,200,120,.12);position:relative;z-index:1;text-align:center}
+.role-eyebrow{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(50,200,120,.6);margin-bottom:10px}
+.role-name{font-size:40px;font-weight:900;color:#e8fff2;letter-spacing:.04em;text-shadow:0 0 30px rgba(50,200,120,.4)}
+.role-en{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.2em;color:rgba(50,200,120,.45);margin-top:4px}
+.sec{padding:18px 22px;position:relative;z-index:1;border-bottom:1px solid rgba(50,200,120,.07)}
+.sec:last-of-type{border-bottom:none}
+.sec-title{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(50,200,120,.55);margin-bottom:10px}
+.pub-info-text{font-size:16px;font-weight:700;color:#d8f8e8;line-height:1.7;letter-spacing:.03em}
+.sec.secret1{background:rgba(50,200,120,.04);border-left:3px solid rgba(50,200,120,.35) !important;padding-left:20px}
+.role-reveal{font-size:13px;color:rgba(180,255,220,.7);line-height:1.6;margin-bottom:12px}
+.role-identity{display:flex;align-items:center;justify-content:center;gap:10px;background:rgba(50,200,120,.1);border:1px solid rgba(50,200,120,.3);border-radius:6px;padding:14px 18px;margin-bottom:8px}
+.role-identity-icon{font-size:28px}
+.role-identity-text{font-size:22px;font-weight:900;color:#88ffcc;letter-spacing:.06em;text-shadow:0 0 20px rgba(50,200,120,.5)}
+.role-identity-sub{font-size:12px;color:rgba(180,255,220,.6);line-height:1.6;text-align:center}
+.sec.ability{background:rgba(255,200,50,.03);border-left:3px solid rgba(255,200,50,.35) !important;padding-left:20px}
+.sec.ability .sec-title{color:rgba(255,200,50,.6)}
+.ability-name{font-size:15px;font-weight:700;color:#ffe082;margin-bottom:8px}
+.ability-items{display:flex;gap:8px;margin:10px 0;flex-wrap:wrap}
+.ability-item-tag{display:inline-flex;align-items:center;gap:5px;background:rgba(255,200,50,.1);border:1px solid rgba(255,200,50,.3);border-radius:4px;padding:4px 10px;font-size:12px;color:#ffd54f;font-weight:700}
+.ability-body{font-size:13px;color:#fff3cc;line-height:1.7}
+.notes{margin-top:10px;display:flex;flex-direction:column;gap:5px}
+.note-item{display:flex;gap:6px;align-items:flex-start;font-size:11px;color:rgba(255,200,80,.7);line-height:1.5}
+.note-icon{flex-shrink:0;font-size:12px;margin-top:1px}
+.sec.win{background:rgba(50,220,130,.03);border-left:3px solid rgba(50,220,130,.35) !important;padding-left:20px}
+.sec.win .sec-title{color:rgba(50,220,130,.6)}
+.win-item{display:flex;gap:8px;align-items:center;font-size:14px;font-weight:700;color:#b3ffe0;padding:4px 0}
+.win-item::before{content:'▸';color:#32dc82;font-size:12px}
+.sec.bonus{background:rgba(255,160,50,.03);border-left:3px solid rgba(255,160,50,.3) !important;padding-left:20px}
+.sec.bonus .sec-title{color:rgba(255,160,50,.6)}
+.bonus-item{display:flex;gap:8px;align-items:center;font-size:13px;color:#ffd8a0;padding:3px 0}
+.bonus-item::before{content:'★';color:#ffaa44;font-size:11px}
+.card-footer{padding:10px 22px;border-top:1px solid rgba(50,200,120,.12);display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1}
+.footer-code{font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(50,200,120,.28);letter-spacing:.1em}
+.footer-status{display:flex;align-items:center;gap:5px;font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(50,200,120,.55);letter-spacing:.1em}
+.footer-status::before{content:'';display:inline-block;width:5px;height:5px;border-radius:50%;background:#32c878;box-shadow:0 0 5px #32c878;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+/* アイテムカード */
+.item-card{width:100%;max-width:420px;background:linear-gradient(155deg,#0f1318,#090c10);border:1px solid rgba(255,190,50,.25);border-radius:10px;overflow:hidden;box-shadow:0 0 40px rgba(180,130,10,.15),0 4px 24px rgba(0,0,0,.7);position:relative;animation:fadeUp .7s .15s ease both}
+.item-card::after{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,transparent,#ffbe32,#cc8800,transparent);pointer-events:none}
+.item-card-header{padding:16px 22px 12px;border-bottom:1px solid rgba(255,190,50,.12);display:flex;align-items:center;justify-content:space-between;gap:8px}
+.item-card-eyebrow{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,190,50,.5);margin-bottom:3px}
+.item-card-title{font-size:15px;font-weight:700;color:#fff8e0}
+/* 同期ステータス */
+.sync-badge{display:flex;align-items:center;gap:5px;font-family:'Share Tech Mono',monospace;font-size:8px;color:rgba(50,220,130,.6);letter-spacing:.08em;white-space:nowrap}
+.sync-dot{width:5px;height:5px;border-radius:50%;background:#32dc82;box-shadow:0 0 5px #32dc82;flex-shrink:0;animation:blink 2s infinite}
+.sync-dot.off{background:#666;box-shadow:none;animation:none}
+.item-slots{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:16px}
+.slot{border-radius:8px;min-height:150px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;cursor:pointer;transition:transform .2s,box-shadow .2s;position:relative;padding:10px 8px}
+.slot:active{transform:scale(.96)}
+.slot.has-item{background:rgba(255,190,50,.07);border:1px solid rgba(255,190,50,.3);box-shadow:0 0 16px rgba(255,190,50,.06)}
+.slot.has-item:hover{box-shadow:0 0 24px rgba(255,190,50,.14)}
+.slot-owned-badge{position:absolute;top:7px;right:7px;font-family:'Share Tech Mono',monospace;font-size:8px;padding:2px 6px;border-radius:2px;background:rgba(50,220,130,.12);color:#32dc82;border:1px solid rgba(50,220,130,.25)}
+.slot-icon{font-size:32px;line-height:1}
+.slot-name{font-size:13px;font-weight:700;color:#ffe8a0}
+.slot-hint{font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(255,230,130,.4)}
+.slot.empty{background:rgba(255,255,255,.015);border:1px dashed rgba(255,255,255,.1);cursor:default}
+.slot.empty .slot-icon{opacity:.18}
+.slot.empty .slot-name{color:rgba(255,255,255,.2);font-size:11px}
+.slot.empty .slot-hint{color:rgba(255,255,255,.12)}
+.slot.given{background:rgba(255,60,60,.03);border:1px dashed rgba(255,80,80,.15);cursor:default}
+.slot.given .slot-icon{opacity:.22}
+.slot.given .slot-name{color:rgba(255,100,100,.4)}
+.slot.given .slot-hint{color:rgba(255,80,80,.3)}
+.item-card-footer{padding:10px 22px;border-top:1px solid rgba(255,190,50,.1);display:flex;justify-content:space-between;font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(255,190,50,.28);letter-spacing:.1em}
+.item-count-val{color:rgba(255,190,50,.65)}
+/* ポップアップ */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.78);backdrop-filter:blur(6px);z-index:100;align-items:flex-end;justify-content:center;padding:0}
+.overlay.open{display:flex;animation:oIn .22s ease}
+@keyframes oIn{from{opacity:0}to{opacity:1}}
+.popup{width:100%;max-width:420px;background:linear-gradient(155deg,#0f1825,#080d14);border:1px solid rgba(255,190,50,.3);border-radius:14px 14px 0 0;overflow:hidden;animation:pIn .28s cubic-bezier(.34,1.2,.64,1)}
+@keyframes pIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.popup-handle{width:36px;height:3px;background:rgba(255,255,255,.15);border-radius:2px;margin:14px auto 0}
+.popup-img{background:linear-gradient(160deg,#1a1500,#0d0a00);padding:24px 24px 18px;display:flex;flex-direction:column;align-items:center;gap:10px;border-bottom:1px solid rgba(255,190,50,.12)}
+.pop-big-icon{font-size:64px;line-height:1}
+.pop-name{font-size:20px;font-weight:900;color:#ffe082}
+.pop-desc{font-size:13px;color:rgba(255,230,150,.65);line-height:1.6;text-align:center}
+.popup-body{padding:18px 20px 28px}
+.transfer-label{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,80,80,.6);margin-bottom:10px}
+.role-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.role-btn{padding:10px 6px;border-radius:5px;cursor:pointer;font-family:'Noto Serif JP',serif;font-size:12px;font-weight:700;background:rgba(255,80,80,.08);color:rgba(255,160,160,.8);border:1px solid rgba(255,80,80,.2);transition:background .2s,border-color .2s}
+.role-btn:hover,.role-btn.sel{background:rgba(255,80,80,.2);border-color:rgba(255,80,80,.5);color:#ffaaaa}
+.role-btn.sel{box-shadow:0 0 10px rgba(255,80,80,.2)}
+.confirm-btn{width:100%;padding:11px;background:rgba(255,80,80,.15);color:#ff9090;border:1px solid rgba(255,80,80,.35);border-radius:6px;font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:.18em;cursor:pointer;transition:background .2s;margin-bottom:8px}
+.confirm-btn:hover:not(:disabled){background:rgba(255,80,80,.28);color:#ffbbbb}
+.confirm-btn:disabled{opacity:.35;cursor:not-allowed}
+.close-btn{width:100%;padding:9px;background:transparent;color:rgba(255,255,255,.25);border:1px solid rgba(255,255,255,.1);border-radius:6px;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.15em;cursor:pointer;transition:background .2s}
+.close-btn:hover{background:rgba(255,255,255,.06);color:rgba(255,255,255,.5)}
+/* トースト */
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(12px);background:rgba(50,220,130,.14);border:1px solid rgba(50,220,130,.4);border-radius:6px;padding:10px 20px;font-family:'Share Tech Mono',monospace;font-size:11px;color:rgba(100,255,180,.9);letter-spacing:.1em;opacity:0;transition:opacity .3s,transform .3s;z-index:300;pointer-events:none;white-space:nowrap}
+</style>
+</head>
+<body>
+
+<!-- 公開カード（デザイン変更なし） -->
+<div class="pub-card">
+  <div class="card-header">
+    <div class="role-eyebrow">裏切り者 / TRAITOR</div>
+    <div class="role-name">🏥 医師</div>
+    <div class="role-en">DOCTOR</div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-title">【公開情報】</div>
+    <div class="pub-info-text">潔癖で几帳面。カルテの改ざんは絶対に許さない主義だが、自分の秘密だけは別の話だ。</div>
+  </div>
+
+  <div class="sec secret1">
+    <div class="sec-title">【秘密情報①】</div>
+    <div class="role-reveal">あなたは——</div>
+    <div class="role-identity">
+      <div class="role-identity-icon">🏥</div>
+      <div class="role-identity-text">裏切り者（つきグループ）です。</div>
+    </div>
+    <div class="role-identity-sub">エンジニアだけは、絶対に地球へ帰してはならない。</div>
+  </div>
+
+  <div class="sec ability">
+    <div class="sec-title">【能力②】致死投与</div>
+    <div class="ability-name">エンジニアを消す</div>
+    <div class="ability-items">
+      <span class="ability-item-tag">☠️ 未承認の劇薬</span>
+    </div>
+    <div class="ability-body">劇薬を探索で入手済みの場合、最終アクションで「エンジニアへの致死投与」を宣言。エンジニアは最終アクションを失う。</div>
+    <div class="notes">
+      <div class="note-item"><span class="note-icon">⚠️</span><span>☠️劇薬を探索で入手していない場合は発動不可。</span></div>
+      <div class="note-item"><span class="note-icon">⚠️</span><span>エンジニアが先に行動した場合は無効になる場合がある。</span></div>
+    </div>
+  </div>
+
+  <div class="sec win">
+    <div class="sec-title">【勝利条件】</div>
+    <div class="win-item">帰還用カプセルが修復され帰還すること</div>
+  </div>
+
+  <div class="sec bonus">
+    <div class="sec-title">【ボーナスミッション】</div>
+    <div class="bonus-item">エンジニアへの致死投与成功（つきグループ＋60億円）</div>
+    <div class="bonus-item">誰にも見破られなかった（＋10億円）</div>
+  </div>
+
+  <div class="card-footer">
+    <div class="footer-code">DOCTOR-01 / LAST-15MIN</div>
+    <div class="footer-status">MONITORING</div>
+  </div>
+</div>
+
+<!-- アイテムカード（Firestore リアルタイム連携） -->
+<div class="item-card">
+  <div class="item-card-header">
+    <div>
+      <div class="item-card-eyebrow">🎒 所持アイテム / INVENTORY</div>
+      <div class="item-card-title">医師のアイテム</div>
+    </div>
+    <div class="sync-badge">
+      <div class="sync-dot" id="sync-dot"></div>
+      <span id="sync-label">接続中…</span>
+    </div>
+  </div>
+  <div class="item-slots" id="slots">
+    <div class="slot empty"><div class="slot-icon" style="opacity:.3">⏳</div><div class="slot-name" style="color:rgba(255,255,255,.25);font-size:11px">読み込み中</div></div>
+    <div class="slot empty"><div class="slot-icon" style="opacity:.1">📦</div><div class="slot-name" style="color:rgba(255,255,255,.15);font-size:11px">—</div></div>
+  </div>
+  <div class="item-card-footer">
+    <span>DOCTOR-01 / LAST-15MIN</span>
+    <span>所持: <span id="item-count" class="item-count-val">—</span> 個</span>
+  </div>
+</div>
+
+<!-- 渡すポップアップ -->
+<div class="overlay" id="overlay" onclick="bgClose(event)">
+  <div class="popup">
+    <div class="popup-handle"></div>
+    <div class="popup-img">
+      <div class="pop-big-icon" id="pop-icon"></div>
+      <div class="pop-name" id="pop-name"></div>
+      <div class="pop-desc" id="pop-desc"></div>
+    </div>
+    <div class="popup-body">
+      <div class="transfer-label">渡す相手を選択</div>
+      <div class="role-btns">
+        <button class="role-btn" onclick="pickRole(this,'captain')">🚀 船長</button>
+        <button class="role-btn" onclick="pickRole(this,'engineer')">⚙️ エンジニア</button>
+        <button class="role-btn" onclick="pickRole(this,'scientist')">🧪 科学者</button>
+      </div>
+      <button class="confirm-btn" id="confirm-btn" disabled onclick="confirmGive()">この相手に渡す ✓</button>
+      <button class="close-btn" onclick="closePopup()">キャンセル</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- Firebase Firestore -->
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+  import { getFirestore, doc, onSnapshot, setDoc, getDoc }
+    from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBHVQILRmOO6ZZDL_Szy_5cn7i9v6Ux5lo",
+    authDomain: "astro-murder.firebaseapp.com",
+    projectId: "astro-murder",
+    storageBucket: "astro-murder.firebasestorage.app",
+    messagingSenderId: "543542600233",
+    appId: "1:543542600233:web:ba9a6050ac775d4352f238"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db  = getFirestore(app);
+
+  // ── アイテム定義 ──────────────────────────────
+  const ALL_ITEMS = {
+    captain_key:      { icon:'🗝️', name:'マスターオーバーライドキー', desc:'全エリアのロックを解除できる万能キー。' },
+    doctor_sedative:  { icon:'💉', name:'医療用鎮静剤',              desc:'能力①「鎮静剤投与」の発動に使用。' },
+    engineer_tool:    { icon:'🔧', name:'緊急修復ツールセット',       desc:'エンジニアの初期所持品。アリバイ証拠品。' },
+    scientist_device: { icon:'📱', name:'暗号化端末',                desc:'科学者の能力②「カプセル破壊」の発動条件。' },
+    cockpit_terminal: { icon:'📡', name:'違法通信端末',              desc:'操縦室（探索①）で発見。破壊の発動条件にもなる。' },
+    engine_explosive: { icon:'💣', name:'起爆装置パーツ',            desc:'機関室（探索②）で発見。単体では起爆不可。' },
+    life_poison:      { icon:'☠️', name:'未承認の劇薬',              desc:'生命維持室（探索③）で発見。致死投与の発動条件。' },
+    cargo_battery:    { icon:'🔋', name:'過充電バッテリー',           desc:'貨物室（探索④）で発見。破壊の発動条件にもなる。' },
+  };
+
+  const ROLE = 'doctor';
+  const INIT_ITEMS = ['doctor_sedative'];
+  const OTHER_ROLES = { captain:'🚀 船長', engineer:'⚙️ エンジニア', scientist:'🧪 科学者' };
+
+  const docRef = doc(db, 'game', 'session', 'inventory', ROLE);
+  let curItem = null, selRole = null;
+
+  // ── 初期化 ────────────────────────────────────
+  async function init() {
+    try {
+      const snap = await getDoc(docRef);
+      if (!snap.exists()) {
+        await setDoc(docRef, { items: INIT_ITEMS, role: ROLE });
+      }
+      // リアルタイム監視スタート
+      onSnapshot(docRef, (s) => {
+        const items = s.exists() ? (s.data().items || []) : [];
+        renderSlots(items);
+        setSynced(true);
+      }, () => setSynced(false));
+    } catch(e) {
+      setSynced(false);
+    }
+  }
+
+  function setSynced(ok) {
+    document.getElementById('sync-dot').className = 'sync-dot' + (ok ? '' : ' off');
+    document.getElementById('sync-label').textContent = ok ? 'SYNC' : 'オフライン';
+  }
+
+  // ── スロット描画 ──────────────────────────────
+  function renderSlots(items) {
+    const area = document.getElementById('slots');
+    document.getElementById('item-count').textContent = items.length;
+
+    let html = items.map(id => {
+      const it = ALL_ITEMS[id] || { icon:'❓', name: id, desc:'' };
+      return `<div class="slot has-item" onclick="openPopup('${id}')">
+        <div class="slot-owned-badge">所持中</div>
+        <div class="slot-icon">${it.icon}</div>
+        <div class="slot-name">${it.name}</div>
+        <div class="slot-hint">タップで詳細</div>
+      </div>`;
+    }).join('');
+
+    // 空きスロット補完（最低2枠表示）
+    const empties = Math.max(0, 2 - items.length);
+    for (let i = 0; i < empties; i++) {
+      html += `<div class="slot empty">
+        <div class="slot-icon">📦</div>
+        <div class="slot-name">空きスロット</div>
+        <div class="slot-hint">交渉で入手</div>
+      </div>`;
+    }
+    area.innerHTML = html;
+  }
+
+  // ── ポップアップ ──────────────────────────────
+  window.openPopup = function(itemId) {
+    const it = ALL_ITEMS[itemId]; if (!it) return;
+    curItem = itemId; selRole = null;
+    document.getElementById('pop-icon').textContent = it.icon;
+    document.getElementById('pop-name').textContent = it.name;
+    document.getElementById('pop-desc').textContent = it.desc;
+    document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('sel'));
+    document.getElementById('confirm-btn').disabled = true;
+    document.getElementById('overlay').classList.add('open');
+  };
+  window.closePopup  = () => { document.getElementById('overlay').classList.remove('open'); curItem=null; selRole=null; };
+  window.bgClose     = (e) => { if (e.target === document.getElementById('overlay')) window.closePopup(); };
+  window.pickRole    = (btn, role) => {
+    document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('sel'));
+    btn.classList.add('sel'); selRole = role;
+    document.getElementById('confirm-btn').disabled = false;
+  };
+
+  // ── アイテムを渡す（Firestore書き込み） ──────────
+  window.confirmGive = async function() {
+    if (!curItem || !selRole) return;
+    document.getElementById('confirm-btn').disabled = true;
+    try {
+      // 自分の所持品から削除
+      const mySnap = await getDoc(docRef);
+      const newMy  = (mySnap.data()?.items || []).filter(id => id !== curItem);
+
+      // 相手の所持品に追加
+      const targetRef  = doc(db, 'game', 'session', 'inventory', selRole);
+      const targetSnap = await getDoc(targetRef);
+      const newTarget  = [...(targetSnap.data()?.items || [])];
+      if (!newTarget.includes(curItem)) newTarget.push(curItem);
+
+      // 同時書き込み
+      await setDoc(docRef,    { items: newMy,     role: ROLE });
+      await setDoc(targetRef, { items: newTarget, role: selRole });
+
+      window.closePopup();
+      showToast('✅ アイテムを渡しました');
+    } catch(e) {
+      showToast('⚠️ ' + e.message);
+      document.getElementById('confirm-btn').disabled = false;
+    }
+  };
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.style.opacity = '1'; t.style.transform = 'translateX(-50%) translateY(0)';
+    setTimeout(() => { t.style.opacity='0'; t.style.transform='translateX(-50%) translateY(12px)'; }, 2600);
+  }
+
+  init();
+</script>
+</body>
+</html>
