@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>たくろう、宇宙（どこ）までも</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&family=Shippori+Mincho:wght@400;700;800&family=Orbitron:wght@400;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&family=Shippori+Mincho:wght@400;700;800&family=Orbitron:wght@400;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --space-black: #02030a;
@@ -1124,6 +1124,168 @@
     color: rgba(232,240,255,0.2);
     margin-top: 48px;
   }
+
+/* ===== MISSION 05 ===== */
+.mission5-section {
+  --bg:#03040c;
+  --acc:#4da6ff;
+  --red:#ff4444;
+  --gold:#ffbe32;
+  --green:#32c878;
+  --mono:'Share Tech Mono',monospace;
+  --raj:'Rajdhani',sans-serif;
+  position:relative;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  overflow:hidden;
+  padding:0 0 80px;
+}
+.stars-canvas{position:absolute;inset:0;pointer-events:none;z-index:0}
+.blackhole-wrap{position:absolute;left:50%;top:55%;transform:translate(-50%,-50%);width:min(600px,90vw);aspect-ratio:1;pointer-events:none;z-index:0}
+.bh-disk{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,rgba(255,160,30,0) 0%,rgba(255,160,30,.06) 8%,rgba(255,120,20,.15) 16%,rgba(255,80,10,.25) 24%,rgba(200,60,0,.2) 32%,rgba(150,40,0,.1) 40%,rgba(255,160,30,.04) 50%,rgba(255,160,30,0) 60%,rgba(80,20,180,.15) 72%,rgba(40,10,140,.2) 82%,rgba(80,20,180,.08) 92%,rgba(255,160,30,0) 100%);animation:bhspin 28s linear infinite;filter:blur(2px)}
+.bh-ring1{position:absolute;inset:15%;border-radius:50%;border:1px solid rgba(255,160,30,.35);box-shadow:0 0 30px rgba(255,120,20,.3),inset 0 0 30px rgba(255,120,20,.1);animation:bhspin 18s linear infinite reverse}
+.bh-ring2{position:absolute;inset:25%;border-radius:50%;border:1px solid rgba(150,80,255,.25);box-shadow:0 0 20px rgba(120,60,220,.25);animation:bhspin 12s linear infinite}
+.bh-core{position:absolute;inset:35%;border-radius:50%;background:radial-gradient(circle,#000 55%,rgba(10,5,30,.9) 75%,transparent 100%);box-shadow:0 0 60px rgba(0,0,0,.9),0 0 100px rgba(0,0,0,.7)}
+.bh-glow{position:absolute;inset:-10%;border-radius:50%;background:radial-gradient(circle at 50% 60%,rgba(255,100,20,.06) 0%,transparent 65%);pointer-events:none}
+@keyframes bhspin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+.supernova-streaks{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.streak{position:absolute;height:1px;background:linear-gradient(90deg,transparent,rgba(255,200,100,.6),transparent);border-radius:1px;animation:streakAnim var(--dur,3s) linear infinite var(--delay,0s);opacity:0}
+@keyframes streakAnim{0%{opacity:0;transform:translateX(-100px) scaleX(.3)}10%{opacity:1}80%{opacity:.6}100%{opacity:0;transform:translateX(calc(100vw + 200px)) scaleX(1)}}
+.m5-header{position:relative;z-index:10;width:100%;text-align:center;padding:80px 20px 0;display:flex;flex-direction:column;align-items:center;gap:10px}
+.m5-rule{width:min(400px,80vw);height:1px;background:linear-gradient(90deg,transparent,rgba(255,100,50,.6),rgba(255,60,30,.8),rgba(255,100,50,.6),transparent);box-shadow:0 0 8px rgba(255,80,30,.4);margin-bottom:8px}
+.m5-eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.35em;color:rgba(255,100,50,.7);text-transform:uppercase}
+.m5-num{font-family:var(--raj);font-size:clamp(72px,16vw,120px);font-weight:700;color:transparent;background:linear-gradient(160deg,rgba(255,80,30,.9) 0%,rgba(255,40,10,.7) 40%,rgba(180,20,0,.5) 100%);-webkit-background-clip:text;background-clip:text;filter:drop-shadow(0 0 30px rgba(255,60,20,.5)) drop-shadow(0 0 60px rgba(255,30,0,.3));line-height:1;letter-spacing:-.02em}
+.m5-dash{width:60px;height:2px;background:linear-gradient(90deg,transparent,rgba(255,100,50,.8),transparent);margin:4px auto}
+.m5-codename{font-family:var(--mono);font-size:clamp(11px,2.5vw,14px);letter-spacing:.22em;color:rgba(255,150,100,.6);text-transform:uppercase}
+.m5-alert{position:relative;z-index:10;margin:40px 20px 0;max-width:560px;width:calc(100% - 40px);border:1px solid rgba(255,60,30,.35);background:rgba(255,30,10,.06);border-radius:4px;padding:16px 20px;display:flex;align-items:center;gap:14px}
+.m5-alert-icon{font-size:22px;flex-shrink:0;animation:blink 2s ease-in-out infinite}
+.m5-alert-text{font-family:var(--mono);font-size:11px;color:rgba(255,180,160,.75);line-height:1.7;letter-spacing:.04em}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.m5-flavor{position:relative;z-index:10;max-width:560px;width:calc(100% - 40px);margin:32px 20px 0;text-align:center;display:flex;flex-direction:column;gap:14px}
+.m5-flavor p{font-size:clamp(13px,3vw,15px);color:rgba(200,220,255,.65);line-height:2;letter-spacing:.04em}
+.m5-flavor strong{color:rgba(200,220,255,.9);font-weight:700}
+.m5-divider{width:1px;height:40px;background:linear-gradient(180deg,transparent,rgba(255,80,30,.5),transparent);margin:0 auto}
+.m5-launch-wrap{position:relative;z-index:10;margin:36px 20px 0;display:flex;flex-direction:column;align-items:center;gap:12px}
+.m5-launch-label{font-family:var(--mono);font-size:9px;letter-spacing:.3em;color:rgba(255,100,50,.5);text-transform:uppercase}
+.m5-launch-btn{position:relative;padding:18px 48px;background:transparent;border:1px solid rgba(255,80,30,.5);border-radius:4px;cursor:pointer;font-family:var(--mono);font-size:13px;letter-spacing:.2em;color:rgba(255,180,160,.9);text-transform:uppercase;transition:all .3s;overflow:hidden}
+.m5-launch-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,80,30,.08),rgba(255,40,10,.04));transition:opacity .3s}
+.m5-launch-btn::after{content:'';position:absolute;left:-100%;top:0;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,120,60,.15),transparent);transition:left .5s}
+.m5-launch-btn:hover{border-color:rgba(255,100,50,.8);color:#fff;box-shadow:0 0 20px rgba(255,60,20,.25),0 0 40px rgba(255,30,0,.12)}
+.m5-launch-btn:hover::after{left:100%}
+.m5-launch-btn .btn-icon{margin-right:10px;font-size:15px}
+.m5-launch-sub{font-family:var(--mono);font-size:8px;letter-spacing:.18em;color:rgba(255,120,80,.35)}
+.m5-rocket-panel{position:relative;z-index:10;width:calc(100% - 40px);max-width:480px;margin:24px 20px 0;display:none;flex-direction:column;align-items:center;gap:0;animation:panelIn .5s cubic-bezier(.34,1.2,.64,1) both}
+.m5-rocket-panel.open{display:flex}
+@keyframes panelIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.rp-hd{width:100%;padding:12px 20px;background:rgba(255,60,30,.06);border:1px solid rgba(255,60,30,.25);border-bottom:none;border-radius:8px 8px 0 0;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.rp-hd-left{display:flex;align-items:center;gap:10px}
+.rp-status-dot{width:7px;height:7px;border-radius:50%;background:#ff4444;box-shadow:0 0 6px #ff4444;animation:blink 1.5s infinite}
+.rp-hd-title{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:rgba(255,180,160,.8)}
+.rp-close-btn{background:transparent;border:1px solid rgba(255,255,255,.1);border-radius:3px;padding:4px 10px;font-family:var(--mono);font-size:9px;color:rgba(255,255,255,.3);cursor:pointer;transition:all .2s;letter-spacing:.1em}
+.rp-close-btn:hover{background:rgba(255,255,255,.07);color:rgba(255,255,255,.6)}
+.rocket-inner{width:100%;background:linear-gradient(180deg,rgba(10,22,44,.95),rgba(6,14,30,.98));border:1px solid rgba(77,166,255,.18);border-top:none;border-radius:0 0 8px 8px;padding:20px;display:flex;flex-direction:column;align-items:center;gap:0}
+.r-nose-wrap{position:relative;width:160px;margin:0 auto}
+.r-nose{width:0;height:0;border-left:80px solid transparent;border-right:80px solid transparent;border-bottom:62px solid rgba(10,22,44,.95);margin:0 auto;filter:drop-shadow(0 -4px 18px rgba(77,166,255,.35));position:relative}
+.r-nose::before{content:'';position:absolute;inset:0;width:0;height:0;border-left:78px solid transparent;border-right:78px solid transparent;border-bottom:60px solid rgba(77,166,255,.12);top:2px;left:-78px}
+.r-nose-label{position:absolute;width:160px;text-align:center;top:24px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:9px;color:rgba(77,166,255,.7);letter-spacing:.15em;pointer-events:none}
+.r-body{background:linear-gradient(180deg,rgba(10,22,44,.95),rgba(6,14,30,.98));border:1px solid rgba(77,166,255,.2);border-top:none;margin:0 auto;width:160px;border-radius:0 0 4px 4px;overflow:hidden;box-shadow:0 0 40px rgba(20,60,180,.3),inset 0 0 24px rgba(0,0,20,.5);position:relative}
+.r-body::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(180deg,rgba(77,166,255,.4),rgba(77,166,255,.1),rgba(77,166,255,.4));pointer-events:none}
+.r-body::after{content:'';position:absolute;right:0;top:0;bottom:0;width:2px;background:linear-gradient(180deg,rgba(77,166,255,.4),rgba(77,166,255,.1),rgba(77,166,255,.4));pointer-events:none}
+.room-row{width:100%;padding:13px 12px;border:none;border-bottom:1px solid rgba(77,166,255,.1);background:transparent;cursor:pointer;display:flex;align-items:center;gap:8px;transition:background .2s;text-align:left}
+.room-row:last-of-type{border-bottom:none}
+.room-row:hover{background:rgba(77,166,255,.07)}
+.room-row:active{background:rgba(77,166,255,.13)}
+.room-row.explored{background:rgba(50,220,130,.04)}
+.rr-num{font-family:var(--mono);font-size:10px;color:rgba(77,166,255,.5);width:16px;flex-shrink:0}
+.rr-icon{font-size:17px;flex-shrink:0}
+.rr-info{flex:1}
+.rr-name{font-size:12px;font-weight:700;color:rgba(200,220,255,.85)}
+.rr-note{font-family:var(--mono);font-size:7px;color:rgba(255,120,80,.5);margin-top:1px}
+.rr-status{font-family:var(--mono);font-size:8px;color:rgba(77,166,255,.35)}
+.rr-status.done{color:#32c878}
+.rr-status.part{color:#ffbe32}
+.r-fins{display:flex;justify-content:space-between;width:196px;margin:0 auto;margin-top:-18px}
+.fin-l{width:0;height:0;border-right:20px solid rgba(10,22,44,.95);border-bottom:32px solid transparent}
+.fin-r{width:0;height:0;border-left:20px solid rgba(10,22,44,.95);border-bottom:32px solid transparent}
+.r-engine{width:178px;margin:0 auto;background:linear-gradient(180deg,rgba(6,14,30,.98),rgba(3,8,16,.98));border:1px solid rgba(77,166,255,.12);border-top:none;border-radius:0 0 18px 18px;padding:8px 0 5px;display:flex;justify-content:center;gap:14px}
+@keyframes nglow{0%,100%{opacity:.5}50%{opacity:1}}
+.nozzle{width:24px;height:30px;background:linear-gradient(180deg,#0d1830,#060c18);border:1px solid rgba(77,166,255,.2);border-radius:0 0 50% 50%;position:relative;overflow:hidden}
+.nozzle::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:10px;height:14px;background:radial-gradient(ellipse at 50% 100%,rgba(255,160,30,.7),rgba(255,80,0,.3),transparent);border-radius:50%;animation:nglow 1.5s ease-in-out infinite}
+.rp-taskbar{width:100%;background:rgba(4,6,20,.95);border:1px solid rgba(255,255,255,.08);border-top:none;border-radius:0 0 8px 8px;display:flex;justify-content:stretch;margin-top:-1px}
+.tb-btn{flex:1;padding:9px 4px 12px;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;border:none;background:transparent;transition:background .2s;position:relative;border-top:2px solid transparent}
+.tb-btn:hover{background:rgba(255,255,255,.05)}
+.tb-btn.active{border-top-color:var(--tab-c,#4da6ff)}
+.tb-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.tb-label{font-family:var(--mono);font-size:9px;letter-spacing:.08em;color:rgba(255,255,255,.45)}
+.tb-btn.active .tb-label{color:rgba(255,255,255,.85)}
+.rp-group{width:100%;background:rgba(6,10,22,.97);border:1px solid rgba(255,255,255,.07);border-top:none;border-radius:0 0 8px 8px;padding:14px;margin-top:-1px}
+.gc-roles{display:flex;flex-direction:column;gap:6px}
+.gc-role-btn{display:flex;align-items:center;gap:10px;padding:10px 12px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);border-radius:6px;cursor:pointer;transition:all .2s;text-align:left;width:100%}
+.gc-role-btn:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.14)}
+.gc-role-emoji{font-size:16px;flex-shrink:0}
+.gc-role-info{flex:1}
+.gc-role-name{font-size:12px;font-weight:700;color:rgba(200,220,255,.8)}
+.gc-role-true{font-family:var(--mono);font-size:8px;margin-top:2px}
+.gc-role-arrow{font-size:12px;color:rgba(255,255,255,.2)}
+#m5-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(10px);z-index:1000;align-items:flex-end;justify-content:center}
+#m5-overlay.open{display:flex}
+#m5-card-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);backdrop-filter:blur(10px);z-index:1100;align-items:center;justify-content:center;padding:20px}
+#m5-card-overlay.open{display:flex}
+.m5-modal{width:100%;max-width:460px;background:linear-gradient(160deg,#0c1428,#07091a);border:1px solid rgba(77,166,255,.25);border-radius:16px 16px 0 0;max-height:90vh;overflow-y:auto;animation:slideUpM5 .3s cubic-bezier(.34,1.2,.64,1)}
+@keyframes slideUpM5{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.modal-handle{width:36px;height:3px;background:rgba(255,255,255,.15);border-radius:2px;margin:14px auto 0}
+.mhd{padding:14px 20px 12px;border-bottom:1px solid rgba(77,166,255,.1);display:flex;align-items:center;gap:12px}
+.mhd-icon{font-size:28px}
+.mhd-info{flex:1}
+.mhd-num{font-family:var(--mono);font-size:8px;color:rgba(77,166,255,.5);letter-spacing:.15em;margin-bottom:2px}
+.mhd-name{font-size:16px;font-weight:900;color:rgba(200,220,255,.9)}
+.mhd-restrict{font-family:var(--mono);font-size:9px;color:rgba(255,120,80,.6);margin-top:2px}
+.msec{padding:12px 20px;border-bottom:1px solid rgba(77,166,255,.07)}
+.mlabel{font-family:var(--mono);font-size:8px;letter-spacing:.26em;margin-bottom:8px}
+.mlabel.pub{color:rgba(255,200,50,.55)}
+.mlabel.sec{color:rgba(255,80,80,.5)}
+.mbox{font-size:12px;line-height:1.85;padding:10px 13px;border-radius:6px}
+.mbox.pub{color:rgba(200,220,255,.7);background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07)}
+.mbox.sec{color:rgba(255,180,160,.7);background:rgba(255,60,60,.04);border:1px solid rgba(255,60,60,.12)}
+.msend{padding:12px 20px 28px}
+.msend-title{font-family:var(--mono);font-size:8px;letter-spacing:.26em;color:rgba(255,200,50,.55);margin-bottom:10px}
+.items-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.item-slot{border-radius:8px;border:1px solid rgba(255,190,50,.2);background:rgba(255,190,50,.05);padding:10px 8px;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;position:relative}
+.is-ab{position:absolute;top:5px;left:7px;font-family:var(--mono);font-size:8px;color:rgba(255,190,50,.45)}
+.is-icon{font-size:24px;line-height:1}
+.is-name{font-size:10px;font-weight:700;color:#ffe082;line-height:1.4}
+.is-sent{position:absolute;top:5px;right:7px;font-family:var(--mono);font-size:8px;color:#32dc82}
+.target-label{font-family:var(--mono);font-size:8px;letter-spacing:.2em;color:rgba(100,160,255,.5);margin-bottom:7px}
+.target-btns{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:5px}
+.t-btn{padding:9px 6px;background:rgba(77,166,255,.06);border:1px solid rgba(77,166,255,.18);border-radius:7px;font-family:var(--serif);font-size:11px;font-weight:700;color:rgba(150,200,255,.7);cursor:pointer;transition:all .2s;text-align:center}
+.t-btn:hover:not(:disabled){background:rgba(77,166,255,.15);border-color:rgba(77,166,255,.4);color:#c8dcff}
+.t-btn.sel{background:rgba(77,166,255,.2);border-color:rgba(77,166,255,.6);color:#e8f4ff}
+.t-btn:disabled{opacity:.22;cursor:not-allowed;text-decoration:line-through}
+.tnote{font-family:var(--mono);font-size:8px;color:rgba(255,120,80,.45);margin-bottom:10px}
+.send-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
+.s-btn{padding:10px 6px;background:rgba(50,220,130,.1);color:rgba(100,255,190,.8);border:1px solid rgba(50,220,130,.3);border-radius:7px;font-family:var(--mono);font-size:9px;letter-spacing:.08em;cursor:pointer;transition:all .2s;text-align:center}
+.s-btn:hover:not(:disabled){background:rgba(50,220,130,.2)}
+.s-btn:disabled{opacity:.3;cursor:not-allowed}
+.s-btn.sent{background:rgba(50,220,130,.05);color:rgba(50,220,130,.4);border-color:rgba(50,220,130,.15);cursor:default}
+.s-all{width:100%;padding:11px;background:rgba(77,166,255,.1);color:rgba(150,200,255,.85);border:1px solid rgba(77,166,255,.28);border-radius:7px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;cursor:pointer;transition:all .2s;margin-bottom:8px}
+.s-all:hover:not(:disabled){background:rgba(77,166,255,.2)}
+.s-all:disabled{opacity:.3;cursor:not-allowed}
+.m-close{width:100%;padding:10px;background:transparent;color:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.1);border-radius:6px;font-family:var(--mono);font-size:10px;letter-spacing:.15em;cursor:pointer}
+.m-close:hover{background:rgba(255,255,255,.06)}
+.m5-card-modal{width:100%;max-width:360px;background:#07091a;border-radius:12px;overflow:hidden;animation:slideUpM5 .3s ease;border:1px solid rgba(255,255,255,.1)}
+.cm-hd{padding:20px 20px 16px;text-align:center;border-bottom:1px solid rgba(255,255,255,.08)}
+.cm-emoji{font-size:40px;margin-bottom:6px}
+.cm-role{font-size:20px;font-weight:900;color:rgba(200,220,255,.9)}
+.cm-grp{font-family:var(--mono);font-size:10px;letter-spacing:.2em;margin-top:4px}
+.cm-true{font-size:11px;color:rgba(200,220,255,.45);margin-top:4px}
+.cm-link{display:block;margin:14px 16px 4px;padding:13px;text-align:center;border-radius:8px;font-family:var(--mono);font-size:10px;letter-spacing:.15em;cursor:pointer;text-decoration:none;color:#fff;transition:filter .2s}
+.cm-link:hover{filter:brightness(1.2)}
+.cm-close-btn{display:block;margin:4px 16px 16px;padding:10px;text-align:center;background:transparent;border:1px solid rgba(255,255,255,.1);border-radius:6px;font-family:var(--mono);font-size:10px;letter-spacing:.15em;cursor:pointer;color:rgba(255,255,255,.3)}
+.cm-close-btn:hover{background:rgba(255,255,255,.06)}
+.m5-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(10px);background:rgba(50,220,130,.14);border:1px solid rgba(50,220,130,.4);border-radius:6px;padding:9px 18px;font-family:var(--mono);font-size:11px;color:rgba(100,255,180,.9);letter-spacing:.1em;opacity:0;transition:all .3s;z-index:2000;pointer-events:none;white-space:nowrap}
 </style>
 </head>
 <body>
@@ -1794,6 +1956,160 @@
   </div>
 </section>
 
+<div class="cosmic-divider"></div>
+
+<!-- ===== MISSION 05 ===== -->
+<section class="mission5-section" id="mission5">
+  <canvas class="stars-canvas" id="m5-stars-canvas"></canvas>
+  <div class="supernova-streaks" id="m5-streaks"></div>
+  <div class="blackhole-wrap">
+    <div class="bh-glow"></div>
+    <div class="bh-disk"></div>
+    <div class="bh-ring1"></div>
+    <div class="bh-ring2"></div>
+    <div class="bh-core"></div>
+  </div>
+  <div class="m5-header">
+    <div class="m5-rule"></div>
+    <div class="m5-eyebrow">━━━━━ MISSION 05 — START ━━━━━</div>
+    <div class="m5-num">05</div>
+    <div class="m5-dash"></div>
+    <div class="m5-codename">LAST 15 MINUTES — SURVIVAL PROTOCOL</div>
+  </div>
+  <div class="m5-alert">
+    <div class="m5-alert-icon">⚠️</div>
+    <div class="m5-alert-text">CRITICAL ALERT — 帰還用カプセルに致命的な破損を検出。<br>修復不能まで残り <strong>15:00</strong>。仲間の中に破壊工作員が潜んでいる。</div>
+  </div>
+  <div class="m5-flavor">
+    <p>ミッションが終わりかけた。もうすぐ地球へ帰還できる。<br>突然として警報が鳴り響く。</p>
+    <div class="m5-divider"></div>
+    <p>「……気づいたか。仲間たちの中に、<strong>ライバル企業から送り込まれた破壊工作員</strong>が1人混じっている。<br>犯人を捕まえなければカプセルを直せない。</p>
+    <p>幸運を祈る。</p>
+  </div>
+  <div class="m5-launch-wrap">
+    <div class="m5-launch-label">GAME MASTER ONLY</div>
+    <button class="m5-launch-btn" id="m5-launch-btn" onclick="toggleM5Panel()">
+      <span class="btn-icon">🚀</span>LAUNCH MISSION CONSOLE
+    </button>
+    <div class="m5-launch-sub">CLICK TO OPEN EXPLORATION MAP &amp; GROUP CONTROL</div>
+  </div>
+  <div class="m5-rocket-panel" id="m5-rocket-panel">
+    <div class="rp-hd" style="border-radius:8px 8px 0 0">
+      <div class="rp-hd-left">
+        <div class="rp-status-dot"></div>
+        <div class="rp-hd-title">GM CONSOLE — ACTIVE</div>
+      </div>
+      <button class="rp-close-btn" onclick="toggleM5Panel()">✕ CLOSE</button>
+    </div>
+    <div class="rocket-inner" style="border-radius:0">
+      <div class="r-nose-wrap">
+        <div class="r-nose"></div>
+        <div class="r-nose-label">LAST-15MIN</div>
+      </div>
+      <div class="r-body">
+        <button class="room-row" id="room-btn-0" onclick="openM5Room(0)">
+          <div class="rr-num">①</div><div class="rr-icon">🛸</div>
+          <div class="rr-info"><div class="rr-name">操縦室</div><div class="rr-note">🔒 船長 入室不可</div></div>
+          <div class="rr-status" id="rs-0">未探索</div>
+        </button>
+        <button class="room-row" id="room-btn-1" onclick="openM5Room(1)">
+          <div class="rr-num">②</div><div class="rr-icon">⚡</div>
+          <div class="rr-info"><div class="rr-name">機関室</div><div class="rr-note">🔒 エンジニア 入室不可</div></div>
+          <div class="rr-status" id="rs-1">未探索</div>
+        </button>
+        <button class="room-row" id="room-btn-2" onclick="openM5Room(2)">
+          <div class="rr-num">③</div><div class="rr-icon">🏥</div>
+          <div class="rr-info"><div class="rr-name">生命維持室</div><div class="rr-note">🔒 医師 入室不可</div></div>
+          <div class="rr-status" id="rs-2">未探索</div>
+        </button>
+        <button class="room-row" id="room-btn-3" onclick="openM5Room(3)">
+          <div class="rr-num">④</div><div class="rr-icon">📦</div>
+          <div class="rr-info"><div class="rr-name">貨物室</div><div class="rr-note">🔒 科学者 入室不可</div></div>
+          <div class="rr-status" id="rs-3">未探索</div>
+        </button>
+      </div>
+      <div class="r-fins"><div class="fin-l"></div><div class="fin-r"></div></div>
+      <div class="r-engine">
+        <div class="nozzle"></div><div class="nozzle"></div><div class="nozzle"></div>
+      </div>
+    </div>
+    <div class="rp-taskbar">
+      <button class="tb-btn active" id="tb-mochi" style="--tab-c:#4da6ff" onclick="switchM5Group('mochi')">
+        <div class="tb-dot" style="background:#4da6ff;box-shadow:0 0 5px #4da6ff"></div>
+        <div class="tb-label">もち</div>
+      </button>
+      <button class="tb-btn" id="tb-tsuki" onclick="switchM5Group('tsuki')">
+        <div class="tb-dot" style="background:#32c878;box-shadow:0 0 5px #32c878"></div>
+        <div class="tb-label">つき</div>
+      </button>
+      <button class="tb-btn" id="tb-taku" onclick="switchM5Group('taku')">
+        <div class="tb-dot" style="background:#ffbe32;box-shadow:0 0 5px #ffbe32"></div>
+        <div class="tb-label">たく</div>
+      </button>
+      <button class="tb-btn" id="tb-rou" onclick="switchM5Group('rou')">
+        <div class="tb-dot" style="background:#ff5555;box-shadow:0 0 5px #ff5555"></div>
+        <div class="tb-label">ろう</div>
+      </button>
+    </div>
+    <div class="rp-group">
+      <div class="gc-roles" id="gc-roles"></div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION05 探索モーダル -->
+<div id="m5-overlay" onclick="m5BgClose(event)">
+  <div class="m5-modal">
+    <div class="modal-handle"></div>
+    <div class="mhd">
+      <div class="mhd-icon" id="m-icon"></div>
+      <div class="mhd-info">
+        <div class="mhd-num" id="m-num"></div>
+        <div class="mhd-name" id="m-name"></div>
+        <div class="mhd-restrict" id="m-restrict"></div>
+      </div>
+    </div>
+    <div class="msec">
+      <div class="mlabel pub">🟢 全員公開ストーリー</div>
+      <div class="mbox pub" id="m-pub"></div>
+      <div class="mlabel sec" style="margin-top:10px">🔴 GM→探索者のみ（口頭で伝える）</div>
+      <div class="mbox sec" id="m-sec"></div>
+    </div>
+    <div class="msend">
+      <div class="msend-title">📤 発見アイテムを探索者に送信</div>
+      <div class="items-grid">
+        <div class="item-slot" id="is-0"><div class="is-ab">A</div><div class="is-icon" id="ii0"></div><div class="is-name" id="in0"></div></div>
+        <div class="item-slot" id="is-1"><div class="is-ab">B</div><div class="is-icon" id="ii1"></div><div class="is-name" id="in1"></div></div>
+      </div>
+      <div class="target-label">送信先（探索する1人を選択）</div>
+      <div class="target-btns" id="m-tbts"></div>
+      <div class="tnote" id="m-tnote"></div>
+      <div class="send-btns">
+        <button class="s-btn" id="sb0" disabled onclick="sendM5Item(0)">A を送信</button>
+        <button class="s-btn" id="sb1" disabled onclick="sendM5Item(1)">B を送信</button>
+      </div>
+      <button class="s-all" id="sba" disabled onclick="sendM5All()">A・B 両方まとめて送信</button>
+      <button class="m-close" onclick="closeM5Modal()">閉じる</button>
+    </div>
+  </div>
+</div>
+
+<!-- MISSION05 役職カードモーダル -->
+<div id="m5-card-overlay" onclick="m5CardBgClose(event)">
+  <div class="m5-card-modal">
+    <div class="cm-hd">
+      <div class="cm-emoji" id="cm-emoji"></div>
+      <div class="cm-role" id="cm-role"></div>
+      <div class="cm-grp" id="cm-grp"></div>
+      <div class="cm-true" id="cm-true"></div>
+    </div>
+    <a class="cm-link" id="cm-link" target="_blank">📱 役職カードを開く</a>
+    <div class="cm-close-btn" onclick="closeM5Card()">閉じる</div>
+  </div>
+</div>
+
+<div class="m5-toast" id="m5-toast"></div>
+
 
 <script>
 // ===== STARFIELD =====
@@ -2058,6 +2374,217 @@ document.getElementById('open-bank').addEventListener('click', () => {
 document.getElementById('btn-close-bank').addEventListener('click', () => {
   bankOverlay.classList.remove('open');
 });
+</script>
+
+<!-- ===== MISSION 05 SCRIPTS ===== -->
+<script>
+(function(){
+  const cv=document.getElementById('m5-stars-canvas');
+  function resize(){cv.width=cv.offsetWidth;cv.height=cv.offsetHeight}
+  resize();new ResizeObserver(resize).observe(cv);
+  const ctx=cv.getContext('2d');
+  const stars=Array.from({length:180},()=>({x:Math.random(),y:Math.random(),r:Math.random()*1.2+.2,a:Math.random(),da:(Math.random()-.5)*.003}));
+  function draw(){ctx.clearRect(0,0,cv.width,cv.height);stars.forEach(s=>{s.a=Math.max(.05,Math.min(1,s.a+s.da));if(s.a<=.05||s.a>=1)s.da*=-1;ctx.beginPath();ctx.arc(s.x*cv.width,s.y*cv.height,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(200,220,255,${s.a})`;ctx.fill();});requestAnimationFrame(draw);}
+  draw();
+})();
+(function(){
+  const wrap=document.getElementById('m5-streaks');
+  for(let i=0;i<18;i++){const el=document.createElement('div');el.className='streak';el.style.cssText=`top:${Math.random()*100}%;width:${60+Math.random()*180}px;--dur:${2+Math.random()*5}s;--delay:${Math.random()*8}s;opacity:${0.3+Math.random()*0.4};`;wrap.appendChild(el);}
+})();
+</script>
+
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+  import { getFirestore, doc, getDoc, setDoc } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBHVQILRmOO6ZZDL_Szy_5cn7i9v6Ux5lo",
+    authDomain: "astro-murder.firebaseapp.com",
+    projectId: "astro-murder",
+    storageBucket: "astro-murder.firebasestorage.app",
+    messagingSenderId: "543542600233",
+    appId: "1:543542600233:web:ba9a6050ac775d4352f238"
+  };
+  const app=initializeApp(firebaseConfig);
+  const db=getFirestore(app);
+
+  const GROUP_JP  ={mochi:'もち',tsuki:'つき',taku:'たく',rou:'ろう'};
+  const GROUP_ACC ={mochi:'#4da6ff',tsuki:'#32c878',taku:'#ffbe32',rou:'#ff5555'};
+  const ROLE_JP   ={captain:'船長',doctor:'医師',engineer:'エンジニア',scientist:'科学者'};
+  const ROLE_EMOJI={captain:'🛸',doctor:'🏥',engineer:'⚡',scientist:'🧪'};
+  const ROLE_ACC  ={captain:'#4da6ff',doctor:'#32c878',engineer:'#ffbe32',scientist:'#ff5555'};
+  const ROLES     =['captain','scientist','engineer','doctor'];
+  const ALL_ROLES =['captain','doctor','engineer','scientist'];
+  const TRUE_GROUP={
+    mochi:{captain:'mochi',scientist:'tsuki',engineer:'taku', doctor:'rou'  },
+    tsuki:{captain:'tsuki',scientist:'mochi',engineer:'rou',  doctor:'taku' },
+    taku: {captain:'taku', scientist:'rou',  engineer:'mochi',doctor:'tsuki'},
+    rou:  {captain:'rou',  scientist:'taku', engineer:'tsuki',doctor:'mochi'},
+  };
+  const CARD_FILES={captain:'murder/sample_captain.html',doctor:'murder/sample_doctor.html',engineer:'murder/sample_engineer.html',scientist:'murder/sample_scientist.html'};
+
+  const ROOMS=[
+    {id:0,icon:'🛸',name:'操縦室',num:'① 操縦室',restrict:'captain',restrictLabel:'🔒 船長 入室不可',
+     items:[{id:'cockpit_terminal',icon:'📡',name:'暗号通信端末',desc:'競合企業への暗号通信端末。'},{id:'nav_log',icon:'🗓️',name:'改ざんされた航行ログ',desc:'マスターキー使用履歴が残っている。'}],
+     storyPub:'操縦室に不審な操作ログが残っていた。競合企業への暗号通信の痕跡が発見された。',
+     storySec:'【口頭のみ】航行ログにマスターキーを使ったロック解除記録がある。船長だけが持つキーの使用履歴だ。'},
+    {id:1,icon:'⚡',name:'機関室',num:'② 機関室',restrict:'engineer',restrictLabel:'🔒 エンジニア 入室不可',
+     items:[{id:'engine_explosive',icon:'💣',name:'起爆装置パーツ',desc:'単体では起爆不可。'},{id:'eng_manual',icon:'🔧',name:'書き込みのある修復マニュアル',desc:'エンジニアの筆跡で細工手順が書き込まれている。'}],
+     storyPub:'エネルギーコアに過負荷の細工が施されていた。精密な電気工学の知識が必要な作業だ。',
+     storySec:'【口頭のみ】エンジニアの認証コードで記録された不正アクセスログが残っている。'},
+    {id:2,icon:'🏥',name:'生命維持室',num:'③ 生命維持室',restrict:'doctor',restrictLabel:'🔒 医師 入室不可',
+     items:[{id:'life_poison',icon:'⚠️',name:'未認可の薬物',desc:'医師の致死判定能力の発動条件。'},{id:'med_record',icon:'📋',name:'改ざんされた医療処置記録',desc:'医師の署名で改ざんされている。'}],
+     storyPub:'酸素循環フィルターに異物が混入されていた。医療・薬学の専門知識が必要な仕業だ。',
+     storySec:'【口頭のみ】医師の署名付きで、未認可の薬物の持ち込み記録がある。'},
+    {id:3,icon:'📦',name:'貨物室',num:'④ 貨物室',restrict:'scientist',restrictLabel:'🔒 科学者 入室不可',
+     items:[{id:'cargo_battery',icon:'🔋',name:'高圧電池パック',desc:'カプセル破壊能力の発動条件。'},{id:'enc_media',icon:'💾',name:'暗号化記憶媒体',desc:'スパイグループの機密データ。'}],
+     storyPub:'貨物室の隔壁に爆破装置が取り付けられていた。帰還の瞬間に起動する設計になっている。',
+     storySec:'【口頭のみ】爆破装置の起動コードが科学者の研究端末のシリアルナンバーと一致する。'},
+  ];
+
+  const sentMap={0:{0:false,1:false},1:{0:false,1:false},2:{0:false,1:false},3:{0:false,1:false}};
+  let curRoom=null,selTarget=null,curGroup='mochi';
+
+  window.toggleM5Panel=function(){
+    const p=document.getElementById('m5-rocket-panel');
+    const btn=document.getElementById('m5-launch-btn');
+    if(p.classList.contains('open')){
+      p.classList.remove('open');
+      btn.innerHTML='<span class="btn-icon">🚀</span>LAUNCH MISSION CONSOLE';
+    } else {
+      p.classList.add('open');
+      btn.innerHTML='<span class="btn-icon">✕</span>CLOSE CONSOLE';
+      renderM5Group(curGroup);
+    }
+  };
+
+  window.switchM5Group=function(g){
+    curGroup=g;
+    document.querySelectorAll('.tb-btn').forEach(b=>{b.classList.remove('active');b.style.borderTop='none'});
+    const tb=document.getElementById('tb-'+g);
+    tb.classList.add('active');
+    tb.style.borderTop='2px solid '+GROUP_ACC[g];
+    renderM5Group(g);
+  };
+
+  function renderM5Group(g){
+    const el=document.getElementById('gc-roles');
+    el.innerHTML=ROLES.map(role=>{
+      const tg=TRUE_GROUP[g][role];
+      return `<button class="gc-role-btn" onclick="openM5Card('${g}','${role}')">
+        <div class="gc-role-emoji">${ROLE_EMOJI[role]}</div>
+        <div class="gc-role-info">
+          <div class="gc-role-name">${ROLE_JP[role]}</div>
+          <div class="gc-role-true" style="color:${GROUP_ACC[tg]}88">真の所属：${GROUP_JP[tg]}グループ</div>
+        </div>
+        <div class="gc-role-arrow">›</div>
+      </button>`;
+    }).join('');
+  }
+
+  window.openM5Card=function(g,role){
+    const tg=TRUE_GROUP[g][role];
+    document.getElementById('cm-emoji').textContent=ROLE_EMOJI[role];
+    document.getElementById('cm-role').textContent=ROLE_JP[role];
+    document.getElementById('cm-grp').textContent=GROUP_JP[g]+'グループ';
+    document.getElementById('cm-grp').style.color=GROUP_ACC[g];
+    document.getElementById('cm-true').textContent='真の所属：'+GROUP_JP[tg]+'グループ';
+    const lk=document.getElementById('cm-link');
+    lk.href=CARD_FILES[role];
+    lk.style.cssText=`display:block;margin:14px 16px 4px;padding:13px;text-align:center;border-radius:8px;font-family:var(--mono);font-size:10px;letter-spacing:.15em;cursor:pointer;text-decoration:none;color:${ROLE_ACC[role]};background:${ROLE_ACC[role]}22;border:1px solid ${ROLE_ACC[role]}44`;
+    document.getElementById('m5-card-overlay').classList.add('open');
+  };
+  window.closeM5Card=()=>document.getElementById('m5-card-overlay').classList.remove('open');
+  window.m5CardBgClose=(e)=>{if(e.target===document.getElementById('m5-card-overlay'))window.closeM5Card()};
+
+  window.openM5Room=function(id){
+    const r=ROOMS[id];curRoom=r;selTarget=null;
+    document.getElementById('m-icon').textContent=r.icon;
+    document.getElementById('m-num').textContent=r.num;
+    document.getElementById('m-name').textContent=r.name;
+    document.getElementById('m-restrict').textContent=r.restrictLabel;
+    document.getElementById('m-pub').textContent=r.storyPub;
+    document.getElementById('m-sec').textContent=r.storySec;
+    r.items.forEach((it,i)=>{
+      document.getElementById('ii'+i).textContent=it.icon;
+      document.getElementById('in'+i).textContent=it.name;
+      const sl=document.getElementById('is-'+i);
+      const ob=sl.querySelector('.is-sent');if(ob)ob.remove();
+      if(sentMap[id][i]){const b=document.createElement('div');b.className='is-sent';b.textContent='✓';sl.appendChild(b);}
+      const sb=document.getElementById('sb'+i);
+      sb.disabled=true;sb.textContent=(i===0?'A':'B')+(sentMap[id][i]?' 済み':' を送信');
+      sb.className=sentMap[id][i]?'s-btn sent':'s-btn';
+    });
+    const as=sentMap[id][0]&&sentMap[id][1];
+    document.getElementById('sba').disabled=true;
+    document.getElementById('sba').textContent=as?'✓ 両方送信済み':'A・B 両方まとめて送信';
+    const btns=document.getElementById('m-tbts');
+    btns.innerHTML=ALL_ROLES.map(role=>{
+      const dis=role===r.restrict?'disabled':'';
+      return `<button class="t-btn" id="tbtn-${role}" ${dis} onclick="pickM5Target(this,'${role}')">${ROLE_EMOJI[role]} ${ROLE_JP[role]}</button>`;
+    }).join('');
+    document.getElementById('m-tnote').textContent='※ '+r.restrictLabel;
+    document.getElementById('m5-overlay').classList.add('open');
+  };
+  window.pickM5Target=function(btn,role){
+    document.querySelectorAll('.t-btn').forEach(b=>b.classList.remove('sel'));
+    btn.classList.add('sel');selTarget=role;
+    [0,1].forEach(i=>{if(!sentMap[curRoom.id][i])document.getElementById('sb'+i).disabled=false;});
+    if(!(sentMap[curRoom.id][0]&&sentMap[curRoom.id][1]))document.getElementById('sba').disabled=false;
+  };
+  window.closeM5Modal=()=>{document.getElementById('m5-overlay').classList.remove('open');curRoom=null;selTarget=null;};
+  window.m5BgClose=(e)=>{if(e.target===document.getElementById('m5-overlay'))window.closeM5Modal();};
+
+  async function doM5Send(idx){
+    const it=curRoom.items[idx];
+    const ref=doc(db,'game','session','inventory',curGroup+'_'+selTarget);
+    const sn=await getDoc(ref);
+    const items=[...(sn.data()?.items||[])];
+    if(!items.includes(it.id))items.push(it.id);
+    await setDoc(ref,{items,role:selTarget,group:curGroup});
+    sentMap[curRoom.id][idx]=true;
+  }
+  window.sendM5Item=async function(idx){
+    if(!curRoom||!selTarget)return;
+    const btn=document.getElementById('sb'+idx);
+    btn.disabled=true;btn.textContent='送信中…';
+    try{
+      await doM5Send(idx);
+      btn.textContent=(idx===0?'A':'B')+' 済み';btn.className='s-btn sent';
+      const sl=document.getElementById('is-'+idx);
+      if(!sl.querySelector('.is-sent')){const b=document.createElement('div');b.className='is-sent';b.textContent='✓';sl.appendChild(b);}
+      updateM5RS(curRoom.id);
+      if(sentMap[curRoom.id][0]&&sentMap[curRoom.id][1]){document.getElementById('sba').disabled=true;document.getElementById('sba').textContent='✓ 両方送信済み';}
+      m5Toast('✓ '+ROLE_EMOJI[selTarget]+ROLE_JP[selTarget]+' に '+curRoom.items[idx].name+' を送信');
+    }catch(e){btn.disabled=false;btn.textContent=(idx===0?'A':'B')+' を送信';m5Toast('⚠️ '+e.message);}
+  };
+  window.sendM5All=async function(){
+    if(!curRoom||!selTarget)return;
+    const btn=document.getElementById('sba');btn.disabled=true;btn.textContent='送信中…';
+    try{
+      for(let i=0;i<2;i++){
+        if(!sentMap[curRoom.id][i])await doM5Send(i);
+        const sb=document.getElementById('sb'+i);sb.textContent=(i===0?'A':'B')+' 済み';sb.className='s-btn sent';sb.disabled=true;
+        const sl=document.getElementById('is-'+i);
+        if(!sl.querySelector('.is-sent')){const b=document.createElement('div');b.className='is-sent';b.textContent='✓';sl.appendChild(b);}
+      }
+      btn.textContent='✓ 両方送信済み';updateM5RS(curRoom.id);
+      m5Toast('✓ A・B 両方を '+ROLE_EMOJI[selTarget]+ROLE_JP[selTarget]+' に送信');
+    }catch(e){btn.disabled=false;btn.textContent='A・B 両方まとめて送信';m5Toast('⚠️ '+e.message);}
+  };
+  function updateM5RS(id){
+    const s=sentMap[id];const el=document.getElementById('rs-'+id);const btn=document.getElementById('room-btn-'+id);
+    if(s[0]&&s[1]){el.textContent='✓ 完了';el.className='rr-status done';btn.classList.add('explored');}
+    else if(s[0]||s[1]){el.textContent='▶ 1/2';el.className='rr-status part';}
+  }
+  function m5Toast(msg){
+    const t=document.getElementById('m5-toast');t.textContent=msg;
+    t.style.opacity='1';t.style.transform='translateX(-50%) translateY(0)';
+    setTimeout(()=>{t.style.opacity='0';t.style.transform='translateX(-50%) translateY(10px)';},3000);
+  }
+
+  document.getElementById('tb-mochi').style.borderTop='2px solid #4da6ff';
+  renderM5Group('mochi');
 </script>
 </body>
 </html>
