@@ -79,6 +79,7 @@ body{background:#060a18;min-height:100vh;font-family:'Noto Serif JP',serif;paddi
 .used-btn{display:block;margin-top:12px;padding:8px 14px;background:rgba(255,50,50,.1);color:rgba(255,120,120,.8);border:1px solid rgba(255,50,50,.25);border-radius:5px;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.12em;cursor:pointer;transition:all .2s;width:100%}
 .used-btn:hover{background:rgba(255,50,50,.2);color:#ff9090}
 .final-note{margin-top:10px;padding:6px 10px;background:rgba(255,190,50,.05);border:1px solid rgba(255,190,50,.25);border-radius:4px;font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(255,200,80,.7);letter-spacing:.06em}
+.ability-hint{font-size:12px;color:rgba(255,255,255,.3);line-height:1.7;margin-top:6px}
 .sec.win{background:rgba(50,220,130,.03);border-left:3px solid rgba(50,220,130,.35) !important;padding-left:20px}
 .sec.win .sec-title{color:rgba(50,220,130,.6)}
 .win-item{display:flex;gap:8px;align-items:center;font-size:14px;font-weight:700;color:#b3ffe0;padding:4px 0}
@@ -180,7 +181,7 @@ body{background:#060a18;min-height:100vh;font-family:'Noto Serif JP',serif;paddi
   <div class="sub-panel show" id="sp-0-secret">
     <div class="sf-box">
       <div class="sf-label">🔴 極秘ファイル — 船長のみ</div>
-      <div class="sf-text">あなたのIDカードが、科学者の手にある。科学者の初期所持品として確認されている。取り戻せ——そのカードさえあれば、誰かの隠した秘密を暴く力が生まれる。<br><br>この部屋から望月議長の個人回線への送信記録がある。誰かがここから連絡を取っていた。</div>
+      <div class="sf-text">あなたのIDカードが、エンジニアの手にある。エンジニアの初期所持品として確認されている。取り戻せ——そのカードさえあれば、誰かの秘密を暴く力が生まれる。<br><br>この部屋から望月議長の個人回線への送信記録がある。誰かがここから連絡を取っていた——科学者が最も怪しい。</div>
     </div>
   </div>
 </div>
@@ -217,7 +218,7 @@ body{background:#060a18;min-height:100vh;font-family:'Noto Serif JP',serif;paddi
     <div class="sub-panel" id="sp-1-secret">
       <div class="sf-box">
         <div class="sf-label">🔴 極秘ファイル — 船長のみ</div>
-        <div class="sf-text">機関室の不正アクセスにエンジニアのコードが使われた——だがその時刻、エンジニアは別の場所にいた。誰かがエンジニアを嵌めた。本当の黒幕は別にいる。</div>
+        <div class="sf-text">起爆装置の設計は高度すぎる——技術者の知識だけでなく、科学的な知見が必要だ。エンジニアよりも科学者の方が怪しい。<br><br>改ざんされた航行ログを入手できれば、超越特権を使う準備が半分整う。</div>
       </div>
     </div>
   </div>
@@ -255,7 +256,7 @@ body{background:#060a18;min-height:100vh;font-family:'Noto Serif JP',serif;paddi
     <div class="sub-panel" id="sp-2-secret">
       <div class="sf-box">
         <div class="sf-label">🔴 極秘ファイル — 船長のみ</div>
-        <div class="sf-text">生命維持室の改ざんにあなたのIDコードが使用された。科学者があなたのIDカードを持っている——科学者があなたを騙って動いている可能性がある。</div>
+        <div class="sf-text">生命維持室で発見された未認可の薬物——この物質は人の記憶を操作できる可能性がある。誰かがクルーに投与していた痕跡がある。<br><br>未認可の薬物を入手できれば、超越特権を使う準備が整う。</div>
       </div>
     </div>
   </div>
@@ -293,7 +294,7 @@ body{background:#060a18;min-height:100vh;font-family:'Noto Serif JP',serif;paddi
     <div class="sub-panel" id="sp-3-secret">
       <div class="sf-box">
         <div class="sf-label">🔴 極秘ファイル — 船長のみ</div>
-        <div class="sf-text">帰還命令の最終署名があなたのIDで処理された。起爆装置はその署名で起動する——あなたの名前が引き金を引く設計になっている。<br><br>暗号化記憶媒体に真相がある。誰よりも先に手に入れろ。</div>
+        <div class="sf-text">改ざんされた航行ログと未認可の薬物、両方揃えば超越特権が使える。誰が工作員か——それを確かめる前に、拘束できる準備を整えろ。<br><br>動機を忘れるな：自分を騙したやつは絶対に許さない。</div>
       </div>
     </div>
   </div>
@@ -312,11 +313,12 @@ body{background:#060a18;min-height:100vh;font-family:'Noto Serif JP',serif;paddi
   <div class="block-label pub">【公開情報】— 全員に開示可能</div>
   <div class="sec">
     <div class="sec-title">役割説明</div>
-    <div class="pub-info-text">乗組員全体の指揮を執るリーダー。全員の意思決定に関与し、帰還命令を発する権限を持つ。状況判断と統率力が求められる。</div>
+    <div class="pub-info-text">何より規律が大事。チームの安寧を乱す者がいれば、この船もろともに爆破するのもいとわぬ。</div>
   </div>
   <div class="sec ability">
-    <div class="sec-title">公開能力：全域調査権限</div>
-    <div class="ability-body">操縦室を除く全区域への立ち入りと調査が可能。他のクルーへの指示・命令ができる。</div>
+    <div class="sec-title">公開能力：船長の特権</div>
+    <div class="ability-cond">🪪「船長のIDカード」を所持しているとき使用可（⑩話し合いまで、１回）</div>
+    <div class="ability-body">任意のクルー１人を指定し、すでに解除されている１つの【極秘ファイル】を、自分だけが知ることができる。</div>
   </div>
 
   <!-- 秘密の情報 -->
@@ -327,33 +329,32 @@ body{background:#060a18;min-height:100vh;font-family:'Noto Serif JP',serif;paddi
       <div class="role-identity-icon">🛸</div>
       <div class="role-identity-text" id="identity-text">読み込み中…</div>
     </div>
-    <div style="font-size:12px;color:rgba(180,220,255,.55);line-height:1.6;text-align:center;margin-top:4px">全クルーを指揮し、宇宙船を無事に地球へ帰還させよ。<br>あなたの中の裏切り者を見つけ出せ。</div>
+    <div style="font-size:12px;color:rgba(180,220,255,.55);line-height:1.6;text-align:center;margin-top:4px">あなたは真のクルーです。<br>破壊工作員は誰なのか…探し出しましょう。</div>
   </div>
 
   <!-- 能力①（ABILITY1_ITEM_ID所持時のみ表示） -->
   <div class="sec ability" id="ability1-block" style="display:none">
-    <div class="sec-title">【秘密の能力①】身元照会</div>
-    <div class="ability-cond">🪪「船長のIDカード」を所持しているとき使用可</div>
-    <div class="ability-body">任意のクルー1人を指定し、そのクルーの極秘情報の一部をGMに耳打ちで確認できる。使用後、アイテムを消費する。</div>
+    <div class="sec-title">【能力①使用ボタン】船長の特権</div>
+    <div class="ability-cond">🪪「船長のIDカード」を所持しているとき使用可（⑩話し合いまで）</div>
+    <div class="ability-body">GMに耳打ちで極秘ファイルを確認したら、下のボタンを押してIDカードを消費してください。</div>
     <button class="used-btn" onclick="markAbility1Used()">✕ 使用済にする（船長のIDカードを消費）</button>
   </div>
 
   <!-- 能力②（両アイテム所持時のみ表示） -->
   <div class="sec ability" id="ability2-block" style="display:none">
-    <div class="sec-title">【秘密の能力②】強制拘束命令</div>
-    <div class="ability-cond">📡 暗号通信端末 ＋ 🗓️ 改ざんされた航行ログ を所持中</div>
-    <div class="ability-body">任意のクルーを1人指定する。帰還の瞬間（最終アクション）に、そのクルーを強制拘束できる。拘束されたクルーは帰還カプセルに乗ることができない。</div>
-    <div class="final-note">⚠️ 帰還の瞬間（最終アクション）のみに使用可<br>⚠️ この能力をむやみに情報公開すると警戒されてしまうので注意が必要そうだ…</div>
+    <div class="sec-title">【秘密の能力②】船長の超越特権</div>
+    <div class="ability-cond">⚠️ 未認可の薬物 ＋ 🗓️ 改ざんされた航行ログ を所持中</div>
+    <div class="ability-body">任意のクルーを１人指定する。帰還の瞬間（最終アクション）以降に、そのクルーを強制的に拘束することができる。</div>
+    <div class="final-note">⚠️ 帰還の瞬間（最終アクション時）以降かつアイテム所有時に発動<br>⚠️ この能力をむやみに情報公開すると警戒されてしまうので注意が必要そうだ…<br>⚠️ アイテムが足りないときはおとなしくやり過ごそう…</div>
   </div>
 
   <div class="sec win">
     <div class="sec-title">【勝利条件】</div>
-    <div class="win-item">帰還カプセルが修復され全員で地球に帰還すること</div>
+    <div class="win-item">生きて帰還すること</div>
   </div>
   <div class="sec bonus">
     <div class="sec-title">【ボーナスミッション】</div>
-    <div class="bonus-item">破壊工作員（科学者）を正しく拘束すること</div>
-    <div class="bonus-item">自分自身が生き残り帰還すること</div>
+    <div class="bonus-item">工作員を正しく拘束すること</div>
   </div>
   <div class="card-footer">
     <div class="footer-code">CAPTAIN-01 / LAST-15MIN</div>
@@ -448,7 +449,7 @@ const GROUP_NAMES = {mochi:'もちグループ',tsuki:'つきグループ',taku:
 const ROLE = 'captain';
 const INIT_ITEM_ID = 'flashlight';
 const ABILITY1_ITEM_ID = 'captain_id';
-const ABILITY2_ITEMS = ['cockpit_terminal','nav_log'];
+const ABILITY2_ITEMS = ['life_poison','nav_log'];
 const trueGName = GROUP_NAMES[TRUE_GROUP[group]?.[ROLE]] || group;
 
 document.getElementById('nb-name-val').textContent = name || '（名前未設定）';
@@ -458,23 +459,23 @@ const ROOM_PW_FIELD = {1:'pw2', 2:'pw3', 3:'pw4'};
 const unlocked = {0:false, 1:false, 2:false, 3:false}; // 0 is restricted
 
 const ALL_ITEMS = {
-  flashlight:       {icon:'🔦',name:'懐中電灯',                   desc:'【科学者の能力①】に必要。科学者に渡すと、探索済みの部屋の隠しアイテムを特定できる。'},
-  doctor_sedative:  {icon:'💊',name:'鎮静剤',                     desc:'【エンジニアの能力①】に必要。エンジニアに渡すと、強制アイテム奪取を発動できる。'},
-  precision_driver: {icon:'🔩',name:'精密ドライバー',               desc:'【医師の能力①】に必要。医師に渡すと、任意のクルーを一時行動不能にできる。'},
-  captain_id:       {icon:'🪪',name:'船長のIDカード',               desc:'【船長の能力①】に必要。船長に渡すと、任意のクルーの極秘情報を知ることができる。'},
-  cockpit_terminal: {icon:'📡',name:'暗号通信端末',                  desc:'【船長の能力②】に必要（2個セット）。操縦室で発見。'},
-  nav_log:          {icon:'🗓️',name:'改ざんされた航行ログ',           desc:'【船長の能力②】に必要（2個セット）。操縦室で発見。'},
-  engine_explosive: {icon:'💣',name:'起爆装置パーツ',                desc:'【エンジニアの能力②】に必要（2個セット）。機関室で発見。'},
-  eng_manual:       {icon:'🔧',name:'書き込みのある修復マニュアル',    desc:'【エンジニアの能力②】に必要（2個セット）。機関室で発見。'},
-  life_poison:      {icon:'⚠️',name:'未認可の薬物',                  desc:'【医師の能力②】に必要（2個セット）。生命維持室で発見。'},
-  med_record:       {icon:'📋',name:'改ざんされた医療処置記録',        desc:'【医師の能力②】に必要（2個セット）。生命維持室で発見。'},
+  flashlight:       {icon:'🔦',name:'懐中電灯',                   desc:'【科学者の能力①】に必要。科学者に渡すと、探索済みの部屋の発見アイテムを知ることができる。'},
+  doctor_sedative:  {icon:'💊',name:'鎮痛剤',                     desc:'【医師の能力①】に必要。医師に渡すと、探索者を強制的に決定できる。'},
+  precision_driver: {icon:'🔩',name:'精密ドライバー',               desc:'【エンジニアの能力①】に必要。エンジニアに渡すと、任意のクルーと持ち物を交換できる。'},
+  captain_id:       {icon:'🪪',name:'船長のIDカード',               desc:'【船長の能力①】に必要。船長に渡すと、解除済みの極秘ファイルを１つ閲覧できる。'},
+  cockpit_terminal: {icon:'📡',name:'暗号通信端末',                  desc:'操縦室で発見された暗号通信端末。交渉の材料に使える。'},
+  nav_log:          {icon:'🗓️',name:'改ざんされた航行ログ',           desc:'【船長の能力②・エンジニアの能力②】に必要。操縦室で発見。'},
+  engine_explosive: {icon:'💣',name:'起爆装置パーツ',                desc:'【科学者の能力②】に必要（2個セット）。機関室で発見。'},
+  eng_manual:       {icon:'🔧',name:'書き込みのある修復マニュアル',    desc:'機関室で発見されたマニュアル。交渉の材料に使える。'},
+  life_poison:      {icon:'⚠️',name:'未認可の薬物',                  desc:'【船長の能力②・医師の能力②】に必要。生命維持室で発見。'},
+  med_record:       {icon:'📋',name:'改ざんされた医療処置記録',        desc:'【エンジニアの能力②】に必要（2個セット）。生命維持室で発見。'},
   cargo_battery:    {icon:'🔋',name:'高圧電池パック',                desc:'【科学者の能力②】に必要（2個セット）。貨物室で発見。'},
-  enc_media:        {icon:'💾',name:'暗号化記憶媒体',                desc:'【科学者の能力②】に必要（2個セット）。貨物室で発見。'},
+  enc_media:        {icon:'💾',name:'暗号化記憶媒体',                desc:'【医師の能力②】に必要（2個セット）。貨物室で発見。'},
   // 旧IDの後方互換エイリアス
-  captain_key:      {icon:'🔦',name:'懐中電灯',                   desc:'【科学者の能力①】に必要。科学者に渡すと、探索済みの部屋の隠しアイテムを特定できる。'},
-  engineer_tool:    {icon:'🔩',name:'精密ドライバー',               desc:'【医師の能力①】に必要。医師に渡すと、任意のクルーを一時行動不能にできる。'},
-  engine_tool:      {icon:'🔩',name:'精密ドライバー',               desc:'【医師の能力①】に必要。医師に渡すと、任意のクルーを一時行動不能にできる。'},
-  scientist_device: {icon:'🪪',name:'船長のIDカード',               desc:'【船長の能力①】に必要。船長に渡すと、任意のクルーの極秘情報を知ることができる。'},
+  captain_key:      {icon:'🔦',name:'懐中電灯',                   desc:'【科学者の能力①】に必要。科学者に渡すと、探索済みの部屋の発見アイテムを知ることができる。'},
+  engineer_tool:    {icon:'🔩',name:'精密ドライバー',               desc:'【エンジニアの能力①】に必要。エンジニアに渡すと、任意のクルーと持ち物を交換できる。'},
+  engine_tool:      {icon:'🔩',name:'精密ドライバー',               desc:'【エンジニアの能力①】に必要。エンジニアに渡すと、任意のクルーと持ち物を交換できる。'},
+  scientist_device: {icon:'🪪',name:'船長のIDカード',               desc:'【船長の能力①】に必要。船長に渡すと、解除済みの極秘ファイルを１つ閲覧できる。'},
 };
 const INIT_ITEMS = [INIT_ITEM_ID];
 const docRef = doc(db,'game','session','inventory',group+'_'+ROLE);

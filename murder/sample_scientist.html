@@ -138,7 +138,7 @@ body{background:#060a18;min-height:100vh;font-family:'Noto Serif JP',serif;paddi
   <div class="sub-tabbar"><button class="sub-tab active" onclick="switchSub(0,'story',this)">ストーリー</button><button class="sub-tab" onclick="switchSub(0,'hakken',this)">発見物</button><button class="sub-tab" onclick="switchSub(0,'secret',this)">極秘ファイル</button></div>
   <div class="sub-panel show" id="sp-0-story"><div class="sp-label">🟢 公開ストーリー</div><div class="sp-text">帰還3時間前から、操縦システムに未確認の暗号通信が送信されていた。宛先は、望月議長直轄の極秘回線。航行ログには本来の帰還座標とは異なる座標が上書きされていた。</div></div>
   <div class="sub-panel" id="sp-0-hakken"><div class="sp-label">🔍 この部屋の発見物</div><div class="fi-list"><div class="fi-row"><div class="fi-ico">📡</div><div><div class="fi-name">暗号通信端末</div><div class="fi-desc">競合企業への暗号化通信履歴が残る端末</div></div></div><div class="fi-row"><div class="fi-ico">🗓️</div><div><div class="fi-name">改ざんされた航行ログ</div><div class="fi-desc">上書きされた形跡のある飛行記録データ</div></div></div></div></div>
-  <div class="sub-panel" id="sp-0-secret"><div class="sf-box"><div class="sf-label">🔴 極秘ファイル — 科学者のみ</div><div class="sf-text">この部屋からの暗号送信——あなた自身が行ったものだ。望月議長への任務開始報告。あなたは最初から、議長の工作員だ。</div></div></div>
+  <div class="sub-panel" id="sp-0-secret"><div class="sf-box"><div class="sf-label">🔴 極秘ファイル — 科学者のみ</div><div class="sf-text">この部屋からの暗号通信——あなた自身が送ったのかもしれない。覚えていないが、体が動いていた。望月議長への接触記録がある。<br><br>改ざんされた航行ログを誰が持つかに注目しておけ。</div></div></div>
 </div>
 <div class="room-panel" id="rpanel-1">
   <div class="lock-screen" id="ls-1"><div class="lock-big">🔒</div><div class="lock-ttl">機関室 — ロック中</div><div class="lock-desc">GMからパスワードを受け取ったら入力してください</div><div class="lock-row"><input class="lock-inp" id="pw-inp-1" type="text" placeholder="- - - -" maxlength="20"><button class="lock-btn" onclick="tryUnlock(1)">解錠</button></div><div class="lock-err" id="lock-err-1"></div></div>
@@ -146,7 +146,7 @@ body{background:#060a18;min-height:100vh;font-family:'Noto Serif JP',serif;paddi
     <div class="sub-tabbar"><button class="sub-tab active" onclick="switchSub(1,'story',this)">ストーリー</button><button class="sub-tab" onclick="switchSub(1,'hakken',this)">発見物</button><button class="sub-tab" onclick="switchSub(1,'secret',this)">極秘ファイル</button></div>
     <div class="sub-panel show" id="sp-1-story"><div class="sp-label">🟢 公開ストーリー</div><div class="sp-text">エネルギーコアの内部に、精密な起爆装置が組み込まれていた。帰還シーケンスと連動するタイマーを持ち、修復マニュアルの余白には暗号めいたメモが残されていた。</div></div>
     <div class="sub-panel" id="sp-1-hakken"><div class="sp-label">🔍 この部屋の発見物</div><div class="fi-list"><div class="fi-row"><div class="fi-ico">💣</div><div><div class="fi-name">起爆装置パーツ</div><div class="fi-desc">エネルギーコアに接続された精密な爆発装置</div></div></div><div class="fi-row"><div class="fi-ico">🔧</div><div><div class="fi-name">書き込みのある修復マニュアル</div><div class="fi-desc">余白に暗号めいたメモが書き込まれたマニュアル</div></div></div></div></div>
-    <div class="sub-panel" id="sp-1-secret"><div class="sf-box"><div class="sf-label">🔴 極秘ファイル — 科学者のみ</div><div class="sf-text">起爆には貨物室の高圧電池パックが必要だ。あなたは貨物室に入れない。<br><br>懐中電灯を船長から入手できれば、他の部屋に隠れたアイテムを見つける手段が生まれるかもしれない。</div></div></div>
+    <div class="sub-panel" id="sp-1-secret"><div class="sf-box"><div class="sf-label">🔴 極秘ファイル — 科学者のみ</div><div class="sf-text">起爆には貨物室の高圧電池パックが必要だ。あなたは貨物室に入れない。<br><br>誰かに持ってきてもらえ——相手が気づかぬように。懐中電灯を船長から入手できれば、隠れたアイテムを探す手段になるかもしれない。</div></div></div>
   </div>
 </div>
 <div class="room-panel" id="rpanel-2">
@@ -155,40 +155,40 @@ body{background:#060a18;min-height:100vh;font-family:'Noto Serif JP',serif;paddi
     <div class="sub-tabbar"><button class="sub-tab active" onclick="switchSub(2,'story',this)">ストーリー</button><button class="sub-tab" onclick="switchSub(2,'hakken',this)">発見物</button><button class="sub-tab" onclick="switchSub(2,'secret',this)">極秘ファイル</button></div>
     <div class="sub-panel show" id="sp-2-story"><div class="sp-label">🟢 公開ストーリー</div><div class="sp-text">生命維持システムから、地球上に存在しない有機化合物が検出された。さらに、全医療処置記録が完全に上書きされていた。誰かが意図的に証拠を消した。</div></div>
     <div class="sub-panel" id="sp-2-hakken"><div class="sp-label">🔍 この部屋の発見物</div><div class="fi-list"><div class="fi-row"><div class="fi-ico">⚠️</div><div><div class="fi-name">未認可の薬物</div><div class="fi-desc">医療データベースに登録されていない未知の薬剤</div></div></div><div class="fi-row"><div class="fi-ico">📋</div><div><div class="fi-name">改ざんされた医療処置記録</div><div class="fi-desc">データが上書きされた医師の診療ログ</div></div></div></div></div>
-    <div class="sub-panel" id="sp-2-secret"><div class="sf-box"><div class="sf-label">🔴 極秘ファイル — 科学者のみ</div><div class="sf-text">生命維持室の有機化合物——望月議長の研究資料と完全に一致する。議長は人間ではない。それが暴かれることを、議長は恐れている。</div></div></div>
+    <div class="sub-panel" id="sp-2-secret"><div class="sf-box"><div class="sf-label">🔴 極秘ファイル — 科学者のみ</div><div class="sf-text">あなた自身の血液サンプルに、この未認可薬物の反応がある。あなたの体が「勝手に動く」原因はこれかもしれない——望月議長に投与されていた。<br><br>でも今は、目的を果たせ。</div></div></div>
   </div>
 </div>
 <div class="room-panel" id="rpanel-3">
   <div class="restrict-screen"><div class="restrict-big">🚫</div><div class="restrict-ttl">貨物室 — 立入禁止</div><div class="restrict-desc">科学者はこの部屋への立ち入りを<br>禁じられています。<br>他のクルーから発見物を受け取ってください。</div></div>
   <div class="sub-tabbar"><button class="sub-tab active" onclick="switchSub(3,'secret',this)">極秘ファイル</button></div>
-  <div class="sub-panel show" id="sp-3-secret"><div class="sf-box"><div class="sf-label">🔴 極秘ファイル — 科学者のみ</div><div class="sf-text">暗号化記憶媒体の中身——望月議長が地球外生命体である証拠だ。これを地球に届かせてはならない。<br><br>帰還カプセルを破壊し、すべてをここに葬れ。それがあなたの使命だ。</div></div></div>
+  <div class="sub-panel show" id="sp-3-secret"><div class="sf-box"><div class="sf-label">🔴 極秘ファイル — 科学者のみ</div><div class="sf-text">高圧電池パック——これが最後のピースだ。誰かに持ってきてもらえ。<br><br>起爆装置パーツ＋高圧電池パック、両方揃えば帰還の瞬間に全てが終わる。あなたの任務は完結する。</div></div></div>
 </div>
 <div class="card-spacer"></div>
 <div class="pub-card">
   <div class="card-header"><div class="role-eyebrow">乗組員 / CREW</div><div class="role-name">🧪 科学者</div><div class="role-en">SCIENTIST</div></div>
   <div class="block-label pub">【公開情報】— 全員に開示可能</div>
-  <div class="sec"><div class="sec-title">役割説明</div><div class="pub-info-text">宇宙環境研究の専門家。データ解析と実験管理を担当。科学調査の名目で広い行動範囲を持ち、どの区域にも立ち入れる権限がある。</div></div>
-  <div class="sec ability"><div class="sec-title">公開能力：データ解析</div><div class="ability-body">任意のデータ・証拠物を詳細に分析し、隠された情報を引き出すことができる。ただし分析結果は全員に共有される。</div></div>
+  <div class="sec"><div class="sec-title">役割説明</div><div class="pub-info-text">冷徹な合理主義者。感情を排し、最適解だけを追い求める。真理を得るためにー。</div></div>
+  <div class="sec ability"><div class="sec-title">公開能力：科学者の探索</div><div class="ability-cond">🔦「懐中電灯」を所持しているとき使用可（⑩話し合いまで、１回）</div><div class="ability-body">探索が済んだ任意の部屋で、その部屋で発見されたアイテムが何なのかを知ることができる（GMに確認）。</div></div>
   <div class="block-label secret">【秘密の情報】— 本人のみ閲覧</div>
   <div class="sec secret1">
     <div class="sec-title">あなたの真の身元</div>
     <div class="role-identity"><div class="role-identity-icon">🧪</div><div class="role-identity-text" id="identity-text">読み込み中…</div></div>
-    <div style="font-size:12px;color:rgba(255,160,160,.5);line-height:1.6;text-align:center;margin-top:4px">あなたは二重の使命を帯びた最も危険な存在だ。<br>誰も、あなたの真の目的を知らない。</div>
+    <div style="font-size:12px;color:rgba(255,160,160,.5);line-height:1.6;text-align:center;margin-top:4px">カプセルを破壊し、任務を完遂せよ。<br>自分でもよく分からない間に体が動いてしまう……。</div>
   </div>
   <div class="sec ability" id="ability1-block" style="display:none">
-    <div class="sec-title">【秘密の能力①】隠蔽物探知</div>
-    <div class="ability-cond">🔦「懐中電灯」を所持しているとき使用可</div>
-    <div class="ability-body">探索が済んだ任意の部屋で、まだ誰も気づいていないアイテムを1つ特定できる（GMに確認）。使用後、アイテムを消費する。</div>
+    <div class="sec-title">【能力①使用ボタン】科学者の探索</div>
+    <div class="ability-cond">🔦「懐中電灯」を所持しているとき使用可（⑩話し合いまで）</div>
+    <div class="ability-body">GMに部屋のアイテムを確認したら、下のボタンを押して懐中電灯を消費してください。</div>
     <button class="used-btn" onclick="markAbility1Used()">✕ 使用済にする（懐中電灯を消費）</button>
   </div>
   <div class="sec ability" id="ability2-block" style="display:none">
-    <div class="sec-title">【秘密の能力②】帰還カプセル完全破壊</div>
-    <div class="ability-cond">🔋 高圧電池パック ＋ 💾 暗号化記憶媒体 を所持中</div>
-    <div class="ability-body">任意のクルーを1人指定する。帰還の瞬間（最終アクション）に、暗号化記憶媒体の起動コードで高圧電池パックを過充電し、帰還カプセルを完全に焼き切る。乗員全員の帰還が不可能になる。</div>
-    <div class="final-note">⚠️ 帰還の瞬間（最終アクション）のみに使用可<br>⚠️ この能力をむやみに情報公開すると警戒されてしまうので注意が必要そうだ…</div>
+    <div class="sec-title">【秘密の能力②】マッドサイエンティスト</div>
+    <div class="ability-cond">💣 起爆装置パーツ ＋ 🔋 高圧電池パック を所持中</div>
+    <div class="ability-body">帰還の瞬間（最終アクション）に、起爆装置パーツと高圧電池パックを組み合わせ、帰還用カプセルを爆破することができる。</div>
+    <div class="final-note">⚠️ 帰還の瞬間（最終アクション時）かつアイテム所有時のみに発動<br>⚠️ この能力をむやみに情報公開すると警戒されてしまうので注意が必要そうだ…<br>⚠️ アイテムが足りないときはおとなしくやり過ごそう…</div>
   </div>
   <div class="sec win"><div class="sec-title">【勝利条件】</div><div class="win-item" id="win-text">読み込み中…</div></div>
-  <div class="sec bonus"><div class="sec-title">【ボーナスミッション】</div><div class="bonus-item">能力②で帰還カプセルを完全破壊すること</div><div class="bonus-item">自分自身が生き残り帰還すること</div></div>
+  <div class="sec bonus"><div class="sec-title">【ボーナスミッション】</div><div class="bonus-item">誰にも見破られずに破壊成功すること</div><div class="bonus-item">または誤認逮捕させて生きて帰還すること</div></div>
   <div class="card-footer"><div class="footer-code">SCIENTIST-01 / LAST-15MIN</div><div class="footer-status">MONITORING</div></div>
 </div>
 <div class="item-card">
@@ -211,13 +211,13 @@ const params=new URLSearchParams(location.search);
 const group=params.get('group')||'mochi';const name=params.get('name')||'';
 const TRUE_GROUP={mochi:{captain:'mochi',scientist:'tsuki',engineer:'taku',doctor:'rou'},tsuki:{captain:'tsuki',scientist:'mochi',engineer:'rou',doctor:'taku'},taku:{captain:'taku',scientist:'rou',engineer:'mochi',doctor:'tsuki'},rou:{captain:'rou',scientist:'taku',engineer:'tsuki',doctor:'mochi'}};
 const GROUP_NAMES={mochi:'もちグループ',tsuki:'つきグループ',taku:'たくグループ',rou:'ろうグループ'};
-const ROLE='scientist';const INIT_ITEM_ID='captain_id';const ABILITY1_ITEM_ID='flashlight';const ABILITY2_ITEMS=['cargo_battery','enc_media'];
+const ROLE='scientist';const INIT_ITEM_ID='doctor_sedative';const ABILITY1_ITEM_ID='flashlight';const ABILITY2_ITEMS=['engine_explosive','cargo_battery'];
 const tg=TRUE_GROUP[group]?.[ROLE];const trueGName=GROUP_NAMES[tg]||group;
 document.getElementById('nb-name-val').textContent=name||'（名前未設定）';
-document.getElementById('identity-text').textContent='破壊工作員かつ裏切り者（'+trueGName+'）です';
-document.getElementById('win-text').textContent='帰還カプセルを破壊し、真の組織（'+trueGName+'）の名声を守る';
+document.getElementById('identity-text').textContent='破壊工作員（'+trueGName+'）です';
+document.getElementById('win-text').textContent='帰還の瞬間（最終アクション）でカプセル破壊を成功させること';
 const ROOM_PW_FIELD={1:'pw2',2:'pw3'};const unlocked={0:true,1:false,2:false,3:false};
-const ALL_ITEMS={flashlight:{icon:'🔦',name:'懐中電灯',desc:'【科学者の能力①】に必要。科学者に渡すと、探索済みの部屋の隠しアイテムを特定できる。'},doctor_sedative:{icon:'💊',name:'鎮静剤',desc:'【エンジニアの能力①】に必要。エンジニアに渡すと、強制アイテム奪取を発動できる。'},precision_driver:{icon:'🔩',name:'精密ドライバー',desc:'【医師の能力①】に必要。医師に渡すと、任意のクルーを一時行動不能にできる。'},captain_id:{icon:'🪪',name:'船長のIDカード',desc:'【船長の能力①】に必要。船長に渡すと、任意のクルーの極秘情報を知ることができる。'},cockpit_terminal:{icon:'📡',name:'暗号通信端末',desc:'【船長の能力②】に必要（2個セット）。操縦室で発見。'},nav_log:{icon:'🗓️',name:'改ざんされた航行ログ',desc:'【船長の能力②】に必要（2個セット）。操縦室で発見。'},engine_explosive:{icon:'💣',name:'起爆装置パーツ',desc:'【エンジニアの能力②】に必要（2個セット）。機関室で発見。'},eng_manual:{icon:'🔧',name:'書き込みのある修復マニュアル',desc:'【エンジニアの能力②】に必要（2個セット）。機関室で発見。'},life_poison:{icon:'⚠️',name:'未認可の薬物',desc:'【医師の能力②】に必要（2個セット）。生命維持室で発見。'},med_record:{icon:'📋',name:'改ざんされた医療処置記録',desc:'【医師の能力②】に必要（2個セット）。生命維持室で発見。'},cargo_battery:{icon:'🔋',name:'高圧電池パック',desc:'【科学者の能力②】に必要（2個セット）。貨物室で発見。'},enc_media:{icon:'💾',name:'暗号化記憶媒体',desc:'【科学者の能力②】に必要（2個セット）。貨物室で発見。'},captain_key:{icon:'🔦',name:'懐中電灯',desc:'【科学者の能力①】に必要。科学者に渡すと、探索済みの部屋の隠しアイテムを特定できる。'},engineer_tool:{icon:'🔩',name:'精密ドライバー',desc:'【医師の能力①】に必要。医師に渡すと、任意のクルーを一時行動不能にできる。'},engine_tool:{icon:'🔩',name:'精密ドライバー',desc:'【医師の能力①】に必要。医師に渡すと、任意のクルーを一時行動不能にできる。'},scientist_device:{icon:'🪪',name:'船長のIDカード',desc:'【船長の能力①】に必要。船長に渡すと、任意のクルーの極秘情報を知ることができる。'}};
+const ALL_ITEMS={flashlight:{icon:'🔦',name:'懐中電灯',desc:'【科学者の能力①】に必要。科学者に渡すと、探索済みの部屋の発見アイテムを知ることができる。'},doctor_sedative:{icon:'💊',name:'鎮痛剤',desc:'【医師の能力①】に必要。医師に渡すと、探索者を強制的に決定できる。'},precision_driver:{icon:'🔩',name:'精密ドライバー',desc:'【エンジニアの能力①】に必要。エンジニアに渡すと、任意のクルーと持ち物を交換できる。'},captain_id:{icon:'🪪',name:'船長のIDカード',desc:'【船長の能力①】に必要。船長に渡すと、解除済みの極秘ファイルを１つ閲覧できる。'},cockpit_terminal:{icon:'📡',name:'暗号通信端末',desc:'操縦室で発見された暗号通信端末。交渉の材料に使える。'},nav_log:{icon:'🗓️',name:'改ざんされた航行ログ',desc:'【船長の能力②・エンジニアの能力②】に必要。操縦室で発見。'},engine_explosive:{icon:'💣',name:'起爆装置パーツ',desc:'【科学者の能力②】に必要（2個セット）。機関室で発見。'},eng_manual:{icon:'🔧',name:'書き込みのある修復マニュアル',desc:'機関室で発見されたマニュアル。交渉の材料に使える。'},life_poison:{icon:'⚠️',name:'未認可の薬物',desc:'【船長の能力②・医師の能力②】に必要。生命維持室で発見。'},med_record:{icon:'📋',name:'改ざんされた医療処置記録',desc:'【エンジニアの能力②】に必要（2個セット）。生命維持室で発見。'},cargo_battery:{icon:'🔋',name:'高圧電池パック',desc:'【科学者の能力②】に必要（2個セット）。貨物室で発見。'},enc_media:{icon:'💾',name:'暗号化記憶媒体',desc:'【医師の能力②】に必要（2個セット）。貨物室で発見。'},captain_key:{icon:'🔦',name:'懐中電灯',desc:'【科学者の能力①】に必要。科学者に渡すと、探索済みの部屋の発見アイテムを知ることができる。'},engineer_tool:{icon:'🔩',name:'精密ドライバー',desc:'【エンジニアの能力①】に必要。エンジニアに渡すと、任意のクルーと持ち物を交換できる。'},engine_tool:{icon:'🔩',name:'精密ドライバー',desc:'【エンジニアの能力①】に必要。エンジニアに渡すと、任意のクルーと持ち物を交換できる。'},scientist_device:{icon:'🪪',name:'船長のIDカード',desc:'【船長の能力①】に必要。船長に渡すと、解除済みの極秘ファイルを１つ閲覧できる。'}};
 const INIT_ITEMS=[INIT_ITEM_ID];const docRef=doc(db,'game','session','inventory',group+'_'+ROLE);let curItem=null,selRole=null;
 window.tryUnlock=async function(roomId){const inp=document.getElementById('pw-inp-'+roomId);const err=document.getElementById('lock-err-'+roomId);const entered=inp.value.trim();if(!entered){err.textContent='パスワードを入力してください';return;}err.textContent='確認中…';try{const cfgRef=doc(db,'game','session','config','main');const cfgSnap=await getDoc(cfgRef);const field=ROOM_PW_FIELD[roomId];const correct=cfgSnap.exists()?(cfgSnap.data()[field]||''):'';if(!correct){err.textContent='パスワードが設定されていません（GMに確認）';return;}if(entered===correct){unlocked[roomId]=true;document.getElementById('ls-'+roomId).style.display='none';document.getElementById('rc-'+roomId).style.display='block';document.getElementById('rtab-'+roomId).classList.remove('lock-tab');switchRoom(roomId);err.textContent='';}else{err.textContent='❌ パスワードが違います';inp.value='';}}catch(e){err.textContent='⚠️ エラー: '+e.message;}};
 window.switchRoom=function(roomId){document.querySelectorAll('.room-panel').forEach(p=>p.classList.remove('show'));document.querySelectorAll('.room-tab').forEach(t=>t.classList.remove('active'));document.getElementById('rpanel-'+roomId).classList.add('show');document.getElementById('rtab-'+roomId).classList.add('active');};
