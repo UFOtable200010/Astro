@@ -99,7 +99,7 @@
     font-family: 'Space Mono', monospace;
     font-size: 12px;
     letter-spacing: 0.2em;
-    color: rgba(255,200,50,0.6);
+    color: rgba(232,240,255,0.5);
     background: transparent;
     border: none;
     cursor: pointer;
@@ -107,7 +107,7 @@
     transition: color 0.3s;
     padding: 0;
   }
-  .nav-m5-btn:hover { color: rgba(255,200,50,1); }
+  .nav-m5-btn:hover { color: var(--alice-teal); }
 
   /* M-05 progress popup */
   #m5-progress-overlay {
@@ -2903,9 +2903,9 @@ document.getElementById('btn-close-bank').addEventListener('click', () => {
       await Promise.all(writes);
       // M05進行状況もリセット
       localStorage.removeItem('astro_m5_progress');
-      m5ApplyProgress();
-      m5Toast('✓ 全グループの持ち物とM05進行状況を初期化しました');
-    }catch(e){m5Toast('⚠️ 初期化失敗: '+e.message);}
+      if(typeof m5ApplyProgress==='function') m5ApplyProgress();
+      alert('✓ 全グループの持ち物とM05進行状況を初期化しました');
+    }catch(e){alert('⚠️ 初期化失敗: '+e.message);}
   };
 
   window.refreshAllCardURLs=function(){
