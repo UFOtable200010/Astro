@@ -1559,11 +1559,11 @@
 .rt-sub{font-size:8px;opacity:.6}
 .reward-notice{background:rgba(255,215,50,.05);border:1px solid rgba(255,215,50,.2);border-radius:8px;padding:18px 22px;font-size:14px;color:rgba(255,240,180,.8);line-height:1.8;text-align:center}
 .reward-notice strong{color:#ffd740;font-weight:900}
-.ranking-title{font-size:44px;font-weight:900;color:#f0f8ff;text-align:center;letter-spacing:.1em;text-shadow:0 0 40px rgba(77,166,255,.5),0 0 80px rgba(77,166,255,.2);padding:32px 0}
+.ranking-title{font-size:44px;font-weight:900;color:#f0f8ff;text-align:center;letter-spacing:.1em;text-shadow:0 0 40px rgba(77,166,255,.5),0 0 80px rgba(77,166,255,.2);padding:32px 0 100px}
 /* ===== おわりに ===== */
-.owari-section{background:linear-gradient(180deg,#000510 0%,#020a1a 50%,#000208 100%);padding:100px 20px 140px}
+.owari-section{background:linear-gradient(180deg,#000510 0%,#020a1a 50%,#000208 100%);padding:160px 20px 140px}
 .owari-inner{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:32px}
-.owari-heading{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.4em;color:rgba(150,200,255,.4);text-align:center}
+.owari-heading{font-family:'Share Tech Mono',monospace;font-size:22px;letter-spacing:.35em;color:rgba(150,200,255,.65);text-align:center;text-shadow:0 0 20px rgba(77,166,255,.2)}
 .owari-body{font-size:16px;color:rgba(200,225,255,.8);line-height:2.4;padding:8px 4px}
 .owari-quote-block{display:flex;flex-direction:column;gap:36px;padding-top:20px}
 .owari-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(0,200,212,.4),transparent);margin-bottom:16px}
@@ -2662,7 +2662,7 @@
       <div class="owari-divider"></div>
       <p class="owari-quote">「星を探す者は、空ばかり探す。<br>だけど夢々忘れてはならない。<br>うつむいた時に見える地面も、また星だ。」</p>
       <p class="owari-quote owari-quote-right">「この先も、きっとあたしは変わる。」</p>
-      <p class="owari-quote owari-quote-far-right">「たくろう、宇宙どこまでも。」</p>
+      <p class="owari-quote owari-quote-far-right">「たくろう、<ruby>宇宙<rt>どこ</rt></ruby>までも。」</p>
     </div>
   </div>
 </section>
@@ -2742,7 +2742,6 @@
     <button class="gm-chat-hd-close" onclick="closeGMChat()">✕</button>
   </div>
   <div class="gm-group-tabs" id="gm-group-tabs">
-    <button class="gm-group-tab active" data-g="" onclick="gmSetGroup(this,'')">すべて</button>
     <button class="gm-group-tab" data-g="mochi" onclick="gmSetGroup(this,'mochi')">もち</button>
     <button class="gm-group-tab" data-g="tsuki" onclick="gmSetGroup(this,'tsuki')">つき</button>
     <button class="gm-group-tab" data-g="taku" onclick="gmSetGroup(this,'taku')">たく</button>
@@ -3215,7 +3214,7 @@ document.getElementById('btn-close-bank').addEventListener('click', () => {
   };
 
   window.resetAllInventory=async function(){
-    if(!confirm('全グループの持ち物を初期状態に戻します。よろしいですか？')) return;
+    if(!confirm('全グループの持ち物・秘密情報・宇宙人アイコンを初期状態に戻します。よろしいですか？')) return;
     const INIT={'captain':'flashlight','engineer':'doctor_sedative','doctor':'precision_driver','scientist':'captain_id'};
     const groups=['mochi','tsuki','taku','rou'];
     const roles=['captain','engineer','doctor','scientist'];
@@ -3223,15 +3222,17 @@ document.getElementById('btn-close-bank').addEventListener('click', () => {
       const writes=[];
       for(const g of groups){
         for(const r of roles){
-          const ref=doc(db,'game','session','inventory',g+'_'+r);
-          writes.push(setDoc(ref,{items:[INIT[r]],role:r,group:g}));
+          writes.push(setDoc(doc(db,'game','session','inventory',g+'_'+r),{items:[INIT[r]],role:r,group:g}));
+          writes.push(setDoc(doc(db,'game','session','secrets',g+'_'+r),{items:[],group:g,role:r}));
         }
       }
+      // 宇宙人アイコンリセット信号
+      writes.push(setDoc(doc(db,'game','session','reset','alien'),{ts:Date.now()}));
       await Promise.all(writes);
       // M05進行状況もリセット
       localStorage.removeItem('astro_m5_progress');
       if(typeof m5ApplyProgress==='function') m5ApplyProgress();
-      alert('✓ 全グループの持ち物とM05進行状況を初期化しました');
+      alert('✓ 全グループの持ち物・秘密情報・宇宙人アイコンを初期化しました');
     }catch(e){alert('⚠️ 初期化失敗: '+e.message);}
   };
 
@@ -3541,9 +3542,10 @@ window.gmChatShowList=function(){
   _gmRenderList();
 };
 window.gmSetGroup=function(btn,g){
-  _gmCurGroup=g;
+  const wasActive=_gmCurGroup===g;
+  _gmCurGroup=wasActive?'':g;
   document.querySelectorAll('.gm-group-tab').forEach(t=>t.classList.remove('active'));
-  btn.classList.add('active');
+  if(!wasActive)btn.classList.add('active');
   _gmRenderList();
 };
 window.gmClearHistory=async function(){

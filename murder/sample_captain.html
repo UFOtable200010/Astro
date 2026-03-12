@@ -205,6 +205,11 @@ body{background:#060a18;min-height:100vh;font-family:'Noto Serif JP',serif;paddi
 .gm-msg-item{padding:10px 16px;border-bottom:1px solid rgba(255,140,30,.1);display:flex;flex-direction:column;gap:4px}
 .gm-msg-room{font-family:'Share Tech Mono',monospace;font-size:8px;color:rgba(255,180,80,.5);letter-spacing:.1em}
 .gm-msg-text{font-size:13px;color:rgba(255,220,150,.9);line-height:1.8}
+.gm-msg-share{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:8px}
+.gm-msg-share-label{font-family:'Share Tech Mono',monospace;font-size:8px;color:rgba(255,180,80,.5);letter-spacing:.1em}
+.gm-msg-share-btn{padding:4px 9px;background:rgba(255,160,40,.1);border:1px solid rgba(255,160,40,.3);border-radius:5px;font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(255,200,100,.85);cursor:pointer;transition:all .18s}
+.gm-msg-share-btn:hover:not(:disabled){background:rgba(255,160,40,.22);transform:translateY(-1px)}
+.gm-msg-share-btn:disabled{opacity:.4;cursor:not-allowed}
 .alien-btn{position:relative!important}
 .alien-btn.crossed::after{content:'✕';position:absolute;top:0;right:0;font-size:9px;color:#ff4455;font-weight:900;line-height:1}
 </style>
@@ -723,20 +728,33 @@ onSnapshot(doc(db,'game','session','discovery',group+'_'+ROLE),snap=>{
   [0,1,2,3].forEach(roomId=>{const panel=document.getElementById('sp-'+roomId+'-hakken');if(!panel)return;const list=panel.querySelector('.fi-list');if(!list)return;const ri=byRoom[roomId]||[];if(!ri.length)return;list.innerHTML=ri.map(it=>`<div class="fi-row"><div class="fi-ico">${it.icon||'📦'}</div><div><div class="fi-name">${(it.name||'').replace(/</g,'&lt;')}</div><div class="fi-desc">GMから開示されました（表示のみ）</div></div></div>`).join('');});
 });
 // === SECRETS (×⑧) ===
+const _SRE={captain:'🛸',scientist:'🧪',engineer:'⚡',doctor:'🏥'};
+const _SRJ={captain:'船長',scientist:'科学者',engineer:'エンジニア',doctor:'医師'};
+let _secItems=[];
+window.shareSecret=async function(idx,targetRole){
+  const si=_secItems[idx];if(!si)return;
+  const btn=document.querySelector(`.gm-msg-share-btn[data-idx="${idx}"][data-r="${targetRole}"]`);
+  if(btn)btn.disabled=true;
+  try{
+    const ref=doc(db,'game','session','secrets',group+'_'+targetRole);
+    const snap=await getDoc(ref);const ex=snap.exists()?(snap.data().items||[]):[];
+    if(!ex.some(s=>s.roomId===si.roomId)){ex.push({roomId:si.roomId,roomName:si.roomName,text:si.text,ts:Date.now()});await setDoc(ref,{items:ex,group,role:targetRole});}
+    if(btn){btn.textContent='✓ 済';btn.style.opacity='.5';}
+    showToast('✓ '+_SRJ[targetRole]+'に共有しました');
+  }catch(e){if(btn)btn.disabled=false;showToast('⚠️ '+e.message);}
+};
 onSnapshot(doc(db,'game','session','secrets',group+'_'+ROLE),snap=>{
   const items=snap.exists()?(snap.data().items||[]):[];
+  _secItems=items;
   // 発見物タブにも表示
   items.forEach(si=>{const panel=document.getElementById('sp-'+si.roomId+'-hakken');if(!panel)return;let b=panel.querySelector('.fi-secret-recv');if(!b){b=document.createElement('div');b.className='fi-secret-recv';b.innerHTML='<div class="fi-sec-label">📡 GM秘密情報</div><div class="fi-sec-text"></div>';panel.appendChild(b);}b.querySelector('.fi-sec-text').textContent=si.text||'';});
   // アイテム枠下パネルに表示
-  const msgPanel=document.getElementById('gm-msgs-panel');
-  const msgList=document.getElementById('gm-msgs-list');
+  const msgPanel=document.getElementById('gm-msgs-panel');const msgList=document.getElementById('gm-msgs-list');
   if(msgPanel&&msgList){
     if(items.length){
       msgPanel.style.display='';
-      msgList.innerHTML=items.map(si=>`<div class="gm-msg-item"><div class="gm-msg-room">📍 ${si.roomName||'ROOM '+si.roomId}</div><div class="gm-msg-text">${(si.text||'').replace(/</g,'&lt;')}</div></div>`).join('');
-    } else {
-      msgPanel.style.display='none';
-    }
+      msgList.innerHTML=items.map((si,idx)=>`<div class="gm-msg-item"><div class="gm-msg-room">📍 ${si.roomName||'ROOM '+si.roomId}</div><div class="gm-msg-text">${(si.text||'').replace(/</g,'&lt;')}</div><div class="gm-msg-share"><span class="gm-msg-share-label">共有：</span>${['captain','scientist','engineer','doctor'].filter(r=>r!==ROLE).map(r=>`<button class="gm-msg-share-btn" data-idx="${idx}" data-r="${r}" onclick="shareSecret(${idx},'${r}')">${_SRE[r]}${_SRJ[r]}</button>`).join('')}</div></div>`).join('');
+    }else{msgPanel.style.display='none';}
   }
 });
 // === ALIEN × (×⑩) ===
@@ -753,6 +771,12 @@ window.handlePod5IconClick=function(){
     localStorage.setItem(_AXK,'1');
   }
 };
+// === ALIEN RESET SIGNAL ===
+let _alienResetTs=0;
+onSnapshot(doc(db,'game','session','reset','alien'),snap=>{
+  if(!snap.exists())return;const ts=snap.data().ts||0;
+  if(ts>_alienResetTs){_alienResetTs=ts;localStorage.removeItem(_AXK);document.querySelector('.alien-btn').classList.remove('crossed');const pb=document.getElementById('pod5-body');if(pb)pb.innerHTML='この宇宙船には第5の部屋が存在する。<br>そこには正体不明の「何か」からの監視の痕跡がある。';}
+});
 </script>
 </body>
 </html>
