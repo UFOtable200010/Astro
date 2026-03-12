@@ -143,10 +143,15 @@ body{background:#060a18;min-height:100vh;font-family:'Noto Serif JP',serif;paddi
 .pod5-body{font-size:13px;color:rgba(200,180,255,.7);line-height:1.8;margin-bottom:20px}
 .pod5-btn{width:100%;padding:11px;background:rgba(150,100,255,.15);color:rgba(200,160,255,.9);border:1px solid rgba(150,100,255,.35);border-radius:6px;font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:.18em;cursor:pointer;margin-bottom:8px}
 .pod5-close{width:100%;padding:9px;background:transparent;color:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.08);border-radius:6px;font-family:'Share Tech Mono',monospace;font-size:10px;cursor:pointer}
+.secret-box{margin:8px 12px 12px;border:2px solid rgba(255,160,50,.4);border-radius:10px;overflow:hidden;background:rgba(0,5,20,.4)}
+.pub-section-bg{background:rgba(255,255,255,.04)}
+.slot.used{opacity:.32;filter:grayscale(.6) brightness(.7)}
+.slot.used .slot-owned-badge{background:rgba(100,100,100,.2);color:#666;border-color:rgba(100,100,100,.2)}
+.reward{font-family:'Share Tech Mono',monospace;font-size:10px;color:rgba(255,215,50,.85);background:rgba(255,200,30,.08);border:1px solid rgba(255,200,30,.25);border-radius:3px;padding:1px 7px;margin-left:8px;white-space:nowrap}
 </style>
 </head>
 <body>
-<div class="name-bar"><div class="nb-icon">⚡</div><div><div class="nb-role">ENGINEER / エンジニア</div><div class="nb-name" id="nb-name-val">—</div></div><button class="alien-btn" onclick="openPod5()">👾</button></div>
+<div class="name-bar"><div class="nb-icon">⚡</div><div><div class="nb-role">ENGINEER / エンジニア</div><div class="nb-name" id="nb-name-val">—</div></div><button class="alien-btn" onclick="handleAlienClick()">👾</button></div>
 <div class="room-tabbar">
   <button class="room-tab active" id="rtab-intro" onclick="switchRoom('intro')">📖 導入</button>
   <button class="room-tab" id="rtab-0" onclick="switchRoom(0)">操縦室</button>
@@ -157,7 +162,7 @@ body{background:#060a18;min-height:100vh;font-family:'Noto Serif JP',serif;paddi
 <div class="room-panel show" id="rpanel-intro">
   <div class="sub-panel show" style="padding:22px 20px">
     <div class="sp-label">📖 オープニングストーリー</div>
-    <div class="sp-text">宇宙船「たくろう」が地球への帰還まで残り3時間というとき、突然どこかから緊急メッセージが届いた。<br><br>「この船には破壊工作員が潜んでいる。帰還を妨害する者を見つけ出せ」——送信元は不明。誰かが、自分の目的のためにこの警告を送ってきた。しかしそれが誰なのか、何のためなのか……クルーたちは互いを疑いながら、真実を探し始めた。<br><br>あなたは生きて地球に戻ることができるか？</div>
+    <div class="sp-text">宇宙船「たくろう」が地球への帰還まで残り3時間というとき、突然どこかから緊急メッセージが届いた。<br><br>「この船には破壊工作員が潜んでいる。帰還を妨害する者を見つけ出せ」——送信元は不明。誰かが、自分の目的のためにこの警告を送ってきた。しかしそれが誰なのか、何のためなのか……クルーたちは互いを疑いながら、真実を探し始めた。<br><br>あなたは生きて地球に戻ることができるか？<br><br>…そのとき、船内のどこかから不思議な音が届いた。<br><em style="color:rgba(180,140,255,.7);font-style:normal">たん、たん、たん</em>——規則正しい、まるで呼びかけるような音が。気のせいだろうか？</div>
   </div>
 </div>
 <div class="room-panel" id="rpanel-0">
@@ -178,8 +183,9 @@ body{background:#060a18;min-height:100vh;font-family:'Noto Serif JP',serif;paddi
 </div>
 <div class="room-panel" id="rpanel-1">
   <div class="restrict-screen"><div class="restrict-big">🚫</div><div class="restrict-ttl">機関室 — 立入禁止</div><div class="restrict-desc">エンジニアはこの部屋への立ち入りを<br>禁じられています。<br>他のクルーから発見物を受け取ってください。</div></div>
-  <div class="sub-tabbar"><button class="sub-tab active" onclick="switchSub(1,'secret',this)">極秘ファイル</button></div>
-  <div class="sub-panel show" id="sp-1-secret"><div class="sf-box"><div class="sf-label">🔴 極秘ファイル — エンジニアのみ</div><div class="sf-text">あなたとは関係ない起爆装置。でも、これが誰かのせいにされれば……自分は安全だ。<br><br>改ざんされた医療処置記録を手に入れれば、天才のハッキング能力を発動できる。生命維持室を探索した誰かに近づけ。</div></div></div>
+  <div class="sub-tabbar"><button class="sub-tab active" onclick="switchSub(1,'story',this)">ストーリー</button><button class="sub-tab" onclick="switchSub(1,'secret',this)">極秘ファイル</button></div>
+  <div class="sub-panel show" id="sp-1-story"><div class="sp-label">🟢 公開ストーリー</div><div class="sp-text">エンジンの内部に、精巧な爆弾が仕掛けられていた！帰還のスイッチが入る瞬間に爆発するよう設計されている。近くの修復マニュアルの余白には、謎めいたメモが書き込まれていた。</div></div>
+  <div class="sub-panel" id="sp-1-secret"><div class="sf-box"><div class="sf-label">🔴 極秘ファイル — エンジニアのみ</div><div class="sf-text">あなたとは関係ない起爆装置。でも、これが誰かのせいにされれば……自分は安全だ。<br><br>改ざんされた医療処置記録を手に入れれば、天才のハッキング能力を発動できる。生命維持室を探索した誰かに近づけ。</div></div></div>
 </div>
 <div class="room-panel" id="rpanel-2">
   <div class="lock-screen" id="ls-2"><div class="lock-big">🔒</div><div class="lock-ttl">生命維持室 — ロック中</div><div class="lock-desc">GMからパスワードを受け取ったら入力してください</div><div class="lock-row"><input class="lock-inp" id="pw-inp-2" type="text" placeholder="- - - -" maxlength="20"><button class="lock-btn" onclick="tryUnlock(2)">解錠</button></div><div class="lock-err" id="lock-err-2"></div></div>
@@ -211,15 +217,16 @@ body{background:#060a18;min-height:100vh;font-family:'Noto Serif JP',serif;paddi
     <div class="secret-divider-line"></div>
   </div>
   <div class="block-label secret">【秘密の情報】— 本人のみ閲覧</div>
-<div class="ability2-hint">
-  <div class="ability2-hint-name">【能力②：天才のハッキング】</div>
-  ？？？ ＋ ？？？ が両方揃ったとき閲覧・使用可能
-</div>
+<div class="secret-box">
   <div class="sec secret1">
     <div class="sec-title">あなたの真の身元</div>
     <div class="role-identity"><div class="role-identity-icon">⚡</div><div class="role-identity-text" id="identity-text">読み込み中…</div></div>
     <div style="font-size:12px;color:rgba(255,220,130,.5);line-height:1.6;text-align:center;margin-top:4px">破壊工作員ではありませんが、裏切り者（ろうグループ）です。<br>バレないように真のクルーとしてやり過ごしましょう。</div>
   </div>
+<div class="ability2-hint">
+  <div class="ability2-hint-name">【能力②：天才のハッキング】</div>
+  ？？？ ＋ ？？？ が両方揃ったとき閲覧・使用可能
+</div>
   <div class="sec ability" id="ability1-block" style="display:none">
     <div class="sec-title">【能力①使用ボタン】エンジニアの分解</div>
     <div class="ability-cond">🔩「精密ドライバー」を所持しているとき使用可（⑩話し合いまで）</div>
@@ -234,7 +241,8 @@ body{background:#060a18;min-height:100vh;font-family:'Noto Serif JP',serif;paddi
     <button class="used-btn" onclick="markAbility2Used()">🚨 能力②を発動する（GMに報告）</button>
   </div>
   <div class="sec win"><div class="sec-title">【勝利条件】</div><div class="win-item" id="win-text">読み込み中…</div></div>
-  <div class="sec bonus"><div class="sec-title">【ボーナスミッション】</div><div class="bonus-item">精密ドライバー・改ざんされた医療処置記録・高圧電池パックの3つを集めること</div><div class="bonus-item">または誤認逮捕されることなく、工作員を捕まえられること</div></div>
+  <div class="sec bonus"><div class="sec-title">【ボーナスミッション】</div><div class="bonus-item">船長のIDカード・改ざんされた医療処置記録・高圧電池パックの3つを集めること <span class="reward">+50億円</span></div><div class="bonus-item">または誤認逮捕されることなく、工作員を捕まえられること <span class="reward">+10億円</span></div></div>
+</div><!-- /secret-box -->
   <div class="card-footer"><div class="footer-code">ENGINEER-01 / LAST-15MIN</div><div class="footer-status">MONITORING</div></div>
 </div>
 <div class="item-card">
@@ -252,9 +260,9 @@ body{background:#060a18;min-height:100vh;font-family:'Noto Serif JP',serif;paddi
 <div class="pod5-overlay" id="pod5-overlay" onclick="if(event.target===this)closePod5()">
   <div class="pod5-box">
     <div class="pod5-icon">👾</div>
-    <div class="pod5-title">— 第5のポッド —</div>
-    <div class="pod5-body">この宇宙船には第5のポッドが存在する。<br>そこには正体不明の「何か」が乗っているとの情報がある。<br><br>もし真犯人がそのポッドにいると確信したなら、GMに報告せよ。</div>
-    <button class="pod5-btn" onclick="reportPod5()">🚨 第5のポッドを対象にする（GMに報告）</button>
+    <div class="pod5-title">ー第5の部屋　宇宙人からの監視部屋ー</div>
+    <div class="pod5-body">この宇宙船には第5の部屋が存在する。<br>そこには正体不明の「何か」からの監視の痕跡がある。</div>
+    <button class="pod5-btn" onclick="reportPod5()">🚨 第5の部屋を対象にする（GMに報告）</button>
     <button class="pod5-close" onclick="closePod5()">閉じる</button>
   </div>
 </div>
@@ -272,10 +280,14 @@ const ROLE='engineer';const INIT_ITEM_ID='doctor_sedative';const ABILITY1_ITEM_I
 const tg=TRUE_GROUP[group]?.[ROLE];const trueGName=GROUP_NAMES[tg]||group;
 document.getElementById('nb-name-val').textContent=name||'（名前未設定）';
 document.getElementById('identity-text').textContent='裏切り者（'+trueGName+'）です';
-document.getElementById('win-text').textContent='生きて帰還すること';
+document.getElementById('win-text').innerHTML='生きて帰還すること <span class="reward">+10億円</span>';
 const ROOM_PW_FIELD={2:'pw3',3:'pw4'};const unlocked={0:true,1:false,2:false,3:false};
 const ALL_ITEMS={flashlight:{icon:'🔦',name:'懐中電灯',desc:'【科学者の能力①】に必要。科学者に渡すと、探索済みの部屋の発見アイテムを知ることができる。'},doctor_sedative:{icon:'💊',name:'鎮痛剤',desc:'【医師の能力①】に必要。医師に渡すと、探索者を強制的に決定できる。'},precision_driver:{icon:'🔩',name:'精密ドライバー',desc:'【エンジニアの能力①】に必要。エンジニアに渡すと、任意のクルーと持ち物を交換できる。'},captain_id:{icon:'🪪',name:'船長のIDカード',desc:'【船長の能力①】に必要。船長に渡すと、解除済みの極秘ファイルを１つ閲覧できる。'},cockpit_terminal:{icon:'📡',name:'暗号通信端末',desc:'操縦室で発見された暗号通信端末。交渉の材料に使える。'},nav_log:{icon:'🗓️',name:'改ざんされた航行ログ',desc:'【船長の能力②】に必要。操縦室で発見。'},engine_explosive:{icon:'💣',name:'起爆装置パーツ',desc:'【科学者の能力②】に必要（2個セット）。機関室で発見。'},eng_manual:{icon:'🔧',name:'書き込みのある修復マニュアル',desc:'機関室で発見されたマニュアル。交渉の材料に使える。'},life_poison:{icon:'⚠️',name:'未認可の薬物',desc:'【船長の能力②】に必要。生命維持室で発見。'},med_record:{icon:'📋',name:'改ざんされた医療処置記録',desc:'【エンジニアの能力②】に必要（2個セット）。生命維持室で発見。'},cargo_battery:{icon:'🔋',name:'高圧電池パック',desc:'【科学者の能力②】に必要（2個セット）。貨物室で発見。'},enc_media:{icon:'💾',name:'暗号化記憶媒体',desc:'【医師の能力②】に必要（2個セット）。貨物室で発見。'},captain_key:{icon:'🔦',name:'懐中電灯',desc:'【科学者の能力①】に必要。科学者に渡すと、探索済みの部屋の発見アイテムを知ることができる。'},engineer_tool:{icon:'🔩',name:'精密ドライバー',desc:'【エンジニアの能力①】に必要。エンジニアに渡すと、任意のクルーと持ち物を交換できる。'},engine_tool:{icon:'🔩',name:'精密ドライバー',desc:'【エンジニアの能力①】に必要。エンジニアに渡すと、任意のクルーと持ち物を交換できる。'},scientist_device:{icon:'🪪',name:'船長のIDカード',desc:'【船長の能力①】に必要。船長に渡すと、解除済みの極秘ファイルを１つ閲覧できる。'}};
-const INIT_ITEMS=[INIT_ITEM_ID];const docRef=doc(db,'game','session','inventory',group+'_'+ROLE);let curItem=null,selRole=null;
+const INIT_ITEMS=[INIT_ITEM_ID];
+let _currentItems=[];
+const _USED_KEY='used_'+ROLE+'_'+group;
+const _usedSet=new Set(JSON.parse(localStorage.getItem(_USED_KEY)||'[]'));
+const docRef=doc(db,'game','session','inventory',group+'_'+ROLE);let curItem=null,selRole=null;
 window.tryUnlock=async function(roomId){const inp=document.getElementById('pw-inp-'+roomId);const err=document.getElementById('lock-err-'+roomId);const entered=inp.value.trim();if(!entered){err.textContent='パスワードを入力してください';return;}err.textContent='確認中…';try{const cfgRef=doc(db,'game','session','config','main');const cfgSnap=await getDoc(cfgRef);const field=ROOM_PW_FIELD[roomId];const correct=cfgSnap.exists()?(cfgSnap.data()[field]||''):'';if(!correct){err.textContent='パスワードが設定されていません（GMに確認）';return;}if(entered===correct){unlocked[roomId]=true;document.getElementById('ls-'+roomId).style.display='none';document.getElementById('rc-'+roomId).style.display='block';document.getElementById('rtab-'+roomId).classList.remove('lock-tab');switchRoom(roomId);err.textContent='';}else{err.textContent='❌ パスワードが違います';inp.value='';}}catch(e){err.textContent='⚠️ エラー: '+e.message;}};
 window.switchRoom = function(roomId) {
   document.querySelectorAll('.room-panel').forEach(p=>p.classList.remove('show'));
@@ -288,19 +300,21 @@ window.switchRoom = function(roomId) {
 window.switchSub=function(roomId,tab,btn){['story','hakken','secret'].forEach(t=>{const p=document.getElementById('sp-'+roomId+'-'+t);if(p)p.classList.remove('show');});const p=document.getElementById('sp-'+roomId+'-'+tab);if(p)p.classList.add('show');btn.closest('.sub-tabbar').querySelectorAll('.sub-tab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');};
 async function init(){try{const snap=await getDoc(docRef);if(!snap.exists())await setDoc(docRef,{items:INIT_ITEMS,role:ROLE,group});onSnapshot(docRef,s=>{renderSlots(s.exists()?(s.data().items||[]):[]);setSynced(true);},()=>setSynced(false));}catch(e){setSynced(false);}}
 function setSynced(ok){document.getElementById('sync-dot').className='sync-dot'+(ok?'':' off');document.getElementById('sync-label').textContent=ok?'SYNC':'オフライン';}
-function renderSlots(items){const area=document.getElementById('slots');document.getElementById('item-count').textContent=items.length;if(items.length>3)document.getElementById('limit-overlay').classList.add('show');updateAbilityDisplay(items);let html=items.map(id=>{const it=ALL_ITEMS[id]||{icon:'❓',name:id,desc:''};return`<div class="slot has-item" onclick="openPopup('${id}')"><div class="slot-owned-badge">所持中</div><div class="slot-icon">${it.icon}</div><div class="slot-name">${it.name}</div><div class="slot-hint">タップで詳細</div></div>`;}).join('');for(let i=0;i<Math.max(0,2-items.length);i++)html+=`<div class="slot empty"><div class="slot-icon">📦</div><div class="slot-name">空きスロット</div><div class="slot-hint">交渉で入手</div></div>`;area.innerHTML=html;}
-function updateAbilityDisplay(items){document.getElementById('ability1-block').style.display=items.includes(ABILITY1_ITEM_ID)?'':'none';document.getElementById('ability2-block').style.display=ABILITY2_ITEMS.every(id=>items.includes(id))?'':'none';}
+function renderSlots(items){_currentItems=items;const area=document.getElementById('slots');document.getElementById('item-count').textContent=items.length;if(items.length>3)document.getElementById('limit-overlay').classList.add('show');updateAbilityDisplay(items);let html=items.map(id=>{const it=ALL_ITEMS[id]||{icon:'❓',name:id,desc:''};const u=_usedSet.has(id);return`<div class="slot has-item${u?' used':''}" onclick="openPopup('${id}')"><div class="slot-owned-badge">${u?'使用済':'所持中'}</div><div class="slot-icon">${it.icon}</div><div class="slot-name">${it.name}</div><div class="slot-hint">タップで詳細</div></div>`;}).join('');for(let i=0;i<Math.max(0,2-items.length);i++)html+=`<div class="slot empty"><div class="slot-icon">📦</div><div class="slot-name">空きスロット</div><div class="slot-hint">交渉で入手</div></div>`;area.innerHTML=html;}
+function updateAbilityDisplay(items){const hasAbility1=items.includes(ABILITY1_ITEM_ID)&&!_usedSet.has(ABILITY1_ITEM_ID);const hasAbility2=ABILITY2_ITEMS.every(id=>items.includes(id));document.getElementById('ability1-block').style.display=hasAbility1?'':'none';document.getElementById('ability2-block').style.display=hasAbility2?'':'none';}
 window.markAbility2Used = function() {
   if(!confirm('【能力②：天才のハッキング】を発動しますか？\nすぐにGMに報告してください！')) return;
   showToast('🚨 能力②を宣言しました！GMに報告してください');
 };
-window.markAbility1Used=async function(){if(!confirm('【能力①】を使用します。精密ドライバーがインベントリから削除されます。'))return;try{const snap=await getDoc(docRef);const ni=(snap.data()?.items||[]).filter(id=>id!==ABILITY1_ITEM_ID);await setDoc(docRef,{items:ni,role:ROLE,group});showToast('✅ 能力①を使用済みにしました');}catch(e){showToast('⚠️ '+e.message);}};
+window.markAbility1Used=function(){if(!confirm('【能力①】を使用済みにしますか？アイテムは暗く表示されます。'))return;_usedSet.add(ABILITY1_ITEM_ID);localStorage.setItem(_USED_KEY,JSON.stringify([..._usedSet]));renderSlots(_currentItems);showToast('✅ 能力①を使用済みにしました');};
 window.openPopup=function(itemId){const it=ALL_ITEMS[itemId];if(!it)return;curItem=itemId;selRole=null;document.getElementById('pop-icon').textContent=it.icon;document.getElementById('pop-name').textContent=it.name;document.getElementById('pop-desc').textContent=it.desc;document.querySelectorAll('.role-btn').forEach(b=>b.classList.remove('sel'));document.getElementById('confirm-btn').disabled=true;document.getElementById('overlay').classList.add('open');};
 window.closePopup=()=>{document.getElementById('overlay').classList.remove('open');curItem=null;selRole=null;};
 window.bgClose=e=>{if(e.target===document.getElementById('overlay'))window.closePopup();};
 window.pickRole=(btn,role)=>{document.querySelectorAll('.role-btn').forEach(b=>b.classList.remove('sel'));btn.classList.add('sel');selRole=role;document.getElementById('confirm-btn').disabled=false;};
 window.confirmGive=async function(){if(!curItem||!selRole)return;document.getElementById('confirm-btn').disabled=true;try{const mySnap=await getDoc(docRef);const newMy=(mySnap.data()?.items||[]).filter(id=>id!==curItem);const targetRef=doc(db,'game','session','inventory',group+'_'+selRole);const targetSnap=await getDoc(targetRef);const newTarget=[...(targetSnap.data()?.items||[])];if(!newTarget.includes(curItem))newTarget.push(curItem);await setDoc(docRef,{items:newMy,role:ROLE,group});await setDoc(targetRef,{items:newTarget,role:selRole,group});window.closePopup();showToast('✅ アイテムを渡しました');}catch(e){showToast('⚠️ '+e.message);document.getElementById('confirm-btn').disabled=false;}};
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.style.opacity='1';t.style.transform='translateX(-50%) translateY(0)';setTimeout(()=>{t.style.opacity='0';t.style.transform='translateX(-50%) translateY(12px)';},2600);}
+let _alienClicks=0,_alienTimer=null;
+window.handleAlienClick=function(){_alienClicks++;clearTimeout(_alienTimer);if(_alienClicks>=3){_alienClicks=0;openPod5();}else{_alienTimer=setTimeout(()=>{_alienClicks=0;},1500);}};
 window.openPod5 = function() { document.getElementById('pod5-overlay').classList.add('open'); };
 window.closePod5 = function() { document.getElementById('pod5-overlay').classList.remove('open'); };
 window.reportPod5 = function() { closePod5(); showToast('🚨 第5のポッドをGMに報告しました！'); };

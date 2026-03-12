@@ -1484,6 +1484,40 @@
 .m5-role-btn:hover:not(:disabled){opacity:.85;transform:translateY(-1px);}
 .m5-role-btn:disabled{opacity:.35;cursor:not-allowed;}
 .m5-sent-tag{font-family:var(--mono);font-size:9px;color:#32c878;letter-spacing:.1em;}
+/* ===== ENDING SECTION ===== */
+.ending-section{min-height:100vh;background:radial-gradient(ellipse at 50% 60%,#001840 0%,#000a1a 40%,#000208 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 20px;position:relative;overflow:hidden}
+.ending-earth{position:absolute;bottom:-120px;left:50%;transform:translateX(-50%);width:500px;height:500px;border-radius:50%;background:radial-gradient(ellipse at 40% 35%,#1a6b3a 0%,#0e4a8a 35%,#0a2d6b 55%,#061a45 80%,#020a20 100%);box-shadow:0 0 80px rgba(30,100,200,.4),0 0 200px rgba(10,60,140,.25);opacity:.55}
+.ending-earth::after{content:'';position:absolute;inset:0;border-radius:50%;background:linear-gradient(135deg,rgba(255,255,255,.08) 0%,transparent 50%)}
+.ending-title{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.5em;color:rgba(150,200,255,.4);margin-bottom:16px;text-align:center}
+.ending-headline{font-size:32px;font-weight:900;color:#e8f4ff;text-align:center;margin-bottom:8px;letter-spacing:.04em;text-shadow:0 0 40px rgba(77,166,255,.3)}
+.ending-sub{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.2em;color:rgba(100,180,255,.35);text-align:center;margin-bottom:50px}
+.ending-routes{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:100%;max-width:500px;position:relative;z-index:1}
+.ending-btn{padding:18px 12px;border-radius:10px;border:1.5px solid;cursor:pointer;font-family:'Noto Serif JP',serif;font-size:13px;font-weight:700;transition:all .25s;text-align:center;line-height:1.4}
+.ending-btn.happy{background:rgba(50,200,255,.08);border-color:rgba(50,200,255,.35);color:#88ddff}
+.ending-btn.happy:hover{background:rgba(50,200,255,.18);box-shadow:0 0 20px rgba(50,200,255,.15)}
+.ending-btn.bad1{background:rgba(255,80,30,.08);border-color:rgba(255,80,30,.35);color:#ff9988}
+.ending-btn.bad1:hover{background:rgba(255,80,30,.18);box-shadow:0 0 20px rgba(255,80,30,.15)}
+.ending-btn.bad2{background:rgba(255,140,30,.08);border-color:rgba(255,140,30,.35);color:#ffcc88}
+.ending-btn.bad2:hover{background:rgba(255,140,30,.18);box-shadow:0 0 20px rgba(255,140,30,.15)}
+.ending-btn.alien{background:rgba(180,100,255,.08);border-color:rgba(180,100,255,.35);color:#cc99ff}
+.ending-btn.alien:hover{background:rgba(180,100,255,.18);box-shadow:0 0 20px rgba(180,100,255,.15)}
+.ending-btn .eb-icon{font-size:28px;display:block;margin-bottom:8px}
+.ending-btn .eb-reward{font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(255,215,50,.7);margin-top:6px}
+/* ending modal */
+.end-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);backdrop-filter:blur(8px);z-index:500;align-items:center;justify-content:center;padding:20px}
+.end-modal-overlay.open{display:flex;animation:fadeUp .3s ease}
+.end-modal-box{width:100%;max-width:480px;max-height:90vh;overflow-y:auto;border-radius:14px;padding:0;position:relative}
+.end-modal-bg{width:100%;min-height:160px;display:flex;align-items:center;justify-content:center;font-size:72px;padding:32px 20px;border-radius:14px 14px 0 0}
+.end-modal-bg.happy-bg{background:linear-gradient(160deg,#001a10 0%,#002a1a 40%,#001a30 100%);box-shadow:inset 0 0 60px rgba(50,200,100,.1)}
+.end-modal-bg.bad1-bg{background:linear-gradient(160deg,#1a0500 0%,#2a0a00 40%,#100000 100%);box-shadow:inset 0 0 60px rgba(255,80,30,.15)}
+.end-modal-bg.bad2-bg{background:linear-gradient(160deg,#1a0800 0%,#2a1000 40%,#100400 100%);box-shadow:inset 0 0 60px rgba(255,140,30,.15)}
+.end-modal-bg.alien-bg{background:linear-gradient(160deg,#080018 0%,#0f0030 40%,#050010 100%);box-shadow:inset 0 0 60px rgba(180,100,255,.15)}
+.end-modal-body{background:linear-gradient(155deg,#060d18,#03080f);border-radius:0 0 14px 14px;padding:24px 22px 28px}
+.end-modal-label{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:.28em;color:rgba(150,200,255,.4);margin-bottom:6px}
+.end-modal-title{font-size:18px;font-weight:900;color:#e8f4ff;margin-bottom:6px}
+.end-modal-cond{font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(150,200,255,.45);line-height:1.6;margin-bottom:16px;padding:8px 10px;background:rgba(77,166,255,.04);border:1px solid rgba(77,166,255,.1);border-radius:4px}
+.end-modal-story{font-size:13px;color:#c8d8f0;line-height:2;white-space:pre-wrap}
+.end-modal-close{display:block;width:100%;margin-top:20px;padding:11px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:6px;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.15em;color:rgba(255,255,255,.3);cursor:pointer}
 </style>
 </head>
 <body>
@@ -2388,6 +2422,52 @@
   </div>
 </section>
 
+<!-- ===== ENDING SECTION ===== -->
+<section class="ending-section" id="ending">
+  <div class="ending-earth"></div>
+  <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;width:100%;max-width:500px">
+    <div class="ending-title">━━━ GAME ENDING ━━━</div>
+    <div class="ending-headline">🌍 エンディング</div>
+    <div class="ending-sub">帰還の瞬間——あなたたちの選択が、物語を決める</div>
+    <div class="ending-routes">
+      <button class="ending-btn happy" onclick="openEnding('happy')">
+        <span class="eb-icon">🤝</span>
+        ハッピーエンドルート
+        <div class="eb-reward">条件：工作員を拘束・排除</div>
+      </button>
+      <button class="ending-btn bad1" onclick="openEnding('bad1')">
+        <span class="eb-icon">💥</span>
+        バッドエンド①
+        <div class="eb-reward">条件：カプセル爆破成功</div>
+      </button>
+      <button class="ending-btn bad2" onclick="openEnding('bad2')">
+        <span class="eb-icon">🔥</span>
+        バッドエンド②
+        <div class="eb-reward">条件：誤認逮捕＋爆破失敗</div>
+      </button>
+      <button class="ending-btn alien" onclick="openEnding('alien')">
+        <span class="eb-icon">👾</span>
+        ？？エイリアン？？ルート
+        <div class="eb-reward">条件：真の黒幕を拘束</div>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Ending Modal -->
+<div class="end-modal-overlay" id="end-modal-overlay" onclick="if(event.target===this)closeEnding()">
+  <div class="end-modal-box" id="end-modal-box">
+    <div class="end-modal-bg" id="end-modal-bg"></div>
+    <div class="end-modal-body">
+      <div class="end-modal-label" id="end-modal-label"></div>
+      <div class="end-modal-title" id="end-modal-title"></div>
+      <div class="end-modal-cond" id="end-modal-cond"></div>
+      <div class="end-modal-story" id="end-modal-story"></div>
+      <button class="end-modal-close" onclick="closeEnding()">✕ 閉じる</button>
+    </div>
+  </div>
+</div>
+
 <!-- MISSION05 探索モーダル -->
 <div id="m5-overlay" onclick="m5BgClose(event)">
   <div class="m5-modal">
@@ -3048,6 +3128,89 @@ document.getElementById('btn-close-bank').addEventListener('click', () => {
 
   document.getElementById('tb-mochi').style.borderTop='2px solid #4da6ff';
   renderM5Group('mochi');
+
+// ===== ENDING =====
+const ENDINGS = {
+  happy: {
+    label:'HAPPY END',
+    title:'🤝 ハッピーエンドルート',
+    cond:'条件：船長が科学者を拘束 または 医師が科学者を殺害し、帰還',
+    bgClass:'happy-bg',
+    icon:'🏛️',
+    story:`「……終わりだ、科学者。」
+船長の放った拘束具が、あるいは医師の冷たいナイフが、錯乱する科学者を封じ込めた。
+「やめろ……私じゃない、私の意志じゃないんだ！」
+叫び声も虚しく、科学者は引きずられていく。直後、カプセルの爆破カウントダウンが停止した。
+
+機体は大気圏の熱に包まれ、激しく揺れる。窓の向こうには、5年ぶりに見る青い地球が広がっていた。
+君たちは生き残った。裏切り者を排除し、英雄として帰還するのだ。
+
+……だが、科学者のあの言葉。「自分の意志ではない」とは、一体どういう意味だったのだろうか？`
+  },
+  bad1: {
+    label:'BAD END ①',
+    title:'💥 バッドエンドルート①',
+    cond:'条件：科学者が帰還用カプセルの爆破に成功する',
+    bgClass:'bad1-bg',
+    icon:'💥',
+    story:`「……クク、ハハハ！ 間に合わなかったな！」
+科学者が狂気混じりの笑い声を上げると同時に、貨物室から眩い光が溢れ出した。
+「やめろ！」「何をしたんだ！」
+叫ぶ間もなく、カプセルの外壁が内側から弾け飛ぶ。
+
+ゴォォォォ！という凄まじい轟音とともに、真空の闇が君たちを飲み込んでいく。
+バラバラになった機体は、地球の空で一筋の流れ星となって消えた。
+
+君たちの物語は、ここで終わる。暗い宇宙の塵となって、永遠に。`
+  },
+  bad2: {
+    label:'BAD END ②',
+    title:'🔥 バッドエンドルート②',
+    cond:'条件：誤認逮捕 かつ 科学者が爆破に失敗する',
+    bgClass:'bad2-bg',
+    icon:'🔥',
+    story:`「お前が工作員だ！」「いや、こいつが怪しい！」
+互いに指を差し合い、罵り合ううちに、時間は非情にも過ぎ去っていった。
+ついに大気圏突入の衝撃が始まる。しかし、誰一人として状況を掌握できていない。
+
+「……待て、あのスリープポッドから、誰か出てきていないか？」
+エンジニアの震える指の先、5つ目のポッドがゆっくりと開く。そこには、ニヤリと笑う謎の人物……議長の姿をした『何か』が立っていた。
+「……無駄な時間を過ごしたね」
+
+次の瞬間、システムエラーが機体を包む。君たちの意識は、再突入の衝撃とともに闇へと沈んでいった。`
+  },
+  alien: {
+    label:'？？ ALIEN ROUTE ？？',
+    title:'👾 ？？エイリアン？？ルート',
+    cond:'条件：クルー内を拘束・殺害せず、第5の部屋の真の黒幕を拘束または殺害する',
+    bgClass:'alien-bg',
+    icon:'🎤',
+    story:`「……狙いは科学者じゃない。あんただよ、議長。」
+君たちの視線が、第5の部屋に向けられた。
+不意を突かれた謎の人物の顔から、余裕の笑みが消える。
+「なっ、なぜ気づいた……！」
+
+議長が叫ぶ前に、君たちの連携が彼を封じ込めた。彼が手にしていた送信機——科学者の脳波を操り、爆破を誘導していたデバイスが粉々に砕け散る。
+科学者はふらふらと崩れ落ち、正気を取り戻した。「……助かったのか？」
+
+カプセルは安定し、美しい弧を描いて地球へと降りていく。
+4人の間には、かつての不信感ではなく、不思議な一体感が生まれていた。
+君たちは、真の敵を倒したのだ。人類を密かに支配しようとしていた影の支配者を。
+150億という莫大な報酬以上の価値がある、「真の絆」を手に、君たちは母なる星へと帰還した。`
+  }
+};
+
+function openEnding(key){
+  const e=ENDINGS[key];
+  document.getElementById('end-modal-bg').className='end-modal-bg '+e.bgClass;
+  document.getElementById('end-modal-bg').textContent=e.icon;
+  document.getElementById('end-modal-label').textContent=e.label;
+  document.getElementById('end-modal-title').textContent=e.title;
+  document.getElementById('end-modal-cond').textContent=e.cond;
+  document.getElementById('end-modal-story').textContent=e.story;
+  document.getElementById('end-modal-overlay').classList.add('open');
+}
+function closeEnding(){document.getElementById('end-modal-overlay').classList.remove('open');}
 </script>
 </body>
 </html>
