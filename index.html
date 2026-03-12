@@ -1420,10 +1420,10 @@
 .room-card.explored { background:rgba(50,220,130,.05); }
 .rc-icon { font-size:36px;flex-shrink:0;filter:drop-shadow(0 0 8px rgba(77,166,255,.4)); }
 .rc-body { flex:1; }
-.rc-name { font-size:16px;font-weight:700;color:rgba(200,220,255,.92);letter-spacing:.05em;margin-bottom:4px; }
-.rc-restrict { font-family:var(--mono);font-size:9px;color:rgba(255,110,80,.65);letter-spacing:.15em;margin-bottom:5px; }
-.rc-desc { font-size:11px;color:rgba(200,220,255,.42);line-height:1.6; }
-.rc-status { font-family:var(--mono);font-size:9px;flex-shrink:0;text-align:right; }
+.rc-name { font-size:20px;font-weight:700;color:rgba(200,220,255,.92);letter-spacing:.05em;margin-bottom:5px; }
+.rc-restrict { font-family:var(--mono);font-size:12px;color:rgba(255,110,80,.75);letter-spacing:.12em;margin-bottom:6px; }
+.rc-desc { font-size:14px;color:rgba(200,220,255,.55);line-height:1.65; }
+.rc-status { font-family:var(--mono);font-size:12px;flex-shrink:0;text-align:right; }
 .rc-status.done { color:#32c878; }
 .rc-status.part { color:#ffbe32; }
 .rc-status.none { color:rgba(77,166,255,.4); }
@@ -2013,6 +2013,11 @@
     <a href="https://ufotable200010.github.io/Astro/Assessment/Assesment.html" target="_blank" class="action-btn" style="margin-top:20px;">
       📋 &nbsp; INPUT FORM — OPEN MISSION LINK
     </a>
+    <div style="margin-top:10px;padding:10px 14px;background:rgba(255,190,50,.04);border:1px solid rgba(255,190,50,.2);border-radius:4px;display:flex;align-items:center;flex-wrap:wrap;gap:8px;">
+      <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.2em;color:rgba(255,190,50,.5);flex-shrink:0;">MISSION FORM URL</div>
+      <div style="font-family:'Space Mono',monospace;font-size:9px;color:rgba(200,230,255,.4);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">https://ufotable200010.github.io/Astro/Assessment/Assesment.html</div>
+      <button onclick="navigator.clipboard.writeText('https://ufotable200010.github.io/Astro/Assessment/Assesment.html').then(()=>{this.textContent='✓ コピー済み';setTimeout(()=>this.textContent='URLコピー',2000)})" style="padding:6px 12px;background:rgba(255,190,50,.1);border:1px solid rgba(255,190,50,.3);border-radius:3px;font-family:'Space Mono',monospace;font-size:9px;color:rgba(255,190,50,.7);cursor:pointer;white-space:nowrap;flex-shrink:0;">URLコピー</button>
+    </div>
   </div>
 </section>
 
@@ -2506,6 +2511,106 @@
     </div>
     <div class="rp-group">
       <div class="gc-roles" id="gc-roles"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ROLE CARD SAMPLE SECTION ===== -->
+<section style="padding:80px 20px 60px;max-width:480px;margin:0 auto;">
+  <div style="font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.3em;color:rgba(77,166,255,.45);text-align:center;margin-bottom:8px;">ROLE CARD — SAMPLE VIEW</div>
+  <div style="font-size:22px;font-weight:700;color:rgba(200,220,255,.9);text-align:center;letter-spacing:.05em;margin-bottom:4px;">役職カードの見方</div>
+  <div style="font-size:13px;color:rgba(200,220,255,.45);text-align:center;margin-bottom:36px;line-height:1.7;">各自のスマホで開く役職カードのサンプルです。<br>内容はダミー表示です。</div>
+
+  <!-- Name bar sample -->
+  <div style="width:100%;max-width:420px;margin:0 auto 0;background:rgba(10,14,30,.92);border:1px solid rgba(77,166,255,.2);border-radius:10px 10px 0 0;display:flex;align-items:center;gap:12px;padding:12px 18px;box-sizing:border-box;">
+    <div style="font-size:26px;line-height:1;">🛸</div>
+    <div style="flex:1;">
+      <div style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:.2em;color:rgba(77,166,255,.5);">CAPTAIN / 船長</div>
+      <div style="font-size:15px;font-weight:700;color:rgba(200,220,255,.9);">〇〇〇〇（名前）</div>
+    </div>
+    <button style="background:rgba(77,166,255,.08);border:1px solid rgba(77,166,255,.2);border-radius:8px;color:rgba(200,220,255,.6);font-size:20px;padding:6px 10px;cursor:default;">👾</button>
+  </div>
+
+  <!-- Room tabs sample -->
+  <div style="width:100%;max-width:420px;margin:0 auto;display:flex;overflow-x:auto;gap:0;background:rgba(10,14,30,.85);border-left:1px solid rgba(77,166,255,.2);border-right:1px solid rgba(77,166,255,.2);border-bottom:1px solid rgba(77,166,255,.12);box-sizing:border-box;">
+    <div style="flex:1;min-width:60px;padding:10px 6px;font-family:'Share Tech Mono',monospace;font-size:9px;text-align:center;color:rgba(77,166,255,.9);background:rgba(77,166,255,.1);border-bottom:2px solid rgba(77,166,255,.6);">📖 導入</div>
+    <div style="flex:1;min-width:60px;padding:10px 6px;font-family:'Share Tech Mono',monospace;font-size:9px;text-align:center;color:rgba(255,100,80,.5);">操縦室🚫</div>
+    <div style="flex:1;min-width:60px;padding:10px 6px;font-family:'Share Tech Mono',monospace;font-size:9px;text-align:center;color:rgba(200,180,255,.4);">機関室🔒</div>
+    <div style="flex:1;min-width:60px;padding:10px 6px;font-family:'Share Tech Mono',monospace;font-size:9px;text-align:center;color:rgba(200,180,255,.4);">生命維持🔒</div>
+    <div style="flex:1;min-width:60px;padding:10px 6px;font-family:'Share Tech Mono',monospace;font-size:9px;text-align:center;color:rgba(200,180,255,.4);">貨物室🔒</div>
+  </div>
+
+  <!-- Public info panel sample -->
+  <div style="width:100%;max-width:420px;margin:0 auto;background:rgba(10,14,30,.88);border-left:1px solid rgba(77,166,255,.2);border-right:1px solid rgba(77,166,255,.2);border-bottom:1px solid rgba(77,166,255,.12);padding:18px 20px;box-sizing:border-box;">
+    <div style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:.2em;color:rgba(100,200,120,.6);margin-bottom:8px;">▲ 公開情報 — 全員に開示可能</div>
+    <div style="font-size:11px;font-weight:700;color:rgba(200,220,255,.7);margin-bottom:4px;">役割説明</div>
+    <div style="font-size:13px;color:rgba(200,220,255,.55);line-height:1.7;margin-bottom:14px;">ここに役割の説明が表示されます。（公開情報）</div>
+    <div style="font-size:11px;font-weight:700;color:rgba(200,220,255,.7);margin-bottom:4px;">公開能力</div>
+    <div style="font-size:12px;color:rgba(255,200,100,.6);margin-bottom:4px;">〇〇アイテムを所持しているとき使用可</div>
+    <div style="font-size:13px;color:rgba(200,220,255,.55);line-height:1.7;">公開能力の説明が表示されます。</div>
+  </div>
+
+  <!-- Secret divider sample -->
+  <div style="width:100%;max-width:420px;margin:0 auto;background:rgba(10,14,30,.88);border-left:1px solid rgba(77,166,255,.2);border-right:1px solid rgba(77,166,255,.2);display:flex;align-items:center;gap:12px;padding:14px 20px;box-sizing:border-box;">
+    <div style="flex:1;height:1px;background:rgba(200,80,255,.25);"></div>
+    <div style="font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.15em;color:rgba(200,80,255,.7);white-space:nowrap;">🔐 ここから秘密情報</div>
+    <div style="flex:1;height:1px;background:rgba(200,80,255,.25);"></div>
+  </div>
+  <div style="width:100%;max-width:420px;margin:0 auto;background:rgba(10,14,30,.88);border-left:1px solid rgba(77,166,255,.2);border-right:1px solid rgba(77,166,255,.2);padding:4px 20px 14px;box-sizing:border-box;">
+    <div style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:.2em;color:rgba(255,80,80,.5);">▲ 秘密の情報 — 本人のみ閲覧</div>
+  </div>
+
+  <!-- Secret info sample -->
+  <div style="width:100%;max-width:420px;margin:0 auto;background:rgba(10,14,30,.88);border-left:1px solid rgba(77,166,255,.2);border-right:1px solid rgba(77,166,255,.2);border-top:1px solid rgba(200,80,255,.12);padding:18px 20px;box-sizing:border-box;">
+    <div style="font-size:11px;font-weight:700;color:rgba(200,220,255,.7);margin-bottom:6px;">あなたの真の身元</div>
+    <div style="text-align:center;padding:12px;background:rgba(77,166,255,.05);border:1px solid rgba(77,166,255,.15);border-radius:8px;color:rgba(200,220,255,.3);font-size:12px;">本番では役職・陣営が表示されます</div>
+  </div>
+
+  <!-- Ability hint sample -->
+  <div style="width:100%;max-width:420px;margin:0 auto;background:rgba(255,180,30,.04);border-left:1px solid rgba(255,180,30,.22);border-right:1px solid rgba(255,180,30,.22);border-top:1px solid rgba(255,180,30,.1);padding:12px 16px;box-sizing:border-box;font-size:12px;color:rgba(255,200,100,.7);line-height:1.8;">
+    <div style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:.15em;color:rgba(255,180,60,.5);margin-bottom:4px;">【能力②ヒント】</div>
+    ⚠️ ？？？ ＋ ？？？ が両方揃ったとき閲覧・⑪帰還の瞬間で使用可能
+  </div>
+
+  <!-- Chat icon sample -->
+  <div style="width:100%;max-width:420px;margin:0 auto;background:rgba(10,14,30,.88);border-left:1px solid rgba(77,166,255,.2);border-right:1px solid rgba(77,166,255,.2);border-top:1px solid rgba(77,166,255,.08);padding:14px 20px;box-sizing:border-box;display:flex;align-items:center;gap:12px;">
+    <div style="font-size:22px;">💬</div>
+    <div style="flex:1;">
+      <div style="font-size:11px;font-weight:700;color:rgba(200,220,255,.7);margin-bottom:2px;">チャットアイコン</div>
+      <div style="font-size:12px;color:rgba(200,220,255,.4);line-height:1.6;">タップするとグループ内チャットが開きます。<br>アイテム受け渡しもここから行えます。</div>
+    </div>
+  </div>
+
+  <!-- Inventory sample -->
+  <div style="width:100%;max-width:420px;margin:0 auto;background:rgba(10,18,35,.92);border:1px solid rgba(77,166,255,.2);border-top:none;border-radius:0 0 10px 10px;padding:0 0 4px;box-sizing:border-box;">
+    <div style="padding:14px 18px 10px;display:flex;align-items:center;justify-content:space-between;">
+      <div>
+        <div style="font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:.2em;color:rgba(77,166,255,.5);margin-bottom:3px;">🎒 所持アイテム / INVENTORY</div>
+        <div style="font-size:15px;font-weight:700;color:rgba(200,220,255,.85);">○○のアイテム</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;">
+        <div style="width:7px;height:7px;border-radius:50%;background:rgba(77,166,255,.3);"></div>
+        <span style="font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(200,220,255,.35);">接続中…</span>
+      </div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;padding:0 14px 14px;">
+      <div style="flex:1;min-width:100px;background:rgba(255,255,255,.03);border:1px dashed rgba(77,166,255,.15);border-radius:10px;padding:16px 10px;text-align:center;">
+        <div style="font-size:28px;opacity:.2;margin-bottom:6px;">📦</div>
+        <div style="font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(255,255,255,.2);">アイテムスロット</div>
+      </div>
+      <div style="flex:1;min-width:100px;background:rgba(255,255,255,.03);border:1px dashed rgba(77,166,255,.15);border-radius:10px;padding:16px 10px;text-align:center;">
+        <div style="font-size:28px;opacity:.2;margin-bottom:6px;">📦</div>
+        <div style="font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(255,255,255,.2);">アイテムスロット</div>
+      </div>
+      <div style="flex:1;min-width:100px;background:rgba(255,255,255,.03);border:1px dashed rgba(77,166,255,.15);border-radius:10px;padding:16px 10px;text-align:center;">
+        <div style="font-size:28px;opacity:.2;margin-bottom:6px;">📦</div>
+        <div style="font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(255,255,255,.2);">アイテムスロット</div>
+      </div>
+    </div>
+    <!-- Secret messages panel sample -->
+    <div style="border-top:1px solid rgba(255,160,40,.2);background:rgba(255,140,30,.04);">
+      <div style="padding:8px 16px;font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:.22em;color:rgba(255,180,80,.6);">🔒 探索者のみの秘密情報</div>
+      <div style="padding:10px 18px 16px;font-size:12px;color:rgba(255,200,120,.4);line-height:1.7;">GMから送られた秘密メッセージがここに表示されます。<br>他の探索者に共有することも可能です。</div>
     </div>
   </div>
 </section>
