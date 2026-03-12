@@ -169,19 +169,19 @@ body{background:#060a18;min-height:100vh;font-family:'Noto Serif JP',serif;paddi
   <div class="sub-tabbar"><button class="sub-tab active" onclick="switchSub(0,'story',this)">ストーリー</button><button class="sub-tab" onclick="switchSub(0,'hakken',this)">発見物</button><button class="sub-tab" onclick="switchSub(0,'secret',this)">極秘ファイル</button></div>
   <div class="sub-panel show" id="sp-0-story"><div class="sp-label">🟢 公開ストーリー</div><div class="sp-text">操縦システムから謎の通信が、船外の正体不明の回線に送られていた。しかも航行ログの帰還地点が、いつの間にか書き換えられていた——地球以外の場所へ。一体誰が、何のために…？</div></div>
   <div class="sub-panel" id="sp-0-hakken"><div class="sp-label">🔍 この部屋の発見物</div><div class="fi-list"><div class="fi-row"><div class="fi-ico">❓</div><div><div class="fi-name">？？？</div><div class="fi-desc">GMから探索者のみに開示されます</div></div></div><div class="fi-row"><div class="fi-ico">❓</div><div><div class="fi-name">？？？</div><div class="fi-desc">GMから探索者のみに開示されます</div></div></div></div></div>
-  <div class="sub-panel" id="sp-0-secret"><div class="sf-box"><div class="sf-label">🔴 極秘ファイル — 医師のみ</div><div class="sf-text">改ざんされた航行ログに、あなたへの指令書が隠されていた。「目標：帰還を利用せよ」。あなたに命令を下した者は、この船を操っている。<br><br>だがあなたは自分の目的を持っている——誰かを始末し、生きて帰還するという目的を。</div></div></div>
+  <div class="sub-panel" id="sp-0-secret"><div class="sf-box"><div class="sf-label">🔴 極秘ファイル — 医師のみ</div><div class="sf-text">改ざんされた航行ログに、あなたへの指令書が隠されていた。「目標：帰還を利用せよ」。あなたに命令を下したのは、あなたのグループの黒幕——この船の裏側で静かに糸を引く者だ。<br><br>だがあなたは自分の目的を持っている——誰かを始末し、生きて帰還するという目的を。</div></div></div>
 </div>
 <div class="room-panel" id="rpanel-1">
   <div class="lock-screen" id="ls-1"><div class="lock-big">🔒</div><div class="lock-ttl">機関室 — ロック中</div><div class="lock-desc">GMからパスワードを受け取ったら入力してください</div><div class="lock-row"><input class="lock-inp" id="pw-inp-1" type="text" placeholder="- - - -" maxlength="20"><button class="lock-btn" onclick="tryUnlock(1)">解錠</button></div><div class="lock-err" id="lock-err-1"></div></div>
   <div id="rc-1" style="display:none">
     <div class="sub-tabbar"><button class="sub-tab active" onclick="switchSub(1,'story',this)">ストーリー</button><button class="sub-tab" onclick="switchSub(1,'hakken',this)">発見物</button><button class="sub-tab" onclick="switchSub(1,'secret',this)">極秘ファイル</button></div>
-    <div class="sub-panel show" id="sp-1-story"><div class="sp-label">🟢 公開ストーリー</div><div class="sp-text">エンジンの内部に、精巧な爆弾が仕掛けられていた！帰還のスイッチが入る瞬間に爆発するよう設計されている。近くの修復マニュアルの余白には、謎めいたメモが書き込まれていた。</div></div>
+    <div class="sub-panel show" id="sp-1-story"><div class="sp-label">🟢 公開ストーリー</div><div class="sp-text">エンジンの内部に、精巧な爆弾の部品が仕掛けられていた！何らかの電源パーツと接続されれば起爆するよう設計されている。近くの修復マニュアルの余白には、謎めいたメモが書き込まれていた。</div></div>
     <div class="sub-panel" id="sp-1-hakken"><div class="sp-label">🔍 この部屋の発見物</div><div class="fi-list"><div class="fi-row"><div class="fi-ico">❓</div><div><div class="fi-name">？？？</div><div class="fi-desc">GMから探索者のみに開示されます</div></div></div><div class="fi-row"><div class="fi-ico">❓</div><div><div class="fi-name">？？？</div><div class="fi-desc">GMから探索者のみに開示されます</div></div></div></div></div>
     <div class="sub-panel" id="sp-1-secret"><div class="sf-box"><div class="sf-label">🔴 極秘ファイル — 医師のみ</div><div class="sf-text">機関室の起爆装置——これが発動すれば帰還は不可能になる。工作員を見つければあなたは英雄だ。<br><br>でも……もし工作員を利用することで、あなたの目的が達せられるなら？</div></div></div>
   </div>
 </div>
 <div class="room-panel" id="rpanel-2">
-  <div class="restrict-screen"><div class="restrict-big">🚫</div><div class="restrict-ttl">生命維持室 — 立入禁止</div><div class="restrict-desc">医師はこの部屋への立ち入りを<br>禁じられています。<br>他のクルーから発見物を受け取ってください。</div></div>
+  <div class="restrict-screen"><div class="restrict-big">🚫</div><div class="restrict-ttl">生命維持室 — 立入禁止</div><div class="restrict-desc">医療記録の改ざんが発覚し、関与が疑われる医師の立入が禁止されています。他のクルーから発見物を受け取ってください。</div></div>
   <div class="sub-tabbar"><button class="sub-tab active" onclick="switchSub(2,'story',this)">ストーリー</button><button class="sub-tab" onclick="switchSub(2,'secret',this)">極秘ファイル</button></div>
   <div class="sub-panel show" id="sp-2-story"><div class="sp-label">🟢 公開ストーリー</div><div class="sp-text">クルー全員の体から、地球では知られていない謎の薬物反応が検出された！しかも医療記録が全て書き換えられていて、誰が何をされたか全くわからない。誰かが意図的に証拠を消した。</div></div>
   <div class="sub-panel" id="sp-2-secret"><div class="sf-box"><div class="sf-label">🔴 極秘ファイル — 医師のみ</div><div class="sf-text">あなたは医療記録を書き換えた——誰にも見つからないように。鎮痛剤を大量に入手し、暗号化記憶媒体で証拠を消せば……完璧な「事故」が起こせる。誰にも疑われずに、誰かを消せる。</div></div></div>
@@ -190,7 +190,7 @@ body{background:#060a18;min-height:100vh;font-family:'Noto Serif JP',serif;paddi
   <div class="lock-screen" id="ls-3"><div class="lock-big">🔒</div><div class="lock-ttl">貨物室 — ロック中</div><div class="lock-desc">GMからパスワードを受け取ったら入力してください</div><div class="lock-row"><input class="lock-inp" id="pw-inp-3" type="text" placeholder="- - - -" maxlength="20"><button class="lock-btn" onclick="tryUnlock(3)">解錠</button></div><div class="lock-err" id="lock-err-3"></div></div>
   <div id="rc-3" style="display:none">
     <div class="sub-tabbar"><button class="sub-tab active" onclick="switchSub(3,'story',this)">ストーリー</button><button class="sub-tab" onclick="switchSub(3,'hakken',this)">発見物</button><button class="sub-tab" onclick="switchSub(3,'secret',this)">極秘ファイル</button></div>
-    <div class="sub-panel show" id="sp-3-story"><div class="sp-label">🟢 公開ストーリー</div><div class="sp-text">帰還カプセルの電源に、直接爆破装置が繋がれているのを発見した！これが起動したら全員終わりだ。そのすぐ隣に、暗号化された謎のデータを収めた記憶媒体が封印されて置かれていた。</div></div>
+    <div class="sub-panel show" id="sp-3-story"><div class="sp-label">🟢 公開ストーリー</div><div class="sp-text">帰還カプセルの電源となる高圧電池パックが発見された！機関室の爆弾部品と組み合わされれば全員が危ない。そのすぐ隣に、暗号化された謎のデータを収めた記憶媒体が封印されて置かれていた。</div></div>
     <div class="sub-panel" id="sp-3-hakken"><div class="sp-label">🔍 この部屋の発見物</div><div class="fi-list"><div class="fi-row"><div class="fi-ico">❓</div><div><div class="fi-name">？？？</div><div class="fi-desc">GMから探索者のみに開示されます</div></div></div><div class="fi-row"><div class="fi-ico">❓</div><div><div class="fi-name">？？？</div><div class="fi-desc">GMから探索者のみに開示されます</div></div></div></div></div>
     <div class="sub-panel" id="sp-3-secret"><div class="sf-box"><div class="sf-label">🔴 極秘ファイル — 医師のみ</div><div class="sf-text">暗号化記憶媒体——これが手に入れば、鎮痛剤と合わせて完璧な「事故」を仕掛けられる。動機を忘れるな：誰かひとり、始末しなければならない。</div></div></div>
   </div>
@@ -211,7 +211,7 @@ body{background:#060a18;min-height:100vh;font-family:'Noto Serif JP',serif;paddi
   <div class="sec secret1">
     <div class="sec-title">あなたの真の身元</div>
     <div class="role-identity"><div class="role-identity-icon">🏥</div><div class="role-identity-text" id="identity-text">読み込み中…</div></div>
-    <div style="font-size:12px;color:rgba(130,230,180,.5);line-height:1.6;text-align:center;margin-top:4px">破壊工作員ではありませんが、裏切り者（たくグループ）です。<br>バレないように真のクルーとしてやり過ごしましょう。</div>
+    <div id="identity-sub" style="font-size:12px;color:rgba(130,230,180,.5);line-height:1.6;text-align:center;margin-top:4px">読み込み中…</div>
   </div>
 <div class="ability2-hint">
   <div class="ability2-hint-name">【能力②：やぶ医者の狂乱】</div>
@@ -222,6 +222,7 @@ body{background:#060a18;min-height:100vh;font-family:'Noto Serif JP',serif;paddi
     <div class="ability-cond">💊「鎮痛剤」を所持しているとき使用可（⑩話し合いまで）</div>
     <div class="ability-body">GMに次の探索者を指定したら、下のボタンを押して鎮痛剤を消費してください。</div>
     <button class="used-btn" onclick="markAbility1Used()">✕ 使用済にする（鎮痛剤を消費）</button>
+    <div class="final-note">⚠️ 使用済みにしてもアイテムは暗く表示されるだけです。鎮痛剤を所持中であれば能力②の発動条件は引き続き有効です。</div>
   </div>
   <div class="sec ability" id="ability2-block" style="display:none">
     <div class="sec-title">【秘密の能力②】やぶ医者の狂乱</div>
@@ -270,6 +271,7 @@ const ROLE='doctor';const INIT_ITEM_ID='precision_driver';const ABILITY1_ITEM_ID
 const tg=TRUE_GROUP[group]?.[ROLE];const trueGName=GROUP_NAMES[tg]||group;
 document.getElementById('nb-name-val').textContent=name||'（名前未設定）';
 document.getElementById('identity-text').textContent='裏切り者（'+trueGName+'）です';
+document.getElementById('identity-sub').innerHTML='破壊工作員ではありませんが、裏切り者（'+trueGName+'）です。<br>バレないように真のクルーとしてやり過ごしましょう。';
 document.getElementById('win-text').innerHTML='生きて帰還すること <span class="reward">+10億円</span>';
 const ROOM_PW_FIELD={1:'pw2',3:'pw4'};const unlocked={0:true,1:false,2:false,3:false};
 const ALL_ITEMS={flashlight:{icon:'🔦',name:'懐中電灯',desc:'【科学者の能力①】に必要。科学者に渡すと、探索済みの部屋の発見アイテムを知ることができる。'},doctor_sedative:{icon:'💊',name:'鎮痛剤',desc:'【医師の能力①】に必要。医師に渡すと、探索者を強制的に決定できる。'},precision_driver:{icon:'🔩',name:'精密ドライバー',desc:'【エンジニアの能力①】に必要。エンジニアに渡すと、任意のクルーと持ち物を交換できる。'},captain_id:{icon:'🪪',name:'船長のIDカード',desc:'【船長の能力①】に必要。船長に渡すと、解除済みの極秘ファイルを１つ閲覧できる。'},cockpit_terminal:{icon:'📡',name:'暗号通信端末',desc:'操縦室で発見された暗号通信端末。交渉の材料に使える。'},nav_log:{icon:'🗓️',name:'改ざんされた航行ログ',desc:'【船長の能力②】に必要。操縦室で発見。'},engine_explosive:{icon:'💣',name:'起爆装置パーツ',desc:'【科学者の能力②】に必要（2個セット）。機関室で発見。'},eng_manual:{icon:'🔧',name:'書き込みのある修復マニュアル',desc:'機関室で発見されたマニュアル。交渉の材料に使える。'},life_poison:{icon:'⚠️',name:'未認可の薬物',desc:'【船長の能力②】に必要。生命維持室で発見。'},med_record:{icon:'📋',name:'改ざんされた医療処置記録',desc:'【エンジニアの能力②】に必要（2個セット）。生命維持室で発見。'},cargo_battery:{icon:'🔋',name:'高圧電池パック',desc:'【科学者の能力②】に必要（2個セット）。貨物室で発見。'},enc_media:{icon:'💾',name:'暗号化記憶媒体',desc:'【医師の能力②】に必要（2個セット）。貨物室で発見。'},captain_key:{icon:'🔦',name:'懐中電灯',desc:'【科学者の能力①】に必要。科学者に渡すと、探索済みの部屋の発見アイテムを知ることができる。'},engineer_tool:{icon:'🔩',name:'精密ドライバー',desc:'【エンジニアの能力①】に必要。エンジニアに渡すと、任意のクルーと持ち物を交換できる。'},engine_tool:{icon:'🔩',name:'精密ドライバー',desc:'【エンジニアの能力①】に必要。エンジニアに渡すと、任意のクルーと持ち物を交換できる。'},scientist_device:{icon:'🪪',name:'船長のIDカード',desc:'【船長の能力①】に必要。船長に渡すと、解除済みの極秘ファイルを１つ閲覧できる。'}};
