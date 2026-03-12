@@ -1487,39 +1487,105 @@
 /* ===== ENDING SECTION ===== */
 .ending-spacer{height:100vh;background:linear-gradient(180deg,transparent 0%,#000510 100%)}
 .ending-section{min-height:100vh;background:radial-gradient(ellipse at 50% 75%,#001535 0%,#000a1a 50%,#000208 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 20px 120px;position:relative}
-.ending-earth{position:absolute;bottom:-80px;left:50%;transform:translateX(-50%);width:440px;height:440px;border-radius:50%;background:radial-gradient(ellipse at 38% 32%,#1e7a42 0%,#155a88 25%,#0e3d6b 45%,#071a45 70%,#020a20 100%);box-shadow:0 0 0 18px rgba(77,140,255,.06),0 0 0 36px rgba(50,100,220,.04),0 0 80px rgba(40,120,255,.35),0 0 160px rgba(20,70,200,.2)}
-.ending-earth::before{content:'';position:absolute;inset:-18px;border-radius:50%;background:radial-gradient(ellipse at 35% 25%,rgba(180,230,255,.14) 0%,rgba(100,180,255,.06) 35%,transparent 65%);pointer-events:none}
-.ending-earth::after{content:'';position:absolute;inset:0;border-radius:50%;background:linear-gradient(140deg,rgba(255,255,255,.1) 0%,rgba(180,220,255,.04) 30%,transparent 55%);pointer-events:none}
+@keyframes earthAtm{0%,100%{opacity:.65}50%{opacity:1}}
+.ending-earth{position:absolute;bottom:-140px;left:50%;transform:translateX(-50%);width:600px;height:600px;border-radius:50%;background:radial-gradient(ellipse 22% 14% at 28% 32%,rgba(34,120,60,.82) 0%,transparent 100%),radial-gradient(ellipse 18% 22% at 64% 22%,rgba(28,100,45,.78) 0%,transparent 100%),radial-gradient(ellipse 30% 12% at 56% 58%,rgba(36,90,28,.72) 0%,transparent 100%),radial-gradient(ellipse 14% 18% at 16% 62%,rgba(32,80,24,.68) 0%,transparent 100%),radial-gradient(ellipse 18% 10% at 82% 48%,rgba(38,108,48,.62) 0%,transparent 100%),radial-gradient(ellipse 12% 8% at 44% 75%,rgba(30,75,20,.55) 0%,transparent 100%),radial-gradient(ellipse at 40% 35%,#1c7096 0%,#0d4e7c 18%,#073560 38%,#031c3e 62%,#010822 100%);box-shadow:inset -100px -70px 90px rgba(0,0,20,.85),0 0 0 8px rgba(100,185,255,.06),0 0 0 22px rgba(70,145,240,.04),0 0 65px rgba(50,130,220,.48),0 0 130px rgba(28,100,200,.3),0 0 260px rgba(16,75,180,.18)}
+.ending-earth::before{content:'';position:absolute;inset:-18px;border-radius:50%;background:radial-gradient(ellipse,transparent 46%,rgba(120,190,255,.06) 52%,rgba(90,165,255,.14) 56%,rgba(70,135,230,.08) 62%,transparent 71%);pointer-events:none;animation:earthAtm 4s ease-in-out infinite}
+.ending-earth::after{content:'';position:absolute;inset:0;border-radius:50%;background:radial-gradient(ellipse at 30% 25%,rgba(225,248,255,.23) 0%,rgba(170,222,255,.08) 28%,transparent 54%);pointer-events:none}
 .ending-title{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.5em;color:rgba(150,200,255,.4);margin-bottom:16px;text-align:center}
 .ending-headline{font-size:32px;font-weight:900;color:#e8f4ff;text-align:center;margin-bottom:8px;letter-spacing:.04em;text-shadow:0 0 40px rgba(77,166,255,.3)}
 .ending-sub{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.2em;color:rgba(100,180,255,.35);text-align:center;margin-bottom:50px}
 .ending-routes{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:100%;max-width:500px;position:relative;z-index:1}
-.ending-btn{padding:18px 12px;border-radius:10px;border:1.5px solid;cursor:pointer;font-family:'Noto Serif JP',serif;font-size:13px;font-weight:700;transition:all .25s;text-align:center;line-height:1.4}
-.ending-btn.happy{background:rgba(50,200,255,.08);border-color:rgba(50,200,255,.35);color:#88ddff}
-.ending-btn.happy:hover{background:rgba(50,200,255,.18);box-shadow:0 0 20px rgba(50,200,255,.15)}
-.ending-btn.bad1{background:rgba(255,80,30,.08);border-color:rgba(255,80,30,.35);color:#ff9988}
-.ending-btn.bad1:hover{background:rgba(255,80,30,.18);box-shadow:0 0 20px rgba(255,80,30,.15)}
-.ending-btn.bad2{background:rgba(255,140,30,.08);border-color:rgba(255,140,30,.35);color:#ffcc88}
-.ending-btn.bad2:hover{background:rgba(255,140,30,.18);box-shadow:0 0 20px rgba(255,140,30,.15)}
-.ending-btn.alien{background:rgba(180,100,255,.08);border-color:rgba(180,100,255,.35);color:#cc99ff}
-.ending-btn.alien:hover{background:rgba(180,100,255,.18);box-shadow:0 0 20px rgba(180,100,255,.15)}
-.ending-btn .eb-icon{font-size:28px;display:block;margin-bottom:8px}
-.ending-btn .eb-reward{font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(255,215,50,.7);margin-top:6px}
-/* ending modal */
-.end-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);backdrop-filter:blur(8px);z-index:500;align-items:center;justify-content:center;padding:20px}
-.end-modal-overlay.open{display:flex;animation:fadeUp .3s ease}
-.end-modal-box{width:100%;max-width:480px;max-height:90vh;overflow-y:auto;border-radius:14px;padding:0;position:relative}
-.end-modal-bg{width:100%;min-height:160px;display:flex;align-items:center;justify-content:center;font-size:72px;padding:32px 20px;border-radius:14px 14px 0 0}
-.end-modal-bg.happy-bg{background:linear-gradient(160deg,#001a10 0%,#002a1a 40%,#001a30 100%);box-shadow:inset 0 0 60px rgba(50,200,100,.1)}
-.end-modal-bg.bad1-bg{background:linear-gradient(160deg,#1a0500 0%,#2a0a00 40%,#100000 100%);box-shadow:inset 0 0 60px rgba(255,80,30,.15)}
-.end-modal-bg.bad2-bg{background:linear-gradient(160deg,#1a0800 0%,#2a1000 40%,#100400 100%);box-shadow:inset 0 0 60px rgba(255,140,30,.15)}
-.end-modal-bg.alien-bg{background:linear-gradient(160deg,#080018 0%,#0f0030 40%,#050010 100%);box-shadow:inset 0 0 60px rgba(180,100,255,.15)}
-.end-modal-body{background:linear-gradient(155deg,#060d18,#03080f);border-radius:0 0 14px 14px;padding:24px 22px 28px}
-.end-modal-label{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:.28em;color:rgba(150,200,255,.4);margin-bottom:6px}
-.end-modal-title{font-size:18px;font-weight:900;color:#e8f4ff;margin-bottom:6px}
-.end-modal-cond{font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(150,200,255,.45);line-height:1.6;margin-bottom:16px;padding:8px 10px;background:rgba(77,166,255,.04);border:1px solid rgba(77,166,255,.1);border-radius:4px}
-.end-modal-story{font-size:13px;color:#c8d8f0;line-height:2;white-space:pre-wrap}
-.end-modal-close{display:block;width:100%;margin-top:20px;padding:11px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:6px;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.15em;color:rgba(255,255,255,.3);cursor:pointer}
+.ending-btn{padding:20px 14px;border-radius:12px;border:1.5px solid;cursor:pointer;font-family:'Noto Serif JP',serif;font-size:12px;font-weight:700;transition:all .28s;text-align:center;line-height:1.4;display:flex;flex-direction:column;align-items:center;gap:6px}
+.ending-btn.happy{background:linear-gradient(160deg,rgba(50,200,255,.07),rgba(30,150,220,.04));border-color:rgba(50,200,255,.35);color:#88ddff;box-shadow:0 0 0 0 rgba(50,200,255,0)}
+.ending-btn.happy:hover{background:linear-gradient(160deg,rgba(50,200,255,.15),rgba(30,150,220,.1));box-shadow:0 0 28px rgba(50,200,255,.18);transform:translateY(-2px)}
+.ending-btn.bad1{background:linear-gradient(160deg,rgba(255,80,30,.07),rgba(200,40,10,.04));border-color:rgba(255,80,30,.38);color:#ff9988;box-shadow:0 0 0 0 rgba(255,80,30,0)}
+.ending-btn.bad1:hover{background:linear-gradient(160deg,rgba(255,80,30,.16),rgba(200,40,10,.1));box-shadow:0 0 28px rgba(255,80,30,.18);transform:translateY(-2px)}
+.ending-btn.bad2{background:linear-gradient(160deg,rgba(180,100,200,.07),rgba(120,60,180,.04));border-color:rgba(180,100,200,.38);color:#cc99ee;box-shadow:0 0 0 0 rgba(180,100,200,0)}
+.ending-btn.bad2:hover{background:linear-gradient(160deg,rgba(180,100,200,.16),rgba(120,60,180,.1));box-shadow:0 0 28px rgba(180,100,200,.18);transform:translateY(-2px)}
+.ending-btn.alien{background:linear-gradient(160deg,rgba(180,100,255,.07),rgba(120,50,220,.04));border-color:rgba(180,100,255,.38);color:#cc99ff;box-shadow:0 0 0 0 rgba(180,100,255,0)}
+.ending-btn.alien:hover{background:linear-gradient(160deg,rgba(180,100,255,.16),rgba(120,50,220,.1));box-shadow:0 0 28px rgba(180,100,255,.18);transform:translateY(-2px)}
+.ending-btn .eb-icon{font-size:32px;display:block;line-height:1}
+.ending-btn .eb-title{font-family:'Noto Serif JP',serif;font-size:11px;font-weight:700;line-height:1.5}
+.ending-btn .eb-reward{font-family:'Share Tech Mono',monospace;font-size:8px;color:rgba(255,215,50,.65);letter-spacing:.04em;line-height:1.5}
+/* ===== GM CHAT ===== */
+.gm-chat-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.97);backdrop-filter:blur(14px);z-index:500;flex-direction:column}
+.gm-chat-overlay.open{display:flex;animation:fadeUp .3s ease}
+.gm-chat-hd{display:flex;align-items:center;padding:14px 16px;border-bottom:1px solid rgba(77,166,255,.12);background:rgba(0,0,0,.4);flex-shrink:0}
+.gm-chat-hd-back{background:transparent;border:none;color:rgba(77,166,255,.7);font-size:22px;cursor:pointer;padding:4px 10px 4px 0;line-height:1}
+.gm-chat-hd-title{flex:1;font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:rgba(77,166,255,.7)}
+.gm-chat-hd-close{background:transparent;border:none;color:rgba(255,255,255,.3);font-size:18px;cursor:pointer;padding:4px}
+.gm-chat-list{flex:1;overflow-y:auto}
+.gm-chat-item{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.04);cursor:pointer;transition:background .15s}
+.gm-chat-item:hover{background:rgba(77,166,255,.05)}
+.gm-chat-item-icon{font-size:22px;flex-shrink:0}
+.gm-chat-item-info{flex:1;min-width:0}
+.gm-chat-item-name{font-size:13px;color:#c0d8f0;font-weight:700;margin-bottom:2px}
+.gm-chat-item-preview{font-family:var(--mono);font-size:9px;color:rgba(255,255,255,.3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gm-chat-item-badge{width:20px;height:20px;border-radius:50%;background:#ff4455;font-family:var(--mono);font-size:9px;color:#fff;display:none;align-items:center;justify-content:center;flex-shrink:0;font-weight:700}
+.gm-chat-item-badge.show{display:flex}
+.gm-thread-view{display:none;flex:1;flex-direction:column;min-height:0}
+.gm-thread-view.show{display:flex}
+.gm-thread-msgs{flex:1;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:10px}
+.gm-thread-msg{max-width:80%;padding:9px 12px;border-radius:12px;font-size:13px;line-height:1.65}
+.gm-thread-msg.from-player{align-self:flex-start;background:rgba(77,166,255,.1);border:1px solid rgba(77,166,255,.2);color:#c0d8f0;border-radius:4px 12px 12px 12px}
+.gm-thread-msg.from-gm{align-self:flex-end;background:rgba(50,200,130,.1);border:1px solid rgba(50,200,130,.22);color:#b0e8d0;border-radius:12px 4px 12px 12px}
+.gm-thread-msg-who{font-family:var(--mono);font-size:8px;opacity:.5;margin-bottom:3px;letter-spacing:.1em}
+.gm-thread-empty{text-align:center;color:rgba(255,255,255,.2);font-size:12px;padding:28px 0;font-family:var(--mono)}
+.gm-thread-inp-row{display:flex;gap:8px;padding:12px 16px;border-top:1px solid rgba(77,166,255,.1);flex-shrink:0}
+.gm-thread-inp{flex:1;padding:9px 12px;background:rgba(255,255,255,.04);border:1px solid rgba(77,166,255,.15);border-radius:8px;font-family:'Noto Serif JP',serif;font-size:13px;color:#fff;outline:none;resize:none;max-height:80px}
+.gm-thread-inp:focus{border-color:rgba(77,166,255,.38)}
+.gm-thread-send{padding:9px 14px;background:rgba(77,166,255,.12);border:1px solid rgba(77,166,255,.3);border-radius:8px;color:rgba(77,166,255,.9);font-family:var(--mono);font-size:10px;cursor:pointer;white-space:nowrap;transition:background .18s}
+.gm-thread-send:hover{background:rgba(77,166,255,.22)}
+/* ===== REWARD TABLE ===== */
+.reward-section{background:linear-gradient(180deg,#000208 0%,#000510 100%);padding:80px 20px 60px}
+.reward-inner{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:36px}
+.reward-section-title{font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:.4em;color:rgba(255,215,50,.5);text-align:center;margin-bottom:4px}
+.reward-group-block{background:rgba(255,255,255,.02);border:1px solid rgba(var(--gc,77,166,255),.2);border-radius:12px;overflow:hidden}
+.reward-group-label{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.2em;color:var(--gc,#4da6ff);background:rgba(255,255,255,.03);padding:10px 16px;border-bottom:1px solid rgba(255,255,255,.06)}
+.reward-table-wrap{overflow-x:auto}
+.reward-table{width:100%;border-collapse:collapse;font-size:11px}
+.reward-table th{padding:9px 8px;font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(255,255,255,.45);border-bottom:1px solid rgba(255,255,255,.06);text-align:center;white-space:nowrap;line-height:1.4;font-weight:400}
+.reward-table td{padding:10px 8px;border-bottom:1px solid rgba(255,255,255,.04);text-align:center;min-width:70px;height:36px;color:rgba(255,255,255,.2)}
+.rt-row-label{text-align:left!important;font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(255,255,255,.4)!important;padding-left:14px!important;white-space:nowrap;min-width:180px!important}
+.rt-sub{font-size:8px;opacity:.6}
+.reward-notice{background:rgba(255,215,50,.05);border:1px solid rgba(255,215,50,.2);border-radius:8px;padding:18px 22px;font-size:14px;color:rgba(255,240,180,.8);line-height:1.8;text-align:center}
+.reward-notice strong{color:#ffd740;font-weight:900}
+.ranking-title{font-size:28px;font-weight:900;color:#f0f8ff;text-align:center;letter-spacing:.08em;text-shadow:0 0 40px rgba(77,166,255,.4);padding:20px 0}
+/* ===== おわりに ===== */
+.owari-section{background:linear-gradient(180deg,#000510 0%,#020a1a 50%,#000208 100%);padding:80px 20px 120px}
+.owari-inner{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:24px}
+.owari-heading{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.4em;color:rgba(150,200,255,.4);text-align:center}
+.owari-body{font-size:14px;color:rgba(180,210,255,.7);line-height:2.1}
+.owari-quote-block{display:flex;flex-direction:column;gap:20px;padding-top:12px}
+.owari-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(77,166,255,.3),transparent);margin-bottom:8px}
+.owari-quote{font-size:14px;font-weight:700;color:#e8f4ff;line-height:1.8;text-align:center;text-shadow:0 0 20px rgba(77,166,255,.3)}
+.owari-quote-right{text-align:right}
+.owari-quote-far-right{text-align:right;font-size:16px;font-weight:900;color:#ffffff;text-shadow:0 0 30px rgba(77,166,255,.5),0 0 60px rgba(77,166,255,.2)}
+/* ending modal - cinematic */
+@keyframes endIn{from{opacity:0;transform:scale(.9) translateY(14px)}to{opacity:1;transform:scale(1) translateY(0)}}
+@keyframes endGlow{0%,100%{opacity:.55;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.45)}}
+@keyframes endRing{0%{width:120px;height:120px;opacity:.75}100%{width:320px;height:320px;opacity:0}}
+@keyframes endFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.end-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.96);backdrop-filter:blur(14px);z-index:500;align-items:center;justify-content:center;padding:20px;overflow-y:auto}
+.end-modal-overlay.open{display:flex;animation:endIn .42s cubic-bezier(.22,1,.36,1)}
+.end-modal-box{width:100%;max-width:500px;border-radius:20px;overflow:hidden;border:1px solid rgba(255,255,255,.07);box-shadow:0 40px 120px rgba(0,0,0,.9),0 0 80px var(--eg,rgba(50,200,100,.12))}
+.end-modal-box.happy-bg{--eg:rgba(50,200,100,.14);--gc:rgba(50,200,100,.52);--rc:rgba(50,200,100,.28);--lc:rgba(80,225,125,.68);--hb:linear-gradient(160deg,#001a0e 0%,#002a18 50%,#001a2a 100%)}
+.end-modal-box.bad1-bg{--eg:rgba(255,80,30,.14);--gc:rgba(255,80,30,.55);--rc:rgba(255,80,30,.28);--lc:rgba(255,115,65,.68);--hb:linear-gradient(160deg,#200500 0%,#300a00 50%,#180000 100%)}
+.end-modal-box.bad2-bg{--eg:rgba(255,155,30,.14);--gc:rgba(255,155,30,.55);--rc:rgba(255,155,30,.28);--lc:rgba(255,185,65,.68);--hb:linear-gradient(160deg,#1e0700 0%,#2c1000 50%,#140400 100%)}
+.end-modal-box.alien-bg{--eg:rgba(185,80,255,.14);--gc:rgba(185,80,255,.55);--rc:rgba(185,80,255,.28);--lc:rgba(200,115,255,.68);--hb:linear-gradient(160deg,#08001e 0%,#10003a 50%,#060010 100%)}
+.end-modal-hero{position:relative;padding:62px 20px 50px;text-align:center;overflow:hidden;background:var(--hb,linear-gradient(160deg,#001a0e,#002a18))}
+.end-modal-hero-glow{position:absolute;top:50%;left:50%;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,var(--gc,rgba(50,200,100,.5)) 0%,transparent 70%);animation:endGlow 2.6s ease-in-out infinite;pointer-events:none}
+.end-modal-ring,.end-modal-ring2{position:absolute;top:50%;left:50%;margin:-60px 0 0 -60px;width:120px;height:120px;border-radius:50%;border:1px solid var(--rc,rgba(50,200,100,.3));animation:endRing 2.4s ease-out infinite;pointer-events:none}
+.end-modal-ring2{animation-delay:1s}
+.end-modal-icon{position:relative;z-index:1;font-size:88px;line-height:1;display:block;filter:drop-shadow(0 0 26px var(--gc,rgba(50,200,100,.65)));animation:endFloat 3.2s ease-in-out infinite}
+.end-modal-body{background:linear-gradient(175deg,#08101e 0%,#040a10 100%);padding:28px 28px 32px;position:relative}
+.end-modal-body::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gc,rgba(50,200,100,.45)),transparent)}
+.end-modal-label{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.4em;color:var(--lc,rgba(80,225,125,.68));margin-bottom:10px;text-transform:uppercase}
+.end-modal-title{font-size:22px;font-weight:900;color:#f0f8ff;margin-bottom:18px;line-height:1.3;text-shadow:0 0 32px var(--gc,rgba(50,200,100,.42))}
+.end-modal-cond{font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(150,200,255,.52);line-height:1.8;margin-bottom:20px;padding:10px 14px;background:rgba(255,255,255,.03);border-left:2px solid var(--gc,rgba(50,200,100,.45));border-radius:0 5px 5px 0}
+.end-modal-story{font-size:13px;color:#bdd4f0;line-height:2.1;white-space:pre-wrap;border-top:1px solid rgba(255,255,255,.07);padding-top:20px}
+.end-modal-close{display:block;width:100%;margin-top:24px;padding:13px;background:transparent;border:1px solid rgba(255,255,255,.1);border-radius:8px;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.25em;color:rgba(255,255,255,.25);cursor:pointer;transition:all .22s}
+.end-modal-close:hover{border-color:rgba(255,255,255,.22);color:rgba(255,255,255,.48);background:rgba(255,255,255,.04)}
 </style>
 </head>
 <body>
@@ -1546,6 +1612,14 @@
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
         </svg>
+      </button>
+    </li>
+    <li>
+      <button class="timer-btn" id="open-gm-chat" onclick="openGMChat()" title="GM チャット" style="position:relative">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+        </svg>
+        <span class="nav-chat-badge" id="nav-chat-badge" style="display:none;position:absolute;top:-4px;right:-4px;width:16px;height:16px;border-radius:50%;background:#ff4455;font-family:monospace;font-size:8px;color:#fff;align-items:center;justify-content:center;font-weight:700;border:2px solid #040c1a"></span>
       </button>
     </li>
     <li>
@@ -1576,7 +1650,7 @@
       <div class="m5p-step-row" id="m5ps-7"><div class="m5p-step-num">STEP 08</div><div class="m5p-step-body"><div class="m5p-step-name">💬 話し合い③</div><div class="m5p-step-desc">グループ内で情報を共有し、アイテム交渉を行う</div></div><button class="m5p-done-btn" onclick="m5StepDone(7,this)">終了</button></div>
       <div class="m5p-step-row" id="m5ps-8"><div class="m5p-step-num">STEP 09</div><div class="m5p-step-body"><div class="m5p-step-name">🔍 探索④ — 貨物室</div><div class="m5p-step-desc">GMが貨物室PWを口頭告知・情報開示（科学者は入室不可）</div></div><button class="m5p-done-btn" onclick="m5StepDone(8,this)">終了</button></div>
       <div class="m5p-step-row" id="m5ps-9"><div class="m5p-step-num">STEP 10</div><div class="m5p-step-body"><div class="m5p-step-name">💬 話し合い④</div><div class="m5p-step-desc">全情報を共有し、最終的なアイテム交渉を行う</div></div><button class="m5p-done-btn" onclick="m5StepDone(9,this)">終了</button></div>
-      <div class="m5p-step-row" id="m5ps-10"><div class="m5p-step-num">STEP 11</div><div class="m5p-step-body"><div class="m5p-step-name">🚀 帰還の瞬間 — 最終決断</div><div class="m5p-step-desc">GMが最終ルール説明。各自の能力②をここで使用可能</div></div><button class="m5p-done-btn" onclick="m5StepDone(10,this)">終了</button></div>
+      <div class="m5p-step-row" id="m5ps-10"><div class="m5p-step-num">STEP 11</div><div class="m5p-step-body"><div class="m5p-step-name">🚀 帰還の瞬間 — 最終決断</div><div class="m5p-step-desc">誰からアクションを行うか順番を決めてください。GMが最終ルールを後述。</div></div><button class="m5p-done-btn" onclick="m5StepDone(10,this)">終了</button></div>
       <div class="m5p-step-row" id="m5ps-11"><div class="m5p-step-num">STEP 12</div><div class="m5p-step-body"><div class="m5p-step-name">📣 結末・正体公開</div><div class="m5p-step-desc">全員の正体を公開し、勝敗を決定する</div></div><button class="m5p-done-btn" onclick="m5StepDone(11,this)">終了</button></div>
     </div>
     <button id="m5-progress-reset" onclick="m5ResetProgress()">↺ 進行状況をリセット</button>
@@ -2335,7 +2409,9 @@
           <ellipse cx="126.5" cy="420" rx="8" ry="14" fill="rgba(255,140,20,.75)" filter="url(#glw2)"/>
           <ellipse cx="126.5" cy="418" rx="4" ry="8" fill="rgba(255,220,100,.9)"/>
           <!-- テキスト -->
-          <text x="100" y="198" text-anchor="middle" fill="#4da6ff" font-family="monospace" font-size="8" opacity="0.6" letter-spacing="1">LAST-15MIN</text>
+          <text x="100" y="192" text-anchor="middle" fill="#4da6ff" font-family="monospace" font-size="6.5" opacity="0.65" letter-spacing="0.5">MOCHIZUKI = KUROMAKU</text>
+          <!-- 宇宙人アイコン in cockpit window -->
+          <text x="100" y="163" text-anchor="middle" font-size="14" opacity="0.75">👾</text>
         </svg>
       </div>
       <!-- 部屋リスト -->
@@ -2436,25 +2512,143 @@
     <div class="ending-sub">帰還の瞬間——あなたたちの選択が、物語を決める</div>
     <div class="ending-routes">
       <button class="ending-btn happy" onclick="openEnding('happy')">
-        <span class="eb-icon">🤝</span>
-        ハッピーエンドルート
+        <span class="eb-icon">🏛️</span>
+        <div class="eb-title">全人類に告ぐ―</div>
         <div class="eb-reward">条件：工作員を拘束・排除</div>
       </button>
       <button class="ending-btn bad1" onclick="openEnding('bad1')">
         <span class="eb-icon">💥</span>
-        バッドエンド①
+        <div class="eb-title">さよならの夜に<br>死の花を飾ろう―</div>
         <div class="eb-reward">条件：カプセル爆破成功</div>
       </button>
       <button class="ending-btn bad2" onclick="openEnding('bad2')">
-        <span class="eb-icon">🔥</span>
-        バッドエンド②
+        <span class="eb-icon">🌌</span>
+        <div class="eb-title">空の境界―</div>
         <div class="eb-reward">条件：誤認逮捕＋爆破失敗</div>
       </button>
       <button class="ending-btn alien" onclick="openEnding('alien')">
         <span class="eb-icon">👾</span>
-        ？？エイリアン？？ルート
+        <div class="eb-title">遥かなる彼方へ―</div>
         <div class="eb-reward">条件：真の黒幕を拘束</div>
       </button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== REWARD TABLE SECTION ===== -->
+<section class="reward-section" id="reward">
+  <div class="reward-inner">
+    <div class="reward-section-title">💰 報酬金計算表</div>
+
+    <div class="reward-group-block">
+      <div class="reward-group-label" style="--gc:#4da6ff">もちグループ</div>
+      <div class="reward-table-wrap">
+        <table class="reward-table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>🛸 船長<br><span class="rt-sub">（もち）</span></th>
+              <th>🧪 科学者<br><span class="rt-sub">（つき）</span></th>
+              <th>⚡ エンジニア<br><span class="rt-sub">（たく）</span></th>
+              <th>🏥 医師<br><span class="rt-sub">（ろう）</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="rt-row-label">【勝利条件報酬金】</td><td></td><td></td><td></td><td></td></tr>
+            <tr><td class="rt-row-label">【ボーナスミッション報酬金】</td><td></td><td></td><td></td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="reward-group-block">
+      <div class="reward-group-label" style="--gc:#32c878">つきグループ</div>
+      <div class="reward-table-wrap">
+        <table class="reward-table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>🛸 船長<br><span class="rt-sub">（つき）</span></th>
+              <th>🧪 科学者<br><span class="rt-sub">（もち）</span></th>
+              <th>⚡ エンジニア<br><span class="rt-sub">（ろう）</span></th>
+              <th>🏥 医師<br><span class="rt-sub">（たく）</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="rt-row-label">【勝利条件報酬金】</td><td></td><td></td><td></td><td></td></tr>
+            <tr><td class="rt-row-label">【ボーナスミッション報酬金】</td><td></td><td></td><td></td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="reward-group-block">
+      <div class="reward-group-label" style="--gc:#ffbe32">たくグループ</div>
+      <div class="reward-table-wrap">
+        <table class="reward-table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>🛸 船長<br><span class="rt-sub">（たく）</span></th>
+              <th>🧪 科学者<br><span class="rt-sub">（ろう）</span></th>
+              <th>⚡ エンジニア<br><span class="rt-sub">（もち）</span></th>
+              <th>🏥 医師<br><span class="rt-sub">（つき）</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="rt-row-label">【勝利条件報酬金】</td><td></td><td></td><td></td><td></td></tr>
+            <tr><td class="rt-row-label">【ボーナスミッション報酬金】</td><td></td><td></td><td></td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="reward-group-block">
+      <div class="reward-group-label" style="--gc:#ff5555">ろうグループ</div>
+      <div class="reward-table-wrap">
+        <table class="reward-table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>🛸 船長<br><span class="rt-sub">（ろう）</span></th>
+              <th>🧪 科学者<br><span class="rt-sub">（たく）</span></th>
+              <th>⚡ エンジニア<br><span class="rt-sub">（つき）</span></th>
+              <th>🏥 医師<br><span class="rt-sub">（もち）</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="rt-row-label">【勝利条件報酬金】</td><td></td><td></td><td></td><td></td></tr>
+            <tr><td class="rt-row-label">【ボーナスミッション報酬金】</td><td></td><td></td><td></td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ×③ 本当の所属グループへ移動 -->
+    <div class="reward-notice">
+      結果発表！の前に…皆さん<strong>本当の所属グループ</strong>に移動してください。
+    </div>
+
+    <!-- ×④ 順位発表 -->
+    <div class="ranking-title">順位発表</div>
+
+  </div>
+</section>
+
+<!-- ===== おわりに ===== -->
+<section class="owari-section" id="owari">
+  <div class="owari-inner">
+    <div class="owari-heading">おわりに…</div>
+    <div class="owari-body">
+      皆さん私からの企画を楽しんでくれましたでしょうか！？<br><br>
+      少し裏話をさせていただくと最初は不特定多数の方々と集まってゆる～くボードゲームをやる企画もええな…と思いましたが、人集めに少々苦労しました。「ごめん、行きたかったけどいけない☆」の連絡が来るたびに「えっそんなに楽しかったの？行きたかった！」と本心で言わせるレベルの企画作ってやるわごるぁ、と火が付き、気が付いたらここまで…という経緯です。<br><br>
+      もうすんごく楽しかった！と思っていただければそれ以上の喜びはありません。
+    </div>
+    <div class="owari-quote-block">
+      <div class="owari-divider"></div>
+      <p class="owari-quote">「星を探す者は、空ばかり探す。だけど夢々忘れてはならない。うつむいた時に見える地面も、また星だ。」</p>
+      <p class="owari-quote owari-quote-right">「この先も、きっとあたしは変わる。」</p>
+      <p class="owari-quote owari-quote-far-right">「たくろう、宇宙までも。」</p>
     </div>
   </div>
 </section>
@@ -2462,13 +2656,18 @@
 <!-- Ending Modal -->
 <div class="end-modal-overlay" id="end-modal-overlay" onclick="if(event.target===this)closeEnding()">
   <div class="end-modal-box" id="end-modal-box">
-    <div class="end-modal-bg" id="end-modal-bg"></div>
+    <div class="end-modal-hero">
+      <div class="end-modal-ring"></div>
+      <div class="end-modal-ring2"></div>
+      <div class="end-modal-hero-glow"></div>
+      <span class="end-modal-icon" id="end-modal-icon"></span>
+    </div>
     <div class="end-modal-body">
       <div class="end-modal-label" id="end-modal-label"></div>
       <div class="end-modal-title" id="end-modal-title"></div>
       <div class="end-modal-cond" id="end-modal-cond"></div>
       <div class="end-modal-story" id="end-modal-story"></div>
-      <button class="end-modal-close" onclick="closeEnding()">✕ 閉じる</button>
+      <button class="end-modal-close" onclick="closeEnding()">— CLOSE —</button>
     </div>
   </div>
 </div>
@@ -2488,11 +2687,12 @@
     <div class="msec">
       <div class="mlabel pub">🟢 全員公開ストーリー</div>
       <div class="mbox pub" id="m-pub"></div>
-      <div class="mlabel sec" style="margin-top:10px">🔴 GM→探索者のみ（口頭で伝える）</div>
-      <div class="mbox sec" id="m-sec"></div>
     </div>
     <div class="msend">
-      <div class="msend-title">📦 発見アイテム</div>
+      <div class="msend-title" style="margin-bottom:8px">📡 探索者のみの情報（Firebase送信）</div>
+      <div class="mbox sec" id="m-sec" style="margin-bottom:8px;font-size:12px;color:rgba(255,150,100,.7);background:rgba(255,80,30,.04);border:1px solid rgba(255,80,30,.2);border-radius:6px;padding:10px 12px;line-height:1.7"></div>
+      <div class="m5-group-sec-list" id="m5-group-sec-list"></div>
+      <div class="msend-title" style="margin-top:14px">📦 発見アイテム</div>
       <div class="items-grid" id="m-items-grid">
         <div class="item-slot" id="is-0"><div class="is-ab">A</div><div class="is-icon" id="ii0"></div><div class="is-name" id="in0"></div></div>
         <div class="item-slot" id="is-1"><div class="is-ab">B</div><div class="is-icon" id="ii1"></div><div class="is-name" id="in1"></div></div>
@@ -2518,6 +2718,23 @@
 </div>
 
 <div class="m5-toast" id="m5-toast"></div>
+
+<!-- GM CHAT PANEL -->
+<div class="gm-chat-overlay" id="gm-chat-overlay">
+  <div class="gm-chat-hd">
+    <button class="gm-chat-hd-back" id="gm-back-btn" onclick="gmChatShowList()" style="display:none">‹</button>
+    <div class="gm-chat-hd-title" id="gm-chat-hd-title">💬 GM CHAT</div>
+    <button class="gm-chat-hd-close" onclick="closeGMChat()">✕</button>
+  </div>
+  <div class="gm-chat-list" id="gm-chat-list"></div>
+  <div class="gm-thread-view" id="gm-thread-view">
+    <div class="gm-thread-msgs" id="gm-thread-msgs"></div>
+    <div class="gm-thread-inp-row">
+      <textarea class="gm-thread-inp" id="gm-thread-inp" placeholder="返信を入力..." rows="2"></textarea>
+      <button class="gm-thread-send" onclick="gmSendMessage()">送信</button>
+    </div>
+  </div>
+</div>
 
 
 <script>
@@ -2869,7 +3086,7 @@ document.getElementById('btn-close-bank').addEventListener('click', () => {
 
 <script type="module">
   import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
-  import { getFirestore, doc, getDoc, setDoc } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+  import { getFirestore, doc, getDoc, setDoc, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
   const firebaseConfig = {
     apiKey: "AIzaSyBHVQILRmOO6ZZDL_Szy_5cn7i9v6Ux5lo",
@@ -3047,6 +3264,9 @@ document.getElementById('btn-close-bank').addEventListener('click', () => {
       document.getElementById('ii'+i).textContent=it.icon;
       document.getElementById('in'+i).textContent=it.name;
     });
+    // 秘密情報送信リスト（探索者選択）
+    const secList=document.getElementById('m5-group-sec-list');
+    secList.innerHTML=GROUPS.map(g=>`<div class="m5-group-send-row"><div class="m5-gsr-hd"><div class="m5-gsr-dot" style="background:${GROUP_ACC[g]};box-shadow:0 0 5px ${GROUP_ACC[g]};"></div><div class="m5-gsr-name" style="color:${GROUP_ACC[g]};">${GROUP_JP[g]}グループ</div></div><div class="m5-item-send-row" id="ssr-${id}-${g}">${ROLES.map(rl=>`<button class="m5-role-btn" id="secbtn-${id}-${g}-${rl}" style="border-color:${ROLE_ACC[rl]}60;color:${ROLE_ACC[rl]};" onclick="sendM5Secret(${id},'${g}','${rl}')">${ROLE_EMOJI[rl]}${ROLE_JP[rl]}</button>`).join('')}</div></div>`).join('');
     // グループ送信リスト生成（役職別直接送信）
     const list=document.getElementById('m5-group-send-list');
     const roleBtns=(roomId,g,idx)=>ROLES.map(rl=>`<button class="m5-role-btn" style="border-color:${ROLE_ACC[rl]}60;color:${ROLE_ACC[rl]};" onclick="sendM5RoleItem(${roomId},'${g}',${idx},'${rl}')">${ROLE_EMOJI[rl]}${ROLE_JP[rl]}</button>`).join('');
@@ -3072,16 +3292,40 @@ document.getElementById('btn-close-bank').addEventListener('click', () => {
     document.getElementById('m5-overlay').classList.add('open');
   };
 
+  window.sendM5Secret=async function(roomId,group,role){
+    const r=ROOMS[roomId];if(!r)return;
+    const btn=document.getElementById(`secbtn-${roomId}-${group}-${role}`);if(btn)btn.disabled=true;
+    try{
+      const secRef=doc(db,'game','session','secrets',`${group}_${role}`);
+      const snap=await getDoc(secRef);
+      const existing=snap.exists()?(snap.data().items||[]):[];
+      if(!existing.some(s=>s.roomId===roomId)){
+        existing.push({roomId,roomName:r.name,text:r.storySec,ts:Date.now()});
+        await setDoc(secRef,{items:existing,group,role});
+      }
+      if(btn){btn.textContent='✓';btn.style.opacity='.5';}
+      m5Toast(`✓ ${GROUP_JP[group]}グループ ${ROLE_JP[role]} に秘密情報を共有`);
+    }catch(e){if(btn)btn.disabled=false;m5Toast('⚠️ '+e.message);}
+  };
   window.closeM5Modal=()=>{document.getElementById('m5-overlay').classList.remove('open');curRoom=null;};
   window.m5BgClose=(e)=>{if(e.target===document.getElementById('m5-overlay'))window.closeM5Modal();};
 
   async function doSend(roomId,group,idx,role){
     const it=curRoom.items[idx];
+    // 所持アイテム（在庫）に追加
     const ref=doc(db,'game','session','inventory',`${group}_${role}`);
     const sn=await getDoc(ref);
     const items=[...(sn.data()?.items||[])];
     if(!items.includes(it.id))items.push(it.id);
     await setDoc(ref,{items,group,role});
+    // 発見物コレクションにも記録（役職カードの発見物タブ表示用）
+    const discRef=doc(db,'game','session','discovery',`${group}_${role}`);
+    const dsnap=await getDoc(discRef);
+    const discItems=[...(dsnap.data()?.items||[])];
+    if(!discItems.some(d=>d.id===it.id&&d.roomId===roomId)){
+      discItems.push({id:it.id,icon:it.icon,name:it.name,roomId});
+    }
+    await setDoc(discRef,{items:discItems,group,role});
     sentMap[roomId][group][idx]=role;
   }
 
@@ -3138,7 +3382,7 @@ document.getElementById('btn-close-bank').addEventListener('click', () => {
 const ENDINGS = {
   happy: {
     label:'HAPPY END',
-    title:'🤝 ハッピーエンドルート',
+    title:'🏛️ 全人類に告ぐ―',
     cond:'条件：船長が科学者を拘束 または 医師が科学者を殺害し、帰還',
     bgClass:'happy-bg',
     icon:'🏛️',
@@ -3154,7 +3398,7 @@ const ENDINGS = {
   },
   bad1: {
     label:'BAD END ①',
-    title:'💥 バッドエンドルート①',
+    title:'💥 さよならの夜に死の花を飾ろう―',
     cond:'条件：科学者が帰還用カプセルの爆破に成功する',
     bgClass:'bad1-bg',
     icon:'💥',
@@ -3170,7 +3414,7 @@ const ENDINGS = {
   },
   bad2: {
     label:'BAD END ②',
-    title:'🔥 バッドエンドルート②',
+    title:'🌌 空の境界―',
     cond:'条件：誤認逮捕 かつ 科学者が爆破に失敗する',
     bgClass:'bad2-bg',
     icon:'🔥',
@@ -3185,8 +3429,8 @@ const ENDINGS = {
 次の瞬間、システムエラーが機体を包む。君たちの意識は、再突入の衝撃とともに闇へと沈んでいった。`
   },
   alien: {
-    label:'？？ ALIEN ROUTE ？？',
-    title:'👾 ？？エイリアン？？ルート',
+    label:'ALIEN ROUTE',
+    title:'👾 遥かなる彼方へ―',
     cond:'条件：クルー内を拘束・殺害せず、第5の部屋の真の黒幕を拘束または殺害する',
     bgClass:'alien-bg',
     icon:'🎤',
@@ -3207,8 +3451,8 @@ const ENDINGS = {
 
 window.openEnding=function(key){
   const e=ENDINGS[key];
-  document.getElementById('end-modal-bg').className='end-modal-bg '+e.bgClass;
-  document.getElementById('end-modal-bg').textContent=e.icon;
+  document.getElementById('end-modal-box').className='end-modal-box '+e.bgClass;
+  document.getElementById('end-modal-icon').textContent=e.icon;
   document.getElementById('end-modal-label').textContent=e.label;
   document.getElementById('end-modal-title').textContent=e.title;
   document.getElementById('end-modal-cond').textContent=e.cond;
@@ -3216,6 +3460,83 @@ window.openEnding=function(key){
   document.getElementById('end-modal-overlay').classList.add('open');
 };
 window.closeEnding=function(){document.getElementById('end-modal-overlay').classList.remove('open');};
+
+// ===== GM CHAT =====
+const _CHAT_GROUPS=['mochi','tsuki','taku','rou'];
+const _CHAT_ROLES=['captain','scientist','engineer','doctor'];
+const _CHAT_GROUP_JP={mochi:'もち',tsuki:'つき',taku:'たく',rou:'ろう'};
+const _CHAT_ROLE_JP={captain:'船長',doctor:'医師',engineer:'エンジニア',scientist:'科学者'};
+const _CHAT_ROLE_EMO={captain:'🛸',doctor:'🏥',engineer:'⚡',scientist:'🧪'};
+let _gmChatData={},_gmChatSeen={},_gmCurThread=null;
+
+function _gmLoadSeen(){_CHAT_GROUPS.forEach(g=>_CHAT_ROLES.forEach(r=>{const k=g+'_'+r;_gmChatSeen[k]=parseInt(localStorage.getItem('gm_cs_'+k)||'0');}));}
+function _gmUnread(k){return Math.max(0,(_gmChatData[k]||[]).length-(_gmChatSeen[k]||0));}
+function _gmTotalUnread(){let t=0;Object.keys(_gmChatData).forEach(k=>{t+=_gmUnread(k);});return t;}
+function _gmNavBadge(){const n=_gmTotalUnread();const b=document.getElementById('nav-chat-badge');if(!b)return;b.textContent=n>0?n:'';b.style.display=n>0?'flex':'none';}
+function _gmRenderList(){
+  const list=document.getElementById('gm-chat-list');if(!list)return;
+  list.innerHTML='';
+  _CHAT_GROUPS.forEach(g=>{
+    _CHAT_ROLES.forEach(r=>{
+      const k=g+'_'+r;const msgs=_gmChatData[k]||[];const u=_gmUnread(k);
+      const last=msgs.length?msgs[msgs.length-1]:null;
+      const el=document.createElement('div');el.className='gm-chat-item';
+      el.onclick=()=>_gmOpenThread(g,r);
+      el.innerHTML=`<div class="gm-chat-item-icon">${_CHAT_ROLE_EMO[r]}</div><div class="gm-chat-item-info"><div class="gm-chat-item-name">${_CHAT_GROUP_JP[g]}グループ — ${_CHAT_ROLE_JP[r]}</div><div class="gm-chat-item-preview">${last?last.text.slice(0,35)+(last.text.length>35?'…':''):'メッセージなし'}</div></div><div class="gm-chat-item-badge${u>0?' show':''}">${u>0?u:''}</div>`;
+      list.appendChild(el);
+    });
+  });
+}
+function _gmOpenThread(g,r){
+  const k=g+'_'+r;_gmCurThread=k;
+  _gmChatSeen[k]=(_gmChatData[k]||[]).length;localStorage.setItem('gm_cs_'+k,_gmChatSeen[k]);_gmNavBadge();
+  document.getElementById('gm-chat-list').style.display='none';
+  const tv=document.getElementById('gm-thread-view');tv.classList.add('show');
+  document.getElementById('gm-chat-hd-title').textContent=`${_CHAT_ROLE_EMO[r]} ${_CHAT_GROUP_JP[g]} — ${_CHAT_ROLE_JP[r]}`;
+  document.getElementById('gm-back-btn').style.display='block';
+  _gmRenderThread(_gmChatData[k]||[]);
+}
+function _gmRenderThread(msgs){
+  const c=document.getElementById('gm-thread-msgs');if(!c)return;
+  if(!msgs.length){c.innerHTML='<div class="gm-thread-empty">メッセージなし</div>';return;}
+  c.innerHTML='';
+  msgs.forEach(m=>{const d=document.createElement('div');d.className='gm-thread-msg from-'+m.from;d.innerHTML='<div class="gm-thread-msg-who">'+(m.from==='gm'?'GM':m.name||'プレイヤー')+'</div>'+m.text.replace(/</g,'&lt;').replace(/\n/g,'<br>');c.appendChild(d);});
+  c.scrollTop=c.scrollHeight;
+}
+window.gmChatShowList=function(){
+  _gmCurThread=null;
+  document.getElementById('gm-chat-list').style.display='';
+  document.getElementById('gm-thread-view').classList.remove('show');
+  document.getElementById('gm-chat-hd-title').textContent='💬 GM CHAT';
+  document.getElementById('gm-back-btn').style.display='none';
+  _gmRenderList();
+};
+window.gmSendMessage=async function(){
+  if(!_gmCurThread)return;
+  const inp=document.getElementById('gm-thread-inp');const text=inp.value.trim();if(!text)return;inp.value='';
+  const chatDocRef=doc(db,'game','session','chat',_gmCurThread);
+  try{const snap=await getDoc(chatDocRef);const ex=snap.exists()?(snap.data().messages||[]):[];await setDoc(chatDocRef,{messages:[...ex,{from:'gm',text,ts:Date.now(),name:'GM'}]});_gmChatSeen[_gmCurThread]=ex.length+1;localStorage.setItem('gm_cs_'+_gmCurThread,_gmChatSeen[_gmCurThread]);}catch(e){console.error(e);}
+};
+window.openGMChat=function(){
+  _gmLoadSeen();
+  document.getElementById('gm-chat-overlay').classList.add('open');
+  window.gmChatShowList();
+};
+window.closeGMChat=function(){document.getElementById('gm-chat-overlay').classList.remove('open');};
+// Subscribe to all 16 chat threads
+_gmLoadSeen();
+_CHAT_GROUPS.forEach(g=>_CHAT_ROLES.forEach(r=>{
+  const k=g+'_'+r;
+  onSnapshot(doc(db,'game','session','chat',k),snap=>{
+    _gmChatData[k]=snap.exists()?(snap.data().messages||[]):[];
+    _gmNavBadge();
+    if(document.getElementById('gm-chat-overlay').classList.contains('open')){
+      if(_gmCurThread===k){_gmRenderThread(_gmChatData[k]);_gmChatSeen[k]=_gmChatData[k].length;localStorage.setItem('gm_cs_'+k,_gmChatSeen[k]);_gmNavBadge();}
+      else if(!_gmCurThread){_gmRenderList();}
+    }
+  });
+}));
+document.getElementById('gm-thread-inp').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();gmSendMessage();}});
 </script>
 </body>
 </html>

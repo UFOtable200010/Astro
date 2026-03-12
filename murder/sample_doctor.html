@@ -148,6 +148,35 @@ body{background:#060a18;min-height:100vh;font-family:'Noto Serif JP',serif;paddi
 .slot.used{opacity:.32;filter:grayscale(.6) brightness(.7)}
 .slot.used .slot-owned-badge{background:rgba(100,100,100,.2);color:#666;border-color:rgba(100,100,100,.2)}
 .reward{font-family:'Share Tech Mono',monospace;font-size:10px;color:rgba(255,215,50,.85);background:rgba(255,200,30,.08);border:1px solid rgba(255,200,30,.25);border-radius:3px;padding:1px 7px;margin-left:8px;white-space:nowrap}
+/* === CHAT === */
+@keyframes chatUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.chat-fab{position:fixed;bottom:28px;right:20px;width:52px;height:52px;border-radius:50%;background:rgba(77,166,255,.14);border:1.5px solid rgba(77,166,255,.4);color:rgba(77,166,255,.9);font-size:24px;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 24px rgba(0,0,0,.5);z-index:100;transition:all .2s}
+.chat-fab:hover{background:rgba(77,166,255,.24)}
+.chat-fab-badge{position:absolute;top:-3px;right:-3px;width:18px;height:18px;border-radius:50%;background:#ff4455;font-family:'Share Tech Mono',monospace;font-size:9px;color:#fff;display:none;align-items:center;justify-content:center;font-weight:700;border:2px solid #060a18}
+.chat-fab-badge.show{display:flex}
+.chat-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:150;display:none;align-items:flex-end}
+.chat-overlay.open{display:flex;animation:chatUp .28s ease}
+.chat-panel{width:100%;max-height:78vh;background:linear-gradient(180deg,#0a1020,#060c18);border-radius:18px 18px 0 0;border-top:1px solid rgba(77,166,255,.22);display:flex;flex-direction:column;overflow:hidden}
+.chat-hd{display:flex;align-items:center;padding:14px 16px;border-bottom:1px solid rgba(77,166,255,.1);flex-shrink:0}
+.chat-hd-title{flex:1;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.22em;color:rgba(77,166,255,.7)}
+.chat-hd-close{background:transparent;border:none;color:rgba(255,255,255,.3);font-size:18px;cursor:pointer;padding:4px;line-height:1}
+.chat-msgs{flex:1;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:10px;min-height:160px}
+.chat-msg{max-width:82%;padding:9px 12px;border-radius:12px;font-size:13px;line-height:1.65}
+.chat-msg.from-gm{align-self:flex-start;background:rgba(77,166,255,.1);border:1px solid rgba(77,166,255,.2);color:#c0d8f0;border-radius:4px 12px 12px 12px}
+.chat-msg.from-player{align-self:flex-end;background:rgba(50,200,130,.1);border:1px solid rgba(50,200,130,.22);color:#b0e8d0;border-radius:12px 4px 12px 12px}
+.chat-msg-who{font-family:'Share Tech Mono',monospace;font-size:8px;opacity:.5;margin-bottom:3px;letter-spacing:.1em}
+.chat-empty{text-align:center;color:rgba(255,255,255,.2);font-size:12px;padding:28px 0;font-family:'Share Tech Mono',monospace}
+.chat-inp-row{display:flex;gap:8px;padding:12px 16px;border-top:1px solid rgba(77,166,255,.1);flex-shrink:0}
+.chat-inp{flex:1;padding:9px 12px;background:rgba(255,255,255,.04);border:1px solid rgba(77,166,255,.15);border-radius:8px;font-family:'Noto Serif JP',serif;font-size:13px;color:#fff;outline:none;resize:none;max-height:80px}
+.chat-inp:focus{border-color:rgba(77,166,255,.38)}
+.chat-send-btn{padding:9px 14px;background:rgba(77,166,255,.12);border:1px solid rgba(77,166,255,.3);border-radius:8px;color:rgba(77,166,255,.9);font-family:'Share Tech Mono',monospace;font-size:10px;cursor:pointer;white-space:nowrap;transition:background .18s}
+.chat-send-btn:hover{background:rgba(77,166,255,.22)}
+/* discovery & secrets */
+.fi-secret-recv{margin-top:12px;padding:10px 14px;background:rgba(255,80,30,.06);border:1px solid rgba(255,80,30,.28);border-radius:6px}
+.fi-sec-label{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:.2em;color:rgba(255,120,70,.65);margin-bottom:6px}
+.fi-sec-text{font-size:12px;color:rgba(255,180,120,.85);line-height:1.7}
+.alien-btn{position:relative!important}
+.alien-btn.crossed::after{content:'✕';position:absolute;top:0;right:0;font-size:9px;color:#ff4455;font-weight:900;line-height:1}
 </style>
 </head>
 <body>
@@ -253,8 +282,25 @@ body{background:#060a18;min-height:100vh;font-family:'Noto Serif JP',serif;paddi
     <div class="pod5-icon">👾</div>
     <div class="pod5-title">ー第5の部屋　宇宙人からの監視部屋ー</div>
     <div class="pod5-body">この宇宙船には第5の部屋が存在する。<br>そこには正体不明の「何か」からの監視の痕跡がある。</div>
-    <button class="pod5-btn" onclick="reportPod5()">🚨 第5の部屋を対象にする（GMに報告）</button>
+    <button class="pod5-btn" onclick="reportPod5()">第五の部屋を対象にする（最終アクション時、GMにメッセージ送信）</button>
     <button class="pod5-close" onclick="closePod5()">閉じる</button>
+  </div>
+</div>
+
+<!-- Chat FAB -->
+<button class="chat-fab" onclick="openChat()" title="GMとチャット">💬<span class="chat-fab-badge" id="chat-badge"></span></button>
+<!-- Chat Overlay -->
+<div class="chat-overlay" id="chat-overlay" onclick="if(event.target===this)closeChat()">
+  <div class="chat-panel">
+    <div class="chat-hd">
+      <div class="chat-hd-title">💬 GM チャット</div>
+      <button class="chat-hd-close" onclick="closeChat()">✕</button>
+    </div>
+    <div class="chat-msgs" id="chat-msgs"><div class="chat-empty">まだメッセージはありません</div></div>
+    <div class="chat-inp-row">
+      <textarea class="chat-inp" id="chat-inp" placeholder="GMへメッセージ..." rows="2"></textarea>
+      <button class="chat-send-btn" onclick="sendChat()">送信</button>
+    </div>
   </div>
 </div>
 
@@ -309,8 +355,52 @@ let _alienClicks=0,_alienTimer=null;
 window.handleAlienClick=function(){_alienClicks++;clearTimeout(_alienTimer);if(_alienClicks>=3){_alienClicks=0;openPod5();}else{_alienTimer=setTimeout(()=>{_alienClicks=0;},1500);}};
 window.openPod5 = function() { document.getElementById('pod5-overlay').classList.add('open'); };
 window.closePod5 = function() { document.getElementById('pod5-overlay').classList.remove('open'); };
-window.reportPod5 = function() { closePod5(); showToast('🚨 第5のポッドをGMに報告しました！'); };
+window.reportPod5 = async function() {
+  try {
+    await setDoc(doc(db,'game','session','pod5',group+'_'+ROLE),{group,role:ROLE,name,ts:Date.now(),reported:true});
+    closePod5(); showToast('📡 第五の部屋をGMに送信しました');
+  } catch(e) { showToast('⚠️ 送信に失敗しました: '+e.message); }
+};
 init();
+
+// === CHAT ===
+const chatRef=doc(db,'game','session','chat',group+'_'+ROLE);
+let chatMsgs=[],chatSeen=parseInt(localStorage.getItem('cs_'+group+'_'+ROLE)||'0');
+function renderChatMsgs(msgs){
+  chatMsgs=msgs;
+  const c=document.getElementById('chat-msgs');
+  if(!msgs.length){c.innerHTML='<div class="chat-empty">まだメッセージはありません</div>';updateChatBadge();return;}
+  c.innerHTML='';
+  msgs.forEach(m=>{const d=document.createElement('div');d.className='chat-msg from-'+m.from;d.innerHTML='<div class="chat-msg-who">'+(m.from==='gm'?'GM':m.name||'あなた')+'</div>'+m.text.replace(/</g,'&lt;').replace(/\n/g,'<br>');c.appendChild(d);});
+  c.scrollTop=c.scrollHeight;
+  updateChatBadge();
+}
+function updateChatBadge(){const u=Math.max(0,chatMsgs.length-chatSeen);const b=document.getElementById('chat-badge');b.textContent=u||'';u?b.classList.add('show'):b.classList.remove('show');}
+onSnapshot(chatRef,s=>renderChatMsgs(s.exists()?(s.data().messages||[]):[]));
+window.openChat=function(){document.getElementById('chat-overlay').classList.add('open');chatSeen=chatMsgs.length;localStorage.setItem('cs_'+group+'_'+ROLE,chatSeen);document.getElementById('chat-badge').classList.remove('show');setTimeout(()=>{document.getElementById('chat-msgs').scrollTop=9999;},50);};
+window.closeChat=function(){document.getElementById('chat-overlay').classList.remove('open');};
+window.sendChat=async function(){const inp=document.getElementById('chat-inp');const text=inp.value.trim();if(!text)return;inp.value='';try{const snap=await getDoc(chatRef);const ex=snap.exists()?(snap.data().messages||[]):[];await setDoc(chatRef,{messages:[...ex,{from:'player',text,ts:Date.now(),name:name||'プレイヤー'}]});}catch(e){showToast('⚠️ '+e.message);}};
+document.getElementById('chat-inp').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendChat();}});
+
+// === DISCOVERY (×⑦) ===
+onSnapshot(doc(db,'game','session','discovery',group+'_'+ROLE),snap=>{
+  const items=snap.exists()?(snap.data().items||[]):[];
+  const byRoom={};items.forEach(it=>{if(!byRoom[it.roomId])byRoom[it.roomId]=[];byRoom[it.roomId].push(it);});
+  [0,1,2,3].forEach(roomId=>{const panel=document.getElementById('sp-'+roomId+'-hakken');if(!panel)return;const list=panel.querySelector('.fi-list');if(!list)return;const ri=byRoom[roomId]||[];if(!ri.length)return;list.innerHTML=ri.map(it=>`<div class="fi-row"><div class="fi-ico">${it.icon||'📦'}</div><div><div class="fi-name">${(it.name||'').replace(/</g,'&lt;')}</div><div class="fi-desc">GMから開示されました（表示のみ）</div></div></div>`).join('');});
+});
+// === SECRETS (×⑧) ===
+onSnapshot(doc(db,'game','session','secrets',group+'_'+ROLE),snap=>{
+  const items=snap.exists()?(snap.data().items||[]):[];
+  items.forEach(si=>{const panel=document.getElementById('sp-'+si.roomId+'-hakken');if(!panel)return;let b=panel.querySelector('.fi-secret-recv');if(!b){b=document.createElement('div');b.className='fi-secret-recv';b.innerHTML='<div class="fi-sec-label">📡 GM秘密情報</div><div class="fi-sec-text"></div>';panel.appendChild(b);}b.querySelector('.fi-sec-text').textContent=si.text||'';});
+});
+// === ALIEN × (×⑩) ===
+const _AXK='ax_'+group+'_'+ROLE;
+if(localStorage.getItem(_AXK))document.querySelector('.alien-btn').classList.add('crossed');
+window.handleAlienClick=function(){
+  const hasAb2=ABILITY2_ITEMS.every(id=>_currentItems.includes(id));
+  if(hasAb2&&document.getElementById('pod5-overlay').classList.contains('open')){document.querySelector('.alien-btn').classList.add('crossed');localStorage.setItem(_AXK,'1');closePod5();return;}
+  _alienClicks++;clearTimeout(_alienTimer);if(_alienClicks>=3){_alienClicks=0;openPod5();}else{_alienTimer=setTimeout(()=>{_alienClicks=0;},1500);}
+};
 </script>
 </body>
 </html>
