@@ -125,28 +125,41 @@ body{background:#060a18;min-height:100vh;font-family:'Noto Serif JP',serif;paddi
 .limit-msg{font-size:14px;color:#ffaaaa;line-height:1.9;margin-bottom:20px}
 .limit-ok{padding:10px 28px;background:rgba(255,50,50,.2);border:1px solid rgba(255,50,50,.5);border-radius:6px;color:#ff8888;font-family:'Share Tech Mono',monospace;font-size:11px;cursor:pointer}
 .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(12px);background:rgba(50,220,130,.14);border:1px solid rgba(50,220,130,.4);border-radius:6px;padding:10px 20px;font-family:'Share Tech Mono',monospace;font-size:11px;color:rgba(100,255,180,.9);opacity:0;transition:opacity .3s,transform .3s;z-index:300;pointer-events:none;white-space:nowrap}
+/* Secret divider */
+.secret-divider{display:flex;align-items:center;gap:10px;padding:14px 22px 6px;background:rgba(255,80,20,.04)}
+.secret-divider-line{flex:1;height:2px;background:linear-gradient(90deg,transparent,rgba(255,100,40,.6),transparent)}
+.secret-divider-text{font-family:'Share Tech Mono',monospace;font-size:10px;color:rgba(255,140,50,.9);letter-spacing:.12em;white-space:nowrap;font-weight:700}
+/* Enhanced secret block label */
+.block-label.secret{color:rgba(255,160,50,1)!important;background:rgba(255,90,10,.1)!important;border-color:rgba(255,90,10,.3)!important;font-size:10px!important;padding:11px 22px!important;letter-spacing:.18em!important}
 </style>
 </head>
 <body>
 <div class="name-bar"><div class="nb-icon">⚡</div><div><div class="nb-role">ENGINEER / エンジニア</div><div class="nb-name" id="nb-name-val">—</div></div></div>
 <div class="room-tabbar">
-  <button class="room-tab active" id="rtab-0" onclick="switchRoom(0)">操縦室</button>
+  <button class="room-tab active" id="rtab-intro" onclick="switchRoom('intro')">📖 導入</button>
+  <button class="room-tab" id="rtab-0" onclick="switchRoom(0)">操縦室</button>
   <button class="room-tab restrict-tab" id="rtab-1" onclick="switchRoom(1)">機関室🚫</button>
   <button class="room-tab lock-tab" id="rtab-2" onclick="switchRoom(2)">生命維持🔒</button>
   <button class="room-tab lock-tab" id="rtab-3" onclick="switchRoom(3)">貨物室🔒</button>
 </div>
-<div class="room-panel show" id="rpanel-0">
+<div class="room-panel show" id="rpanel-intro">
+  <div class="sub-panel show" style="padding:22px 20px">
+    <div class="sp-label">📖 オープニングストーリー</div>
+    <div class="sp-text">宇宙船「たくろう」が地球への帰還まで残り3時間というとき、突然船内システムから警告音が鳴り響いた。<br><br>「複数のシステムで不正な改ざんを検出。調査を開始してください」<br><br>誰かが、この船を帰還させないために動いている——。クルーたちは互いを疑いながら、真実を探し始めた。<br><br>あなたは生きて地球に戻ることができるか？</div>
+  </div>
+</div>
+<div class="room-panel" id="rpanel-0">
   <div class="sub-tabbar">
     <button class="sub-tab active" onclick="switchSub(0,'story',this)">ストーリー</button>
     <button class="sub-tab" onclick="switchSub(0,'hakken',this)">発見物</button>
     <button class="sub-tab" onclick="switchSub(0,'secret',this)">極秘ファイル</button>
   </div>
-  <div class="sub-panel show" id="sp-0-story"><div class="sp-label">🟢 公開ストーリー</div><div class="sp-text">帰還3時間前から、操縦システムに未確認の暗号通信が送信されていた。宛先は、望月議長直轄の極秘回線。航行ログには本来の帰還座標とは異なる座標が上書きされていた。</div></div>
+  <div class="sub-panel show" id="sp-0-story"><div class="sp-label">🟢 公開ストーリー</div><div class="sp-text">帰還まで3時間というタイミングで、操縦システムから謎の通信が「望月議長」という人物の秘密回線に送られていた。しかも航行ログの帰還地点が、いつの間にか書き換えられていた。一体誰が、何のために…？</div></div>
   <div class="sub-panel" id="sp-0-hakken">
     <div class="sp-label">🔍 この部屋の発見物</div>
     <div class="fi-list">
-      <div class="fi-row"><div class="fi-ico">📡</div><div><div class="fi-name">暗号通信端末</div><div class="fi-desc">競合企業への暗号化通信履歴が残る端末</div></div></div>
-      <div class="fi-row"><div class="fi-ico">🗓️</div><div><div class="fi-name">改ざんされた航行ログ</div><div class="fi-desc">上書きされた形跡のある飛行記録データ</div></div></div>
+      <div class="fi-row"><div class="fi-ico">❓</div><div><div class="fi-name">？？？</div><div class="fi-desc">GMから探索者のみに開示されます</div></div></div>
+      <div class="fi-row"><div class="fi-ico">❓</div><div><div class="fi-name">？？？</div><div class="fi-desc">GMから探索者のみに開示されます</div></div></div>
     </div>
   </div>
   <div class="sub-panel" id="sp-0-secret"><div class="sf-box"><div class="sf-label">🔴 極秘ファイル — エンジニアのみ</div><div class="sf-text">改ざんされた航行ログ——欲しかったものがここにある。このデータを手に入れれば、あなたの計画が一歩進む。<br><br>情報を盗んで自分の本当の所属グループに貢献してやるんだ。ほかの人などどうでもいい。</div></div></div>
@@ -160,8 +173,8 @@ body{background:#060a18;min-height:100vh;font-family:'Noto Serif JP',serif;paddi
   <div class="lock-screen" id="ls-2"><div class="lock-big">🔒</div><div class="lock-ttl">生命維持室 — ロック中</div><div class="lock-desc">GMからパスワードを受け取ったら入力してください</div><div class="lock-row"><input class="lock-inp" id="pw-inp-2" type="text" placeholder="- - - -" maxlength="20"><button class="lock-btn" onclick="tryUnlock(2)">解錠</button></div><div class="lock-err" id="lock-err-2"></div></div>
   <div id="rc-2" style="display:none">
     <div class="sub-tabbar"><button class="sub-tab active" onclick="switchSub(2,'story',this)">ストーリー</button><button class="sub-tab" onclick="switchSub(2,'hakken',this)">発見物</button><button class="sub-tab" onclick="switchSub(2,'secret',this)">極秘ファイル</button></div>
-    <div class="sub-panel show" id="sp-2-story"><div class="sp-label">🟢 公開ストーリー</div><div class="sp-text">生命維持システムから、地球上に存在しない有機化合物が検出された。さらに、全医療処置記録が完全に上書きされていた。誰かが意図的に証拠を消した。</div></div>
-    <div class="sub-panel" id="sp-2-hakken"><div class="sp-label">🔍 この部屋の発見物</div><div class="fi-list"><div class="fi-row"><div class="fi-ico">⚠️</div><div><div class="fi-name">未認可の薬物</div><div class="fi-desc">医療データベースに登録されていない未知の薬剤</div></div></div><div class="fi-row"><div class="fi-ico">📋</div><div><div class="fi-name">改ざんされた医療処置記録</div><div class="fi-desc">データが上書きされた医師の診療ログ</div></div></div></div></div>
+    <div class="sub-panel show" id="sp-2-story"><div class="sp-label">🟢 公開ストーリー</div><div class="sp-text">クルー全員の体から、地球では知られていない謎の薬物反応が検出された！しかも医療記録が全て書き換えられていて、誰が何をされたか全くわからない。誰かが意図的に証拠を消した。</div></div>
+    <div class="sub-panel" id="sp-2-hakken"><div class="sp-label">🔍 この部屋の発見物</div><div class="fi-list"><div class="fi-row"><div class="fi-ico">❓</div><div><div class="fi-name">？？？</div><div class="fi-desc">GMから探索者のみに開示されます</div></div></div><div class="fi-row"><div class="fi-ico">❓</div><div><div class="fi-name">？？？</div><div class="fi-desc">GMから探索者のみに開示されます</div></div></div></div></div>
     <div class="sub-panel" id="sp-2-secret"><div class="sf-box"><div class="sf-label">🔴 極秘ファイル — エンジニアのみ</div><div class="sf-text">改ざんされた医療処置記録——これは使える。誰かが証拠を隠した痕跡だ。<br><br>このデータを持っていれば、帰還の瞬間に有利に動けるかもしれない。改ざんされた航行ログと合わせれば完璧だ。</div></div></div>
   </div>
 </div>
@@ -169,8 +182,8 @@ body{background:#060a18;min-height:100vh;font-family:'Noto Serif JP',serif;paddi
   <div class="lock-screen" id="ls-3"><div class="lock-big">🔒</div><div class="lock-ttl">貨物室 — ロック中</div><div class="lock-desc">GMからパスワードを受け取ったら入力してください</div><div class="lock-row"><input class="lock-inp" id="pw-inp-3" type="text" placeholder="- - - -" maxlength="20"><button class="lock-btn" onclick="tryUnlock(3)">解錠</button></div><div class="lock-err" id="lock-err-3"></div></div>
   <div id="rc-3" style="display:none">
     <div class="sub-tabbar"><button class="sub-tab active" onclick="switchSub(3,'story',this)">ストーリー</button><button class="sub-tab" onclick="switchSub(3,'hakken',this)">発見物</button><button class="sub-tab" onclick="switchSub(3,'secret',this)">極秘ファイル</button></div>
-    <div class="sub-panel show" id="sp-3-story"><div class="sp-label">🟢 公開ストーリー</div><div class="sp-text">貨物室の隔壁に、帰還カプセルの電源ラインに直結した爆破装置が発見された。傍には高度な暗号化が施された記憶媒体が、封印された状態で置かれていた。</div></div>
-    <div class="sub-panel" id="sp-3-hakken"><div class="sp-label">🔍 この部屋の発見物</div><div class="fi-list"><div class="fi-row"><div class="fi-ico">🔋</div><div><div class="fi-name">高圧電池パック</div><div class="fi-desc">通常の3倍以上の電圧に調整された危険な電源</div></div></div><div class="fi-row"><div class="fi-ico">💾</div><div><div class="fi-name">暗号化記憶媒体</div><div class="fi-desc">高度な暗号化が施された未知のデータ媒体</div></div></div></div></div>
+    <div class="sub-panel show" id="sp-3-story"><div class="sp-label">🟢 公開ストーリー</div><div class="sp-text">帰還カプセルの電源に、直接爆破装置が繋がれているのを発見した！これが起動したら全員終わりだ。そのすぐ隣に、暗号化された謎のデータを収めた記憶媒体が封印されて置かれていた。</div></div>
+    <div class="sub-panel" id="sp-3-hakken"><div class="sp-label">🔍 この部屋の発見物</div><div class="fi-list"><div class="fi-row"><div class="fi-ico">❓</div><div><div class="fi-name">？？？</div><div class="fi-desc">GMから探索者のみに開示されます</div></div></div><div class="fi-row"><div class="fi-ico">❓</div><div><div class="fi-name">？？？</div><div class="fi-desc">GMから探索者のみに開示されます</div></div></div></div></div>
     <div class="sub-panel" id="sp-3-secret"><div class="sf-box"><div class="sf-label">🔴 極秘ファイル — エンジニアのみ</div><div class="sf-text">高圧電池パック——科学者がこれを欲しがっているはずだ。逆に使える：誰がこれを欲しがるかで、工作員が誰かわかる。<br><br>あるいは……自分が持って、交渉の切り札にするか。</div></div></div>
   </div>
 </div>
@@ -180,6 +193,11 @@ body{background:#060a18;min-height:100vh;font-family:'Noto Serif JP',serif;paddi
   <div class="block-label pub">【公開情報】— 全員に開示可能</div>
   <div class="sec"><div class="sec-title">役割説明</div><div class="pub-info-text">船の心臓部を守る完璧主義の技術屋。機械は裏切らないと信じているが、人間はどうだろうか。</div></div>
   <div class="sec ability"><div class="sec-title">公開能力：エンジニアの分解</div><div class="ability-cond">🔩「精密ドライバー」を所持しているとき使用可（⑩話し合いまで、１回）</div><div class="ability-body">自分以外のクルー１人を指定し、そのクルーの持ち物を１個ずつ他の誰かと交換するよう命じることができる。</div></div>
+  <div class="secret-divider">
+    <div class="secret-divider-line"></div>
+    <div class="secret-divider-text">🔐 ここから秘密情報</div>
+    <div class="secret-divider-line"></div>
+  </div>
   <div class="block-label secret">【秘密の情報】— 本人のみ閲覧</div>
   <div class="sec secret1">
     <div class="sec-title">あなたの真の身元</div>
@@ -197,6 +215,7 @@ body{background:#060a18;min-height:100vh;font-family:'Noto Serif JP',serif;paddi
     <div class="ability-cond">🗓️ 改ざんされた航行ログ ＋ 📋 改ざんされた医療処置記録 を所持中</div>
     <div class="ability-body">任意のクルーを１人指定し、そのクルーの持ち物を１個だけ強制的に交換させることができる。</div>
     <div class="final-note">⚠️ 帰還の瞬間（最終アクション時）かつアイテム所有時のみに発動<br>⚠️ この能力をむやみに情報公開すると警戒されてしまうので注意が必要そうだ…<br>⚠️ アイテムが足りないときはおとなしくやり過ごそう…</div>
+    <button class="used-btn" onclick="markAbility2Used()">🚨 能力②を発動する（GMに報告）</button>
   </div>
   <div class="sec win"><div class="sec-title">【勝利条件】</div><div class="win-item" id="win-text">読み込み中…</div></div>
   <div class="sec bonus"><div class="sec-title">【ボーナスミッション】</div><div class="bonus-item">高圧電池パック・改ざんされた航行ログ・鎮痛剤の3つを集めること</div><div class="bonus-item">または誤認逮捕されることなく、工作員を捕まえられること</div></div>
@@ -222,7 +241,7 @@ const params=new URLSearchParams(location.search);
 const group=params.get('group')||'mochi';const name=params.get('name')||'';
 const TRUE_GROUP={mochi:{captain:'mochi',scientist:'tsuki',engineer:'taku',doctor:'rou'},tsuki:{captain:'tsuki',scientist:'mochi',engineer:'rou',doctor:'taku'},taku:{captain:'taku',scientist:'rou',engineer:'mochi',doctor:'tsuki'},rou:{captain:'rou',scientist:'taku',engineer:'tsuki',doctor:'mochi'}};
 const GROUP_NAMES={mochi:'もちグループ',tsuki:'つきグループ',taku:'たくグループ',rou:'ろうグループ'};
-const ROLE='engineer';const INIT_ITEM_ID='captain_id';const ABILITY1_ITEM_ID='precision_driver';const ABILITY2_ITEMS=['nav_log','med_record'];
+const ROLE='engineer';const INIT_ITEM_ID='doctor_sedative';const ABILITY1_ITEM_ID='precision_driver';const ABILITY2_ITEMS=['nav_log','med_record'];
 const tg=TRUE_GROUP[group]?.[ROLE];const trueGName=GROUP_NAMES[tg]||group;
 document.getElementById('nb-name-val').textContent=name||'（名前未設定）';
 document.getElementById('identity-text').textContent='裏切り者（'+trueGName+'）です';
@@ -231,12 +250,23 @@ const ROOM_PW_FIELD={2:'pw3',3:'pw4'};const unlocked={0:true,1:false,2:false,3:f
 const ALL_ITEMS={flashlight:{icon:'🔦',name:'懐中電灯',desc:'【科学者の能力①】に必要。科学者に渡すと、探索済みの部屋の発見アイテムを知ることができる。'},doctor_sedative:{icon:'💊',name:'鎮痛剤',desc:'【医師の能力①】に必要。医師に渡すと、探索者を強制的に決定できる。'},precision_driver:{icon:'🔩',name:'精密ドライバー',desc:'【エンジニアの能力①】に必要。エンジニアに渡すと、任意のクルーと持ち物を交換できる。'},captain_id:{icon:'🪪',name:'船長のIDカード',desc:'【船長の能力①】に必要。船長に渡すと、解除済みの極秘ファイルを１つ閲覧できる。'},cockpit_terminal:{icon:'📡',name:'暗号通信端末',desc:'操縦室で発見された暗号通信端末。交渉の材料に使える。'},nav_log:{icon:'🗓️',name:'改ざんされた航行ログ',desc:'【船長の能力②・エンジニアの能力②】に必要。操縦室で発見。'},engine_explosive:{icon:'💣',name:'起爆装置パーツ',desc:'【科学者の能力②】に必要（2個セット）。機関室で発見。'},eng_manual:{icon:'🔧',name:'書き込みのある修復マニュアル',desc:'機関室で発見されたマニュアル。交渉の材料に使える。'},life_poison:{icon:'⚠️',name:'未認可の薬物',desc:'【船長の能力②・医師の能力②】に必要。生命維持室で発見。'},med_record:{icon:'📋',name:'改ざんされた医療処置記録',desc:'【エンジニアの能力②】に必要（2個セット）。生命維持室で発見。'},cargo_battery:{icon:'🔋',name:'高圧電池パック',desc:'【科学者の能力②】に必要（2個セット）。貨物室で発見。'},enc_media:{icon:'💾',name:'暗号化記憶媒体',desc:'【医師の能力②】に必要（2個セット）。貨物室で発見。'},captain_key:{icon:'🔦',name:'懐中電灯',desc:'【科学者の能力①】に必要。科学者に渡すと、探索済みの部屋の発見アイテムを知ることができる。'},engineer_tool:{icon:'🔩',name:'精密ドライバー',desc:'【エンジニアの能力①】に必要。エンジニアに渡すと、任意のクルーと持ち物を交換できる。'},engine_tool:{icon:'🔩',name:'精密ドライバー',desc:'【エンジニアの能力①】に必要。エンジニアに渡すと、任意のクルーと持ち物を交換できる。'},scientist_device:{icon:'🪪',name:'船長のIDカード',desc:'【船長の能力①】に必要。船長に渡すと、解除済みの極秘ファイルを１つ閲覧できる。'}};
 const INIT_ITEMS=[INIT_ITEM_ID];const docRef=doc(db,'game','session','inventory',group+'_'+ROLE);let curItem=null,selRole=null;
 window.tryUnlock=async function(roomId){const inp=document.getElementById('pw-inp-'+roomId);const err=document.getElementById('lock-err-'+roomId);const entered=inp.value.trim();if(!entered){err.textContent='パスワードを入力してください';return;}err.textContent='確認中…';try{const cfgRef=doc(db,'game','session','config','main');const cfgSnap=await getDoc(cfgRef);const field=ROOM_PW_FIELD[roomId];const correct=cfgSnap.exists()?(cfgSnap.data()[field]||''):'';if(!correct){err.textContent='パスワードが設定されていません（GMに確認）';return;}if(entered===correct){unlocked[roomId]=true;document.getElementById('ls-'+roomId).style.display='none';document.getElementById('rc-'+roomId).style.display='block';document.getElementById('rtab-'+roomId).classList.remove('lock-tab');switchRoom(roomId);err.textContent='';}else{err.textContent='❌ パスワードが違います';inp.value='';}}catch(e){err.textContent='⚠️ エラー: '+e.message;}};
-window.switchRoom=function(roomId){document.querySelectorAll('.room-panel').forEach(p=>p.classList.remove('show'));document.querySelectorAll('.room-tab').forEach(t=>t.classList.remove('active'));document.getElementById('rpanel-'+roomId).classList.add('show');document.getElementById('rtab-'+roomId).classList.add('active');};
+window.switchRoom = function(roomId) {
+  document.querySelectorAll('.room-panel').forEach(p=>p.classList.remove('show'));
+  document.querySelectorAll('.room-tab').forEach(t=>t.classList.remove('active'));
+  const panelEl = roomId === 'intro' ? document.getElementById('rpanel-intro') : document.getElementById('rpanel-'+roomId);
+  const tabEl = roomId === 'intro' ? document.getElementById('rtab-intro') : document.getElementById('rtab-'+roomId);
+  if(panelEl) panelEl.classList.add('show');
+  if(tabEl) tabEl.classList.add('active');
+};
 window.switchSub=function(roomId,tab,btn){['story','hakken','secret'].forEach(t=>{const p=document.getElementById('sp-'+roomId+'-'+t);if(p)p.classList.remove('show');});const p=document.getElementById('sp-'+roomId+'-'+tab);if(p)p.classList.add('show');btn.closest('.sub-tabbar').querySelectorAll('.sub-tab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');};
 async function init(){try{const snap=await getDoc(docRef);if(!snap.exists())await setDoc(docRef,{items:INIT_ITEMS,role:ROLE,group});onSnapshot(docRef,s=>{renderSlots(s.exists()?(s.data().items||[]):[]);setSynced(true);},()=>setSynced(false));}catch(e){setSynced(false);}}
 function setSynced(ok){document.getElementById('sync-dot').className='sync-dot'+(ok?'':' off');document.getElementById('sync-label').textContent=ok?'SYNC':'オフライン';}
 function renderSlots(items){const area=document.getElementById('slots');document.getElementById('item-count').textContent=items.length;if(items.length>3)document.getElementById('limit-overlay').classList.add('show');updateAbilityDisplay(items);let html=items.map(id=>{const it=ALL_ITEMS[id]||{icon:'❓',name:id,desc:''};return`<div class="slot has-item" onclick="openPopup('${id}')"><div class="slot-owned-badge">所持中</div><div class="slot-icon">${it.icon}</div><div class="slot-name">${it.name}</div><div class="slot-hint">タップで詳細</div></div>`;}).join('');for(let i=0;i<Math.max(0,2-items.length);i++)html+=`<div class="slot empty"><div class="slot-icon">📦</div><div class="slot-name">空きスロット</div><div class="slot-hint">交渉で入手</div></div>`;area.innerHTML=html;}
 function updateAbilityDisplay(items){document.getElementById('ability1-block').style.display=items.includes(ABILITY1_ITEM_ID)?'':'none';document.getElementById('ability2-block').style.display=ABILITY2_ITEMS.every(id=>items.includes(id))?'':'none';}
+window.markAbility2Used = function() {
+  if(!confirm('【能力②：天才のハッキング】を発動しますか？\nすぐにGMに報告してください！')) return;
+  showToast('🚨 能力②を宣言しました！GMに報告してください');
+};
 window.markAbility1Used=async function(){if(!confirm('【能力①】を使用します。精密ドライバーがインベントリから削除されます。'))return;try{const snap=await getDoc(docRef);const ni=(snap.data()?.items||[]).filter(id=>id!==ABILITY1_ITEM_ID);await setDoc(docRef,{items:ni,role:ROLE,group});showToast('✅ 能力①を使用済みにしました');}catch(e){showToast('⚠️ '+e.message);}};
 window.openPopup=function(itemId){const it=ALL_ITEMS[itemId];if(!it)return;curItem=itemId;selRole=null;document.getElementById('pop-icon').textContent=it.icon;document.getElementById('pop-name').textContent=it.name;document.getElementById('pop-desc').textContent=it.desc;document.querySelectorAll('.role-btn').forEach(b=>b.classList.remove('sel'));document.getElementById('confirm-btn').disabled=true;document.getElementById('overlay').classList.add('open');};
 window.closePopup=()=>{document.getElementById('overlay').classList.remove('open');curItem=null;selRole=null;};

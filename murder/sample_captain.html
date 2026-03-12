@@ -149,6 +149,12 @@ body{background:#060a18;min-height:100vh;font-family:'Noto Serif JP',serif;paddi
 .limit-ok:hover{background:rgba(255,50,50,.35)}
 /* toast */
 .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(12px);background:rgba(50,220,130,.14);border:1px solid rgba(50,220,130,.4);border-radius:6px;padding:10px 20px;font-family:'Share Tech Mono',monospace;font-size:11px;color:rgba(100,255,180,.9);letter-spacing:.1em;opacity:0;transition:opacity .3s,transform .3s;z-index:300;pointer-events:none;white-space:nowrap}
+/* Secret divider */
+.secret-divider{display:flex;align-items:center;gap:10px;padding:14px 22px 6px;background:rgba(255,80,20,.04)}
+.secret-divider-line{flex:1;height:2px;background:linear-gradient(90deg,transparent,rgba(255,100,40,.6),transparent)}
+.secret-divider-text{font-family:'Share Tech Mono',monospace;font-size:10px;color:rgba(255,140,50,.9);letter-spacing:.12em;white-space:nowrap;font-weight:700}
+/* Enhanced secret block label */
+.block-label.secret{color:rgba(255,160,50,1)!important;background:rgba(255,90,10,.1)!important;border-color:rgba(255,90,10,.3)!important;font-size:10px!important;padding:11px 22px!important;letter-spacing:.18em!important}
 </style>
 </head>
 <body>
@@ -162,14 +168,22 @@ body{background:#060a18;min-height:100vh;font-family:'Noto Serif JP',serif;paddi
 </div>
 
 <div class="room-tabbar">
+  <button class="room-tab active" id="rtab-intro" onclick="switchRoom('intro')">📖 導入</button>
   <button class="room-tab restrict-tab" id="rtab-0" onclick="switchRoom(0)">操縦室🚫</button>
   <button class="room-tab lock-tab" id="rtab-1" onclick="switchRoom(1)">機関室🔒</button>
   <button class="room-tab lock-tab" id="rtab-2" onclick="switchRoom(2)">生命維持🔒</button>
   <button class="room-tab lock-tab" id="rtab-3" onclick="switchRoom(3)">貨物室🔒</button>
 </div>
 
+<div class="room-panel show" id="rpanel-intro">
+  <div class="sub-panel show" style="padding:22px 20px">
+    <div class="sp-label">📖 オープニングストーリー</div>
+    <div class="sp-text">宇宙船「たくろう」が地球への帰還まで残り3時間というとき、突然船内システムから警告音が鳴り響いた。<br><br>「複数のシステムで不正な改ざんを検出。調査を開始してください」<br><br>誰かが、この船を帰還させないために動いている——。クルーたちは互いを疑いながら、真実を探し始めた。<br><br>あなたは生きて地球に戻ることができるか？</div>
+  </div>
+</div>
+
 <!-- 操縦室（立入禁止） -->
-<div class="room-panel show" id="rpanel-0">
+<div class="room-panel" id="rpanel-0">
   <div class="restrict-screen">
     <div class="restrict-big">🚫</div>
     <div class="restrict-ttl">操縦室 — 立入禁止</div>
@@ -206,13 +220,13 @@ body{background:#060a18;min-height:100vh;font-family:'Noto Serif JP',serif;paddi
     </div>
     <div class="sub-panel show" id="sp-1-story">
       <div class="sp-label">🟢 公開ストーリー</div>
-      <div class="sp-text">エネルギーコアの内部に、精密な起爆装置が組み込まれていた。帰還シーケンスと連動するタイマーを持ち、修復マニュアルの余白には暗号めいたメモが残されていた。</div>
+      <div class="sp-text">エンジンの内部に、精巧な爆弾が仕掛けられていた！帰還のスイッチが入る瞬間に爆発するよう設計されている。近くの修復マニュアルの余白には、謎めいたメモが書き込まれていた。</div>
     </div>
     <div class="sub-panel" id="sp-1-hakken">
       <div class="sp-label">🔍 この部屋の発見物</div>
       <div class="fi-list">
-        <div class="fi-row"><div class="fi-ico">💣</div><div><div class="fi-name">起爆装置パーツ</div><div class="fi-desc">エネルギーコアに接続された精密な爆発装置</div></div></div>
-        <div class="fi-row"><div class="fi-ico">🔧</div><div><div class="fi-name">書き込みのある修復マニュアル</div><div class="fi-desc">余白に暗号めいたメモが書き込まれたマニュアル</div></div></div>
+        <div class="fi-row"><div class="fi-ico">❓</div><div><div class="fi-name">？？？</div><div class="fi-desc">GMから探索者のみに開示されます</div></div></div>
+        <div class="fi-row"><div class="fi-ico">❓</div><div><div class="fi-name">？？？</div><div class="fi-desc">GMから探索者のみに開示されます</div></div></div>
       </div>
     </div>
     <div class="sub-panel" id="sp-1-secret">
@@ -244,13 +258,13 @@ body{background:#060a18;min-height:100vh;font-family:'Noto Serif JP',serif;paddi
     </div>
     <div class="sub-panel show" id="sp-2-story">
       <div class="sp-label">🟢 公開ストーリー</div>
-      <div class="sp-text">生命維持システムから、地球上に存在しない有機化合物が検出された。さらに、全医療処置記録が完全に上書きされていた。誰かが意図的に証拠を消した。</div>
+      <div class="sp-text">クルー全員の体から、地球では知られていない謎の薬物反応が検出された！しかも医療記録が全て書き換えられていて、誰が何をされたか全くわからない。誰かが意図的に証拠を消した。</div>
     </div>
     <div class="sub-panel" id="sp-2-hakken">
       <div class="sp-label">🔍 この部屋の発見物</div>
       <div class="fi-list">
-        <div class="fi-row"><div class="fi-ico">⚠️</div><div><div class="fi-name">未認可の薬物</div><div class="fi-desc">医療データベースに登録されていない未知の薬剤</div></div></div>
-        <div class="fi-row"><div class="fi-ico">📋</div><div><div class="fi-name">改ざんされた医療処置記録</div><div class="fi-desc">データが上書きされた医師の診療ログ</div></div></div>
+        <div class="fi-row"><div class="fi-ico">❓</div><div><div class="fi-name">？？？</div><div class="fi-desc">GMから探索者のみに開示されます</div></div></div>
+        <div class="fi-row"><div class="fi-ico">❓</div><div><div class="fi-name">？？？</div><div class="fi-desc">GMから探索者のみに開示されます</div></div></div>
       </div>
     </div>
     <div class="sub-panel" id="sp-2-secret">
@@ -282,13 +296,13 @@ body{background:#060a18;min-height:100vh;font-family:'Noto Serif JP',serif;paddi
     </div>
     <div class="sub-panel show" id="sp-3-story">
       <div class="sp-label">🟢 公開ストーリー</div>
-      <div class="sp-text">貨物室の隔壁に、帰還カプセルの電源ラインに直結した爆破装置が発見された。傍には高度な暗号化が施された記憶媒体が、封印された状態で置かれていた。</div>
+      <div class="sp-text">帰還カプセルの電源に、直接爆破装置が繋がれているのを発見した！これが起動したら全員終わりだ。そのすぐ隣に、暗号化された謎のデータを収めた記憶媒体が封印されて置かれていた。</div>
     </div>
     <div class="sub-panel" id="sp-3-hakken">
       <div class="sp-label">🔍 この部屋の発見物</div>
       <div class="fi-list">
-        <div class="fi-row"><div class="fi-ico">🔋</div><div><div class="fi-name">高圧電池パック</div><div class="fi-desc">通常の3倍以上の電圧に調整された危険な電源</div></div></div>
-        <div class="fi-row"><div class="fi-ico">💾</div><div><div class="fi-name">暗号化記憶媒体</div><div class="fi-desc">高度な暗号化が施された未知のデータ媒体</div></div></div>
+        <div class="fi-row"><div class="fi-ico">❓</div><div><div class="fi-name">？？？</div><div class="fi-desc">GMから探索者のみに開示されます</div></div></div>
+        <div class="fi-row"><div class="fi-ico">❓</div><div><div class="fi-name">？？？</div><div class="fi-desc">GMから探索者のみに開示されます</div></div></div>
       </div>
     </div>
     <div class="sub-panel" id="sp-3-secret">
@@ -322,6 +336,11 @@ body{background:#060a18;min-height:100vh;font-family:'Noto Serif JP',serif;paddi
   </div>
 
   <!-- 秘密の情報 -->
+  <div class="secret-divider">
+    <div class="secret-divider-line"></div>
+    <div class="secret-divider-text">🔐 ここから秘密情報</div>
+    <div class="secret-divider-line"></div>
+  </div>
   <div class="block-label secret">【秘密の情報】— 本人のみ閲覧</div>
   <div class="sec secret1">
     <div class="sec-title">あなたの真の身元</div>
@@ -346,6 +365,7 @@ body{background:#060a18;min-height:100vh;font-family:'Noto Serif JP',serif;paddi
     <div class="ability-cond">⚠️ 未認可の薬物 ＋ 🗓️ 改ざんされた航行ログ を所持中</div>
     <div class="ability-body">任意のクルーを１人指定する。帰還の瞬間（最終アクション）以降に、そのクルーを強制的に拘束することができる。</div>
     <div class="final-note">⚠️ 帰還の瞬間（最終アクション時）以降かつアイテム所有時に発動<br>⚠️ この能力をむやみに情報公開すると警戒されてしまうので注意が必要そうだ…<br>⚠️ アイテムが足りないときはおとなしくやり過ごそう…</div>
+    <button class="used-btn" onclick="markAbility2Used()">🚨 能力②を発動する（GMに報告）</button>
   </div>
 
   <div class="sec win">
@@ -505,8 +525,10 @@ window.tryUnlock = async function(roomId) {
 window.switchRoom = function(roomId) {
   document.querySelectorAll('.room-panel').forEach(p=>p.classList.remove('show'));
   document.querySelectorAll('.room-tab').forEach(t=>t.classList.remove('active'));
-  document.getElementById('rpanel-'+roomId).classList.add('show');
-  document.getElementById('rtab-'+roomId).classList.add('active');
+  const panelEl = roomId === 'intro' ? document.getElementById('rpanel-intro') : document.getElementById('rpanel-'+roomId);
+  const tabEl = roomId === 'intro' ? document.getElementById('rtab-intro') : document.getElementById('rtab-'+roomId);
+  if(panelEl) panelEl.classList.add('show');
+  if(tabEl) tabEl.classList.add('active');
 };
 window.switchSub = function(roomId,tab,btn) {
   ['story','hakken','secret'].forEach(t=>{const p=document.getElementById('sp-'+roomId+'-'+t);if(p)p.classList.remove('show');});
@@ -542,6 +564,11 @@ function updateAbilityDisplay(items){
   document.getElementById('ability1-block').style.display = hasAbility1 ? '' : 'none';
   document.getElementById('ability2-block').style.display = hasAbility2 ? '' : 'none';
 }
+
+window.markAbility2Used = function() {
+  if(!confirm('【能力②：船長の超越特権】を発動しますか？\nすぐにGMに報告してください！')) return;
+  showToast('🚨 能力②を宣言しました！GMに報告してください');
+};
 
 window.markAbility1Used = async function(){
   if(!confirm('【能力①】を使用します。船長のIDカードがインベントリから削除されます。')) return;
