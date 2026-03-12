@@ -1485,8 +1485,8 @@
 .m5-role-btn:disabled{opacity:.35;cursor:not-allowed;}
 .m5-sent-tag{font-family:var(--mono);font-size:9px;color:#32c878;letter-spacing:.1em;}
 /* ===== ENDING SECTION ===== */
-.ending-spacer{height:100vh;background:linear-gradient(180deg,transparent 0%,#000510 100%)}
-.ending-section{min-height:100vh;background:radial-gradient(ellipse at 50% 75%,#001535 0%,#000a1a 50%,#000208 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 20px 120px;position:relative}
+.ending-spacer{height:100vh;background:linear-gradient(180deg,transparent 0%,#000208 100%)}
+.ending-section{min-height:100vh;background:linear-gradient(180deg,#000208 0%,transparent 18%,transparent 82%,#000208 100%),radial-gradient(ellipse at 50% 75%,#001535 0%,#000a1a 50%,#000208 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 20px 120px;position:relative}
 @keyframes earthAtm{0%,100%{opacity:.65}50%{opacity:1}}
 .ending-earth{position:absolute;bottom:-140px;left:50%;transform:translateX(-50%);width:600px;height:600px;border-radius:50%;background:radial-gradient(ellipse 22% 14% at 28% 32%,rgba(34,120,60,.82) 0%,transparent 100%),radial-gradient(ellipse 18% 22% at 64% 22%,rgba(28,100,45,.78) 0%,transparent 100%),radial-gradient(ellipse 30% 12% at 56% 58%,rgba(36,90,28,.72) 0%,transparent 100%),radial-gradient(ellipse 14% 18% at 16% 62%,rgba(32,80,24,.68) 0%,transparent 100%),radial-gradient(ellipse 18% 10% at 82% 48%,rgba(38,108,48,.62) 0%,transparent 100%),radial-gradient(ellipse 12% 8% at 44% 75%,rgba(30,75,20,.55) 0%,transparent 100%),radial-gradient(ellipse at 40% 35%,#1c7096 0%,#0d4e7c 18%,#073560 38%,#031c3e 62%,#010822 100%);box-shadow:inset -100px -70px 90px rgba(0,0,20,.85),0 0 0 8px rgba(100,185,255,.06),0 0 0 22px rgba(70,145,240,.04),0 0 65px rgba(50,130,220,.48),0 0 130px rgba(28,100,200,.3),0 0 260px rgba(16,75,180,.18)}
 .ending-earth::before{content:'';position:absolute;inset:-18px;border-radius:50%;background:radial-gradient(ellipse,transparent 46%,rgba(120,190,255,.06) 52%,rgba(90,165,255,.14) 56%,rgba(70,135,230,.08) 62%,transparent 71%);pointer-events:none;animation:earthAtm 4s ease-in-out infinite}
@@ -1546,21 +1546,26 @@
 .reward-table{width:100%;border-collapse:collapse;font-size:11px}
 .reward-table th{padding:9px 8px;font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(255,255,255,.45);border-bottom:1px solid rgba(255,255,255,.06);text-align:center;white-space:nowrap;line-height:1.4;font-weight:400}
 .reward-table td{padding:10px 8px;border-bottom:1px solid rgba(255,255,255,.04);text-align:center;min-width:70px;height:36px;color:rgba(255,255,255,.2)}
+.reward-table input[type=number]{width:60px;padding:5px 6px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:5px;color:#e8f4ff;font-family:'Share Tech Mono',monospace;font-size:12px;text-align:center;outline:none}
+.reward-table input[type=number]:focus{border-color:rgba(255,215,50,.4);box-shadow:0 0 0 2px rgba(255,215,50,.08)}
+.rt-total-row td{background:rgba(255,215,50,.04)!important;border-top:1px solid rgba(255,215,50,.2)!important;font-weight:700;color:rgba(255,215,50,.8)!important}
+.rt-total-val{font-family:'Share Tech Mono',monospace;font-size:13px;color:rgba(255,215,50,.8)}
 .rt-row-label{text-align:left!important;font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(255,255,255,.4)!important;padding-left:14px!important;white-space:nowrap;min-width:180px!important}
 .rt-sub{font-size:8px;opacity:.6}
 .reward-notice{background:rgba(255,215,50,.05);border:1px solid rgba(255,215,50,.2);border-radius:8px;padding:18px 22px;font-size:14px;color:rgba(255,240,180,.8);line-height:1.8;text-align:center}
 .reward-notice strong{color:#ffd740;font-weight:900}
 .ranking-title{font-size:28px;font-weight:900;color:#f0f8ff;text-align:center;letter-spacing:.08em;text-shadow:0 0 40px rgba(77,166,255,.4);padding:20px 0}
 /* ===== おわりに ===== */
-.owari-section{background:linear-gradient(180deg,#000510 0%,#020a1a 50%,#000208 100%);padding:80px 20px 120px}
-.owari-inner{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:24px}
+.owari-section{background:linear-gradient(180deg,#000510 0%,#020a1a 50%,#000208 100%);padding:100px 20px 140px}
+.owari-inner{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:32px}
 .owari-heading{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.4em;color:rgba(150,200,255,.4);text-align:center}
-.owari-body{font-size:14px;color:rgba(180,210,255,.7);line-height:2.1}
-.owari-quote-block{display:flex;flex-direction:column;gap:20px;padding-top:12px}
-.owari-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(77,166,255,.3),transparent);margin-bottom:8px}
-.owari-quote{font-size:14px;font-weight:700;color:#e8f4ff;line-height:1.8;text-align:center;text-shadow:0 0 20px rgba(77,166,255,.3)}
-.owari-quote-right{text-align:right}
-.owari-quote-far-right{text-align:right;font-size:16px;font-weight:900;color:#ffffff;text-shadow:0 0 30px rgba(77,166,255,.5),0 0 60px rgba(77,166,255,.2)}
+.owari-body{font-size:16px;color:rgba(200,225,255,.8);line-height:2.4;padding:8px 4px}
+.owari-quote-block{display:flex;flex-direction:column;gap:32px;padding-top:20px}
+.owari-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(77,166,255,.35),transparent);margin-bottom:12px}
+.owari-quote{font-size:17px;font-weight:700;color:#c8e8ff;line-height:2.0;text-align:center;text-shadow:0 0 24px rgba(77,166,255,.35);letter-spacing:.04em;font-style:italic}
+.owari-quote-right{text-align:right;font-size:20px;color:#dff0ff;text-shadow:0 0 30px rgba(100,180,255,.4),0 0 60px rgba(77,166,255,.15)}
+.owari-quote-far-right{text-align:right;font-size:26px;font-weight:900;color:#ffffff;letter-spacing:.06em;text-shadow:0 0 20px rgba(77,166,255,.7),0 0 50px rgba(77,166,255,.4),0 0 100px rgba(100,200,255,.2);line-height:1.5}
+.owari-quote rt{font-size:10px;font-weight:400;letter-spacing:.1em;color:rgba(150,200,255,.6)}
 /* ending modal - cinematic */
 @keyframes endIn{from{opacity:0;transform:scale(.9) translateY(14px)}to{opacity:1;transform:scale(1) translateY(0)}}
 @keyframes endGlow{0%,100%{opacity:.55;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.45)}}
@@ -2554,8 +2559,9 @@
             </tr>
           </thead>
           <tbody>
-            <tr><td class="rt-row-label">【勝利条件報酬金】</td><td></td><td></td><td></td><td></td></tr>
-            <tr><td class="rt-row-label">【ボーナスミッション報酬金】</td><td></td><td></td><td></td><td></td></tr>
+            <tr><td class="rt-row-label">【勝利条件報酬金】</td><td><input type="number" min="0" placeholder="0"></td><td><input type="number" min="0" placeholder="0"></td><td><input type="number" min="0" placeholder="0"></td><td><input type="number" min="0" placeholder="0"></td></tr>
+            <tr><td class="rt-row-label">【ボーナスミッション報酬金】</td><td><input type="number" min="0" placeholder="0"></td><td><input type="number" min="0" placeholder="0"></td><td><input type="number" min="0" placeholder="0"></td><td><input type="number" min="0" placeholder="0"></td></tr>
+            <tr class="rt-total-row"><td class="rt-row-label">【合計】</td><td class="rt-total-val">—</td><td class="rt-total-val">—</td><td class="rt-total-val">—</td><td class="rt-total-val">—</td></tr>
           </tbody>
         </table>
       </div>
@@ -2575,8 +2581,9 @@
             </tr>
           </thead>
           <tbody>
-            <tr><td class="rt-row-label">【勝利条件報酬金】</td><td></td><td></td><td></td><td></td></tr>
-            <tr><td class="rt-row-label">【ボーナスミッション報酬金】</td><td></td><td></td><td></td><td></td></tr>
+            <tr><td class="rt-row-label">【勝利条件報酬金】</td><td><input type="number" min="0" placeholder="0"></td><td><input type="number" min="0" placeholder="0"></td><td><input type="number" min="0" placeholder="0"></td><td><input type="number" min="0" placeholder="0"></td></tr>
+            <tr><td class="rt-row-label">【ボーナスミッション報酬金】</td><td><input type="number" min="0" placeholder="0"></td><td><input type="number" min="0" placeholder="0"></td><td><input type="number" min="0" placeholder="0"></td><td><input type="number" min="0" placeholder="0"></td></tr>
+            <tr class="rt-total-row"><td class="rt-row-label">【合計】</td><td class="rt-total-val">—</td><td class="rt-total-val">—</td><td class="rt-total-val">—</td><td class="rt-total-val">—</td></tr>
           </tbody>
         </table>
       </div>
@@ -2596,8 +2603,9 @@
             </tr>
           </thead>
           <tbody>
-            <tr><td class="rt-row-label">【勝利条件報酬金】</td><td></td><td></td><td></td><td></td></tr>
-            <tr><td class="rt-row-label">【ボーナスミッション報酬金】</td><td></td><td></td><td></td><td></td></tr>
+            <tr><td class="rt-row-label">【勝利条件報酬金】</td><td><input type="number" min="0" placeholder="0"></td><td><input type="number" min="0" placeholder="0"></td><td><input type="number" min="0" placeholder="0"></td><td><input type="number" min="0" placeholder="0"></td></tr>
+            <tr><td class="rt-row-label">【ボーナスミッション報酬金】</td><td><input type="number" min="0" placeholder="0"></td><td><input type="number" min="0" placeholder="0"></td><td><input type="number" min="0" placeholder="0"></td><td><input type="number" min="0" placeholder="0"></td></tr>
+            <tr class="rt-total-row"><td class="rt-row-label">【合計】</td><td class="rt-total-val">—</td><td class="rt-total-val">—</td><td class="rt-total-val">—</td><td class="rt-total-val">—</td></tr>
           </tbody>
         </table>
       </div>
@@ -2617,8 +2625,9 @@
             </tr>
           </thead>
           <tbody>
-            <tr><td class="rt-row-label">【勝利条件報酬金】</td><td></td><td></td><td></td><td></td></tr>
-            <tr><td class="rt-row-label">【ボーナスミッション報酬金】</td><td></td><td></td><td></td><td></td></tr>
+            <tr><td class="rt-row-label">【勝利条件報酬金】</td><td><input type="number" min="0" placeholder="0"></td><td><input type="number" min="0" placeholder="0"></td><td><input type="number" min="0" placeholder="0"></td><td><input type="number" min="0" placeholder="0"></td></tr>
+            <tr><td class="rt-row-label">【ボーナスミッション報酬金】</td><td><input type="number" min="0" placeholder="0"></td><td><input type="number" min="0" placeholder="0"></td><td><input type="number" min="0" placeholder="0"></td><td><input type="number" min="0" placeholder="0"></td></tr>
+            <tr class="rt-total-row"><td class="rt-row-label">【合計】</td><td class="rt-total-val">—</td><td class="rt-total-val">—</td><td class="rt-total-val">—</td><td class="rt-total-val">—</td></tr>
           </tbody>
         </table>
       </div>
@@ -2646,9 +2655,9 @@
     </div>
     <div class="owari-quote-block">
       <div class="owari-divider"></div>
-      <p class="owari-quote">「星を探す者は、空ばかり探す。だけど夢々忘れてはならない。うつむいた時に見える地面も、また星だ。」</p>
+      <p class="owari-quote">「星を探す者は、空ばかり探す。<br>だけど夢々忘れてはならない。<br>うつむいた時に見える地面も、また星だ。」</p>
       <p class="owari-quote owari-quote-right">「この先も、きっとあたしは変わる。」</p>
-      <p class="owari-quote owari-quote-far-right">「たくろう、宇宙までも。」</p>
+      <p class="owari-quote owari-quote-far-right">「たくろう、<ruby>宇宙<rt>どこ</rt></ruby>までも。」</p>
     </div>
   </div>
 </section>
@@ -3467,6 +3476,7 @@ const _CHAT_ROLES=['captain','scientist','engineer','doctor'];
 const _CHAT_GROUP_JP={mochi:'もち',tsuki:'つき',taku:'たく',rou:'ろう'};
 const _CHAT_ROLE_JP={captain:'船長',doctor:'医師',engineer:'エンジニア',scientist:'科学者'};
 const _CHAT_ROLE_EMO={captain:'🛸',doctor:'🏥',engineer:'⚡',scientist:'🧪'};
+const _TRUE_GROUP={mochi:{captain:'mochi',scientist:'tsuki',engineer:'taku',doctor:'rou'},tsuki:{captain:'tsuki',scientist:'mochi',engineer:'rou',doctor:'taku'},taku:{captain:'taku',scientist:'rou',engineer:'mochi',doctor:'tsuki'},rou:{captain:'rou',scientist:'taku',engineer:'tsuki',doctor:'mochi'}};
 let _gmChatData={},_gmChatSeen={},_gmCurThread=null;
 
 function _gmLoadSeen(){_CHAT_GROUPS.forEach(g=>_CHAT_ROLES.forEach(r=>{const k=g+'_'+r;_gmChatSeen[k]=parseInt(localStorage.getItem('gm_cs_'+k)||'0');}));}
@@ -3482,7 +3492,8 @@ function _gmRenderList(){
       const last=msgs.length?msgs[msgs.length-1]:null;
       const el=document.createElement('div');el.className='gm-chat-item';
       el.onclick=()=>_gmOpenThread(g,r);
-      el.innerHTML=`<div class="gm-chat-item-icon">${_CHAT_ROLE_EMO[r]}</div><div class="gm-chat-item-info"><div class="gm-chat-item-name">${_CHAT_GROUP_JP[g]}グループ — ${_CHAT_ROLE_JP[r]}</div><div class="gm-chat-item-preview">${last?last.text.slice(0,35)+(last.text.length>35?'…':''):'メッセージなし'}</div></div><div class="gm-chat-item-badge${u>0?' show':''}">${u>0?u:''}</div>`;
+      const trueG=_TRUE_GROUP[g]&&_TRUE_GROUP[g][r]?_CHAT_GROUP_JP[_TRUE_GROUP[g][r]]:'?';
+      el.innerHTML=`<div class="gm-chat-item-icon">${_CHAT_ROLE_EMO[r]}</div><div class="gm-chat-item-info"><div class="gm-chat-item-name">${_CHAT_GROUP_JP[g]}グループ — ${_CHAT_ROLE_JP[r]}<span style="font-size:9px;opacity:.55;margin-left:5px">（真：${trueG}）</span></div><div class="gm-chat-item-preview">${last?last.text.slice(0,35)+(last.text.length>35?'…':''):'メッセージなし'}</div></div><div class="gm-chat-item-badge${u>0?' show':''}">${u>0?u:''}</div>`;
       list.appendChild(el);
     });
   });
@@ -3537,6 +3548,19 @@ _CHAT_GROUPS.forEach(g=>_CHAT_ROLES.forEach(r=>{
   });
 }));
 document.getElementById('gm-thread-inp').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();gmSendMessage();}});
+// Reward table auto-total
+document.querySelectorAll('.reward-table').forEach(table=>{
+  const update=()=>{
+    const rows=table.querySelectorAll('tbody tr:not(.rt-total-row)');
+    const totalCells=table.querySelectorAll('.rt-total-val');
+    totalCells.forEach((tc,ci)=>{
+      let sum=0;let hasVal=false;
+      rows.forEach(row=>{const inp=row.querySelectorAll('td')[ci+1]?.querySelector('input');if(inp&&inp.value!==''){sum+=Number(inp.value)||0;hasVal=true;}});
+      tc.textContent=hasVal?(sum+'億円'):'—';
+    });
+  };
+  table.querySelectorAll('input[type=number]').forEach(inp=>inp.addEventListener('input',update));
+});
 </script>
 </body>
 </html>

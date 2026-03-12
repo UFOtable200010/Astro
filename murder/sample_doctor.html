@@ -244,7 +244,8 @@ body{background:#060a18;min-height:100vh;font-family:'Noto Serif JP',serif;paddi
   </div>
 <div class="ability2-hint">
   <div class="ability2-hint-name">【能力②：やぶ医者の狂乱】</div>
-  ？？？ ＋ ？？？ が両方揃ったとき閲覧・使用可能
+  ⚠️？？？ ＋ ？？？ が両方揃ったとき閲覧・⑪帰還の瞬間で使用可能<br>
+  ⚠️アイテムが足りないときはおとなしくやり過ごそう…
 </div>
   <div class="sec ability" id="ability1-block" style="display:none">
     <div class="sec-title">【能力①使用ボタン】医師の検診</div>
@@ -257,7 +258,7 @@ body{background:#060a18;min-height:100vh;font-family:'Noto Serif JP',serif;paddi
     <div class="sec-title">【秘密の能力②】やぶ医者の狂乱</div>
     <div class="ability-cond">💊 鎮痛剤（大量） ＋ 💾 暗号化記憶媒体 を所持中</div>
     <div class="ability-body">鎮痛剤を過剰投与し記録を書き換えることで、任意のクルーを１人始末することができる（帰還の瞬間に発動）。</div>
-    <div class="final-note">⚠️ 帰還の瞬間（最終アクション時）以降かつアイテム所有時に発動<br>⚠️ この能力をむやみに情報公開すると警戒されてしまうので注意が必要そうだ…<br>⚠️ アイテムが足りないときはおとなしくやり過ごそう…</div>
+    <div class="final-note">⚠️ 帰還の瞬間（最終アクション時）以降かつアイテム所有時に発動<br>⚠️ この能力をむやみに情報公開すると警戒されてしまうので注意が必要そうだ…</div>
     <button class="used-btn" onclick="markAbility2Used()">🚨 能力②を発動する（GMに報告）</button>
   </div>
   <div class="sec win"><div class="sec-title">【勝利条件】</div><div class="win-item" id="win-text">読み込み中…</div></div>
@@ -279,10 +280,9 @@ body{background:#060a18;min-height:100vh;font-family:'Noto Serif JP',serif;paddi
 
 <div class="pod5-overlay" id="pod5-overlay" onclick="if(event.target===this)closePod5()">
   <div class="pod5-box">
-    <div class="pod5-icon">👾</div>
+    <div class="pod5-icon" id="pod5-icon" onclick="handlePod5IconClick()" style="cursor:pointer">👾</div>
     <div class="pod5-title">ー第5の部屋　宇宙人からの監視部屋ー</div>
-    <div class="pod5-body">この宇宙船には第5の部屋が存在する。<br>そこには正体不明の「何か」からの監視の痕跡がある。</div>
-    <button class="pod5-btn" onclick="reportPod5()">第五の部屋を対象にする（最終アクション時、GMにメッセージ送信）</button>
+    <div class="pod5-body" id="pod5-body">この宇宙船には第5の部屋が存在する。<br>そこには正体不明の「何か」からの監視の痕跡がある。</div>
     <button class="pod5-close" onclick="closePod5()">閉じる</button>
   </div>
 </div>
@@ -397,9 +397,15 @@ onSnapshot(doc(db,'game','session','secrets',group+'_'+ROLE),snap=>{
 const _AXK='ax_'+group+'_'+ROLE;
 if(localStorage.getItem(_AXK))document.querySelector('.alien-btn').classList.add('crossed');
 window.handleAlienClick=function(){
-  const hasAb2=ABILITY2_ITEMS.every(id=>_currentItems.includes(id));
-  if(hasAb2&&document.getElementById('pod5-overlay').classList.contains('open')){document.querySelector('.alien-btn').classList.add('crossed');localStorage.setItem(_AXK,'1');closePod5();return;}
   _alienClicks++;clearTimeout(_alienTimer);if(_alienClicks>=3){_alienClicks=0;openPod5();}else{_alienTimer=setTimeout(()=>{_alienClicks=0;},1500);}
+};
+window.handlePod5IconClick=function(){
+  const hasAb2=ABILITY2_ITEMS.every(id=>_currentItems.includes(id));
+  if(hasAb2){
+    document.getElementById('pod5-body').innerHTML='くっ…なぜばれたんだ…';
+    document.querySelector('.alien-btn').classList.add('crossed');
+    localStorage.setItem(_AXK,'1');
+  }
 };
 </script>
 </body>
