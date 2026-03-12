@@ -289,7 +289,7 @@ body{background:#060a18;min-height:100vh;font-family:'Noto Serif JP',serif;paddi
   <div class="item-slots" id="slots"><div class="slot empty"><div class="slot-icon" style="opacity:.3">⏳</div><div class="slot-name" style="font-size:11px;color:rgba(255,255,255,.25)">読み込み中</div></div><div class="slot empty"><div class="slot-icon" style="opacity:.1">📦</div><div class="slot-name" style="font-size:11px;color:rgba(255,255,255,.15)">—</div></div></div>
   <div class="item-card-footer"><span>ENGINEER-01 / LAST-15MIN</span><span>所持: <span id="item-count" class="item-count-val">—</span> 個</span></div>
 </div>
-<div class="gm-msgs-panel" id="gm-msgs-panel" style="display:none">
+<div class="gm-msgs-panel" id="gm-msgs-panel">
   <div class="gm-msgs-hd">🔒 探索者のみの秘密情報</div>
   <div id="gm-msgs-list"></div>
 </div>
@@ -432,8 +432,8 @@ onSnapshot(doc(db,'game','session','secrets',group+'_'+ROLE),snap=>{
   items.forEach(si=>{const panel=document.getElementById('sp-'+si.roomId+'-hakken');if(!panel)return;let b=panel.querySelector('.fi-secret-recv');if(!b){b=document.createElement('div');b.className='fi-secret-recv';b.innerHTML='<div class="fi-sec-label">📡 GM秘密情報</div><div class="fi-sec-text"></div>';panel.appendChild(b);}b.querySelector('.fi-sec-text').textContent=si.text||'';});
   const msgPanel=document.getElementById('gm-msgs-panel');const msgList=document.getElementById('gm-msgs-list');
   if(msgPanel&&msgList){
-    if(items.length){msgPanel.style.display='';msgList.innerHTML=items.map((si,idx)=>`<div class="gm-msg-item"><div class="gm-msg-room">📍 ${si.roomName||'ROOM '+si.roomId}</div><div class="gm-msg-text">${(si.text||'').replace(/</g,'&lt;')}</div><div class="gm-msg-share"><span class="gm-msg-share-label">共有：</span>${['captain','scientist','engineer','doctor'].filter(r=>r!==ROLE).map(r=>`<button class="gm-msg-share-btn" data-idx="${idx}" data-r="${r}" onclick="shareSecret(${idx},'${r}')">${_SRE[r]}${_SRJ[r]}</button>`).join('')}</div></div>`).join('');}
-    else{msgPanel.style.display='none';}
+    if(items.length){msgList.innerHTML=items.map((si,idx)=>`<div class="gm-msg-item"><div class="gm-msg-room">📍 ${si.roomName||'ROOM '+si.roomId}</div><div class="gm-msg-text">${(si.text||'').replace(/</g,'&lt;')}</div><div class="gm-msg-share"><span class="gm-msg-share-label">共有：</span>${['captain','scientist','engineer','doctor'].filter(r=>r!==ROLE).map(r=>`<button class="gm-msg-share-btn" data-idx="${idx}" data-r="${r}" onclick="shareSecret(${idx},'${r}')">${_SRE[r]}${_SRJ[r]}</button>`).join('')}</div></div>`).join('');}
+    else{msgList.innerHTML='<div class="gm-msg-item" style="color:rgba(255,200,120,.35);font-size:12px;">まだ秘密情報はありません</div>';}
   }
 });
 </script>
