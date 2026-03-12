@@ -174,6 +174,11 @@ body{background:#060a18;min-height:100vh;font-family:'Noto Serif JP',serif;paddi
 .fi-secret-recv{margin-top:12px;padding:10px 14px;background:rgba(255,80,30,.06);border:1px solid rgba(255,80,30,.28);border-radius:6px}
 .fi-sec-label{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:.2em;color:rgba(255,120,70,.65);margin-bottom:6px}
 .fi-sec-text{font-size:12px;color:rgba(255,180,120,.85);line-height:1.7}
+.gm-msgs-panel{width:100%;max-width:420px;background:rgba(255,160,40,.05);border:1px solid rgba(255,160,40,.25);border-top:none;overflow:hidden}
+.gm-msgs-hd{padding:8px 16px;background:rgba(255,140,30,.08);border-bottom:1px solid rgba(255,140,30,.15);font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:.22em;color:rgba(255,180,80,.7)}
+.gm-msg-item{padding:10px 16px;border-bottom:1px solid rgba(255,140,30,.1);display:flex;flex-direction:column;gap:4px}
+.gm-msg-room{font-family:'Share Tech Mono',monospace;font-size:8px;color:rgba(255,180,80,.5);letter-spacing:.1em}
+.gm-msg-text{font-size:13px;color:rgba(255,220,150,.9);line-height:1.8}
 </style>
 </head>
 <body>
@@ -266,6 +271,10 @@ body{background:#060a18;min-height:100vh;font-family:'Noto Serif JP',serif;paddi
   <div class="item-card-header"><div><div class="item-card-eyebrow">🎒 所持アイテム / INVENTORY</div><div class="item-card-title">科学者のアイテム</div></div><div class="sync-badge"><div class="sync-dot" id="sync-dot"></div><span id="sync-label">接続中…</span></div></div>
   <div class="item-slots" id="slots"><div class="slot empty"><div class="slot-icon" style="opacity:.3">⏳</div><div class="slot-name" style="font-size:11px;color:rgba(255,255,255,.25)">読み込み中</div></div><div class="slot empty"><div class="slot-icon" style="opacity:.1">📦</div><div class="slot-name" style="font-size:11px;color:rgba(255,255,255,.15)">—</div></div></div>
   <div class="item-card-footer"><span>SCIENTIST-01 / LAST-15MIN</span><span>所持: <span id="item-count" class="item-count-val">—</span> 個</span></div>
+</div>
+<div class="gm-msgs-panel" id="gm-msgs-panel" style="display:none">
+  <div class="gm-msgs-hd">📡 GMからの秘密情報</div>
+  <div id="gm-msgs-list"></div>
 </div>
 <div class="overlay" id="overlay" onclick="bgClose(event)">
   <div class="popup"><div class="popup-handle"></div><div class="popup-img"><div class="pop-big-icon" id="pop-icon"></div><div class="pop-name" id="pop-name"></div><div class="pop-desc" id="pop-desc"></div></div>
@@ -387,6 +396,8 @@ onSnapshot(doc(db,'game','session','discovery',group+'_'+ROLE),snap=>{
 onSnapshot(doc(db,'game','session','secrets',group+'_'+ROLE),snap=>{
   const items=snap.exists()?(snap.data().items||[]):[];
   items.forEach(si=>{const panel=document.getElementById('sp-'+si.roomId+'-hakken');if(!panel)return;let b=panel.querySelector('.fi-secret-recv');if(!b){b=document.createElement('div');b.className='fi-secret-recv';b.innerHTML='<div class="fi-sec-label">📡 GM秘密情報</div><div class="fi-sec-text"></div>';panel.appendChild(b);}b.querySelector('.fi-sec-text').textContent=si.text||'';});
+  const msgPanel=document.getElementById('gm-msgs-panel');const msgList=document.getElementById('gm-msgs-list');
+  if(msgPanel&&msgList){if(items.length){msgPanel.style.display='';msgList.innerHTML=items.map(si=>`<div class="gm-msg-item"><div class="gm-msg-room">📍 ${si.roomName||'ROOM '+si.roomId}</div><div class="gm-msg-text">${(si.text||'').replace(/</g,'&lt;')}</div></div>`).join('');}else{msgPanel.style.display='none';}}
 });
 </script>
 </body>

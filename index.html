@@ -1514,6 +1514,11 @@
 .gm-chat-hd-back{background:transparent;border:none;color:rgba(77,166,255,.7);font-size:22px;cursor:pointer;padding:4px 10px 4px 0;line-height:1}
 .gm-chat-hd-title{flex:1;font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:rgba(77,166,255,.7)}
 .gm-chat-hd-close{background:transparent;border:none;color:rgba(255,255,255,.3);font-size:18px;cursor:pointer;padding:4px}
+.gm-group-tabs{display:flex;border-bottom:1px solid rgba(77,166,255,.1);background:rgba(0,0,0,.3);flex-shrink:0}
+.gm-group-tab{flex:1;padding:9px 4px;font-family:var(--mono);font-size:9px;letter-spacing:.08em;color:rgba(255,255,255,.28);background:transparent;border:none;cursor:pointer;transition:all .2s;border-bottom:2px solid transparent;text-align:center}
+.gm-group-tab.active{color:rgba(77,166,255,.9);border-bottom-color:rgba(77,166,255,.7);background:rgba(77,166,255,.05)}
+.gm-clear-btn{padding:5px 12px;background:rgba(255,60,60,.08);border:1px solid rgba(255,60,60,.2);border-radius:5px;color:rgba(255,100,100,.6);font-family:var(--mono);font-size:9px;cursor:pointer;transition:all .2s;white-space:nowrap;flex-shrink:0}
+.gm-clear-btn:hover{background:rgba(255,60,60,.18);color:rgba(255,140,140,.9)}
 .gm-chat-list{flex:1;overflow-y:auto}
 .gm-chat-item{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.04);cursor:pointer;transition:background .15s}
 .gm-chat-item:hover{background:rgba(77,166,255,.05)}
@@ -1539,7 +1544,7 @@
 /* ===== REWARD TABLE ===== */
 .reward-section{background:linear-gradient(180deg,#000208 0%,#000510 100%);padding:80px 20px 60px}
 .reward-inner{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:36px}
-.reward-section-title{font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:.4em;color:rgba(255,215,50,.5);text-align:center;margin-bottom:4px}
+.reward-section-title{font-family:'Share Tech Mono',monospace;font-size:20px;letter-spacing:.25em;color:rgba(255,215,50,.85);text-align:center;margin-bottom:12px;text-shadow:0 0 20px rgba(255,215,50,.3)}
 .reward-group-block{background:rgba(255,255,255,.02);border:1px solid rgba(var(--gc,77,166,255),.2);border-radius:12px;overflow:hidden}
 .reward-group-label{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.2em;color:var(--gc,#4da6ff);background:rgba(255,255,255,.03);padding:10px 16px;border-bottom:1px solid rgba(255,255,255,.06)}
 .reward-table-wrap{overflow-x:auto}
@@ -1554,18 +1559,18 @@
 .rt-sub{font-size:8px;opacity:.6}
 .reward-notice{background:rgba(255,215,50,.05);border:1px solid rgba(255,215,50,.2);border-radius:8px;padding:18px 22px;font-size:14px;color:rgba(255,240,180,.8);line-height:1.8;text-align:center}
 .reward-notice strong{color:#ffd740;font-weight:900}
-.ranking-title{font-size:28px;font-weight:900;color:#f0f8ff;text-align:center;letter-spacing:.08em;text-shadow:0 0 40px rgba(77,166,255,.4);padding:20px 0}
+.ranking-title{font-size:44px;font-weight:900;color:#f0f8ff;text-align:center;letter-spacing:.1em;text-shadow:0 0 40px rgba(77,166,255,.5),0 0 80px rgba(77,166,255,.2);padding:32px 0}
 /* ===== おわりに ===== */
 .owari-section{background:linear-gradient(180deg,#000510 0%,#020a1a 50%,#000208 100%);padding:100px 20px 140px}
 .owari-inner{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:32px}
 .owari-heading{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.4em;color:rgba(150,200,255,.4);text-align:center}
 .owari-body{font-size:16px;color:rgba(200,225,255,.8);line-height:2.4;padding:8px 4px}
-.owari-quote-block{display:flex;flex-direction:column;gap:32px;padding-top:20px}
-.owari-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(77,166,255,.35),transparent);margin-bottom:12px}
-.owari-quote{font-size:17px;font-weight:700;color:#c8e8ff;line-height:2.0;text-align:center;text-shadow:0 0 24px rgba(77,166,255,.35);letter-spacing:.04em;font-style:italic}
-.owari-quote-right{text-align:right;font-size:20px;color:#dff0ff;text-shadow:0 0 30px rgba(100,180,255,.4),0 0 60px rgba(77,166,255,.15)}
-.owari-quote-far-right{text-align:right;font-size:26px;font-weight:900;color:#ffffff;letter-spacing:.06em;text-shadow:0 0 20px rgba(77,166,255,.7),0 0 50px rgba(77,166,255,.4),0 0 100px rgba(100,200,255,.2);line-height:1.5}
-.owari-quote rt{font-size:10px;font-weight:400;letter-spacing:.1em;color:rgba(150,200,255,.6)}
+.owari-quote-block{display:flex;flex-direction:column;gap:36px;padding-top:20px}
+.owari-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(0,200,212,.4),transparent);margin-bottom:16px}
+.owari-quote{font-size:18px;font-weight:700;line-height:2.0;text-align:center;letter-spacing:.05em;font-style:italic;background:linear-gradient(135deg,#ffffff 0%,#00c8d4 50%,#e879b0 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 12px rgba(0,200,212,.3))}
+.owari-quote-right{text-align:center;font-size:22px;filter:drop-shadow(0 0 18px rgba(232,121,176,.35))}
+.owari-quote-far-right{text-align:center;font-size:28px;font-weight:900;letter-spacing:.08em;line-height:1.6;filter:drop-shadow(0 0 20px rgba(0,200,212,.6)) drop-shadow(0 0 40px rgba(232,121,176,.3))}
+.owari-quote rt{font-size:10px;font-weight:400;letter-spacing:.1em}
 /* ending modal - cinematic */
 @keyframes endIn{from{opacity:0;transform:scale(.9) translateY(14px)}to{opacity:1;transform:scale(1) translateY(0)}}
 @keyframes endGlow{0%,100%{opacity:.55;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.45)}}
@@ -2657,7 +2662,7 @@
       <div class="owari-divider"></div>
       <p class="owari-quote">「星を探す者は、空ばかり探す。<br>だけど夢々忘れてはならない。<br>うつむいた時に見える地面も、また星だ。」</p>
       <p class="owari-quote owari-quote-right">「この先も、きっとあたしは変わる。」</p>
-      <p class="owari-quote owari-quote-far-right">「たくろう、<ruby>宇宙<rt>どこ</rt></ruby>までも。」</p>
+      <p class="owari-quote owari-quote-far-right">「たくろう、宇宙どこまでも。」</p>
     </div>
   </div>
 </section>
@@ -2733,7 +2738,15 @@
   <div class="gm-chat-hd">
     <button class="gm-chat-hd-back" id="gm-back-btn" onclick="gmChatShowList()" style="display:none">‹</button>
     <div class="gm-chat-hd-title" id="gm-chat-hd-title">💬 GM CHAT</div>
+    <button class="gm-clear-btn" id="gm-clear-btn" onclick="gmClearHistory()" title="チャット履歴を初期化">🗑️ 初期化</button>
     <button class="gm-chat-hd-close" onclick="closeGMChat()">✕</button>
+  </div>
+  <div class="gm-group-tabs" id="gm-group-tabs">
+    <button class="gm-group-tab active" data-g="" onclick="gmSetGroup(this,'')">すべて</button>
+    <button class="gm-group-tab" data-g="mochi" onclick="gmSetGroup(this,'mochi')">もち</button>
+    <button class="gm-group-tab" data-g="tsuki" onclick="gmSetGroup(this,'tsuki')">つき</button>
+    <button class="gm-group-tab" data-g="taku" onclick="gmSetGroup(this,'taku')">たく</button>
+    <button class="gm-group-tab" data-g="rou" onclick="gmSetGroup(this,'rou')">ろう</button>
   </div>
   <div class="gm-chat-list" id="gm-chat-list"></div>
   <div class="gm-thread-view" id="gm-thread-view">
@@ -3119,19 +3132,19 @@ document.getElementById('btn-close-bank').addEventListener('click', () => {
     {id:0,icon:'🛸',name:'操縦室',num:'① 操縦室',restrict:'captain',restrictLabel:'🔒 船長 入室不可',
      items:[{id:'cockpit_terminal',icon:'📡',name:'暗号通信端末'},{id:'nav_log',icon:'🗓️',name:'改ざんされた航行ログ'}],
      storyPub:'操縦室に不審な操作ログが残っていた。競合企業への暗号通信の痕跡が発見された。',
-     storySec:'【口頭のみ】航行ログにマスターキーを使ったロック解除記録がある。船長だけが持つキーの使用履歴だ。'},
+     storySec:'航行ログにマスターキーを使ったロック解除記録がある。船長だけが持つキーの使用履歴だ。'},
     {id:1,icon:'⚡',name:'機関室',num:'② 機関室',restrict:'engineer',restrictLabel:'🔒 エンジニア 入室不可',
      items:[{id:'engine_explosive',icon:'💣',name:'起爆装置パーツ'},{id:'eng_manual',icon:'🔧',name:'書き込みのある修復マニュアル'}],
      storyPub:'エネルギーコアに過負荷の細工が施されていた。精密な電気工学の知識が必要な作業だ。',
-     storySec:'【口頭のみ】エンジニアの認証コードで記録された不正アクセスログが残っている。'},
+     storySec:'エンジニアの認証コードで記録された不正アクセスログが残っている。'},
     {id:2,icon:'🏥',name:'生命維持室',num:'③ 生命維持室',restrict:'doctor',restrictLabel:'🔒 医師 入室不可',
      items:[{id:'life_poison',icon:'⚠️',name:'未認可の薬物'},{id:'med_record',icon:'📋',name:'改ざんされた医療処置記録'}],
      storyPub:'酸素循環フィルターに異物が混入されていた。医療・薬学の専門知識が必要な仕業だ。',
-     storySec:'【口頭のみ】医師の署名付きで、未認可の薬物の持ち込み記録がある。'},
+     storySec:'医師の署名付きで、未認可の薬物の持ち込み記録がある。'},
     {id:3,icon:'📦',name:'貨物室',num:'④ 貨物室',restrict:'scientist',restrictLabel:'🔒 科学者 入室不可',
      items:[{id:'cargo_battery',icon:'🔋',name:'高圧電池パック'},{id:'enc_media',icon:'💾',name:'暗号化記憶媒体'}],
      storyPub:'貨物室の隔壁に爆破装置が取り付けられていた。帰還の瞬間に起動する設計になっている。',
-     storySec:'【口頭のみ】爆破装置の起動コードが科学者の研究端末のシリアルナンバーと一致する。'},
+     storySec:'爆破装置の起動コードが科学者の研究端末のシリアルナンバーと一致する。'},
   ];
 
   // sentMap[roomId][group][itemIdx]
@@ -3477,7 +3490,7 @@ const _CHAT_GROUP_JP={mochi:'もち',tsuki:'つき',taku:'たく',rou:'ろう'};
 const _CHAT_ROLE_JP={captain:'船長',doctor:'医師',engineer:'エンジニア',scientist:'科学者'};
 const _CHAT_ROLE_EMO={captain:'🛸',doctor:'🏥',engineer:'⚡',scientist:'🧪'};
 const _TRUE_GROUP={mochi:{captain:'mochi',scientist:'tsuki',engineer:'taku',doctor:'rou'},tsuki:{captain:'tsuki',scientist:'mochi',engineer:'rou',doctor:'taku'},taku:{captain:'taku',scientist:'rou',engineer:'mochi',doctor:'tsuki'},rou:{captain:'rou',scientist:'taku',engineer:'tsuki',doctor:'mochi'}};
-let _gmChatData={},_gmChatSeen={},_gmCurThread=null;
+let _gmChatData={},_gmChatSeen={},_gmCurThread=null,_gmCurGroup='';
 
 function _gmLoadSeen(){_CHAT_GROUPS.forEach(g=>_CHAT_ROLES.forEach(r=>{const k=g+'_'+r;_gmChatSeen[k]=parseInt(localStorage.getItem('gm_cs_'+k)||'0');}));}
 function _gmUnread(k){return Math.max(0,(_gmChatData[k]||[]).length-(_gmChatSeen[k]||0));}
@@ -3486,7 +3499,8 @@ function _gmNavBadge(){const n=_gmTotalUnread();const b=document.getElementById(
 function _gmRenderList(){
   const list=document.getElementById('gm-chat-list');if(!list)return;
   list.innerHTML='';
-  _CHAT_GROUPS.forEach(g=>{
+  const groups=_gmCurGroup?[_gmCurGroup]:_CHAT_GROUPS;
+  groups.forEach(g=>{
     _CHAT_ROLES.forEach(r=>{
       const k=g+'_'+r;const msgs=_gmChatData[k]||[];const u=_gmUnread(k);
       const last=msgs.length?msgs[msgs.length-1]:null;
@@ -3502,6 +3516,8 @@ function _gmOpenThread(g,r){
   const k=g+'_'+r;_gmCurThread=k;
   _gmChatSeen[k]=(_gmChatData[k]||[]).length;localStorage.setItem('gm_cs_'+k,_gmChatSeen[k]);_gmNavBadge();
   document.getElementById('gm-chat-list').style.display='none';
+  document.getElementById('gm-group-tabs').style.display='none';
+  document.getElementById('gm-clear-btn').style.display='none';
   const tv=document.getElementById('gm-thread-view');tv.classList.add('show');
   document.getElementById('gm-chat-hd-title').textContent=`${_CHAT_ROLE_EMO[r]} ${_CHAT_GROUP_JP[g]} — ${_CHAT_ROLE_JP[r]}`;
   document.getElementById('gm-back-btn').style.display='block';
@@ -3517,9 +3533,27 @@ function _gmRenderThread(msgs){
 window.gmChatShowList=function(){
   _gmCurThread=null;
   document.getElementById('gm-chat-list').style.display='';
+  document.getElementById('gm-group-tabs').style.display='';
+  document.getElementById('gm-clear-btn').style.display='';
   document.getElementById('gm-thread-view').classList.remove('show');
   document.getElementById('gm-chat-hd-title').textContent='💬 GM CHAT';
   document.getElementById('gm-back-btn').style.display='none';
+  _gmRenderList();
+};
+window.gmSetGroup=function(btn,g){
+  _gmCurGroup=g;
+  document.querySelectorAll('.gm-group-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  _gmRenderList();
+};
+window.gmClearHistory=async function(){
+  if(!confirm('チャット履歴を全て初期化しますか？'))return;
+  const ps=[];
+  _CHAT_GROUPS.forEach(g=>_CHAT_ROLES.forEach(r=>{
+    ps.push(setDoc(doc(db,'game','session','chat',g+'_'+r),{messages:[]}));
+  }));
+  await Promise.all(ps);
+  _gmChatData={};_gmChatSeen={};localStorage.removeItem&&_CHAT_GROUPS.forEach(g=>_CHAT_ROLES.forEach(r=>localStorage.removeItem('gm_cs_'+g+'_'+r)));
   _gmRenderList();
 };
 window.gmSendMessage=async function(){
