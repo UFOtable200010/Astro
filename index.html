@@ -2355,8 +2355,9 @@
           <div style="font-family:var(--mono);font-size:8px;color:rgba(255,85,85,.45);margin-bottom:3px;">📦 貨物室 PW</div>
           <input id="gm-pw4" type="text" placeholder="PW4" style="width:100%;padding:5px 8px;background:rgba(255,85,85,.06);border:1px solid rgba(255,85,85,.2);border-radius:3px;font-family:var(--mono);font-size:11px;color:#ffaaaa;outline:none;">
         </div>
-        <div style="display:flex;align-items:flex-end;">
+        <div style="display:flex;align-items:flex-end;gap:6px;">
           <button onclick="savePWConfig()" style="padding:5px 14px;background:rgba(50,200,120,.12);border:1px solid rgba(50,200,120,.3);border-radius:3px;font-family:var(--mono);font-size:10px;color:#88ffcc;cursor:pointer;white-space:nowrap;">💾 保存</button>
+          <button onclick="resetAllInventory()" style="padding:5px 14px;background:rgba(255,100,50,.1);border:1px solid rgba(255,100,50,.3);border-radius:3px;font-family:var(--mono);font-size:10px;color:#ffaa88;cursor:pointer;white-space:nowrap;">📦 初期化</button>
         </div>
       </div>
     </div>
@@ -2756,7 +2757,7 @@ document.getElementById('btn-close-bank').addEventListener('click', () => {
 
 // DQタイピング
 (function(){
-  const M5_STORY = 'やっとミッションが終わり、もうすぐ地球へ帰還する。\n\nしかし、突如として警報が鳴り響く。\n「帰還用カプセルに致命的な破損を検出。修復不能まで残り15分。」\n\n幸い、修復は可能だ。だが、その直後に「地上」の委員長から、ノイズ混じりの極秘通信が入る。\n\n「……聞こえるか。君たちの中に、ライバル企業から送り込まれた破壊工作員が1人混じっている。その工作員は、『帰還の瞬間』に帰還用カプセルを完全に破壊するようだ……\n\nそれと……全員に告ぐ。君たちがそれぞれ『私的な理由』で集まったことは分かっている。破壊工作員を捕まえ、無事にカプセルを直せ。そうすれば、隠し持っている機密ごと高額なボーナスで買い取ってやろう。\nただし、破壊工作員を間違えれば……全員のキャリアはここで終わりだ。幸運を祈る。」';
+  const M5_STORY = 'やっとミッションが終わり、もうすぐ地球へ帰還する。\n\nしかし、突如として警報が鳴り響く。\n「帰還用カプセルに致命的な損傷を検出。修復可能時間まで、残り15分。」\n\n損傷の原因は不明——その直後、望月議長から極秘通信が入る。ノイズ混じりの、不自然な声で。\n\n「……聞こえるか。君たちの中に、破壊工作員が紛れている。帰還の瞬間、カプセルを完全に破壊しようとしている者がいる……この通信は傍受されている可能性がある……\n\nこの船には、私が予想していなかったものが存在する。君たちが思っている以上に、この任務は……複雑だ。\n\n全員に告ぐ——工作員を見つけ出し、無事に帰還せよ。信じられる者だけを信じろ。幸運を祈る。」\n\n通信は唐突に途切れた。あとに残ったのは、静寂と、互いを見つめ合う4人の目だ。';
   const el=document.getElementById('m5-dq-text');
   const cursor=document.getElementById('m5-dq-cursor');
   let i=0;
@@ -2884,6 +2885,27 @@ document.getElementById('btn-close-bank').addEventListener('click', () => {
       await setDoc(cfgRef,{pw2,pw3,pw4});
       m5Toast('✓ パスワードをFirestoreに保存しました');
     }catch(e){m5Toast('⚠️ 保存失敗: '+e.message);}
+  };
+
+  window.resetAllInventory=async function(){
+    if(!confirm('全グループの持ち物を初期状態に戻します。よろしいですか？')) return;
+    const INIT={'captain':'flashlight','engineer':'precision_driver','doctor':'doctor_sedative','scientist':'captain_id'};
+    const groups=['mochi','tsuki','taku','rou'];
+    const roles=['captain','engineer','doctor','scientist'];
+    try{
+      const writes=[];
+      for(const g of groups){
+        for(const r of roles){
+          const ref=doc(db,'game','session','inventory',g+'_'+r);
+          writes.push(setDoc(ref,{items:[INIT[r]],role:r,group:g}));
+        }
+      }
+      await Promise.all(writes);
+      // M05進行状況もリセット
+      localStorage.removeItem('astro_m5_progress');
+      m5ApplyProgress();
+      m5Toast('✓ 全グループの持ち物とM05進行状況を初期化しました');
+    }catch(e){m5Toast('⚠️ 初期化失敗: '+e.message);}
   };
 
   window.refreshAllCardURLs=function(){

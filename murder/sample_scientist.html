@@ -136,32 +136,32 @@ body{background:#060a18;min-height:100vh;font-family:'Noto Serif JP',serif;paddi
 </div>
 <div class="room-panel show" id="rpanel-0">
   <div class="sub-tabbar"><button class="sub-tab active" onclick="switchSub(0,'story',this)">ストーリー</button><button class="sub-tab" onclick="switchSub(0,'hakken',this)">発見物</button><button class="sub-tab" onclick="switchSub(0,'secret',this)">極秘ファイル</button></div>
-  <div class="sub-panel show" id="sp-0-story"><div class="sp-label">🟢 公開ストーリー</div><div class="sp-text">操縦室に不審な操作ログが残っていた。競合企業への暗号通信の痕跡が発見された。</div></div>
+  <div class="sub-panel show" id="sp-0-story"><div class="sp-label">🟢 公開ストーリー</div><div class="sp-text">帰還3時間前から、操縦システムに未確認の暗号通信が送信されていた。宛先は、望月議長直轄の極秘回線。航行ログには本来の帰還座標とは異なる座標が上書きされていた。</div></div>
   <div class="sub-panel" id="sp-0-hakken"><div class="sp-label">🔍 この部屋の発見物</div><div class="fi-list"><div class="fi-row"><div class="fi-ico">📡</div><div><div class="fi-name">暗号通信端末</div><div class="fi-desc">競合企業への暗号化通信履歴が残る端末</div></div></div><div class="fi-row"><div class="fi-ico">🗓️</div><div><div class="fi-name">改ざんされた航行ログ</div><div class="fi-desc">上書きされた形跡のある飛行記録データ</div></div></div></div></div>
-  <div class="sub-panel" id="sp-0-secret"><div class="sf-box"><div class="sf-label">🔴 極秘ファイル — 科学者のみ</div><div class="sf-text">操縦室の暗号通信端末に残された最後の送信先——それは望月議会委員長直轄の極秘回線だ。表向きの予算交渉とは全く異なる内容が送信されている。</div></div></div>
+  <div class="sub-panel" id="sp-0-secret"><div class="sf-box"><div class="sf-label">🔴 極秘ファイル — 科学者のみ</div><div class="sf-text">この部屋からの暗号送信——あなた自身が行ったものだ。望月議長への任務開始報告。あなたは最初から、議長の工作員だ。</div></div></div>
 </div>
 <div class="room-panel" id="rpanel-1">
   <div class="lock-screen" id="ls-1"><div class="lock-big">🔒</div><div class="lock-ttl">機関室 — ロック中</div><div class="lock-desc">GMからパスワードを受け取ったら入力してください</div><div class="lock-row"><input class="lock-inp" id="pw-inp-1" type="text" placeholder="- - - -" maxlength="20"><button class="lock-btn" onclick="tryUnlock(1)">解錠</button></div><div class="lock-err" id="lock-err-1"></div></div>
   <div id="rc-1" style="display:none">
     <div class="sub-tabbar"><button class="sub-tab active" onclick="switchSub(1,'story',this)">ストーリー</button><button class="sub-tab" onclick="switchSub(1,'hakken',this)">発見物</button><button class="sub-tab" onclick="switchSub(1,'secret',this)">極秘ファイル</button></div>
-    <div class="sub-panel show" id="sp-1-story"><div class="sp-label">🟢 公開ストーリー</div><div class="sp-text">エネルギーコアに過負荷の細工が施されていた。精密な電気工学の知識が必要な作業だ。</div></div>
+    <div class="sub-panel show" id="sp-1-story"><div class="sp-label">🟢 公開ストーリー</div><div class="sp-text">エネルギーコアの内部に、精密な起爆装置が組み込まれていた。帰還シーケンスと連動するタイマーを持ち、修復マニュアルの余白には暗号めいたメモが残されていた。</div></div>
     <div class="sub-panel" id="sp-1-hakken"><div class="sp-label">🔍 この部屋の発見物</div><div class="fi-list"><div class="fi-row"><div class="fi-ico">💣</div><div><div class="fi-name">起爆装置パーツ</div><div class="fi-desc">エネルギーコアに接続された精密な爆発装置</div></div></div><div class="fi-row"><div class="fi-ico">🔧</div><div><div class="fi-name">書き込みのある修復マニュアル</div><div class="fi-desc">余白に暗号めいたメモが書き込まれたマニュアル</div></div></div></div></div>
-    <div class="sub-panel" id="sp-1-secret"><div class="sf-box"><div class="sf-label">🔴 極秘ファイル — 科学者のみ</div><div class="sf-text">機関室の起爆装置は単独では作動しない。貨物室の高圧電池パックと連動する設計だ。つまり、これを起動させるためには貨物室のアイテムが必要になる。</div></div></div>
+    <div class="sub-panel" id="sp-1-secret"><div class="sf-box"><div class="sf-label">🔴 極秘ファイル — 科学者のみ</div><div class="sf-text">起爆には貨物室の高圧電池パックが必要だ。あなたは貨物室に入れない。<br><br>懐中電灯を船長から入手できれば、他の部屋に隠れたアイテムを見つける手段が生まれるかもしれない。</div></div></div>
   </div>
 </div>
 <div class="room-panel" id="rpanel-2">
   <div class="lock-screen" id="ls-2"><div class="lock-big">🔒</div><div class="lock-ttl">生命維持室 — ロック中</div><div class="lock-desc">GMからパスワードを受け取ったら入力してください</div><div class="lock-row"><input class="lock-inp" id="pw-inp-2" type="text" placeholder="- - - -" maxlength="20"><button class="lock-btn" onclick="tryUnlock(2)">解錠</button></div><div class="lock-err" id="lock-err-2"></div></div>
   <div id="rc-2" style="display:none">
     <div class="sub-tabbar"><button class="sub-tab active" onclick="switchSub(2,'story',this)">ストーリー</button><button class="sub-tab" onclick="switchSub(2,'hakken',this)">発見物</button><button class="sub-tab" onclick="switchSub(2,'secret',this)">極秘ファイル</button></div>
-    <div class="sub-panel show" id="sp-2-story"><div class="sp-label">🟢 公開ストーリー</div><div class="sp-text">酸素循環フィルターに異物が混入されていた。医療・薬学の専門知識が必要な仕業だ。</div></div>
+    <div class="sub-panel show" id="sp-2-story"><div class="sp-label">🟢 公開ストーリー</div><div class="sp-text">生命維持システムから、地球上に存在しない有機化合物が検出された。さらに、全医療処置記録が完全に上書きされていた。誰かが意図的に証拠を消した。</div></div>
     <div class="sub-panel" id="sp-2-hakken"><div class="sp-label">🔍 この部屋の発見物</div><div class="fi-list"><div class="fi-row"><div class="fi-ico">⚠️</div><div><div class="fi-name">未認可の薬物</div><div class="fi-desc">医療データベースに登録されていない未知の薬剤</div></div></div><div class="fi-row"><div class="fi-ico">📋</div><div><div class="fi-name">改ざんされた医療処置記録</div><div class="fi-desc">データが上書きされた医師の診療ログ</div></div></div></div></div>
-    <div class="sub-panel" id="sp-2-secret"><div class="sf-box"><div class="sf-label">🔴 極秘ファイル — 科学者のみ</div><div class="sf-text">未認可の薬物の成分を分析した。これは地球上に存在しない有機化合物だ。人工合成ではない——生物由来だ。この船に、人間以外の何かが関与している。</div></div></div>
+    <div class="sub-panel" id="sp-2-secret"><div class="sf-box"><div class="sf-label">🔴 極秘ファイル — 科学者のみ</div><div class="sf-text">生命維持室の有機化合物——望月議長の研究資料と完全に一致する。議長は人間ではない。それが暴かれることを、議長は恐れている。</div></div></div>
   </div>
 </div>
 <div class="room-panel" id="rpanel-3">
   <div class="restrict-screen"><div class="restrict-big">🚫</div><div class="restrict-ttl">貨物室 — 立入禁止</div><div class="restrict-desc">科学者はこの部屋への立ち入りを<br>禁じられています。<br>他のクルーから発見物を受け取ってください。</div></div>
   <div class="sub-tabbar"><button class="sub-tab active" onclick="switchSub(3,'secret',this)">極秘ファイル</button></div>
-  <div class="sub-panel show" id="sp-3-secret"><div class="sf-box"><div class="sf-label">🔴 極秘ファイル — 科学者のみ</div><div class="sf-text">貨物室の暗号化記憶媒体——あなたはその内容を知っている。望月議長の真の正体に関するデータがそこにある。帰還カプセルを破壊することで、その秘密は永遠に葬られる。それがあなたの本当の任務だ。</div></div></div>
+  <div class="sub-panel show" id="sp-3-secret"><div class="sf-box"><div class="sf-label">🔴 極秘ファイル — 科学者のみ</div><div class="sf-text">暗号化記憶媒体の中身——望月議長が地球外生命体である証拠だ。これを地球に届かせてはならない。<br><br>帰還カプセルを破壊し、すべてをここに葬れ。それがあなたの使命だ。</div></div></div>
 </div>
 <div class="card-spacer"></div>
 <div class="pub-card">
@@ -176,16 +176,16 @@ body{background:#060a18;min-height:100vh;font-family:'Noto Serif JP',serif;paddi
     <div style="font-size:12px;color:rgba(255,160,160,.5);line-height:1.6;text-align:center;margin-top:4px">あなたは二重の使命を帯びた最も危険な存在だ。<br>誰も、あなたの真の目的を知らない。</div>
   </div>
   <div class="sec ability" id="ability1-block" style="display:none">
-    <div class="sec-title">【秘密の能力①】身分偽装</div>
-    <div class="ability-cond">🪪 「船長のIDカード」を所持しているとき使用可</div>
-    <div class="ability-body">船長のIDカードを使い、船長権限で任意の機密ファイルにアクセスできる。使用後、IDカードは元の持ち主に返却される（アイテム削除）。</div>
-    <button class="used-btn" onclick="markAbility1Used()">✕ 使用済にする（IDカードを消費）</button>
+    <div class="sec-title">【秘密の能力①】隠蔽物探知</div>
+    <div class="ability-cond">🔦「懐中電灯」を所持しているとき使用可</div>
+    <div class="ability-body">探索が済んだ任意の部屋で、まだ誰も気づいていないアイテムを1つ特定できる（GMに確認）。使用後、アイテムを消費する。</div>
+    <button class="used-btn" onclick="markAbility1Used()">✕ 使用済にする（懐中電灯を消費）</button>
   </div>
   <div class="sec ability" id="ability2-block" style="display:none">
     <div class="sec-title">【秘密の能力②】帰還カプセル完全破壊</div>
     <div class="ability-cond">🔋 高圧電池パック ＋ 💾 暗号化記憶媒体 を所持中</div>
-    <div class="ability-body">暗号化記憶媒体の起動コードで高圧電池パックを過充電し、帰還カプセルのエネルギーシステムを完全に焼き切る。全員の帰還を永久に不可能にする。</div>
-    <div class="final-note">⚠️ 帰還の瞬間（最終アクション）のみに使用可</div>
+    <div class="ability-body">任意のクルーを1人指定する。帰還の瞬間（最終アクション）に、暗号化記憶媒体の起動コードで高圧電池パックを過充電し、帰還カプセルを完全に焼き切る。乗員全員の帰還が不可能になる。</div>
+    <div class="final-note">⚠️ 帰還の瞬間（最終アクション）のみに使用可<br>⚠️ この能力をむやみに情報公開すると警戒されてしまうので注意が必要そうだ…</div>
   </div>
   <div class="sec win"><div class="sec-title">【勝利条件】</div><div class="win-item" id="win-text">読み込み中…</div></div>
   <div class="sec bonus"><div class="sec-title">【ボーナスミッション】</div><div class="bonus-item">能力②で帰還カプセルを完全破壊すること</div><div class="bonus-item">自分自身が生き残り帰還すること</div></div>
@@ -211,7 +211,7 @@ const params=new URLSearchParams(location.search);
 const group=params.get('group')||'mochi';const name=params.get('name')||'';
 const TRUE_GROUP={mochi:{captain:'mochi',scientist:'tsuki',engineer:'taku',doctor:'rou'},tsuki:{captain:'tsuki',scientist:'mochi',engineer:'rou',doctor:'taku'},taku:{captain:'taku',scientist:'rou',engineer:'mochi',doctor:'tsuki'},rou:{captain:'rou',scientist:'taku',engineer:'tsuki',doctor:'mochi'}};
 const GROUP_NAMES={mochi:'もちグループ',tsuki:'つきグループ',taku:'たくグループ',rou:'ろうグループ'};
-const ROLE='scientist';const INIT_ITEM_ID='captain_id';const ABILITY2_ITEMS=['cargo_battery','enc_media'];
+const ROLE='scientist';const INIT_ITEM_ID='captain_id';const ABILITY1_ITEM_ID='flashlight';const ABILITY2_ITEMS=['cargo_battery','enc_media'];
 const tg=TRUE_GROUP[group]?.[ROLE];const trueGName=GROUP_NAMES[tg]||group;
 document.getElementById('nb-name-val').textContent=name||'（名前未設定）';
 document.getElementById('identity-text').textContent='破壊工作員かつ裏切り者（'+trueGName+'）です';
@@ -225,8 +225,8 @@ window.switchSub=function(roomId,tab,btn){['story','hakken','secret'].forEach(t=
 async function init(){try{const snap=await getDoc(docRef);if(!snap.exists())await setDoc(docRef,{items:INIT_ITEMS,role:ROLE,group});onSnapshot(docRef,s=>{renderSlots(s.exists()?(s.data().items||[]):[]);setSynced(true);},()=>setSynced(false));}catch(e){setSynced(false);}}
 function setSynced(ok){document.getElementById('sync-dot').className='sync-dot'+(ok?'':' off');document.getElementById('sync-label').textContent=ok?'SYNC':'オフライン';}
 function renderSlots(items){const area=document.getElementById('slots');document.getElementById('item-count').textContent=items.length;if(items.length>3)document.getElementById('limit-overlay').classList.add('show');updateAbilityDisplay(items);let html=items.map(id=>{const it=ALL_ITEMS[id]||{icon:'❓',name:id,desc:''};return`<div class="slot has-item" onclick="openPopup('${id}')"><div class="slot-owned-badge">所持中</div><div class="slot-icon">${it.icon}</div><div class="slot-name">${it.name}</div><div class="slot-hint">タップで詳細</div></div>`;}).join('');for(let i=0;i<Math.max(0,2-items.length);i++)html+=`<div class="slot empty"><div class="slot-icon">📦</div><div class="slot-name">空きスロット</div><div class="slot-hint">交渉で入手</div></div>`;area.innerHTML=html;}
-function updateAbilityDisplay(items){document.getElementById('ability1-block').style.display=items.includes(INIT_ITEM_ID)?'':'none';document.getElementById('ability2-block').style.display=ABILITY2_ITEMS.every(id=>items.includes(id))?'':'none';}
-window.markAbility1Used=async function(){if(!confirm('【能力①】を使用します。船長のIDカードがインベントリから削除されます。'))return;try{const snap=await getDoc(docRef);const ni=(snap.data()?.items||[]).filter(id=>id!==INIT_ITEM_ID);await setDoc(docRef,{items:ni,role:ROLE,group});showToast('✅ 能力①を使用済みにしました');}catch(e){showToast('⚠️ '+e.message);}};
+function updateAbilityDisplay(items){document.getElementById('ability1-block').style.display=items.includes(ABILITY1_ITEM_ID)?'':'none';document.getElementById('ability2-block').style.display=ABILITY2_ITEMS.every(id=>items.includes(id))?'':'none';}
+window.markAbility1Used=async function(){if(!confirm('【能力①】を使用します。懐中電灯がインベントリから削除されます。'))return;try{const snap=await getDoc(docRef);const ni=(snap.data()?.items||[]).filter(id=>id!==ABILITY1_ITEM_ID);await setDoc(docRef,{items:ni,role:ROLE,group});showToast('✅ 能力①を使用済みにしました');}catch(e){showToast('⚠️ '+e.message);}};
 window.openPopup=function(itemId){const it=ALL_ITEMS[itemId];if(!it)return;curItem=itemId;selRole=null;document.getElementById('pop-icon').textContent=it.icon;document.getElementById('pop-name').textContent=it.name;document.getElementById('pop-desc').textContent=it.desc;document.querySelectorAll('.role-btn').forEach(b=>b.classList.remove('sel'));document.getElementById('confirm-btn').disabled=true;document.getElementById('overlay').classList.add('open');};
 window.closePopup=()=>{document.getElementById('overlay').classList.remove('open');curItem=null;selRole=null;};
 window.bgClose=e=>{if(e.target===document.getElementById('overlay'))window.closePopup();};
