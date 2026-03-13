@@ -1580,6 +1580,11 @@
 .sg-table td.scientist.restrict{border-left-color:rgba(255,90,90,.4);background:rgba(255,40,40,.04)}
 .sg-sub{display:block;font-size:10px;color:rgba(180,200,230,.45);margin-top:3px;line-height:1.5}
 .sg-key{display:inline-block;font-size:10px;background:rgba(255,215,50,.1);border:1px solid rgba(255,215,50,.25);border-radius:4px;padding:2px 6px;color:rgba(255,215,50,.8);margin-top:4px;white-space:nowrap}
+.sg-table tr.sg-win td{background:rgba(255,215,50,.03);border-top:1.5px solid rgba(255,215,50,.15)}
+.sg-table td.sg-win-label{color:rgba(255,215,50,.6)!important}
+.sg-win-point{display:block;font-size:11px;color:rgba(255,230,130,.85);line-height:1.7;margin-bottom:4px}
+.sg-win-check{display:inline-block;font-size:10px;background:rgba(80,220,120,.1);border:1px solid rgba(80,220,120,.3);border-radius:4px;padding:2px 7px;color:rgba(120,240,150,.85);margin-top:5px}
+.sg-win-out{display:inline-block;font-size:10px;background:rgba(255,80,80,.1);border:1px solid rgba(255,80,80,.3);border-radius:4px;padding:2px 7px;color:rgba(255,130,120,.85);margin-top:5px}
 /* ===== REWARD TABLE ===== */
 .reward-section{background:linear-gradient(180deg,#000208 0%,#000510 100%);padding:80px 20px 60px}
 .reward-inner{max-width:680px;margin:0 auto;display:flex;flex-direction:column;gap:32px}
@@ -2797,6 +2802,31 @@
               <td class="engineer">高圧電池パックを確認<span class="sg-sub">科学者が欲しがるはず→動向を観察</span></td>
               <td class="doctor">暗号化記憶媒体を入手<span class="sg-sub">鎮痛剤と組み合わせ「完璧な事故」計画</span><span class="sg-key">💾 暗号化記憶媒体</span></td>
               <td class="scientist restrict">🚫 立入禁止<span class="sg-sub">電池パックは他者に運ばせる必要あり</span></td>
+            </tr>
+            <tr class="sg-win">
+              <td class="sg-row-label sg-win-label">🌟 遥か彼方へ<br>達成のカギ</td>
+              <td class="captain">
+                <span class="sg-win-point">真クルーとして、裏切り者・工作員を<strong>説得できるか</strong>どうか</span>
+                <span class="sg-win-check">✅ 対話・説得を試みた</span>
+                <span class="sg-win-out">❌ 問答無用で拘束・排除</span>
+              </td>
+              <td class="engineer">
+                <span class="sg-win-point">どれだけ<strong>利己的にならない</strong>かどうか</span>
+                <span class="sg-win-check">✅ 証拠収集に徹して帰還を優先</span>
+                <span class="sg-win-out">❌ 「危ないから奪って止めよう」→強奪はアウト</span>
+              </td>
+              <td class="doctor">
+                <span class="sg-win-point">殺す対象は<strong>クルーだけなのか</strong>気付けるか</span>
+                <span class="sg-win-point" style="font-size:10px;color:rgba(255,215,50,.6)">1体しか殺せない能力 → 「1人ではないかも」という<strong>違和感に気付けたら</strong>はなまる</span>
+                <span class="sg-win-check">✅ 対象の定義を疑えた</span>
+                <span class="sg-win-out">❌ クルー1人を殺すことしか考えなかった</span>
+              </td>
+              <td class="scientist">
+                <span class="sg-win-point">文章の<strong>違和感</strong>から、爆破以外の道を模索できたか</span>
+                <span class="sg-win-point" style="font-size:10px;color:rgba(255,215,50,.6)">「爆破しかない」と思い込まず、別の阻止手段を考えられたかどうか</span>
+                <span class="sg-win-check">✅ 爆破以外の方法を模索した</span>
+                <span class="sg-win-out">❌ 任務通り爆破一択で動いた</span>
+              </td>
             </tr>
           </tbody>
         </table>
