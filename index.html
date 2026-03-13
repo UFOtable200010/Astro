@@ -1519,6 +1519,8 @@
 .gm-group-tabs{display:flex;border-bottom:1px solid rgba(77,166,255,.1);background:rgba(0,0,0,.3);flex-shrink:0}
 .gm-group-tab{flex:1;padding:9px 4px;font-family:var(--mono);font-size:9px;letter-spacing:.08em;color:rgba(255,255,255,.28);background:transparent;border:none;cursor:pointer;transition:all .2s;border-bottom:2px solid transparent;text-align:center}
 .gm-group-tab.active{color:rgba(77,166,255,.9);border-bottom-color:rgba(77,166,255,.7);background:rgba(77,166,255,.05)}
+.gm-tab-badge{display:none;align-items:center;justify-content:center;min-width:15px;height:15px;border-radius:8px;background:rgba(255,65,65,.9);color:#fff;font-size:8px;font-family:var(--mono);font-weight:700;padding:0 3px;margin-left:3px;vertical-align:middle;line-height:1;box-shadow:0 0 6px rgba(255,50,50,.5)}
+.gm-tab-badge.show{display:inline-flex}
 .gm-clear-btn{padding:5px 12px;background:rgba(255,60,60,.08);border:1px solid rgba(255,60,60,.2);border-radius:5px;color:rgba(255,100,100,.6);font-family:var(--mono);font-size:9px;cursor:pointer;transition:all .2s;white-space:nowrap;flex-shrink:0}
 .gm-clear-btn:hover{background:rgba(255,60,60,.18);color:rgba(255,140,140,.9)}
 .gm-chat-list{flex:1;overflow-y:auto}
@@ -3032,10 +3034,10 @@
     <button class="gm-chat-hd-close" onclick="closeGMChat()">✕</button>
   </div>
   <div class="gm-group-tabs" id="gm-group-tabs">
-    <button class="gm-group-tab" data-g="mochi" onclick="gmSetGroup(this,'mochi')">もち</button>
-    <button class="gm-group-tab" data-g="tsuki" onclick="gmSetGroup(this,'tsuki')">つき</button>
-    <button class="gm-group-tab" data-g="taku" onclick="gmSetGroup(this,'taku')">たく</button>
-    <button class="gm-group-tab" data-g="rou" onclick="gmSetGroup(this,'rou')">ろう</button>
+    <button class="gm-group-tab" data-g="mochi" onclick="gmSetGroup(this,'mochi')">もち<span class="gm-tab-badge" id="gtb-mochi"></span></button>
+    <button class="gm-group-tab" data-g="tsuki" onclick="gmSetGroup(this,'tsuki')">つき<span class="gm-tab-badge" id="gtb-tsuki"></span></button>
+    <button class="gm-group-tab" data-g="taku" onclick="gmSetGroup(this,'taku')">たく<span class="gm-tab-badge" id="gtb-taku"></span></button>
+    <button class="gm-group-tab" data-g="rou" onclick="gmSetGroup(this,'rou')">ろう<span class="gm-tab-badge" id="gtb-rou"></span></button>
   </div>
   <div class="gm-chat-list" id="gm-chat-list"></div>
   <div class="gm-thread-view" id="gm-thread-view">
@@ -3786,7 +3788,8 @@ let _gmChatData={},_gmChatSeen={},_gmCurThread=null,_gmCurGroup='';
 function _gmLoadSeen(){_CHAT_GROUPS.forEach(g=>_CHAT_ROLES.forEach(r=>{const k=g+'_'+r;_gmChatSeen[k]=parseInt(localStorage.getItem('gm_cs_'+k)||'0');}));}
 function _gmUnread(k){return Math.max(0,(_gmChatData[k]||[]).length-(_gmChatSeen[k]||0));}
 function _gmTotalUnread(){let t=0;Object.keys(_gmChatData).forEach(k=>{t+=_gmUnread(k);});return t;}
-function _gmNavBadge(){const n=_gmTotalUnread();const b=document.getElementById('nav-chat-badge');if(!b)return;b.textContent=n>0?n:'';b.style.display=n>0?'flex':'none';}
+function _gmGroupTabBadges(){_CHAT_GROUPS.forEach(g=>{let t=0;_CHAT_ROLES.forEach(r=>{t+=_gmUnread(g+'_'+r);});const b=document.getElementById('gtb-'+g);if(!b)return;if(t>0){b.textContent=t;b.classList.add('show');}else{b.textContent='';b.classList.remove('show');}});}
+function _gmNavBadge(){const n=_gmTotalUnread();const b=document.getElementById('nav-chat-badge');if(b){b.textContent=n>0?n:'';b.style.display=n>0?'flex':'none';}  _gmGroupTabBadges();}
 function _gmRenderList(){
   const list=document.getElementById('gm-chat-list');if(!list)return;
   list.innerHTML='';
