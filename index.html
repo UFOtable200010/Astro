@@ -1414,16 +1414,16 @@
 .cm-close-btn:hover{background:rgba(255,255,255,.06)}
 .m5-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(10px);background:rgba(50,220,130,.14);border:1px solid rgba(50,220,130,.4);border-radius:6px;padding:9px 18px;font-family:var(--mono);font-size:11px;color:rgba(100,255,180,.9);letter-spacing:.1em;opacity:0;transition:all .3s;z-index:2000;pointer-events:none;white-space:nowrap}
 /* 部屋カード */
-.room-card { width:100%;padding:18px 16px;border:none;border-bottom:1px solid rgba(77,166,255,.1);background:transparent;cursor:pointer;text-align:left;transition:all .2s;display:flex;align-items:center;gap:16px; }
+.room-card { width:100%;padding:22px 20px;border:none;border-bottom:1px solid rgba(77,166,255,.1);background:transparent;cursor:pointer;text-align:left;transition:all .2s;display:flex;align-items:center;gap:20px; }
 .room-card:hover { background:rgba(77,166,255,.08); }
 .room-card:last-of-type { border-bottom:none; }
 .room-card.explored { background:rgba(50,220,130,.05); }
-.rc-icon { font-size:36px;flex-shrink:0;filter:drop-shadow(0 0 8px rgba(77,166,255,.4)); }
+.rc-icon { font-size:42px;flex-shrink:0;filter:drop-shadow(0 0 10px rgba(77,166,255,.45)); }
 .rc-body { flex:1; }
-.rc-name { font-size:20px;font-weight:700;color:rgba(200,220,255,.92);letter-spacing:.05em;margin-bottom:5px; }
-.rc-restrict { font-family:var(--mono);font-size:12px;color:rgba(255,110,80,.75);letter-spacing:.12em;margin-bottom:6px; }
-.rc-desc { font-size:14px;color:rgba(200,220,255,.55);line-height:1.65; }
-.rc-status { font-family:var(--mono);font-size:12px;flex-shrink:0;text-align:right; }
+.rc-name { font-size:22px;font-weight:700;color:rgba(200,220,255,.92);letter-spacing:.05em;margin-bottom:6px; }
+.rc-restrict { font-family:var(--mono);font-size:13px;color:rgba(255,110,80,.75);letter-spacing:.12em;margin-bottom:7px; }
+.rc-desc { font-size:15px;color:rgba(200,220,255,.55);line-height:1.65; }
+.rc-status { font-family:var(--mono);font-size:13px;flex-shrink:0;text-align:right; }
 .rc-status.done { color:#32c878; }
 .rc-status.part { color:#ffbe32; }
 .rc-status.none { color:rgba(77,166,255,.4); }
@@ -1447,11 +1447,11 @@
 .gm-form-copy:hover { background:rgba(0,200,212,.22); }
 
 /* ===== MISSION 05 追加スタイル ===== */
-.m5-rocket-panel{max-width:min(860px,95vw)!important;width:calc(100% - 40px)!important;}
+.m5-rocket-panel{max-width:min(1100px,97vw)!important;width:calc(100% - 16px)!important;}
 .m5-panel-layout{display:flex;width:100%;gap:0;align-items:stretch}
-.m5-svg-side{width:220px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,rgba(10,22,44,.97),rgba(6,14,30,.99));border-right:1px solid rgba(77,166,255,.15);padding:20px 10px;}
+.m5-svg-side{width:280px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,rgba(10,22,44,.97),rgba(6,14,30,.99));border-right:1px solid rgba(77,166,255,.15);padding:24px 14px;}
 .m5-rooms-side{flex:1;background:linear-gradient(180deg,rgba(10,22,44,.95),rgba(6,14,30,.98));display:flex;flex-direction:column;}
-.m5-svg-rocket{width:180px;height:auto;filter:drop-shadow(0 0 18px rgba(77,166,255,.5));animation:rocketHover 4s ease-in-out infinite;}
+.m5-svg-rocket{width:240px;height:auto;filter:drop-shadow(0 0 22px rgba(77,166,255,.55));animation:rocketHover 4s ease-in-out infinite;}
 @keyframes rocketHover{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 .m5-dq-wrap{position:relative;z-index:10;width:calc(100% - 40px);max-width:640px;margin:32px 20px 0;}
 .m5-dq-box{background:rgba(0,0,0,.97);border:2px solid rgba(255,40,40,.55);border-radius:2px;padding:18px 22px 18px 22px;box-shadow:0 0 30px rgba(255,0,0,.15),0 0 60px rgba(255,0,0,.05),inset 0 0 40px rgba(0,0,0,.9);position:relative;overflow:hidden;}
@@ -1485,12 +1485,14 @@
 .m5-role-btn:disabled{opacity:.35;cursor:not-allowed;}
 .m5-sent-tag{font-family:var(--mono);font-size:9px;color:#32c878;letter-spacing:.1em;}
 /* ===== ENDING SECTION ===== */
-.ending-spacer{height:100vh;background:linear-gradient(180deg,transparent 0%,#000208 100%)}
-.ending-section{min-height:100vh;background:linear-gradient(180deg,#000208 0%,transparent 18%,transparent 82%,#000208 100%),radial-gradient(ellipse at 50% 75%,#001535 0%,#000a1a 50%,#000208 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 20px 120px;position:relative}
-@keyframes earthAtm{0%,100%{opacity:.65}50%{opacity:1}}
-.ending-earth{position:absolute;bottom:-140px;left:50%;transform:translateX(-50%);width:600px;height:600px;border-radius:50%;background:radial-gradient(ellipse 22% 14% at 28% 32%,rgba(34,120,60,.82) 0%,transparent 100%),radial-gradient(ellipse 18% 22% at 64% 22%,rgba(28,100,45,.78) 0%,transparent 100%),radial-gradient(ellipse 30% 12% at 56% 58%,rgba(36,90,28,.72) 0%,transparent 100%),radial-gradient(ellipse 14% 18% at 16% 62%,rgba(32,80,24,.68) 0%,transparent 100%),radial-gradient(ellipse 18% 10% at 82% 48%,rgba(38,108,48,.62) 0%,transparent 100%),radial-gradient(ellipse 12% 8% at 44% 75%,rgba(30,75,20,.55) 0%,transparent 100%),radial-gradient(ellipse at 40% 35%,#1c7096 0%,#0d4e7c 18%,#073560 38%,#031c3e 62%,#010822 100%);box-shadow:inset -100px -70px 90px rgba(0,0,20,.85),0 0 0 8px rgba(100,185,255,.06),0 0 0 22px rgba(70,145,240,.04),0 0 65px rgba(50,130,220,.48),0 0 130px rgba(28,100,200,.3),0 0 260px rgba(16,75,180,.18)}
-.ending-earth::before{content:'';position:absolute;inset:-18px;border-radius:50%;background:radial-gradient(ellipse,transparent 46%,rgba(120,190,255,.06) 52%,rgba(90,165,255,.14) 56%,rgba(70,135,230,.08) 62%,transparent 71%);pointer-events:none;animation:earthAtm 4s ease-in-out infinite}
-.ending-earth::after{content:'';position:absolute;inset:0;border-radius:50%;background:radial-gradient(ellipse at 30% 25%,rgba(225,248,255,.23) 0%,rgba(170,222,255,.08) 28%,transparent 54%);pointer-events:none}
+.ending-spacer{height:100vh;background:linear-gradient(180deg,transparent 0%,rgba(0,2,8,.6) 100%)}
+.ending-section{min-height:100vh;background:linear-gradient(180deg,rgba(0,2,8,.55) 0%,transparent 20%,transparent 75%,rgba(0,2,8,.7) 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 20px 120px;position:relative;overflow:hidden}
+@keyframes earthAtm{0%,100%{opacity:.6}50%{opacity:1}}
+@keyframes earthPulse{0%,100%{box-shadow:inset -120px -80px 100px rgba(0,0,20,.9),0 0 0 8px rgba(100,185,255,.06),0 0 0 30px rgba(70,145,240,.035),0 0 80px rgba(50,130,220,.55),0 0 180px rgba(28,100,200,.35),0 0 350px rgba(16,75,180,.22)}50%{box-shadow:inset -120px -80px 100px rgba(0,0,20,.9),0 0 0 8px rgba(100,185,255,.08),0 0 0 40px rgba(70,145,240,.05),0 0 100px rgba(50,130,220,.7),0 0 220px rgba(28,100,200,.45),0 0 420px rgba(16,75,180,.3)}}
+.ending-earth{position:absolute;bottom:-180px;left:50%;transform:translateX(-50%);width:min(900px,140vw);height:min(900px,140vw);border-radius:50%;background:radial-gradient(ellipse 22% 14% at 28% 32%,rgba(34,130,65,.88) 0%,transparent 100%),radial-gradient(ellipse 18% 22% at 64% 22%,rgba(28,108,50,.82) 0%,transparent 100%),radial-gradient(ellipse 32% 14% at 55% 56%,rgba(36,95,30,.78) 0%,transparent 100%),radial-gradient(ellipse 15% 20% at 16% 62%,rgba(32,85,26,.72) 0%,transparent 100%),radial-gradient(ellipse 20% 12% at 82% 46%,rgba(40,115,52,.66) 0%,transparent 100%),radial-gradient(ellipse 14% 10% at 44% 78%,rgba(30,80,22,.58) 0%,transparent 100%),radial-gradient(ellipse 10% 8% at 72% 68%,rgba(38,100,28,.5) 0%,transparent 100%),radial-gradient(ellipse at 40% 35%,#1e7ca0 0%,#0e5585 14%,#083e6e 32%,#041e48 56%,#010a25 100%);animation:earthPulse 5s ease-in-out infinite}
+.ending-earth::before{content:'';position:absolute;inset:-24px;border-radius:50%;background:radial-gradient(ellipse,transparent 43%,rgba(120,190,255,.04) 49%,rgba(90,165,255,.18) 54%,rgba(70,135,230,.1) 60%,rgba(50,110,210,.04) 66%,transparent 73%);pointer-events:none;animation:earthAtm 4s ease-in-out infinite}
+.ending-earth::after{content:'';position:absolute;inset:0;border-radius:50%;background:radial-gradient(ellipse at 32% 24%,rgba(235,252,255,.26) 0%,rgba(180,230,255,.1) 24%,transparent 50%),radial-gradient(ellipse at 68% 72%,rgba(80,150,255,.08) 0%,transparent 35%);pointer-events:none}
+.ending-nebula{position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 20% 30%,rgba(30,80,180,.08) 0%,transparent 65%),radial-gradient(ellipse 60% 40% at 80% 60%,rgba(100,20,160,.07) 0%,transparent 60%);pointer-events:none;z-index:0}
 .ending-title{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.5em;color:rgba(150,200,255,.4);margin-bottom:16px;text-align:center}
 .ending-headline{font-size:32px;font-weight:900;color:#e8f4ff;text-align:center;margin-bottom:8px;letter-spacing:.04em;text-shadow:0 0 40px rgba(77,166,255,.3)}
 .ending-sub{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.2em;color:rgba(100,180,255,.35);text-align:center;margin-bottom:50px}
@@ -1543,15 +1545,37 @@
 .gm-thread-send:hover{background:rgba(77,166,255,.22)}
 /* ===== REWARD TABLE ===== */
 .reward-section{background:linear-gradient(180deg,#000208 0%,#000510 100%);padding:80px 20px 60px}
-.reward-inner{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:36px}
+.reward-inner{max-width:680px;margin:0 auto;display:flex;flex-direction:column;gap:32px}
 .reward-section-title{font-family:'Share Tech Mono',monospace;font-size:20px;letter-spacing:.25em;color:rgba(255,215,50,.85);text-align:center;margin-bottom:12px;text-shadow:0 0 20px rgba(255,215,50,.3)}
+/* Victory Condition Selector */
+.rt-vc-block{background:rgba(255,255,255,.02);border:1px solid rgba(255,215,50,.2);border-radius:12px;overflow:hidden}
+.rt-sec-label{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.22em;color:rgba(255,215,50,.6);background:rgba(255,215,50,.04);padding:10px 16px;border-bottom:1px solid rgba(255,215,50,.1)}
+.rt-vc-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:12px}
+.rt-vc-btn{padding:12px 8px;border-radius:8px;border:1.5px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03);cursor:pointer;font-family:'Noto Serif JP',serif;font-size:11px;color:rgba(200,220,255,.6);text-align:center;line-height:1.5;transition:all .22s}
+.rt-vc-btn:hover{border-color:rgba(255,215,50,.35);background:rgba(255,215,50,.06);color:rgba(255,240,180,.9)}
+.rt-vc-btn.active{border-color:rgba(255,215,50,.7);background:rgba(255,215,50,.1);color:#ffe082;box-shadow:0 0 14px rgba(255,215,50,.18)}
+.rt-vc-btn .rt-vc-title{font-weight:700;margin-bottom:4px}
+.rt-vc-btn .rt-vc-vals{font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(255,215,50,.5);line-height:1.6}
+.rt-vc-btn.active .rt-vc-vals{color:rgba(255,215,50,.8)}
+/* Bonus Mission */
+.rt-bonus-block{background:rgba(255,255,255,.02);border:1px solid rgba(100,200,255,.18);border-radius:12px;overflow:hidden}
+.rt-bonus-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.rt-bonus-role{padding:12px 14px;border-right:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06)}
+.rt-bonus-role:nth-child(even){border-right:none}
+.rt-bonus-role:nth-child(n+3){border-bottom:none}
+.rt-bonus-role-name{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.14em;color:rgba(100,200,255,.6);margin-bottom:8px}
+.rt-bonus-item{display:flex;align-items:flex-start;gap:7px;margin-bottom:6px;cursor:pointer;font-size:11px;color:rgba(200,220,255,.65);line-height:1.5}
+.rt-bonus-item:last-child{margin-bottom:0}
+.rt-bonus-item input[type=checkbox]{width:14px;height:14px;flex-shrink:0;margin-top:2px;accent-color:#ffbe32;cursor:pointer}
+.rt-bonus-item .rt-bonus-reward{color:rgba(255,215,50,.75);font-weight:700;white-space:nowrap}
+/* Group tables */
 .reward-group-block{background:rgba(255,255,255,.02);border:1px solid rgba(var(--gc,77,166,255),.2);border-radius:12px;overflow:hidden}
 .reward-group-label{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.2em;color:var(--gc,#4da6ff);background:rgba(255,255,255,.03);padding:10px 16px;border-bottom:1px solid rgba(255,255,255,.06)}
 .reward-table-wrap{overflow-x:auto}
 .reward-table{width:100%;border-collapse:collapse;font-size:11px}
 .reward-table th{padding:9px 8px;font-family:'Share Tech Mono',monospace;font-size:9px;color:rgba(255,255,255,.45);border-bottom:1px solid rgba(255,255,255,.06);text-align:center;white-space:nowrap;line-height:1.4;font-weight:400}
-.reward-table td{padding:10px 8px;border-bottom:1px solid rgba(255,255,255,.04);text-align:center;min-width:70px;height:36px;color:rgba(255,255,255,.2)}
-.reward-table input[type=number]{width:60px;padding:5px 6px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:5px;color:#e8f4ff;font-family:'Share Tech Mono',monospace;font-size:12px;text-align:center;outline:none}
+.reward-table td{padding:10px 8px;border-bottom:1px solid rgba(255,255,255,.04);text-align:center;min-width:72px;height:36px;color:rgba(255,255,255,.2)}
+.reward-table input[type=number]{width:64px;padding:5px 6px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:5px;color:#e8f4ff;font-family:'Share Tech Mono',monospace;font-size:12px;text-align:center;outline:none}
 .reward-table input[type=number]:focus{border-color:rgba(255,215,50,.4);box-shadow:0 0 0 2px rgba(255,215,50,.08)}
 .rt-total-row td{background:rgba(255,215,50,.04)!important;border-top:1px solid rgba(255,215,50,.2)!important;font-weight:700;color:rgba(255,215,50,.8)!important}
 .rt-total-val{font-family:'Share Tech Mono',monospace;font-size:13px;color:rgba(255,215,50,.8)}
@@ -2645,6 +2669,7 @@
 
 <!-- ===== ENDING SECTION ===== -->
 <section class="ending-section" id="ending">
+  <div class="ending-nebula"></div>
   <div class="ending-earth"></div>
   <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;width:100%;max-width:500px">
     <div class="ending-title">━━━ GAME ENDING ━━━</div>
@@ -2680,22 +2705,64 @@
   <div class="reward-inner">
     <div class="reward-section-title">💰 報酬金計算表</div>
 
+    <!-- 勝利条件セレクター -->
+    <div class="rt-vc-block">
+      <div class="rt-sec-label">🏆 勝利条件を選択（１つ）</div>
+      <div class="rt-vc-btns">
+        <button class="rt-vc-btn" data-vc="happy" onclick="selectVC('happy')">
+          <div class="rt-vc-title">🏛️ 全人類に告ぐ</div>
+          <div class="rt-vc-vals">船長 +10億 / 科学者 -10億<br>医師 +10億 / エンジニア +10億</div>
+        </button>
+        <button class="rt-vc-btn" data-vc="bad1" onclick="selectVC('bad1')">
+          <div class="rt-vc-title">💥 さよならの夜に<br>死の花を飾ろう</div>
+          <div class="rt-vc-vals">科学者 +80億<br>他3役職 -50億</div>
+        </button>
+        <button class="rt-vc-btn" data-vc="bad2" onclick="selectVC('bad2')">
+          <div class="rt-vc-title">🌌 空の境界</div>
+          <div class="rt-vc-vals">全員 -30億</div>
+        </button>
+        <button class="rt-vc-btn" data-vc="alien" onclick="selectVC('alien')">
+          <div class="rt-vc-title">👾 遥かなる彼方へ</div>
+          <div class="rt-vc-vals">全員 +150億</div>
+        </button>
+      </div>
+    </div>
+
+    <!-- ボーナスミッション -->
+    <div class="rt-bonus-block">
+      <div class="rt-sec-label">🎯 ボーナスミッション（複数選択可）</div>
+      <div class="rt-bonus-grid">
+        <div class="rt-bonus-role">
+          <div class="rt-bonus-role-name">🛸 船長</div>
+          <label class="rt-bonus-item"><input type="checkbox" class="rt-bonus-check" data-role="captain" data-val="70" onchange="updateRewardTable()"><span>工作員を正しく帰還させた <span class="rt-bonus-reward">+70億</span></span></label>
+        </div>
+        <div class="rt-bonus-role">
+          <div class="rt-bonus-role-name">🧪 科学者</div>
+          <label class="rt-bonus-item"><input type="checkbox" class="rt-bonus-check" data-role="scientist" data-val="30" onchange="updateRewardTable()"><span>誤認逮捕させて生きて帰還 <span class="rt-bonus-reward">+30億</span></span></label>
+        </div>
+        <div class="rt-bonus-role">
+          <div class="rt-bonus-role-name">🏥 医師</div>
+          <label class="rt-bonus-item"><input type="checkbox" class="rt-bonus-check" data-role="doctor" data-val="50" onchange="updateRewardTable()"><span>誰かひとり始末に成功 <span class="rt-bonus-reward">+50億</span></span></label>
+          <label class="rt-bonus-item"><input type="checkbox" class="rt-bonus-check" data-role="doctor" data-val="10" onchange="updateRewardTable()"><span>工作員を誤認なく捕まえた <span class="rt-bonus-reward">+10億</span></span></label>
+        </div>
+        <div class="rt-bonus-role">
+          <div class="rt-bonus-role-name">⚡ エンジニア</div>
+          <label class="rt-bonus-item"><input type="checkbox" class="rt-bonus-check" data-role="engineer" data-val="50" onchange="updateRewardTable()"><span>IDカード・処置記録・電池を収集 <span class="rt-bonus-reward">+50億</span></span></label>
+          <label class="rt-bonus-item"><input type="checkbox" class="rt-bonus-check" data-role="engineer" data-val="10" onchange="updateRewardTable()"><span>工作員を誤認なく捕まえた <span class="rt-bonus-reward">+10億</span></span></label>
+        </div>
+      </div>
+    </div>
+
+    <!-- 各グループ計算表 -->
+    <!-- 列順: 船長=0, 科学者=1, エンジニア=2, 医師=3 -->
     <div class="reward-group-block">
       <div class="reward-group-label" style="--gc:#4da6ff">もちグループ</div>
       <div class="reward-table-wrap">
         <table class="reward-table">
-          <thead>
-            <tr>
-              <th></th>
-              <th>🛸 船長<br><span class="rt-sub">（もち）</span></th>
-              <th>🧪 科学者<br><span class="rt-sub">（つき）</span></th>
-              <th>⚡ エンジニア<br><span class="rt-sub">（たく）</span></th>
-              <th>🏥 医師<br><span class="rt-sub">（ろう）</span></th>
-            </tr>
-          </thead>
+          <thead><tr><th></th><th>🛸 船長<br><span class="rt-sub">（もち）</span></th><th>🧪 科学者<br><span class="rt-sub">（つき）</span></th><th>⚡ エンジニア<br><span class="rt-sub">（たく）</span></th><th>🏥 医師<br><span class="rt-sub">（ろう）</span></th></tr></thead>
           <tbody>
-            <tr><td class="rt-row-label">【勝利条件報酬金】</td><td><input type="number" min="0" placeholder="0"></td><td><input type="number" min="0" placeholder="0"></td><td><input type="number" min="0" placeholder="0"></td><td><input type="number" min="0" placeholder="0"></td></tr>
-            <tr><td class="rt-row-label">【ボーナスミッション報酬金】</td><td><input type="number" min="0" placeholder="0"></td><td><input type="number" min="0" placeholder="0"></td><td><input type="number" min="0" placeholder="0"></td><td><input type="number" min="0" placeholder="0"></td></tr>
+            <tr class="rt-win-row"><td class="rt-row-label">【勝利条件報酬金】</td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td></tr>
+            <tr class="rt-bonus-row"><td class="rt-row-label">【ボーナスミッション報酬金】</td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td></tr>
             <tr class="rt-total-row"><td class="rt-row-label">【合計】</td><td class="rt-total-val">—</td><td class="rt-total-val">—</td><td class="rt-total-val">—</td><td class="rt-total-val">—</td></tr>
           </tbody>
         </table>
@@ -2706,18 +2773,10 @@
       <div class="reward-group-label" style="--gc:#32c878">つきグループ</div>
       <div class="reward-table-wrap">
         <table class="reward-table">
-          <thead>
-            <tr>
-              <th></th>
-              <th>🛸 船長<br><span class="rt-sub">（つき）</span></th>
-              <th>🧪 科学者<br><span class="rt-sub">（もち）</span></th>
-              <th>⚡ エンジニア<br><span class="rt-sub">（ろう）</span></th>
-              <th>🏥 医師<br><span class="rt-sub">（たく）</span></th>
-            </tr>
-          </thead>
+          <thead><tr><th></th><th>🛸 船長<br><span class="rt-sub">（つき）</span></th><th>🧪 科学者<br><span class="rt-sub">（もち）</span></th><th>⚡ エンジニア<br><span class="rt-sub">（ろう）</span></th><th>🏥 医師<br><span class="rt-sub">（たく）</span></th></tr></thead>
           <tbody>
-            <tr><td class="rt-row-label">【勝利条件報酬金】</td><td><input type="number" min="0" placeholder="0"></td><td><input type="number" min="0" placeholder="0"></td><td><input type="number" min="0" placeholder="0"></td><td><input type="number" min="0" placeholder="0"></td></tr>
-            <tr><td class="rt-row-label">【ボーナスミッション報酬金】</td><td><input type="number" min="0" placeholder="0"></td><td><input type="number" min="0" placeholder="0"></td><td><input type="number" min="0" placeholder="0"></td><td><input type="number" min="0" placeholder="0"></td></tr>
+            <tr class="rt-win-row"><td class="rt-row-label">【勝利条件報酬金】</td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td></tr>
+            <tr class="rt-bonus-row"><td class="rt-row-label">【ボーナスミッション報酬金】</td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td></tr>
             <tr class="rt-total-row"><td class="rt-row-label">【合計】</td><td class="rt-total-val">—</td><td class="rt-total-val">—</td><td class="rt-total-val">—</td><td class="rt-total-val">—</td></tr>
           </tbody>
         </table>
@@ -2728,18 +2787,10 @@
       <div class="reward-group-label" style="--gc:#ffbe32">たくグループ</div>
       <div class="reward-table-wrap">
         <table class="reward-table">
-          <thead>
-            <tr>
-              <th></th>
-              <th>🛸 船長<br><span class="rt-sub">（たく）</span></th>
-              <th>🧪 科学者<br><span class="rt-sub">（ろう）</span></th>
-              <th>⚡ エンジニア<br><span class="rt-sub">（もち）</span></th>
-              <th>🏥 医師<br><span class="rt-sub">（つき）</span></th>
-            </tr>
-          </thead>
+          <thead><tr><th></th><th>🛸 船長<br><span class="rt-sub">（たく）</span></th><th>🧪 科学者<br><span class="rt-sub">（ろう）</span></th><th>⚡ エンジニア<br><span class="rt-sub">（もち）</span></th><th>🏥 医師<br><span class="rt-sub">（つき）</span></th></tr></thead>
           <tbody>
-            <tr><td class="rt-row-label">【勝利条件報酬金】</td><td><input type="number" min="0" placeholder="0"></td><td><input type="number" min="0" placeholder="0"></td><td><input type="number" min="0" placeholder="0"></td><td><input type="number" min="0" placeholder="0"></td></tr>
-            <tr><td class="rt-row-label">【ボーナスミッション報酬金】</td><td><input type="number" min="0" placeholder="0"></td><td><input type="number" min="0" placeholder="0"></td><td><input type="number" min="0" placeholder="0"></td><td><input type="number" min="0" placeholder="0"></td></tr>
+            <tr class="rt-win-row"><td class="rt-row-label">【勝利条件報酬金】</td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td></tr>
+            <tr class="rt-bonus-row"><td class="rt-row-label">【ボーナスミッション報酬金】</td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td></tr>
             <tr class="rt-total-row"><td class="rt-row-label">【合計】</td><td class="rt-total-val">—</td><td class="rt-total-val">—</td><td class="rt-total-val">—</td><td class="rt-total-val">—</td></tr>
           </tbody>
         </table>
@@ -2750,18 +2801,10 @@
       <div class="reward-group-label" style="--gc:#ff5555">ろうグループ</div>
       <div class="reward-table-wrap">
         <table class="reward-table">
-          <thead>
-            <tr>
-              <th></th>
-              <th>🛸 船長<br><span class="rt-sub">（ろう）</span></th>
-              <th>🧪 科学者<br><span class="rt-sub">（たく）</span></th>
-              <th>⚡ エンジニア<br><span class="rt-sub">（つき）</span></th>
-              <th>🏥 医師<br><span class="rt-sub">（もち）</span></th>
-            </tr>
-          </thead>
+          <thead><tr><th></th><th>🛸 船長<br><span class="rt-sub">（ろう）</span></th><th>🧪 科学者<br><span class="rt-sub">（たく）</span></th><th>⚡ エンジニア<br><span class="rt-sub">（つき）</span></th><th>🏥 医師<br><span class="rt-sub">（もち）</span></th></tr></thead>
           <tbody>
-            <tr><td class="rt-row-label">【勝利条件報酬金】</td><td><input type="number" min="0" placeholder="0"></td><td><input type="number" min="0" placeholder="0"></td><td><input type="number" min="0" placeholder="0"></td><td><input type="number" min="0" placeholder="0"></td></tr>
-            <tr><td class="rt-row-label">【ボーナスミッション報酬金】</td><td><input type="number" min="0" placeholder="0"></td><td><input type="number" min="0" placeholder="0"></td><td><input type="number" min="0" placeholder="0"></td><td><input type="number" min="0" placeholder="0"></td></tr>
+            <tr class="rt-win-row"><td class="rt-row-label">【勝利条件報酬金】</td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td></tr>
+            <tr class="rt-bonus-row"><td class="rt-row-label">【ボーナスミッション報酬金】</td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td></tr>
             <tr class="rt-total-row"><td class="rt-row-label">【合計】</td><td class="rt-total-val">—</td><td class="rt-total-val">—</td><td class="rt-total-val">—</td><td class="rt-total-val">—</td></tr>
           </tbody>
         </table>
@@ -3715,17 +3758,63 @@ _CHAT_GROUPS.forEach(g=>_CHAT_ROLES.forEach(r=>{
 }));
 document.getElementById('gm-thread-inp').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();gmSendMessage();}});
 // Reward table auto-total
+// 列順: [captain=0, scientist=1, engineer=2, doctor=3]
+const _VC_VALS={
+  happy: [10,-10,10,10],
+  bad1:  [-50,80,-50,-50],
+  bad2:  [-30,-30,-30,-30],
+  alien: [150,150,150,150]
+};
+window.selectVC=function(vc){
+  document.querySelectorAll('.rt-vc-btn').forEach(b=>b.classList.toggle('active',b.dataset.vc===vc));
+  updateRewardTable();
+};
+window.updateRewardTable=function(){
+  const activeBtn=document.querySelector('.rt-vc-btn.active');
+  const vcVals=activeBtn?_VC_VALS[activeBtn.dataset.vc]:null;
+  const bonus=[0,0,0,0];
+  const roleOrder=['captain','scientist','engineer','doctor'];
+  document.querySelectorAll('.rt-bonus-check:checked').forEach(cb=>{
+    const ri=roleOrder.indexOf(cb.dataset.role);
+    if(ri>=0)bonus[ri]+=Number(cb.dataset.val);
+  });
+  document.querySelectorAll('.reward-group-block').forEach(block=>{
+    const winInputs=[...block.querySelectorAll('.rt-win-row td input')];
+    const bonusInputs=[...block.querySelectorAll('.rt-bonus-row td input')];
+    const totalCells=[...block.querySelectorAll('.rt-total-val')];
+    for(let i=0;i<4;i++){
+      const w=vcVals?vcVals[i]:null;
+      const b=bonus[i];
+      if(winInputs[i])winInputs[i].value=w!==null?w:'';
+      if(bonusInputs[i])bonusInputs[i].value=b||'';
+      if(totalCells[i]){
+        const wv=w!==null?w:Number(winInputs[i]?.value||0);
+        const total=wv+b;
+        const hasAny=w!==null||b>0;
+        totalCells[i].textContent=hasAny?(total+'億円'):'—';
+        totalCells[i].style.color=total<0?'#ff6666':total===0?'rgba(255,215,50,.5)':'#32c878';
+      }
+    }
+  });
+};
+// 手動入力時も合計更新
 document.querySelectorAll('.reward-table').forEach(table=>{
-  const update=()=>{
-    const rows=table.querySelectorAll('tbody tr:not(.rt-total-row)');
-    const totalCells=table.querySelectorAll('.rt-total-val');
-    totalCells.forEach((tc,ci)=>{
-      let sum=0;let hasVal=false;
-      rows.forEach(row=>{const inp=row.querySelectorAll('td')[ci+1]?.querySelector('input');if(inp&&inp.value!==''){sum+=Number(inp.value)||0;hasVal=true;}});
-      tc.textContent=hasVal?(sum+'億円'):'—';
-    });
-  };
-  table.querySelectorAll('input[type=number]').forEach(inp=>inp.addEventListener('input',update));
+  table.querySelectorAll('input[type=number]').forEach(inp=>inp.addEventListener('input',()=>{
+    const block=table.closest('.reward-group-block');
+    const winInputs=[...block.querySelectorAll('.rt-win-row td input')];
+    const bonusInputs=[...block.querySelectorAll('.rt-bonus-row td input')];
+    const totalCells=[...block.querySelectorAll('.rt-total-val')];
+    for(let i=0;i<4;i++){
+      const w=Number(winInputs[i]?.value||0);
+      const b=Number(bonusInputs[i]?.value||0);
+      const hasAny=winInputs[i]?.value!==''||bonusInputs[i]?.value!=='';
+      const total=w+b;
+      if(totalCells[i]){
+        totalCells[i].textContent=hasAny?(total+'億円'):'—';
+        totalCells[i].style.color=total<0?'#ff6666':total===0?'rgba(255,215,50,.5)':'#32c878';
+      }
+    }
+  }));
 });
 </script>
 </body>
