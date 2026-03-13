@@ -2705,110 +2705,92 @@
   <div class="reward-inner">
     <div class="reward-section-title">💰 報酬金計算表</div>
 
-    <!-- 勝利条件セレクター -->
-    <div class="rt-vc-block">
-      <div class="rt-sec-label">🏆 勝利条件を選択（１つ）</div>
-      <div class="rt-vc-btns">
-        <button class="rt-vc-btn" data-vc="happy" onclick="selectVC('happy')">
-          <div class="rt-vc-title">🏛️ 全人類に告ぐ</div>
-          <div class="rt-vc-vals">船長 +10億 / 科学者 -10億<br>医師 +10億 / エンジニア +10億</div>
-        </button>
-        <button class="rt-vc-btn" data-vc="bad1" onclick="selectVC('bad1')">
-          <div class="rt-vc-title">💥 さよならの夜に<br>死の花を飾ろう</div>
-          <div class="rt-vc-vals">科学者 +80億<br>他3役職 -50億</div>
-        </button>
-        <button class="rt-vc-btn" data-vc="bad2" onclick="selectVC('bad2')">
-          <div class="rt-vc-title">🌌 空の境界</div>
-          <div class="rt-vc-vals">全員 -30億</div>
-        </button>
-        <button class="rt-vc-btn" data-vc="alien" onclick="selectVC('alien')">
-          <div class="rt-vc-title">👾 遥かなる彼方へ</div>
-          <div class="rt-vc-vals">全員 +150億</div>
-        </button>
-      </div>
-    </div>
-
-    <!-- ボーナスミッション -->
-    <div class="rt-bonus-block">
-      <div class="rt-sec-label">🎯 ボーナスミッション（複数選択可）</div>
-      <div class="rt-bonus-grid">
-        <div class="rt-bonus-role">
-          <div class="rt-bonus-role-name">🛸 船長</div>
-          <label class="rt-bonus-item"><input type="checkbox" class="rt-bonus-check" data-role="captain" data-val="70" onchange="updateRewardTable()"><span>工作員を正しく帰還させた <span class="rt-bonus-reward">+70億</span></span></label>
-        </div>
-        <div class="rt-bonus-role">
-          <div class="rt-bonus-role-name">🧪 科学者</div>
-          <label class="rt-bonus-item"><input type="checkbox" class="rt-bonus-check" data-role="scientist" data-val="30" onchange="updateRewardTable()"><span>誤認逮捕させて生きて帰還 <span class="rt-bonus-reward">+30億</span></span></label>
-        </div>
-        <div class="rt-bonus-role">
-          <div class="rt-bonus-role-name">🏥 医師</div>
-          <label class="rt-bonus-item"><input type="checkbox" class="rt-bonus-check" data-role="doctor" data-val="50" onchange="updateRewardTable()"><span>誰かひとり始末に成功 <span class="rt-bonus-reward">+50億</span></span></label>
-          <label class="rt-bonus-item"><input type="checkbox" class="rt-bonus-check" data-role="doctor" data-val="10" onchange="updateRewardTable()"><span>工作員を誤認なく捕まえた <span class="rt-bonus-reward">+10億</span></span></label>
-        </div>
-        <div class="rt-bonus-role">
-          <div class="rt-bonus-role-name">⚡ エンジニア</div>
-          <label class="rt-bonus-item"><input type="checkbox" class="rt-bonus-check" data-role="engineer" data-val="50" onchange="updateRewardTable()"><span>IDカード・処置記録・電池を収集 <span class="rt-bonus-reward">+50億</span></span></label>
-          <label class="rt-bonus-item"><input type="checkbox" class="rt-bonus-check" data-role="engineer" data-val="10" onchange="updateRewardTable()"><span>工作員を誤認なく捕まえた <span class="rt-bonus-reward">+10億</span></span></label>
-        </div>
-      </div>
-    </div>
-
-    <!-- 各グループ計算表 -->
-    <!-- 列順: 船長=0, 科学者=1, エンジニア=2, 医師=3 -->
-    <div class="reward-group-block">
+    <!-- もちグループ: 列順 船長=もち, 科学者=つき, エンジニア=たく, 医師=ろう -->
+    <div class="reward-group-block" data-group="mochi">
       <div class="reward-group-label" style="--gc:#4da6ff">もちグループ</div>
-      <div class="reward-table-wrap">
-        <table class="reward-table">
-          <thead><tr><th></th><th>🛸 船長<br><span class="rt-sub">（もち）</span></th><th>🧪 科学者<br><span class="rt-sub">（つき）</span></th><th>⚡ エンジニア<br><span class="rt-sub">（たく）</span></th><th>🏥 医師<br><span class="rt-sub">（ろう）</span></th></tr></thead>
-          <tbody>
-            <tr class="rt-win-row"><td class="rt-row-label">【勝利条件報酬金】</td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td></tr>
-            <tr class="rt-bonus-row"><td class="rt-row-label">【ボーナスミッション報酬金】</td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td></tr>
-            <tr class="rt-total-row"><td class="rt-row-label">【合計】</td><td class="rt-total-val">—</td><td class="rt-total-val">—</td><td class="rt-total-val">—</td><td class="rt-total-val">—</td></tr>
-          </tbody>
-        </table>
+      <div style="padding:10px 12px 4px;border-bottom:1px solid rgba(255,255,255,.06);">
+        <div style="font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.18em;color:rgba(255,215,50,.55);margin-bottom:7px;">🏆 勝利条件（１つ選択）</div>
+        <div class="rt-vc-btns">
+          <button class="rt-vc-btn" data-vc="happy" onclick="selectVC('happy','mochi')"><div class="rt-vc-title">🏛️ 全人類に告ぐ</div><div class="rt-vc-vals">船長+10/科学者-10<br>医師+10/エンジニア+10</div></button>
+          <button class="rt-vc-btn" data-vc="bad1" onclick="selectVC('bad1','mochi')"><div class="rt-vc-title">💥 さよならの夜に<br>死の花を飾ろう</div><div class="rt-vc-vals">科学者+80 / 他-50</div></button>
+          <button class="rt-vc-btn" data-vc="bad2" onclick="selectVC('bad2','mochi')"><div class="rt-vc-title">🌌 空の境界</div><div class="rt-vc-vals">全員 -30億</div></button>
+          <button class="rt-vc-btn" data-vc="alien" onclick="selectVC('alien','mochi')"><div class="rt-vc-title">👾 遥かなる彼方へ</div><div class="rt-vc-vals">全員 +150億</div></button>
+        </div>
+        <div style="font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.18em;color:rgba(100,200,255,.55);margin:10px 0 7px;">🎯 ボーナスミッション</div>
+        <div class="rt-bonus-grid">
+          <div class="rt-bonus-role"><div class="rt-bonus-role-name">🛸 船長（もち）</div><label class="rt-bonus-item"><input type="checkbox" class="rt-bonus-check" data-role="captain" data-val="70" onchange="updateGroup(this)"><span>工作員を正しく帰還させた <span class="rt-bonus-reward">+70億</span></span></label></div>
+          <div class="rt-bonus-role"><div class="rt-bonus-role-name">🧪 科学者（つき）</div><label class="rt-bonus-item"><input type="checkbox" class="rt-bonus-check" data-role="scientist" data-val="30" onchange="updateGroup(this)"><span>誤認逮捕させて生きて帰還 <span class="rt-bonus-reward">+30億</span></span></label></div>
+          <div class="rt-bonus-role"><div class="rt-bonus-role-name">🏥 医師（ろう）</div><label class="rt-bonus-item"><input type="checkbox" class="rt-bonus-check" data-role="doctor" data-val="50" onchange="updateGroup(this)"><span>誰かひとり始末に成功 <span class="rt-bonus-reward">+50億</span></span></label><label class="rt-bonus-item"><input type="checkbox" class="rt-bonus-check" data-role="doctor" data-val="10" onchange="updateGroup(this)"><span>工作員を誤認なく捕まえた <span class="rt-bonus-reward">+10億</span></span></label></div>
+          <div class="rt-bonus-role"><div class="rt-bonus-role-name">⚡ エンジニア（たく）</div><label class="rt-bonus-item"><input type="checkbox" class="rt-bonus-check" data-role="engineer" data-val="50" onchange="updateGroup(this)"><span>IDカード・処置記録・電池を収集 <span class="rt-bonus-reward">+50億</span></span></label><label class="rt-bonus-item"><input type="checkbox" class="rt-bonus-check" data-role="engineer" data-val="10" onchange="updateGroup(this)"><span>工作員を誤認なく捕まえた <span class="rt-bonus-reward">+10億</span></span></label></div>
+        </div>
       </div>
+      <div class="reward-table-wrap"><table class="reward-table"><thead><tr><th></th><th>🛸 船長<br><span class="rt-sub">（もち）</span></th><th>🧪 科学者<br><span class="rt-sub">（つき）</span></th><th>⚡ エンジニア<br><span class="rt-sub">（たく）</span></th><th>🏥 医師<br><span class="rt-sub">（ろう）</span></th></tr></thead><tbody><tr class="rt-win-row"><td class="rt-row-label">【勝利条件報酬金】</td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td></tr><tr class="rt-bonus-row"><td class="rt-row-label">【ボーナス報酬金】</td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td></tr><tr class="rt-total-row"><td class="rt-row-label">【合計】</td><td class="rt-total-val">—</td><td class="rt-total-val">—</td><td class="rt-total-val">—</td><td class="rt-total-val">—</td></tr></tbody></table></div>
     </div>
 
-    <div class="reward-group-block">
+    <!-- つきグループ: 列順 船長=つき, 科学者=もち, エンジニア=ろう, 医師=たく -->
+    <div class="reward-group-block" data-group="tsuki">
       <div class="reward-group-label" style="--gc:#32c878">つきグループ</div>
-      <div class="reward-table-wrap">
-        <table class="reward-table">
-          <thead><tr><th></th><th>🛸 船長<br><span class="rt-sub">（つき）</span></th><th>🧪 科学者<br><span class="rt-sub">（もち）</span></th><th>⚡ エンジニア<br><span class="rt-sub">（ろう）</span></th><th>🏥 医師<br><span class="rt-sub">（たく）</span></th></tr></thead>
-          <tbody>
-            <tr class="rt-win-row"><td class="rt-row-label">【勝利条件報酬金】</td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td></tr>
-            <tr class="rt-bonus-row"><td class="rt-row-label">【ボーナスミッション報酬金】</td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td></tr>
-            <tr class="rt-total-row"><td class="rt-row-label">【合計】</td><td class="rt-total-val">—</td><td class="rt-total-val">—</td><td class="rt-total-val">—</td><td class="rt-total-val">—</td></tr>
-          </tbody>
-        </table>
+      <div style="padding:10px 12px 4px;border-bottom:1px solid rgba(255,255,255,.06);">
+        <div style="font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.18em;color:rgba(255,215,50,.55);margin-bottom:7px;">🏆 勝利条件（１つ選択）</div>
+        <div class="rt-vc-btns">
+          <button class="rt-vc-btn" data-vc="happy" onclick="selectVC('happy','tsuki')"><div class="rt-vc-title">🏛️ 全人類に告ぐ</div><div class="rt-vc-vals">船長+10/科学者-10<br>医師+10/エンジニア+10</div></button>
+          <button class="rt-vc-btn" data-vc="bad1" onclick="selectVC('bad1','tsuki')"><div class="rt-vc-title">💥 さよならの夜に<br>死の花を飾ろう</div><div class="rt-vc-vals">科学者+80 / 他-50</div></button>
+          <button class="rt-vc-btn" data-vc="bad2" onclick="selectVC('bad2','tsuki')"><div class="rt-vc-title">🌌 空の境界</div><div class="rt-vc-vals">全員 -30億</div></button>
+          <button class="rt-vc-btn" data-vc="alien" onclick="selectVC('alien','tsuki')"><div class="rt-vc-title">👾 遥かなる彼方へ</div><div class="rt-vc-vals">全員 +150億</div></button>
+        </div>
+        <div style="font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.18em;color:rgba(100,200,255,.55);margin:10px 0 7px;">🎯 ボーナスミッション</div>
+        <div class="rt-bonus-grid">
+          <div class="rt-bonus-role"><div class="rt-bonus-role-name">🛸 船長（つき）</div><label class="rt-bonus-item"><input type="checkbox" class="rt-bonus-check" data-role="captain" data-val="70" onchange="updateGroup(this)"><span>工作員を正しく帰還させた <span class="rt-bonus-reward">+70億</span></span></label></div>
+          <div class="rt-bonus-role"><div class="rt-bonus-role-name">🧪 科学者（もち）</div><label class="rt-bonus-item"><input type="checkbox" class="rt-bonus-check" data-role="scientist" data-val="30" onchange="updateGroup(this)"><span>誤認逮捕させて生きて帰還 <span class="rt-bonus-reward">+30億</span></span></label></div>
+          <div class="rt-bonus-role"><div class="rt-bonus-role-name">🏥 医師（たく）</div><label class="rt-bonus-item"><input type="checkbox" class="rt-bonus-check" data-role="doctor" data-val="50" onchange="updateGroup(this)"><span>誰かひとり始末に成功 <span class="rt-bonus-reward">+50億</span></span></label><label class="rt-bonus-item"><input type="checkbox" class="rt-bonus-check" data-role="doctor" data-val="10" onchange="updateGroup(this)"><span>工作員を誤認なく捕まえた <span class="rt-bonus-reward">+10億</span></span></label></div>
+          <div class="rt-bonus-role"><div class="rt-bonus-role-name">⚡ エンジニア（ろう）</div><label class="rt-bonus-item"><input type="checkbox" class="rt-bonus-check" data-role="engineer" data-val="50" onchange="updateGroup(this)"><span>IDカード・処置記録・電池を収集 <span class="rt-bonus-reward">+50億</span></span></label><label class="rt-bonus-item"><input type="checkbox" class="rt-bonus-check" data-role="engineer" data-val="10" onchange="updateGroup(this)"><span>工作員を誤認なく捕まえた <span class="rt-bonus-reward">+10億</span></span></label></div>
+        </div>
       </div>
+      <div class="reward-table-wrap"><table class="reward-table"><thead><tr><th></th><th>🛸 船長<br><span class="rt-sub">（つき）</span></th><th>🧪 科学者<br><span class="rt-sub">（もち）</span></th><th>⚡ エンジニア<br><span class="rt-sub">（ろう）</span></th><th>🏥 医師<br><span class="rt-sub">（たく）</span></th></tr></thead><tbody><tr class="rt-win-row"><td class="rt-row-label">【勝利条件報酬金】</td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td></tr><tr class="rt-bonus-row"><td class="rt-row-label">【ボーナス報酬金】</td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td></tr><tr class="rt-total-row"><td class="rt-row-label">【合計】</td><td class="rt-total-val">—</td><td class="rt-total-val">—</td><td class="rt-total-val">—</td><td class="rt-total-val">—</td></tr></tbody></table></div>
     </div>
 
-    <div class="reward-group-block">
+    <!-- たくグループ: 列順 船長=たく, 科学者=ろう, エンジニア=もち, 医師=つき -->
+    <div class="reward-group-block" data-group="taku">
       <div class="reward-group-label" style="--gc:#ffbe32">たくグループ</div>
-      <div class="reward-table-wrap">
-        <table class="reward-table">
-          <thead><tr><th></th><th>🛸 船長<br><span class="rt-sub">（たく）</span></th><th>🧪 科学者<br><span class="rt-sub">（ろう）</span></th><th>⚡ エンジニア<br><span class="rt-sub">（もち）</span></th><th>🏥 医師<br><span class="rt-sub">（つき）</span></th></tr></thead>
-          <tbody>
-            <tr class="rt-win-row"><td class="rt-row-label">【勝利条件報酬金】</td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td></tr>
-            <tr class="rt-bonus-row"><td class="rt-row-label">【ボーナスミッション報酬金】</td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td></tr>
-            <tr class="rt-total-row"><td class="rt-row-label">【合計】</td><td class="rt-total-val">—</td><td class="rt-total-val">—</td><td class="rt-total-val">—</td><td class="rt-total-val">—</td></tr>
-          </tbody>
-        </table>
+      <div style="padding:10px 12px 4px;border-bottom:1px solid rgba(255,255,255,.06);">
+        <div style="font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.18em;color:rgba(255,215,50,.55);margin-bottom:7px;">🏆 勝利条件（１つ選択）</div>
+        <div class="rt-vc-btns">
+          <button class="rt-vc-btn" data-vc="happy" onclick="selectVC('happy','taku')"><div class="rt-vc-title">🏛️ 全人類に告ぐ</div><div class="rt-vc-vals">船長+10/科学者-10<br>医師+10/エンジニア+10</div></button>
+          <button class="rt-vc-btn" data-vc="bad1" onclick="selectVC('bad1','taku')"><div class="rt-vc-title">💥 さよならの夜に<br>死の花を飾ろう</div><div class="rt-vc-vals">科学者+80 / 他-50</div></button>
+          <button class="rt-vc-btn" data-vc="bad2" onclick="selectVC('bad2','taku')"><div class="rt-vc-title">🌌 空の境界</div><div class="rt-vc-vals">全員 -30億</div></button>
+          <button class="rt-vc-btn" data-vc="alien" onclick="selectVC('alien','taku')"><div class="rt-vc-title">👾 遥かなる彼方へ</div><div class="rt-vc-vals">全員 +150億</div></button>
+        </div>
+        <div style="font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.18em;color:rgba(100,200,255,.55);margin:10px 0 7px;">🎯 ボーナスミッション</div>
+        <div class="rt-bonus-grid">
+          <div class="rt-bonus-role"><div class="rt-bonus-role-name">🛸 船長（たく）</div><label class="rt-bonus-item"><input type="checkbox" class="rt-bonus-check" data-role="captain" data-val="70" onchange="updateGroup(this)"><span>工作員を正しく帰還させた <span class="rt-bonus-reward">+70億</span></span></label></div>
+          <div class="rt-bonus-role"><div class="rt-bonus-role-name">🧪 科学者（ろう）</div><label class="rt-bonus-item"><input type="checkbox" class="rt-bonus-check" data-role="scientist" data-val="30" onchange="updateGroup(this)"><span>誤認逮捕させて生きて帰還 <span class="rt-bonus-reward">+30億</span></span></label></div>
+          <div class="rt-bonus-role"><div class="rt-bonus-role-name">🏥 医師（つき）</div><label class="rt-bonus-item"><input type="checkbox" class="rt-bonus-check" data-role="doctor" data-val="50" onchange="updateGroup(this)"><span>誰かひとり始末に成功 <span class="rt-bonus-reward">+50億</span></span></label><label class="rt-bonus-item"><input type="checkbox" class="rt-bonus-check" data-role="doctor" data-val="10" onchange="updateGroup(this)"><span>工作員を誤認なく捕まえた <span class="rt-bonus-reward">+10億</span></span></label></div>
+          <div class="rt-bonus-role"><div class="rt-bonus-role-name">⚡ エンジニア（もち）</div><label class="rt-bonus-item"><input type="checkbox" class="rt-bonus-check" data-role="engineer" data-val="50" onchange="updateGroup(this)"><span>IDカード・処置記録・電池を収集 <span class="rt-bonus-reward">+50億</span></span></label><label class="rt-bonus-item"><input type="checkbox" class="rt-bonus-check" data-role="engineer" data-val="10" onchange="updateGroup(this)"><span>工作員を誤認なく捕まえた <span class="rt-bonus-reward">+10億</span></span></label></div>
+        </div>
       </div>
+      <div class="reward-table-wrap"><table class="reward-table"><thead><tr><th></th><th>🛸 船長<br><span class="rt-sub">（たく）</span></th><th>🧪 科学者<br><span class="rt-sub">（ろう）</span></th><th>⚡ エンジニア<br><span class="rt-sub">（もち）</span></th><th>🏥 医師<br><span class="rt-sub">（つき）</span></th></tr></thead><tbody><tr class="rt-win-row"><td class="rt-row-label">【勝利条件報酬金】</td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td></tr><tr class="rt-bonus-row"><td class="rt-row-label">【ボーナス報酬金】</td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td></tr><tr class="rt-total-row"><td class="rt-row-label">【合計】</td><td class="rt-total-val">—</td><td class="rt-total-val">—</td><td class="rt-total-val">—</td><td class="rt-total-val">—</td></tr></tbody></table></div>
     </div>
 
-    <div class="reward-group-block">
+    <!-- ろうグループ: 列順 船長=ろう, 科学者=たく, エンジニア=つき, 医師=もち -->
+    <div class="reward-group-block" data-group="rou">
       <div class="reward-group-label" style="--gc:#ff5555">ろうグループ</div>
-      <div class="reward-table-wrap">
-        <table class="reward-table">
-          <thead><tr><th></th><th>🛸 船長<br><span class="rt-sub">（ろう）</span></th><th>🧪 科学者<br><span class="rt-sub">（たく）</span></th><th>⚡ エンジニア<br><span class="rt-sub">（つき）</span></th><th>🏥 医師<br><span class="rt-sub">（もち）</span></th></tr></thead>
-          <tbody>
-            <tr class="rt-win-row"><td class="rt-row-label">【勝利条件報酬金】</td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td></tr>
-            <tr class="rt-bonus-row"><td class="rt-row-label">【ボーナスミッション報酬金】</td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td></tr>
-            <tr class="rt-total-row"><td class="rt-row-label">【合計】</td><td class="rt-total-val">—</td><td class="rt-total-val">—</td><td class="rt-total-val">—</td><td class="rt-total-val">—</td></tr>
-          </tbody>
-        </table>
+      <div style="padding:10px 12px 4px;border-bottom:1px solid rgba(255,255,255,.06);">
+        <div style="font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.18em;color:rgba(255,215,50,.55);margin-bottom:7px;">🏆 勝利条件（１つ選択）</div>
+        <div class="rt-vc-btns">
+          <button class="rt-vc-btn" data-vc="happy" onclick="selectVC('happy','rou')"><div class="rt-vc-title">🏛️ 全人類に告ぐ</div><div class="rt-vc-vals">船長+10/科学者-10<br>医師+10/エンジニア+10</div></button>
+          <button class="rt-vc-btn" data-vc="bad1" onclick="selectVC('bad1','rou')"><div class="rt-vc-title">💥 さよならの夜に<br>死の花を飾ろう</div><div class="rt-vc-vals">科学者+80 / 他-50</div></button>
+          <button class="rt-vc-btn" data-vc="bad2" onclick="selectVC('bad2','rou')"><div class="rt-vc-title">🌌 空の境界</div><div class="rt-vc-vals">全員 -30億</div></button>
+          <button class="rt-vc-btn" data-vc="alien" onclick="selectVC('alien','rou')"><div class="rt-vc-title">👾 遥かなる彼方へ</div><div class="rt-vc-vals">全員 +150億</div></button>
+        </div>
+        <div style="font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:.18em;color:rgba(100,200,255,.55);margin:10px 0 7px;">🎯 ボーナスミッション</div>
+        <div class="rt-bonus-grid">
+          <div class="rt-bonus-role"><div class="rt-bonus-role-name">🛸 船長（ろう）</div><label class="rt-bonus-item"><input type="checkbox" class="rt-bonus-check" data-role="captain" data-val="70" onchange="updateGroup(this)"><span>工作員を正しく帰還させた <span class="rt-bonus-reward">+70億</span></span></label></div>
+          <div class="rt-bonus-role"><div class="rt-bonus-role-name">🧪 科学者（たく）</div><label class="rt-bonus-item"><input type="checkbox" class="rt-bonus-check" data-role="scientist" data-val="30" onchange="updateGroup(this)"><span>誤認逮捕させて生きて帰還 <span class="rt-bonus-reward">+30億</span></span></label></div>
+          <div class="rt-bonus-role"><div class="rt-bonus-role-name">🏥 医師（もち）</div><label class="rt-bonus-item"><input type="checkbox" class="rt-bonus-check" data-role="doctor" data-val="50" onchange="updateGroup(this)"><span>誰かひとり始末に成功 <span class="rt-bonus-reward">+50億</span></span></label><label class="rt-bonus-item"><input type="checkbox" class="rt-bonus-check" data-role="doctor" data-val="10" onchange="updateGroup(this)"><span>工作員を誤認なく捕まえた <span class="rt-bonus-reward">+10億</span></span></label></div>
+          <div class="rt-bonus-role"><div class="rt-bonus-role-name">⚡ エンジニア（つき）</div><label class="rt-bonus-item"><input type="checkbox" class="rt-bonus-check" data-role="engineer" data-val="50" onchange="updateGroup(this)"><span>IDカード・処置記録・電池を収集 <span class="rt-bonus-reward">+50億</span></span></label><label class="rt-bonus-item"><input type="checkbox" class="rt-bonus-check" data-role="engineer" data-val="10" onchange="updateGroup(this)"><span>工作員を誤認なく捕まえた <span class="rt-bonus-reward">+10億</span></span></label></div>
+        </div>
       </div>
+      <div class="reward-table-wrap"><table class="reward-table"><thead><tr><th></th><th>🛸 船長<br><span class="rt-sub">（ろう）</span></th><th>🧪 科学者<br><span class="rt-sub">（たく）</span></th><th>⚡ エンジニア<br><span class="rt-sub">（つき）</span></th><th>🏥 医師<br><span class="rt-sub">（もち）</span></th></tr></thead><tbody><tr class="rt-win-row"><td class="rt-row-label">【勝利条件報酬金】</td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td></tr><tr class="rt-bonus-row"><td class="rt-row-label">【ボーナス報酬金】</td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td><td><input type="number" placeholder="—"></td></tr><tr class="rt-total-row"><td class="rt-row-label">【合計】</td><td class="rt-total-val">—</td><td class="rt-total-val">—</td><td class="rt-total-val">—</td><td class="rt-total-val">—</td></tr></tbody></table></div>
     </div>
 
     <!-- ×③ 本当の所属グループへ移動 -->
@@ -3757,7 +3739,7 @@ _CHAT_GROUPS.forEach(g=>_CHAT_ROLES.forEach(r=>{
   });
 }));
 document.getElementById('gm-thread-inp').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();gmSendMessage();}});
-// Reward table auto-total
+// Reward table auto-total (per-group)
 // 列順: [captain=0, scientist=1, engineer=2, doctor=3]
 const _VC_VALS={
   happy: [10,-10,10,10],
@@ -3765,56 +3747,40 @@ const _VC_VALS={
   bad2:  [-30,-30,-30,-30],
   alien: [150,150,150,150]
 };
-window.selectVC=function(vc){
-  document.querySelectorAll('.rt-vc-btn').forEach(b=>b.classList.toggle('active',b.dataset.vc===vc));
-  updateRewardTable();
-};
-window.updateRewardTable=function(){
-  const activeBtn=document.querySelector('.rt-vc-btn.active');
+function _updateGroupBlock(block){
+  const activeBtn=block.querySelector('.rt-vc-btn.active');
   const vcVals=activeBtn?_VC_VALS[activeBtn.dataset.vc]:null;
   const bonus=[0,0,0,0];
   const roleOrder=['captain','scientist','engineer','doctor'];
-  document.querySelectorAll('.rt-bonus-check:checked').forEach(cb=>{
+  block.querySelectorAll('.rt-bonus-check:checked').forEach(cb=>{
     const ri=roleOrder.indexOf(cb.dataset.role);
     if(ri>=0)bonus[ri]+=Number(cb.dataset.val);
   });
-  document.querySelectorAll('.reward-group-block').forEach(block=>{
-    const winInputs=[...block.querySelectorAll('.rt-win-row td input')];
-    const bonusInputs=[...block.querySelectorAll('.rt-bonus-row td input')];
-    const totalCells=[...block.querySelectorAll('.rt-total-val')];
-    for(let i=0;i<4;i++){
-      const w=vcVals?vcVals[i]:null;
-      const b=bonus[i];
-      if(winInputs[i])winInputs[i].value=w!==null?w:'';
-      if(bonusInputs[i])bonusInputs[i].value=b||'';
-      if(totalCells[i]){
-        const wv=w!==null?w:Number(winInputs[i]?.value||0);
-        const total=wv+b;
-        const hasAny=w!==null||b>0;
-        totalCells[i].textContent=hasAny?(total+'億円'):'—';
-        totalCells[i].style.color=total<0?'#ff6666':total===0?'rgba(255,215,50,.5)':'#32c878';
-      }
+  const winInputs=[...block.querySelectorAll('.rt-win-row td input')];
+  const bonusInputs=[...block.querySelectorAll('.rt-bonus-row td input')];
+  const totalCells=[...block.querySelectorAll('.rt-total-val')];
+  for(let i=0;i<4;i++){
+    const w=vcVals?vcVals[i]:null;
+    const b=bonus[i];
+    if(winInputs[i])winInputs[i].value=w!==null?w:'';
+    if(bonusInputs[i])bonusInputs[i].value=b||'';
+    if(totalCells[i]){
+      const wv=w!==null?w:Number(winInputs[i]?.value||0);
+      const total=wv+b;
+      const hasAny=w!==null||b>0||winInputs[i]?.value!=='';
+      totalCells[i].textContent=hasAny?(total+'億円'):'—';
+      totalCells[i].style.color=total<0?'#ff6666':total===0?'rgba(255,215,50,.5)':'#32c878';
     }
-  });
+  }
+}
+window.selectVC=function(vc,groupId){
+  const block=document.querySelector(`.reward-group-block[data-group="${groupId}"]`);
+  block.querySelectorAll('.rt-vc-btn').forEach(b=>b.classList.toggle('active',b.dataset.vc===vc));
+  _updateGroupBlock(block);
 };
-// 手動入力時も合計更新
-document.querySelectorAll('.reward-table').forEach(table=>{
-  table.querySelectorAll('input[type=number]').forEach(inp=>inp.addEventListener('input',()=>{
-    const block=table.closest('.reward-group-block');
-    const winInputs=[...block.querySelectorAll('.rt-win-row td input')];
-    const bonusInputs=[...block.querySelectorAll('.rt-bonus-row td input')];
-    const totalCells=[...block.querySelectorAll('.rt-total-val')];
-    for(let i=0;i<4;i++){
-      const w=Number(winInputs[i]?.value||0);
-      const b=Number(bonusInputs[i]?.value||0);
-      const hasAny=winInputs[i]?.value!==''||bonusInputs[i]?.value!=='';
-      const total=w+b;
-      if(totalCells[i]){
-        totalCells[i].textContent=hasAny?(total+'億円'):'—';
-        totalCells[i].style.color=total<0?'#ff6666':total===0?'rgba(255,215,50,.5)':'#32c878';
-      }
-    }
-  }));
+window.updateGroup=function(el){_updateGroupBlock(el.closest('.reward-group-block'));};
+document.querySelectorAll('.reward-group-block').forEach(block=>{
+  block.querySelectorAll('input[type=number]').forEach(inp=>inp.addEventListener('input',()=>_updateGroupBlock(block)));
 });
 </script>
 </body>
